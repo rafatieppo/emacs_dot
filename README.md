@@ -1,7 +1,7 @@
 Emacs
 =====
 Initial file EMACS.
-From internet researches, The most from: 
+From internet researches, most of the content from:
 https://github.com/walmes/emacs
 =====================================
 
