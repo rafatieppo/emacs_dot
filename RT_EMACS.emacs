@@ -1,7 +1,7 @@
 ;;=============================================================================
 ;; Arquivo de configuração do Emacs (>=24.3.1) por Rafael Tieppo.
 ;; Este arquivo encontra-se disponível em
-;; A grande maioria do conteúdo aqui disponível foi obtido a
+;; A grande maioria do conteúdo aqui disponível foi obtido/inspirado a
 ;; partir de consultas na internet. Encaminhe dúvidas, problemas e/ou
 ;; sugestões como um issue no diretório GitHub desse arquivo.
 ;;=============================================================================
@@ -28,6 +28,7 @@
 
 ;; Para buscar um arquivo TODO
 (setq org-agenda-files (list "~/Dropbox/EMACS_ORG_MODE/work.org"))
+
                              
 ;;===========================================================================
 ;;DEFINICAO PADRAO
@@ -146,7 +147,6 @@
 
 ;;-----------------------------------------------------------------------------
 ;;-----------------------------------------------------------------------------
-
 
 ;;===========================================================================
 ;; TECLAS DE ATALHO
@@ -278,8 +278,6 @@ e.g. Sunday, September 17, 2000."
 (ac-config-default)
 ;;If you want AC only in your ESS buffers do:`Funciona`
 (setq ess-use-auto-complete 'script-only)
-
-
 ;;-----------------------------------------------------------------------------
 ;;-----------------------------------------------------------------------------
 
@@ -306,13 +304,11 @@ e.g. Sunday, September 17, 2000."
 ;; Usei:
 (add-hook 'LaTeX-mode-hook (lambda () (turn-on-reftex) (setq reftex-plug-into-AUCTeX t)))
 ;; fonte:http://stackoverflow.com/questions/5722816/reftex-in-emacs-menu-bar
-
 ;;-----------------------------------------------------------------------------
 
-
-;;-----------------------------------------------------------------------------
+;;===========================================================================
 ;;AUTO COMLETE
-;;-----------------------------------------------------------------------------
+;;===========================================================================
 (setq ac-math-unicode-in-math-p t)
 
 ```lisp
@@ -343,9 +339,9 @@ e.g. Sunday, September 17, 2000."
    (setq ac-modes (append ac-modes '(foo-mode)))
    (add-hook 'foo-mode-hook 'ac-l-setup)
 
-;;-----------------------------------------------------------------------------
+;;===========================================================================
 ;; CONFIGURACOES AVANCADAS AUCTEX
-;;-----------------------------------------------------------------------------
+;;===========================================================================
 ;;http://tex.stackexchange.com/questions/161797/how-to-configure-emacs-and-auctex-to-perform-forward-and-inverse-search
 
 (custom-set-variables
@@ -358,17 +354,11 @@ e.g. Sunday, September 17, 2000."
  '(TeX-source-correlate-mode t)
  '(TeX-source-correlate-start-server t)
 )
-
 ;;-----------------------------------------------------------------------------
 
-
-;;-----------------------------------------------------------------------------
-;;-----------------------------------------------------------------------------
+;;===========================================================================
 ;; WORD COUNT LISP wc.el
-;;-----------------------------------------------------------------------------
-;;-----------------------------------------------------------------------------
-
-;;-----------------------------------------------------------------------------
+;;===========================================================================
 ;;CONTAR PALAVRAS LATEX,  M-x wc RET
 (add-to-list 'load-path "/home/rafatieppo/.emacs.d")
 (load "wc.el")
@@ -377,7 +367,6 @@ e.g. Sunday, September 17, 2000."
 ;;===========================================================================
 ;; POLY-MODE MAKDOWN
 ;;===========================================================================
-;;-----------------------------------------------------------------------------
 
 ;;instalar via MELPA
 ;;ALT+x list-packages 
@@ -405,7 +394,6 @@ e.g. Sunday, September 17, 2000."
 ;;===========================================================================
 ;; VERTICAL INDENTATION GUIDES
 ;;===========================================================================
-;;-----------------------------------------------------------------------------
 ;;http://stackoverflow.com/questions/1587972/how-to-display-indentation-guides-in-emacs
 ;;https://github.com/antonj/Highlight-Indentation-for-Emacs/blob/
 ;;master/highlight-indentation.el
@@ -417,7 +405,6 @@ e.g. Sunday, September 17, 2000."
 ;;===========================================================================
 ;; THEMES - SEVERAL SCHEMES
 ;;===========================================================================
-;;-----------------------------------------------------------------------------
 ;; ESQUEMA de cores solarized-dark.
 ;; 1) # Debian and derived  apt-get install emacs-goodies-el
 ;;       http://www.nongnu.org/color-theme/#sec5
@@ -465,7 +452,6 @@ e.g. Sunday, September 17, 2000."
 ;;===========================================================================
 ;;WHEATGRASS VEM PADRAO EMACS
 ;;===========================================================================
-;;-----------------------------------------------------------------------------
 
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
