@@ -239,11 +239,17 @@ e.g. Sunday, September 17, 2000."
 ;; https://github.com/magnars/.emacs.d/blob/master/sane-defaults.el
 ;; Salva lista de aquivos recentes. Abrir lista com C-x f
 (recentf-mode 1)
-(setq recentf-max-saved-items 100) ;; 20 é muito pouco.
+(setq recentf-max-saved-items 25) ;; 20 é muito pouco.
 ;; Salva histórico de comandos do minibuffer.
 (savehist-mode 1)
 (setq history-length 1000)
 ;;---------------------------------------------------------------------------
+
+;; recentf stuff
+;;(require 'recentf)
+;;(recentf-mode 1)
+;;(setq recentf-max-menu-items 25)
+;;(global-set-key "\C-x\ \C-r" 'recentf-open-files)
 
 
 ;;===========================================================================
@@ -310,7 +316,7 @@ e.g. Sunday, September 17, 2000."
 ;; Esse deu erro: TESTANDO: FUNCIONOU PERFEITO
 (add-hook 'LaTeX-mode-hook 'turn-on-reftex)
 (setq reftex-plug-into-AUCTeX t)
-;;atalhos
+;;atalhos UTEIS
 ;;;;;automatic formatting of a section: C-c C-q C-s;
 ;;;;;section preview: C-c C-p C-s; (see the screenshot on the right)
 
