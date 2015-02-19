@@ -1,5 +1,6 @@
 ;;=============================================================================
 ;; Arquivo de configuração do Emacs (>=24.3.1) por Rafael Tieppo.
+
 ;; Este arquivo encontra-se disponível em
 ;; A grande maioria do conteúdo aqui disponível foi obtido/inspirado a
 ;; partir de consultas na internet. Encaminhe dúvidas, problemas e/ou
@@ -81,7 +82,7 @@
 ;;-----------------------------------------------------------------------------
 ;; Quebra de linhas ao exceder largura do texto (padrão é 72
 ;; caracteres).
-(setq-default fill-column 72)
+(setq-default fill-column 80)
 ;; (setq fill-column 72)
 ;; (setq-default truncate-lines t)
 ;;-----------------------------------------------------------------------------
@@ -184,6 +185,14 @@
 ;; Define C-= para fazer linha com 60 sinais de -.
 (global-set-key [?\C--] (kbd "C-u 6 0 ="))
 ;;-----------------------------------------------------------------------------
+
+;;----------------------------------------------------------------------------- 
+;; Define F11 e F12 para trocar entre modo com e sem menus.
+;; (global-set-key (kbd "<f11>") 'toggle-fullscreen)
+(global-set-key (kbd "<f11>") 'toggle-menu-bar-mode-from-frame)
+(global-set-key (kbd "<f12>") 'toggle-tool-bar-mode-from-frame)
+;;----------------------------------------------------------------------------- 
+
 
 ;;===========================================================================
 ;;FUNCOES
@@ -297,12 +306,19 @@ e.g. Sunday, September 17, 2000."
 ;; http://piotrkazmierczak.com/2010/05/13/emacs-as-the-ultimate-latex-editor/
 ;; Para ativar: C-c =  it means CTRL + c + = 
 
-;; Esse deu erro:
-;;(add-hook 'LaTeX-mode-hook 'turn-on-reftex)
-;;(setq reftex-pl	ug-into-AUCTeX t)
 
+;; Esse deu erro: TESTANDO: FUNCIONOU PERFEITO
+(add-hook 'LaTeX-mode-hook 'turn-on-reftex)
+(setq reftex-plug-into-AUCTeX t)
+;;atalhos
+;;;;;automatic formatting of a section: C-c C-q C-s;
+;;;;;section preview: C-c C-p C-s; (see the screenshot on the right)
+
+
+;; TESTE: USEI ESSE PQ O ACIMA ESTAVA com erro (digitei errado). TESTANDO O SUPERIOR AGORA
+;; esse FICA NA RESERVA
 ;; Usei:
-(add-hook 'LaTeX-mode-hook (lambda () (turn-on-reftex) (setq reftex-plug-into-AUCTeX t)))
+;;(add-hook 'LaTeX-mode-hook (lambda () (turn-on-reftex) (setq reftex-plug-into-AUCTeX t)))
 ;; fonte:http://stackoverflow.com/questions/5722816/reftex-in-emacs-menu-bar
 ;;-----------------------------------------------------------------------------
 
