@@ -425,6 +425,44 @@ e.g. Sunday, September 17, 2000."
 ;;-----------------------------------------------------------------------------
 
 ;;===========================================================================
+;; ESS - HIGHLIGHTS ON PROGRAMING CODES
+;;===========================================================================
+ (setq ess-R-font-lock-keywords
+         '((ess-R-fl-keyword:modifiers . t) ; default
+           (ess-R-fl-keyword:fun-defs . t) ; default
+           (ess-R-fl-keyword:keywords . t) ; default
+           (ess-R-fl-keyword:assign-ops . t) ; default
+           (ess-R-fl-keyword:constants . t) ; default
+           (ess-fl-keyword:fun-calls . t)
+;;           (ess-fl-keyword:numbers . t)
+;;           (ess-fl-keyword:operators . t)
+           (ess-fl-keyword:delimiters . t)
+           (ess-fl-keyword:= . t)
+           (ess-R-fl-keyword:F&T . t)))
+
+   (setq inferior-R-font-lock-keywords
+         '((ess-S-fl-keyword:prompt . t) ; default
+           (ess-R-fl-keyword:messages . t) ; default
+           (ess-R-fl-keyword:modifiers . t) ; default
+           (ess-R-fl-keyword:fun-defs . t) ; default
+           (ess-R-fl-keyword:keywords . t) ; default
+           (ess-R-fl-keyword:assign-ops . t) ; default
+           (ess-R-fl-keyword:constants . t) ; default
+           (ess-fl-keyword:matrix-labels . t) ; default
+           (ess-fl-keyword:fun-calls . t)
+;;           (ess-fl-keyword:numbers . t)
+;;           (ess-fl-keyword:operators . t)
+           (ess-fl-keyword:delimiters . t)
+           (ess-fl-keyword:= . t)
+           (ess-R-fl-keyword:F&T . t)))
+
+;;-----------------------------------------------------------------------------
+
+
+
+
+
+;;===========================================================================
 ;; THEMES - SEVERAL SCHEMES
 ;;===========================================================================
 ;; ESQUEMA de cores solarized-dark.
@@ -450,10 +488,11 @@ e.g. Sunday, September 17, 2000."
 ;;-----------------------------------------------------------------------------
 ;;-----------------------------------------------------------------------------
 ;; THEMES from: http://emacsthemes.caisah.info/
+
 (add-to-list 'load-path "/home/rafatieppo/.emacs.d/emacs-color-theme-solarized-master")
-(require 'color-theme-solarized)
 (require 'solarized-dark-theme)
 (require 'solarized-light-theme)
+(require 'color-theme-solarized)
 
 (add-to-list 'load-path "/home/rafatieppo/.emacs.d/themess")
 (require 'Amelie-theme)
@@ -461,18 +500,19 @@ e.g. Sunday, September 17, 2000."
 (add-to-list 'load-path "/home/rafatieppo/.emacs.d/themess")
 (require 'assemblage-theme)
 
-(add-to-list 'load-path "/home/rafatieppo/.emacs.d/themess")
-(require 'deep-thought-theme)
+;;(add-to-list 'load-path "/home/rafatieppo/.emacs.d/themess")
+;;(require 'deep-thought-theme)
 
-(add-to-list 'load-path "/home/rafatieppo/.emacs.d/themess")
-(require 'erosiond-theme)
+;;(add-to-list 'load-path "/home/rafatieppo/.emacs.d/themess")
+;;(require 'erosiond-theme)
 
 ;; themes from: http://emacsthemes.caisah.info/
 ;;(add-to-list 'load-path "/home/rafatieppo/.emacs.d/themess")
 ;;(require 'wilson-theme.el)
 
+
 ;;===========================================================================
-;;WHEATGRASS VEM PADRAO EMACS
+;;TEMA VEM PADRAO EMACS
 ;;===========================================================================
 
 (custom-set-variables
@@ -480,15 +520,10 @@ e.g. Sunday, September 17, 2000."
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
-
-;; '(TeX-source-correlate-method (quote synctex))
-;; '(TeX-source-correlate-mode t)
-;; '(TeX-source-correlate-start-server t)
-
- '(custom-enabled-themes (quote (wheatgrass))))
-(custom-set-faces
- ;; custom-set-faces was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
+ '(custom-enabled-themes (quote (solarized)))
+ '(custom-safe-themes (quote ("8db4b03b9ae654d4a57804286eb3e332725c84d7cdab38463cb6b97d5762ad26" default))) ;;to confirm lisp code
  )
+
+
+
+ 
