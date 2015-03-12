@@ -361,6 +361,81 @@ e.g. Sunday, September 17, 2000."
    (setq ac-modes (append ac-modes '(foo-mode)))
    (add-hook 'foo-mode-hook 'ac-l-setup)
 
+
+
+;;===========================================================================
+;; THEMES - SEVERAL SCHEMES
+;;===========================================================================
+;; ESQUEMA de cores solarized-dark.
+;; 1) # Debian and derived  apt-get install emacs-goodies-el
+;;       http://www.nongnu.org/color-theme/#sec5
+;; 2) copiar o zip de https://github.com/sellout/emacs-color-theme-solarized
+;; 3) descompacter em /home/rafatieppo/.emacs.d/emacs-color-theme-solarized-master
+;; Para ver as cores e demais configurações do tema faça.
+;; M-x color-theme-print
+;;-----------------------------------------------------------------------------
+
+;;===========================================================================
+;; THEMES - SEVERAL SCHEMES
+;;===========================================================================
+;;-----------------------------------------------------------------------------
+;; ESQUEMA de cores solarized-dark.
+;; 1) # Debian and derived  apt-get install emacs-goodies-el
+;;       http://www.nongnu.org/color-theme/#sec5
+;; 2) copiar o zip de https://github.com/sellout/emacs-color-theme-solarized
+;; 3) descompacter em /home/rafatieppo/.emacs.d/emacs-color-theme-solarized-master
+;; Para ver as cores e demais configurações do tema faça.
+;; M-x color-theme-print
+;;-----------------------------------------------------------------------------
+;;-----------------------------------------------------------------------------
+;; THEMES from: http://emacsthemes.caisah.info/
+
+(add-to-list 'load-path "/home/rafatieppo/.emacs.d/emacs-color-theme-solarized-master")
+(require 'solarized-dark-theme)
+(require 'solarized-light-theme)
+(require 'color-theme-solarized)
+
+(add-to-list 'load-path "/home/rafatieppo/.emacs.d/themess")
+(require 'monokai-theme)
+
+;;(add-to-list 'load-path "/home/rafatieppo/.emacs.d/themess")
+;;(require 'Amelie-theme)
+
+;;(add-to-list 'load-path "/home/rafatieppo/.emacs.d/themess")
+;;(require 'assemblage-theme)
+
+;;(add-to-list 'load-path "/home/rafatieppo/.emacs.d/themess")
+;;(require 'soothe-theme)
+
+;;(add-to-list 'load-path "/home/rafatieppo/.emacs.d/themess")
+;;(require 'deep-thought-theme)
+
+;;(add-to-list 'load-path "/home/rafatieppo/.emacs.d/themess")
+;;(require 'erosiond-theme)
+
+;; themes from: http://emacsthemes.caisah.info/
+;;(add-to-list 'load-path "/home/rafatieppo/.emacs.d/themess")
+;;(require 'wilson-theme.el)
+
+
+;;===========================================================================
+;;TEMA VEM PADRAO EMACS
+;;===========================================================================
+
+;;(custom-set-faces
+ ;; custom-set-faces was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ 
+;; '(custom-enabled-themes (quote (monokai) ) )
+;; '(custom-safe-themes (quote ("0eebf69ceadbbcdd747713f2f3f839fe0d4a45bd0d4d9f46145e40878fc9b098" default)))
+
+;; '(custom-enabled-themes (quote (solarized)))
+;; '(custom-safe-themes (quote ("8db4b03b9ae654d4a57804286eb3e332725c84d7cdab38463cb6b97d5762ad26" default))) ;;to confirm lisp code
+
+;;===========================================================================
+
 ;;===========================================================================
 ;; CONFIGURACOES AVANCADAS AUCTEX
 ;;===========================================================================
@@ -375,7 +450,10 @@ e.g. Sunday, September 17, 2000."
  '(TeX-source-correlate-method (quote synctex))
  '(TeX-source-correlate-mode t)
  '(TeX-source-correlate-start-server t)
-)
+
+ '(custom-enabled-themes (quote (monokai) ) )
+ '(custom-safe-themes (quote ("0eebf69ceadbbcdd747713f2f3f839fe0d4a45bd0d4d9f46145e40878fc9b098" default)))
+ )
 ;;-----------------------------------------------------------------------------
 
 ;;===========================================================================
@@ -457,72 +535,6 @@ e.g. Sunday, September 17, 2000."
            (ess-R-fl-keyword:F&T . t)))
 
 ;;-----------------------------------------------------------------------------
-
-
-
-
-
-;;===========================================================================
-;; THEMES - SEVERAL SCHEMES
-;;===========================================================================
-;; ESQUEMA de cores solarized-dark.
-;; 1) # Debian and derived  apt-get install emacs-goodies-el
-;;       http://www.nongnu.org/color-theme/#sec5
-;; 2) copiar o zip de https://github.com/sellout/emacs-color-theme-solarized
-;; 3) descompacter em /home/rafatieppo/.emacs.d/emacs-color-theme-solarized-master
-;; Para ver as cores e demais configurações do tema faça.
-;; M-x color-theme-print
-;;-----------------------------------------------------------------------------
-
-;;===========================================================================
-;; THEMES - SEVERAL SCHEMES
-;;===========================================================================
-;;-----------------------------------------------------------------------------
-;; ESQUEMA de cores solarized-dark.
-;; 1) # Debian and derived  apt-get install emacs-goodies-el
-;;       http://www.nongnu.org/color-theme/#sec5
-;; 2) copiar o zip de https://github.com/sellout/emacs-color-theme-solarized
-;; 3) descompacter em /home/rafatieppo/.emacs.d/emacs-color-theme-solarized-master
-;; Para ver as cores e demais configurações do tema faça.
-;; M-x color-theme-print
-;;-----------------------------------------------------------------------------
-;;-----------------------------------------------------------------------------
-;; THEMES from: http://emacsthemes.caisah.info/
-
-(add-to-list 'load-path "/home/rafatieppo/.emacs.d/emacs-color-theme-solarized-master")
-(require 'solarized-dark-theme)
-(require 'solarized-light-theme)
-(require 'color-theme-solarized)
-
-(add-to-list 'load-path "/home/rafatieppo/.emacs.d/themess")
-(require 'Amelie-theme)
-
-(add-to-list 'load-path "/home/rafatieppo/.emacs.d/themess")
-(require 'assemblage-theme)
-
-;;(add-to-list 'load-path "/home/rafatieppo/.emacs.d/themess")
-;;(require 'deep-thought-theme)
-
-;;(add-to-list 'load-path "/home/rafatieppo/.emacs.d/themess")
-;;(require 'erosiond-theme)
-
-;; themes from: http://emacsthemes.caisah.info/
-;;(add-to-list 'load-path "/home/rafatieppo/.emacs.d/themess")
-;;(require 'wilson-theme.el)
-
-
-;;===========================================================================
-;;TEMA VEM PADRAO EMACS
-;;===========================================================================
-
-(custom-set-variables
- ;; custom-set-variables was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- '(custom-enabled-themes (quote (solarized)))
- '(custom-safe-themes (quote ("8db4b03b9ae654d4a57804286eb3e332725c84d7cdab38463cb6b97d5762ad26" default))) ;;to confirm lisp code
- )
 
 
 
