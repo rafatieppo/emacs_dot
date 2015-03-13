@@ -427,12 +427,21 @@ e.g. Sunday, September 17, 2000."
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
+
+
+ ;; '(custom-enabled-themes (quote (solarized)))
+;; '(custom-safe-themes (quote ("8db4b03b9ae654d4a57804286eb3e332725c84d7cdab38463cb6b97d5762ad26" default))) ;;to confirm lisp code
+
  
 ;; '(custom-enabled-themes (quote (monokai) ) )
 ;; '(custom-safe-themes (quote ("0eebf69ceadbbcdd747713f2f3f839fe0d4a45bd0d4d9f46145e40878fc9b098" default)))
 
-;; '(custom-enabled-themes (quote (solarized)))
-;; '(custom-safe-themes (quote ("8db4b03b9ae654d4a57804286eb3e332725c84d7cdab38463cb6b97d5762ad26" default))) ;;to confirm lisp code
+
+;; '(custom-enabled-themes (quote (soothe)))
+;; '(custom-safe-themes (quote ("27713778ce0291c1002fac10ba08f6de8430a6f24a506b821293b9eda806dfcc" default)))
+ ;;)
+
+
 
 ;;===========================================================================
 
@@ -450,9 +459,8 @@ e.g. Sunday, September 17, 2000."
  '(TeX-source-correlate-method (quote synctex))
  '(TeX-source-correlate-mode t)
  '(TeX-source-correlate-start-server t)
-
- '(custom-enabled-themes (quote (monokai) ) )
- '(custom-safe-themes (quote ("0eebf69ceadbbcdd747713f2f3f839fe0d4a45bd0d4d9f46145e40878fc9b098" default)))
+ '(custom-enabled-themes (quote (soothe)))
+ '(custom-safe-themes (quote ("27713778ce0291c1002fac10ba08f6de8430a6f24a506b821293b9eda806dfcc" default)))
  )
 ;;-----------------------------------------------------------------------------
 
@@ -514,8 +522,8 @@ e.g. Sunday, September 17, 2000."
            (ess-fl-keyword:fun-calls . t)
 ;;           (ess-fl-keyword:numbers . t)
 ;;           (ess-fl-keyword:operators . t)
-           (ess-fl-keyword:delimiters . t)
-           (ess-fl-keyword:= . t)
+;;           (ess-fl-keyword:delimiters . t)
+;;           (ess-fl-keyword:= . t)
            (ess-R-fl-keyword:F&T . t)))
 
    (setq inferior-R-font-lock-keywords
@@ -530,8 +538,8 @@ e.g. Sunday, September 17, 2000."
            (ess-fl-keyword:fun-calls . t)
 ;;           (ess-fl-keyword:numbers . t)
 ;;           (ess-fl-keyword:operators . t)
-           (ess-fl-keyword:delimiters . t)
-           (ess-fl-keyword:= . t)
+;;           (ess-fl-keyword:delimiters . t)
+;;           (ess-fl-keyword:= . t)
            (ess-R-fl-keyword:F&T . t)))
 
 ;;-----------------------------------------------------------------------------
@@ -539,3 +547,10 @@ e.g. Sunday, September 17, 2000."
 
 
  
+
+(custom-set-faces
+ ;; custom-set-faces was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ )
