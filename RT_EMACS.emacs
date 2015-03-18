@@ -560,10 +560,10 @@ load-path))
            (ess-R-fl-keyword:assign-ops . t) ; default
            (ess-R-fl-keyword:constants . t) ; default
            (ess-fl-keyword:fun-calls . t)
-           (ess-fl-keyword:numbers . nil)
+           (ess-fl-keyword:numbers . nil)  ;;se ativar fica muita colorido
            (ess-fl-keyword:operators . t)
-           (ess-fl-keyword:delimiters . nil)
-           (ess-fl-keyword:= . nil)
+           (ess-fl-keyword:delimiters . nil) ;;se ativar fica muita colorido
+           (ess-fl-keyword:= . nil) ;;se ativar fica muita colorido
            (ess-R-fl-keyword:F&T . t)))
 
    (setq inferior-R-font-lock-keywords
@@ -585,17 +585,15 @@ load-path))
 ;;-----------------------------------------------------------------------------
 
 ;;===========================================================================
-;; ESS - MINOR MODE C-c @ C-h   C-c @ C-s
+;; ESS - MINOR MODE C-c @ C-h   C-c @ C-s  Para ocultar os blocos etc.
 ;;===========================================================================
 ;;http://www.linuxquestions.org/questions/programming-9/automatic-hs-minor-mode-in-emacs-for-php-mode-732087/ 
 
 (add-hook 'ess-mode-hook         'hs-minor-mode)
-;;-----------------------------------------------------------------------------
 ;;(add-hook 'TeX-mode-hook         'hs-minor-mode)
 	
 ;;TEST to fold AUCTEX
 (add-hook 'LaTeX-mode-hook (lambda ()
                              (TeX-fold-mode 1)))
-
 ;;(add-hook 'find-file-hook 'TeX-fold-buffer t)
-
+;;-----------------------------------------------------------------------------
