@@ -283,6 +283,7 @@ e.g. Sunday, September 17, 2000."
 ;;-----------------------------------------------------------------------------
 ;;-----------------------------------------------------------------------------
 
+
 ;;===========================================================================
 ;; AUTO COMPLETE FUNCTION
 ;;===========================================================================
@@ -295,6 +296,63 @@ e.g. Sunday, September 17, 2000."
 (setq ess-use-auto-complete 'script-only)
 ;;-----------------------------------------------------------------------------
 ;;-----------------------------------------------------------------------------
+
+
+
+;;===========================================================================
+;; POLY-MODE MAKDOWN ;; (DEVE ESTAR ANTES DO SUPORTE PARA LATEX.)
+;;===========================================================================
+
+;; Suporte para MarkDown.
+;; (DEVE ESTAR ANTES DO SUPORTE PARA LATEX.)
+;; O markdown-mode.el vem com a instalação do emacs-goodies-el.
+;; sudo apt-get install emacs-goodies-el
+;; Inicia no modo para markdown para arquivos *.md e *.markdown.
+
+;; http://jblevins.org/projects/markdown-mode/
+
+(autoload 'markdown-mode "markdown-mode"
+"Major mode for editing Markdown files" t)
+(add-to-list 'auto-mode-alist '("\\.markdown\\'" . markdown-mode))
+(add-to-list 'auto-mode-alist '("\\.md\\'" . markdown-mode))
+;;-----------------------------------------------------------------------------
+
+;; Suporte para R+MarkDown (requer emacs >= 24.3.1).
+;; (DEVE ESTAR ANTES DO SUPORTE PARA LATEX.)
+;; Obter polymode da origem (em constante modificação).
+;; http://stackoverflow.com/questions/16567348/knitr-markdown-highlighting-in-emacs
+;; cd ~/Downloads/
+;; git clone https://github.com/vitoshka/polymode.git
+;; cd polymode
+;; mkdir ~/.emacs.d/polymode/
+;; cp -v *.el ~/.emacs.d/polymode/
+;; cp -rv ./modes/ ~/.emacs.d/polymode/
+;; cd .. && rm -rf polymode
+;; Adicionar os diretórios com os modos.
+
+(setq load-path
+(append '("/home/rafatieppo/.emacs.d/polymode/"
+"/home/rafatieppo/.emacs.d/polymode/modes")
+load-path))
+
+;; Chama os modos.
+(require 'poly-R)
+(require 'poly-markdown)
+(require 'poly-noweb)
+(autoload 'poly-markdown-mode "poly-markdown-mode"
+"Major mode for editing R-Markdown files" t)
+(add-to-list 'auto-mode-alist '("\\.Rmd\\'" . poly-markdown-mode))
+
+;;/home/rafatieppo/.emacs.d/elpa/polymode-20141204.2346/
+
+;;-----------------------------------------------------------------------------
+
+
+
+
+
+
+
 
 
 ;;===========================================================================
@@ -459,8 +517,10 @@ e.g. Sunday, September 17, 2000."
  '(TeX-source-correlate-method (quote synctex))
  '(TeX-source-correlate-mode t)
  '(TeX-source-correlate-start-server t)
- '(custom-enabled-themes (quote (soothe)))
- '(custom-safe-themes (quote ("27713778ce0291c1002fac10ba08f6de8430a6f24a506b821293b9eda806dfcc" default)))
+ '(custom-enabled-themes (quote (monokai) ) )
+ '(custom-safe-themes (quote ("0eebf69ceadbbcdd747713f2f3f839fe0d4a45bd0d4d9f46145e40878fc9b098" default)))
+
+
  )
 ;;-----------------------------------------------------------------------------
 
@@ -470,26 +530,6 @@ e.g. Sunday, September 17, 2000."
 ;;CONTAR PALAVRAS LATEX,  M-x wc RET
 (add-to-list 'load-path "/home/rafatieppo/.emacs.d")
 (load "wc.el")
-;;-----------------------------------------------------------------------------
-
-;;===========================================================================
-;; POLY-MODE MAKDOWN
-;;===========================================================================
-
-;;instalar via MELPA
-;;ALT+x list-packages 
-
-(defun rmd-mode ()
-  "ESS Markdown mode for rmd files"
-  (interactive)
-  (setq load-path 
-    (append (list "path/to/polymode/" "path/to/polymode/modes/")
-        load-path))
-  (require 'poly-R)
-  (require 'poly-markdown)     
-  (poly-markdown+r-mode))
-  
-  (add-to-list 'auto-mode-alist '("\\.Rmd" . poly-markdown+r-mode))
 ;;-----------------------------------------------------------------------------
 
 ;;===========================================================================
@@ -520,10 +560,10 @@ e.g. Sunday, September 17, 2000."
            (ess-R-fl-keyword:assign-ops . t) ; default
            (ess-R-fl-keyword:constants . t) ; default
            (ess-fl-keyword:fun-calls . t)
-;;           (ess-fl-keyword:numbers . t)
-;;           (ess-fl-keyword:operators . t)
-;;           (ess-fl-keyword:delimiters . t)
-;;           (ess-fl-keyword:= . t)
+           (ess-fl-keyword:numbers . nil)
+           (ess-fl-keyword:operators . t)
+           (ess-fl-keyword:delimiters . nil)
+           (ess-fl-keyword:= . nil)
            (ess-R-fl-keyword:F&T . t)))
 
    (setq inferior-R-font-lock-keywords
@@ -544,13 +584,18 @@ e.g. Sunday, September 17, 2000."
 
 ;;-----------------------------------------------------------------------------
 
+;;===========================================================================
+;; ESS - MINOR MODE C-c @ C-h   C-c @ C-s
+;;===========================================================================
+;;http://www.linuxquestions.org/questions/programming-9/automatic-hs-minor-mode-in-emacs-for-php-mode-732087/ 
 
+(add-hook 'ess-mode-hook         'hs-minor-mode)
+;;-----------------------------------------------------------------------------
+;;(add-hook 'TeX-mode-hook         'hs-minor-mode)
+	
+;;TEST to fold AUCTEX
+(add-hook 'LaTeX-mode-hook (lambda ()
+                             (TeX-fold-mode 1)))
 
- 
+;;(add-hook 'find-file-hook 'TeX-fold-buffer t)
 
-(custom-set-faces
- ;; custom-set-faces was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- )
