@@ -82,7 +82,7 @@
 ;;-----------------------------------------------------------------------------
 ;; Quebra de linhas ao exceder largura do texto (padrão é 72
 ;; caracteres).
-(setq-default fill-column 80)
+(setq-default fill-column 72)
 ;; (setq fill-column 72)
 ;; (setq-default truncate-lines t)
 ;;-----------------------------------------------------------------------------
@@ -130,7 +130,20 @@
 ;;---------------------------------------------------------------------------
 
 ;;---------------------------------------------------------------------------
-;; cor de fundo cursor
+;; cor de fundo cursor Macro highlight-current-line.el
+;; http://www.emacswiki.org/emacs/highlight-current-line.el
+
+(require 'highlight-current-line)
+(highlight-current-line-on t)
+ 
+;; To customize the background color
+;; Para ver a lista de cores 
+;; M-x list-color-display
+(set-face-background 'highlight-current-line-face "#2F2F2F")
+
+
+
+;;ERRO AO CARREGAR
 ;;(global-hl-line-mode enable)
 ;;---------------------------------------------------------------------------
 
@@ -195,6 +208,22 @@
 
 
 ;;===========================================================================
+;; SETTING TO WORK WITH ESS and R
+;;===========================================================================
+;;---------------------------------------------------------------------------
+;; faz com que apareceça os argumentos das funções do R no minibuffer
+(require 'ess-eldoc)
+(setq-default ess-dialect "R")
+;;-----------------------------------------------------------------------------
+
+;;---------------------------------------------------------------------------
+;; If you want all help buffers to go into one frame do:
+(setq ess-help-own-frame 'one)
+;;-----------------------------------------------------------------------------
+;;-----------------------------------------------------------------------------
+
+
+;;===========================================================================
 ;;FUNCOES
 ;;===========================================================================
 ;;-----------------------------------------------------------------------------
@@ -252,21 +281,6 @@ e.g. Sunday, September 17, 2000."
 ;;(global-set-key "\C-x\ \C-r" 'recentf-open-files)
 
 
-;;===========================================================================
-;; SETTING TO WORK WITH ESS and R
-;;===========================================================================
-;;---------------------------------------------------------------------------
-;; faz com que apareceça os argumentos das funções do R no minibuffer
-(require 'ess-eldoc)
-(setq-default ess-dialect "R")
-;;-----------------------------------------------------------------------------
-
-;;---------------------------------------------------------------------------
-;; If you want all help buffers to go into one frame do:
-(setq ess-help-own-frame 'one)
-;;-----------------------------------------------------------------------------
-;;-----------------------------------------------------------------------------
-
 
 ;;===========================================================================
 ;; FUNCTION HIGHLIGHTS LISP
@@ -317,6 +331,7 @@ e.g. Sunday, September 17, 2000."
 (add-to-list 'auto-mode-alist '("\\.md\\'" . markdown-mode))
 ;;-----------------------------------------------------------------------------
 
+;; PASSOS
 ;; Suporte para R+MarkDown (requer emacs >= 24.3.1).
 ;; (DEVE ESTAR ANTES DO SUPORTE PARA LATEX.)
 ;; Obter polymode da origem (em constante modificação).
@@ -346,13 +361,6 @@ load-path))
 ;;/home/rafatieppo/.emacs.d/elpa/polymode-20141204.2346/
 
 ;;-----------------------------------------------------------------------------
-
-
-
-
-
-
-
 
 
 ;;===========================================================================
@@ -560,7 +568,7 @@ load-path))
            (ess-R-fl-keyword:assign-ops . t) ; default
            (ess-R-fl-keyword:constants . t) ; default
            (ess-fl-keyword:fun-calls . t)
-           (ess-fl-keyword:numbers . nil)  ;;se ativar fica muita colorido
+           (ess-fl-keyword:numbers . t)  ;;se ativar fica muita colorido
            (ess-fl-keyword:operators . t)
            (ess-fl-keyword:delimiters . nil) ;;se ativar fica muita colorido
            (ess-fl-keyword:= . nil) ;;se ativar fica muita colorido
@@ -569,16 +577,16 @@ load-path))
    (setq inferior-R-font-lock-keywords
          '((ess-S-fl-keyword:prompt . t) ; default
            (ess-R-fl-keyword:messages . t) ; default
-           (ess-R-fl-keyword:modifiers . t) ; default
-           (ess-R-fl-keyword:fun-defs . t) ; default
+           (ess-R-fl-keyword:modifiers . nil) ; default
+           (ess-R-fl-keyword:fun-defs . nil) ; default
            (ess-R-fl-keyword:keywords . t) ; default
-           (ess-R-fl-keyword:assign-ops . t) ; default
+           (ess-R-fl-keyword:assign-ops . nil) ; default
            (ess-R-fl-keyword:constants . t) ; default
            (ess-fl-keyword:matrix-labels . t) ; default
-           (ess-fl-keyword:fun-calls . t)
-;;           (ess-fl-keyword:numbers . t)
-;;           (ess-fl-keyword:operators . t)
-;;           (ess-fl-keyword:delimiters . t)
+           (ess-fl-keyword:fun-calls . nil)
+;;           (ess-fl-keyword:numbers . nil)
+;;           (ess-fl-keyword:operators . nil)
+;;           (ess-fl-keyword:delimiters . nil)
 ;;           (ess-fl-keyword:= . t)
            (ess-R-fl-keyword:F&T . t)))
 
