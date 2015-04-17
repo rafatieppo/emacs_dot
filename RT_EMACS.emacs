@@ -11,12 +11,24 @@
 ;;TO INSTALL FROM MELPA
 ;;===========================================================================
 ;;-----------------------------------------------------------------------------
-(when (>= emacs-major-version 24)
-  (require 'package)
-  (package-initialize)
-  (add-to-list 'package-archives '("melpa" . "http://melpa.milkbox.net/packages/") t)
-  )
+;(when (>= emacs-major-version 24)
+;  (require 'package)
+;  (package-initialize)
+;  (add-to-list 'package-archives '("melpa" . "http://melpa.milkbox.net/packages/") t)
+;  )
+  
+  
+ (add-to-list 'load-path "~/.emacs.d/")
+(load "package")
+(require 'package)
+(add-to-list 'package-archives
+    '("marmalade" .
+      "http://marmalade-repo.org/packages/"))
+(package-initialize) 
+  
+  
 ;;-----------------------------------------------------------------------------
+
 
 ;;===========================================================================
 ;;ORG MODE
@@ -28,7 +40,30 @@
 (setq org-log-done t)
 
 ;; Para buscar um arquivo TODO
-(setq org-agenda-files (list "~/Dropbox/EMACS_ORG_MODE/work.org"))
+;;(setq org-agenda-files (list "~/Dropbox/EMACS_ORG_MODE/work.org"))
+
+;;-----------------------------------------------------------------------------
+;; ORG mode for Android
+;;http://stackoverflow.com/questions/11822353/how-to-make-org-mobile-work-in-android
+;; http://blog.gabrielsaldana.org/mobileorg-for-android-setup-and-workflow/
+
+;; where all your org files will be stored
+(setq org-directory "/home/rafatieppo/Dropbox/EMACS_ORG_MODE")
+
+(setq org-mobile-directory "/home/rafatieppo/Dropbox/MOBILEORG")
+
+(setq org-agenda-files '("/home/rafatieppo/Dropbox/EMACS_ORG_MODE/RAFA.org"))
+
+(setq org-mobile-inbox-for-pull "/home/rafatieppo/Dropbox/EMACS_ORG_MODE/mobile.org")
+
+;;-----------------------------------------------------------------------------
+;; Provide to run R code
+(org-babel-do-load-languages
+ 'org-babel-load-languages
+ '((emacs-lisp . t)
+   (clojure . t)
+   (python . t)
+   (R . t)))
 
                              
 ;;===========================================================================
@@ -245,6 +280,17 @@ e.g. Sunday, September 17, 2000."
 (insert (make-string 45 ? ) "tiepporc@unemat.br\n")
 (insert (make-string 45 ? ) (format-time-string "%d-%m-%Y\n"))
 (insert (make-string 65 ?=) "\n")
+)
+
+(defun header_org ()
+"Insere cabecalho org-mode"
+(interactive)
+(insert (make-string 0 ? ) "#+LaTeX_CLASS_OPTIONS: [a4paper] \n")
+(insert (make-string 0 ? ) "#+LaTeX_CLASS_OPTIONS: [12pt] \n")
+(insert (make-string 0 ? ) "#+TITLE: Title \n")
+(insert (make-string 0 ? ) "#+DATE: \n")
+(insert (make-string 0 ? ) "#+AUTHOR: Rafael Tieppo \n")
+(insert (make-string 0 ? ) "#+EMAIL: tiepporc@unemat.br \n")
 )
 ;;-----------------------------------------------------------------------------
 
