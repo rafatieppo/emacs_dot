@@ -11,21 +11,24 @@
 ;;TO INSTALL FROM MELPA
 ;;===========================================================================
 ;;-----------------------------------------------------------------------------
-;(when (>= emacs-major-version 24)
-;  (require 'package)
-;  (package-initialize)
-;  (add-to-list 'package-archives '("melpa" . "http://melpa.milkbox.net/packages/") t)
-;  )
+
   
-  
- (add-to-list 'load-path "~/.emacs.d/")
+(add-to-list 'load-path "~/.emacs.d/")
 (load "package")
 (require 'package)
-(add-to-list 'package-archives
-    '("marmalade" .
-      "http://marmalade-repo.org/packages/"))
+;;(add-to-list 'package-archives
+;;    '("marmalade" .
+;;      "http://marmalade-repo.org/packages/"))
 (package-initialize) 
   
+
+
+(setq package-enable-at-startup nil)
+
+
+;;(add-to-list 'package-archives '("marmalade" . "https://marmalade-repo.org/packages/"))
+(add-to-list 'package-archives '("melpa" . "http://melpa.org/packages/"))
+;;(add-to-list 'package-archives '("org" . "http://orgmode.org/elpa/") t) ;;Org-mode's repository
   
 ;;-----------------------------------------------------------------------------
 
@@ -39,7 +42,7 @@
 (define-key global-map "\C-ca" 'org-agenda)
 (setq org-log-done t)
 
-;; Para buscar um arquivo TODO
+;;Para buscar um arquivo TODO
 ;;(setq org-agenda-files (list "~/Dropbox/EMACS_ORG_MODE/work.org"))
 
 ;;-----------------------------------------------------------------------------
@@ -52,18 +55,40 @@
 
 (setq org-mobile-directory "/home/rafatieppo/Dropbox/MOBILEORG")
 
-(setq org-agenda-files '("/home/rafatieppo/Dropbox/EMACS_ORG_MODE/RAFA.org"))
-
 (setq org-mobile-inbox-for-pull "/home/rafatieppo/Dropbox/EMACS_ORG_MODE/mobile.org")
+
+;;(setq default-buffer-file-coding-system 'utf-8)
+
+(setq org-mobile-files '("/home/rafatieppo/Dropbox/EMACS_ORG_MODE/RAFA.org"
+                                                                           ))
+(setq org-mobile-agendas '("a"))
+
+;;(setq org-agenda-files '("/home/rafatieppo/Dropbox/EMACS_ORG_MODE/RAFA.org"))
 
 ;;-----------------------------------------------------------------------------
 ;; Provide to run R code
+
+
 (org-babel-do-load-languages
  'org-babel-load-languages
  '((emacs-lisp . t)
+   (latex . t)
    (clojure . t)
    (python . t)
    (R . t)))
+
+;;-----------------------------------------------------------------------------
+;; WORPRESS ORG MODE
+
+(setq load-path (cons "~/.emacs.d/org2blog-master/" load-path))
+(require 'org2blog-autoloads)
+
+
+(add-to-list 'load-path "~/.emacs.d/")
+(require 'metaweblog)
+(add-to-list 'load-path "~/.emacs.d/")
+(require 'xml-rpc)
+
 
                              
 ;;===========================================================================
