@@ -65,9 +65,35 @@
 
 ;;(setq org-agenda-files '("/home/rafatieppo/Dropbox/EMACS_ORG_MODE/RAFA.org"))
 
+
+;;-----------------------------------------------------------------------------
+;; Chronometer Task
+(setq org-clock-persist 'history)
+(org-clock-persistence-insinuate)
+                             
+
+;;-----------------------------------------------------------------------------
+;; ORG SHORCUT
+;;; Quick inserts via <s TAB and similar 
+
+(setq org-structure-template-alist '(("s" "#+BEGIN_SRC ?\n\n#+END_SRC")
+                                     ("e" "#+BEGIN_EXAMPLE\n?\n#+END_EXAMPLE")
+                                     ("q" "#+BEGIN_QUOTE\n?\n#+END_QUOTE")
+                                     ("v" "#+BEGIN_VERSE\n?\n#+END_VERSE")
+                                     ("V" "#+BEGIN_VERBATIM\n?\n#+END_VERBATIM")
+                                     ("c" "#+BEGIN_CENTER\n?\n#+END_CENTER")
+                                     ("l" "#+BEGIN_LaTeX\n?\n#+END_LaTeX")
+                                     ("L" "#+LaTeX: ")
+                                     ("h" "#+BEGIN_HTML\n?\n#+END_HTML")
+                                     ("H" "#+HTML: ")
+                                     ("a" "#+BEGIN_ASCII\n?\n#+END_ASCII")
+                                     ("A" "#+ASCII: ")
+                                     ("i" "#+INDEX: ?")
+                                     ("I" "#+INCLUDE: %file ?")
+                                     ("x" "#+BEGIN_COMMENT\n?\n#+END_COMMENT")))
+
 ;;-----------------------------------------------------------------------------
 ;; Provide to run R code
-
 
 (org-babel-do-load-languages
  'org-babel-load-languages
@@ -76,6 +102,26 @@
    (clojure . t)
    (python . t)
    (R . t)))
+
+
+;;-----------------------------------------------------------------------------
+;; Provide Highlight code in SRC
+
+(setq org-src-fontify-natively t)
+
+
+;;-----------------------------------------------------------------------------
+;; Provide Highlight in LATEX and PDF
+;; http://stackoverflow.com/questions/21005885/export-org-mode-code-block-and-result-with-different-styles
+
+;;(require 'ox-latex)
+(add-to-list 'org-latex-packages-alist '("" "minted"))
+(setq org-latex-listings 'minted)
+
+(setq org-latex-pdf-process
+      '("pdflatex -shell-escape -interaction nonstopmode -output-directory %o %f"
+        "pdflatex -shell-escape -interaction nonstopmode -output-directory %o %f"
+        "pdflatex -shell-escape -interaction nonstopmode -output-directory %o %f"))
 
 ;;-----------------------------------------------------------------------------
 ;; WORPRESS ORG MODE
@@ -90,7 +136,6 @@
 (require 'xml-rpc)
 
 
-                             
 ;;===========================================================================
 ;;DEFINICAO PADRAO
 ;;===========================================================================
@@ -199,9 +244,8 @@
 ;; To customize the background color
 ;; Para ver a lista de cores 
 ;; M-x list-color-display
-(set-face-background 'highlight-current-line-face "#2F2F2F")
-
-
+(set-face-background 'highlight-current-line-face "#1F0F0F") ;; soothe
+;; (set-face-background 'highlight-current-line-face "#2F2F2F") ;;MONOKAI
 
 ;;ERRO AO CARREGAR
 ;;(global-hl-line-mode enable)
@@ -296,6 +340,7 @@ e.g. Sunday, September 17, 2000."
 ;; (insert (format-time-string "%A, %e de %B , %Y"))
 (insert (format-time-string "%e/%m/%Y"))
 )
+
 (defun header ()
 "Insere cabeçalho."
 (interactive)
@@ -310,14 +355,15 @@ e.g. Sunday, September 17, 2000."
 (defun header_org ()
 "Insere cabecalho org-mode"
 (interactive)
-(insert (make-string 0 ? ) "#+LaTeX_CLASS_OPTIONS: [a4paper] \n")
+(insert (make-string 0 ? ) "#+LaTeX_CLASS_OPTIONS: [a4paper, top=3cm, bottom=2cm, left=3cm, right=2cm]{article} \n")
 (insert (make-string 0 ? ) "#+LaTeX_CLASS_OPTIONS: [12pt] \n")
+(insert (make-string 0 ? ) "#+LaTeX_HEADER: \\usepackage[alf,abnt-repeated-title-omit=yes,abnt-show-options=warn,abnt-emphasize=bf,abnt-etal-list=0]{abntcite} \n") 
+(insert (make-string 0 ? ) "#+LaTeX_HEADER: \\usemintedstyle{tango} \n")
 (insert (make-string 0 ? ) "#+TITLE: Title \n")
 (insert (make-string 0 ? ) "#+DATE: \n")
 (insert (make-string 0 ? ) "#+AUTHOR: Rafael Tieppo \n")
 (insert (make-string 0 ? ) "#+EMAIL: tiepporc@unemat.br \n")
 )
-;;-----------------------------------------------------------------------------
 
 ;;-----------------------------------------------------------------------------
 ;; Função para duplicar linhas (esse comando/atalho é muito útil).
@@ -526,14 +572,16 @@ load-path))
 ;;-----------------------------------------------------------------------------
 ;;-----------------------------------------------------------------------------
 ;; THEMES from: http://emacsthemes.caisah.info/
+;; https://github.com/owainlewis/emacs-color-themes
+;; themes from: http://emacsthemes.caisah.info/
 
 (add-to-list 'load-path "/home/rafatieppo/.emacs.d/emacs-color-theme-solarized-master")
 (require 'solarized-dark-theme)
 (require 'solarized-light-theme)
 (require 'color-theme-solarized)
 
-(add-to-list 'load-path "/home/rafatieppo/.emacs.d/themess")
-(require 'monokai-theme)
+;;(add-to-list 'load-path "/home/rafatieppo/.emacs.d/themess")
+;;(require 'monokai-theme)
 
 ;;(add-to-list 'load-path "/home/rafatieppo/.emacs.d/themess")
 ;;(require 'Amelie-theme)
@@ -550,10 +598,20 @@ load-path))
 ;;(add-to-list 'load-path "/home/rafatieppo/.emacs.d/themess")
 ;;(require 'erosiond-theme)
 
-;; themes from: http://emacsthemes.caisah.info/
+;;(add-to-list 'load-path "/home/rafatieppo/.emacs.d/themess")
+;;(require 'zenburn-theme)
+
+;;(add-to-list 'load-path "/home/rafatieppo/.emacs.d/themess")
+;;(require 'hickey-theme)
+
+;;(add-to-list 'load-path "/home/rafatieppo/.emacs.d/themess")
+;;(require 'fogus-theme)
+
+(add-to-list 'load-path "/home/rafatieppo/.emacs.d/themess")
+(require 'junio-theme)
+
 ;;(add-to-list 'load-path "/home/rafatieppo/.emacs.d/themess")
 ;;(require 'wilson-theme.el)
-
 
 ;;===========================================================================
 ;;TEMA VEM PADRAO EMACS
@@ -566,19 +624,11 @@ load-path))
  ;; If there is more than one, they won't work right.
 
 
- ;; '(custom-enabled-themes (quote (solarized)))
+;; '(custom-enabled-themes (quote (solarized)))
 ;; '(custom-safe-themes (quote ("8db4b03b9ae654d4a57804286eb3e332725c84d7cdab38463cb6b97d5762ad26" default))) ;;to confirm lisp code
-
- 
 ;; '(custom-enabled-themes (quote (monokai) ) )
 ;; '(custom-safe-themes (quote ("0eebf69ceadbbcdd747713f2f3f839fe0d4a45bd0d4d9f46145e40878fc9b098" default)))
-
-
-;; '(custom-enabled-themes (quote (soothe)))
-;; '(custom-safe-themes (quote ("27713778ce0291c1002fac10ba08f6de8430a6f24a506b821293b9eda806dfcc" default)))
- ;;)
-
-
+;;)
 
 ;;===========================================================================
 
@@ -596,10 +646,6 @@ load-path))
  '(TeX-source-correlate-method (quote synctex))
  '(TeX-source-correlate-mode t)
  '(TeX-source-correlate-start-server t)
- '(custom-enabled-themes (quote (monokai) ) )
- '(custom-safe-themes (quote ("0eebf69ceadbbcdd747713f2f3f839fe0d4a45bd0d4d9f46145e40878fc9b098" default)))
-
-
  )
 ;;-----------------------------------------------------------------------------
 
