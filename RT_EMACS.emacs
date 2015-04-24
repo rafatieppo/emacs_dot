@@ -44,6 +44,9 @@
 
 ;;Para buscar um arquivo TODO
 ;;(setq org-agenda-files (list "~/Dropbox/EMACS_ORG_MODE/work.org"))
+;; arquivo para o org agendasorg-agenda
+(setq org-agenda-files '("/home/rafatieppo/Dropbox/EMACS_ORG_MODE/RAFA.org"))
+
 
 ;;-----------------------------------------------------------------------------
 ;; ORG mode for Android
@@ -122,6 +125,10 @@
       '("pdflatex -shell-escape -interaction nonstopmode -output-directory %o %f"
         "pdflatex -shell-escape -interaction nonstopmode -output-directory %o %f"
         "pdflatex -shell-escape -interaction nonstopmode -output-directory %o %f"))
+
+;;-----------------------------------------------------------------------------
+
+
 
 ;;-----------------------------------------------------------------------------
 ;; WORPRESS ORG MODE
@@ -355,8 +362,8 @@ e.g. Sunday, September 17, 2000."
 (defun header_org ()
 "Insere cabecalho org-mode"
 (interactive)
-(insert (make-string 0 ? ) "#+LaTeX_CLASS_OPTIONS: [a4paper, top=3cm, bottom=2cm, left=3cm, right=2cm]{article} \n")
-(insert (make-string 0 ? ) "#+LaTeX_CLASS_OPTIONS: [12pt] \n")
+(insert (make-string 0 ? ) "#+LaTeX_CLASS_OPTIONS: [article,a4paper,times,12pt] \n")
+(insert (make-string 0 ? ) "#+latex_header: \\usepackage[hmargin=2.5cm,vmargin=2.5cm]{geometry} \n")
 (insert (make-string 0 ? ) "#+LaTeX_HEADER: \\usepackage[alf,abnt-repeated-title-omit=yes,abnt-show-options=warn,abnt-emphasize=bf,abnt-etal-list=0]{abntcite} \n") 
 (insert (make-string 0 ? ) "#+LaTeX_HEADER: \\usemintedstyle{tango} \n")
 (insert (make-string 0 ? ) "#+TITLE: Title \n")
