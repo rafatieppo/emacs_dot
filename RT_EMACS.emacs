@@ -75,6 +75,21 @@
 (org-clock-persistence-insinuate)
                              
 
+
+;;-----------------------------------------------------------------------------
+;; ORG MONTH REPORT
+
+(defun my/org-review-month (start-date)
+  "Review the month's clocked tasks and time."
+  (interactive (list (org-read-date)))
+  ;; Set to the beginning of the month
+  (setq start-date (concat (substring start-date 0 8) "01"))
+  (let ((org-agenda-show-log t)
+        (org-agenda-start-with-log-mode t)
+        (org-agenda-start-with-clockreport-mode t)
+        (org-agenda-clockreport-parameter-plist '(:link t :maxlevel 3)))
+    (org-agenda-list nil start-date 'month)))
+    
 ;;-----------------------------------------------------------------------------
 ;; ORG SHORCUT
 ;;; Quick inserts via <s TAB and similar 
@@ -127,8 +142,21 @@
         "pdflatex -shell-escape -interaction nonstopmode -output-directory %o %f"))
 
 ;;-----------------------------------------------------------------------------
+;;-----------------------------------------------------------------------------
+;; ORG MOMDE MINOR mode markdown
+;; http://stackoverflow.com/questions/14275122/editing-markdown-pipe-tables-in-emacs
+(require 'org-table)
 
+(defun cleanup-org-tables ()
+  (save-excursion
+    (goto-char (point-min))
+    (while (search-forward "-+-" nil t) (replace-match "-|-"))
+    ))
 
+(add-hook 'markdown-mode-hook 'orgtbl-mode)
+(add-hook 'markdown-mode-hook
+          (lambda()
+            (add-hook 'after-save-hook 'cleanup-org-tables  nil 'make-it-local)))
 
 ;;-----------------------------------------------------------------------------
 ;; WORPRESS ORG MODE
@@ -194,8 +222,8 @@
 ;;-----------------------------------------------------------------------------
 ;; Quebra de linhas ao exceder largura do texto (padrão é 72
 ;; caracteres).
-(setq-default fill-column 72)
-;; (setq fill-column 72)
+(setq-default fill-column 76)
+;; (setq fill-column 76)
 ;; (setq-default truncate-lines t)
 ;;-----------------------------------------------------------------------------
 
@@ -251,8 +279,9 @@
 ;; To customize the background color
 ;; Para ver a lista de cores 
 ;; M-x list-color-display
-(set-face-background 'highlight-current-line-face "#1F0F0F") ;; soothe
-;; (set-face-background 'highlight-current-line-face "#2F2F2F") ;;MONOKAI
+;;(set-face-background 'highlight-current-line-face "#1F0F0F") ;; soothe
+;;(set-face-background 'highlight-current-line-face "#2F2F2F") ;;MONOKAI
+(set-face-background 'highlight-current-line-face   "#121212") ;; HICKEY
 
 ;;ERRO AO CARREGAR
 ;;(global-hl-line-mode enable)
@@ -583,8 +612,9 @@ load-path))
 ;; themes from: http://emacsthemes.caisah.info/
 
 (add-to-list 'load-path "/home/rafatieppo/.emacs.d/emacs-color-theme-solarized-master")
-(require 'solarized-dark-theme)
-(require 'solarized-light-theme)
+;;(require 'solarized-light-theme)
+;;(require 'solarized-definitions)
+;;(require 'solarized-theme)
 (require 'color-theme-solarized)
 
 ;;(add-to-list 'load-path "/home/rafatieppo/.emacs.d/themess")
@@ -611,11 +641,14 @@ load-path))
 ;;(add-to-list 'load-path "/home/rafatieppo/.emacs.d/themess")
 ;;(require 'hickey-theme)
 
+(add-to-list 'load-path "/home/rafatieppo/.emacs.d/themess")
+(require 'spolsky-theme)
+
 ;;(add-to-list 'load-path "/home/rafatieppo/.emacs.d/themess")
 ;;(require 'fogus-theme)
 
-(add-to-list 'load-path "/home/rafatieppo/.emacs.d/themess")
-(require 'junio-theme)
+;;(add-to-list 'load-path "/home/rafatieppo/.emacs.d/themess")
+;;(require 'junio-theme)
 
 ;;(add-to-list 'load-path "/home/rafatieppo/.emacs.d/themess")
 ;;(require 'wilson-theme.el)
@@ -693,8 +726,8 @@ load-path))
            (ess-R-fl-keyword:constants . t) ; default
            (ess-fl-keyword:fun-calls . t)
            (ess-fl-keyword:numbers . t)  ;;se ativar fica muita colorido
-           (ess-fl-keyword:operators . t)
-           (ess-fl-keyword:delimiters . nil) ;;se ativar fica muita colorido
+           (ess-fl-keyword:operators . nil)
+           (ess-fl-keyword:delimiters . t) ;;se ativar fica muita colorido
            (ess-fl-keyword:= . nil) ;;se ativar fica muita colorido
            (ess-R-fl-keyword:F&T . t)))
 
@@ -707,7 +740,7 @@ load-path))
            (ess-R-fl-keyword:assign-ops . nil) ; default
            (ess-R-fl-keyword:constants . t) ; default
            (ess-fl-keyword:matrix-labels . t) ; default
-           (ess-fl-keyword:fun-calls . nil)
+           (ess-fl-keyword:fun-calls . t)
 ;;           (ess-fl-keyword:numbers . nil)
 ;;           (ess-fl-keyword:operators . nil)
 ;;           (ess-fl-keyword:delimiters . nil)
@@ -729,3 +762,10 @@ load-path))
                              (TeX-fold-mode 1)))
 ;;(add-hook 'find-file-hook 'TeX-fold-buffer t)
 ;;-----------------------------------------------------------------------------
+
+(custom-set-faces
+ ;; custom-set-faces was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ )
