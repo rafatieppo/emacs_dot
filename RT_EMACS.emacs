@@ -457,6 +457,14 @@ e.g. Sunday, September 17, 2000."
 )
 
 
+(defun figure_md ()
+"Insere cabecalho markdown-mode"
+(interactive)
+(insert (make-string 0 ? ) "![caption here](file here.png){#fig:label_here} \n")
+)
+
+
+
 ;;-----------------------------------------------------------------------------
 ;; Função para duplicar linhas (esse comando/atalho é muito útil).
 ;; http://stackoverflow.com/questions/88399/how-do-i-duplicate-a-whole-line-in-emacs
