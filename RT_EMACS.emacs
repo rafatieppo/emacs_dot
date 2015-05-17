@@ -129,6 +129,21 @@
 
 
 ;;-----------------------------------------------------------------------------
+;; multiple-cursors.el
+;; https://github.com/magnars/multiple-cursors.el
+
+(require 'multiple-cursors)
+
+;; continuous lines
+(global-set-key (kbd "C-S-c C-S-c") 'mc/edit-lines)
+
+;; not based on continuous lines
+(global-set-key (kbd "C->") 'mc/mark-next-like-this)
+(global-set-key (kbd "C-<") 'mc/mark-previous-like-this)
+(global-set-key (kbd "C-c C-<") 'mc/mark-all-like-this)
+
+
+;;-----------------------------------------------------------------------------
 ;; Provide Highlight in LATEX and PDF
 ;; http://stackoverflow.com/questions/21005885/export-org-mode-code-block-and-result-with-different-styles
 
@@ -142,6 +157,22 @@
         "pdflatex -shell-escape -interaction nonstopmode -output-directory %o %f"))
 
 ;;-----------------------------------------------------------------------------
+;; WORPRESS ORG MODE
+
+(setq load-path (cons "~/.emacs.d/org2blog-master/" load-path))
+(require 'org2blog-autoloads)
+
+
+(add-to-list 'load-path "~/.emacs.d/")
+(require 'metaweblog)
+(add-to-list 'load-path "~/.emacs.d/")
+(require 'xml-rpc)
+
+
+;;===========================================================================
+;;MARKDOWN MODE 
+;;===========================================================================
+
 ;;-----------------------------------------------------------------------------
 ;; ORG MOMDE MINOR mode markdown
 ;; http://stackoverflow.com/questions/14275122/editing-markdown-pipe-tables-in-emacs
@@ -158,17 +189,30 @@
           (lambda()
             (add-hook 'after-save-hook 'cleanup-org-tables  nil 'make-it-local)))
 
+
 ;;-----------------------------------------------------------------------------
-;; WORPRESS ORG MODE
+;; MARKDOWN enable MATH
+;;http://jblevins.org/projects/markdown-mode/
+;;(setq markdown-enable-math t)
 
-(setq load-path (cons "~/.emacs.d/org2blog-master/" load-path))
-(require 'org2blog-autoloads)
 
-
+;;-----------------------------------------------------------------------------
+;; MARKDOWN VIEWER LIVE
+;; https://github.com/ancane/markdown-preview-mode
 (add-to-list 'load-path "~/.emacs.d/")
-(require 'metaweblog)
-(add-to-list 'load-path "~/.emacs.d/")
-(require 'xml-rpc)
+(require 'websocket)
+
+
+;;-----------------------------------------------------------------------------
+;; TECLA TAB para 4 espaços
+;; https://ikiwiki.info/tips/Emacs_and_markdown/
+(autoload 'markdown-mode "markdown-mode")
+(add-to-list 'auto-mode-alist '("\\.md" . markdown-mode))
+
+(add-hook 'markdown-mode-hook  
+           '(lambda () 
+               (make-local-hook 'write-contents-hooks) 
+                (add-hook 'write-contents-hooks 'ska-untabify nil t)))
 
 
 ;;===========================================================================
@@ -400,6 +444,18 @@ e.g. Sunday, September 17, 2000."
 (insert (make-string 0 ? ) "#+AUTHOR: Rafael Tieppo \n")
 (insert (make-string 0 ? ) "#+EMAIL: tiepporc@unemat.br \n")
 )
+
+
+(defun header_md ()
+"Insere cabecalho markdown-mode"
+(interactive)
+(insert (make-string 0 ? ) "--- \n")
+(insert (make-string 0 ? ) "title: TITLE \n")
+(insert (make-string 0 ? ) "author: Rafael Tieppo \n")
+(insert (make-string 0 ? ) "date: Maio, 201 \n")
+(insert (make-string 0 ? ) "--- \n")
+)
+
 
 ;;-----------------------------------------------------------------------------
 ;; Função para duplicar linhas (esse comando/atalho é muito útil).
@@ -651,7 +707,12 @@ load-path))
 ;;(require 'junio-theme)
 
 ;;(add-to-list 'load-path "/home/rafatieppo/.emacs.d/themess")
-;;(require 'wilson-theme.el)
+;;(require 'wilson-theme)
+
+;;https://github.com/juba/color-theme-tangotango/blob/master/tangotango-theme.el
+;(add-to-list 'load-path "/home/rafatieppo/.emacs.d/themess")
+;(require 'tangotango-theme)
+
 
 ;;===========================================================================
 ;;TEMA VEM PADRAO EMACS
