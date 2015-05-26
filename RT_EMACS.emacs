@@ -170,52 +170,6 @@
 
 
 ;;===========================================================================
-;;MARKDOWN MODE 
-;;===========================================================================
-
-;;-----------------------------------------------------------------------------
-;; ORG MOMDE MINOR mode markdown
-;; http://stackoverflow.com/questions/14275122/editing-markdown-pipe-tables-in-emacs
-(require 'org-table)
-
-(defun cleanup-org-tables ()
-  (save-excursion
-    (goto-char (point-min))
-    (while (search-forward "-+-" nil t) (replace-match "-|-"))
-    ))
-
-(add-hook 'markdown-mode-hook 'orgtbl-mode)
-(add-hook 'markdown-mode-hook
-          (lambda()
-            (add-hook 'after-save-hook 'cleanup-org-tables  nil 'make-it-local)))
-
-
-;;-----------------------------------------------------------------------------
-;; MARKDOWN enable MATH
-;;http://jblevins.org/projects/markdown-mode/
-;;(setq markdown-enable-math t)
-
-
-;;-----------------------------------------------------------------------------
-;; MARKDOWN VIEWER LIVE
-;; https://github.com/ancane/markdown-preview-mode
-(add-to-list 'load-path "~/.emacs.d/")
-(require 'websocket)
-
-
-;;-----------------------------------------------------------------------------
-;; TECLA TAB para 4 espaços
-;; https://ikiwiki.info/tips/Emacs_and_markdown/
-(autoload 'markdown-mode "markdown-mode")
-(add-to-list 'auto-mode-alist '("\\.md" . markdown-mode))
-
-(add-hook 'markdown-mode-hook  
-           '(lambda () 
-               (make-local-hook 'write-contents-hooks) 
-                (add-hook 'write-contents-hooks 'ska-untabify nil t)))
-
-
-;;===========================================================================
 ;;DEFINICAO PADRAO
 ;;===========================================================================
 ;;---------------------------------------------------------------------------
@@ -311,24 +265,6 @@
 ;; realçador de pareamento de parenteses, chaves, colchetes, aspas...
 (show-paren-mode 1)
 (global-font-lock-mode t) ; turn on syntax highlighting
-;;---------------------------------------------------------------------------
-
-;;---------------------------------------------------------------------------
-;; cor de fundo cursor Macro highlight-current-line.el
-;; http://www.emacswiki.org/emacs/highlight-current-line.el
-
-(require 'highlight-current-line)
-(highlight-current-line-on t)
- 
-;; To customize the background color
-;; Para ver a lista de cores 
-;; M-x list-color-display
-;;(set-face-background 'highlight-current-line-face "#1F0F0F") ;; soothe
-;;(set-face-background 'highlight-current-line-face "#2F2F2F") ;;MONOKAI
-(set-face-background 'highlight-current-line-face   "#121212") ;; HICKEY
-
-;;ERRO AO CARREGAR
-;;(global-hl-line-mode enable)
 ;;---------------------------------------------------------------------------
 
 ;;---------------------------------------------------------------------------
@@ -574,10 +510,56 @@ load-path))
 (autoload 'poly-markdown-mode "poly-markdown-mode"
 "Major mode for editing R-Markdown files" t)
 (add-to-list 'auto-mode-alist '("\\.Rmd\\'" . poly-markdown-mode))
+(add-to-list 'auto-mode-alist '("\\.md\\'" . poly-markdown-mode))
+
 
 ;;/home/rafatieppo/.emacs.d/elpa/polymode-20141204.2346/
 
 ;;-----------------------------------------------------------------------------
+
+;;===========================================================================
+;;MARKDOWN MODE 
+;;===========================================================================
+
+;;-----------------------------------------------------------------------------
+;; ORG MOMDE MINOR mode markdown
+;; http://stackoverflow.com/questions/14275122/editing-markdown-pipe-tables-in-emacs
+(require 'org-table)
+
+(defun cleanup-org-tables ()
+  (save-excursion
+    (goto-char (point-min))
+    (while (search-forward "-+-" nil t) (replace-match "-|-"))
+    ))
+
+(add-hook 'markdown-mode-hook 'orgtbl-mode)
+(add-hook 'markdown-mode-hook
+          (lambda()
+            (add-hook 'after-save-hook 'cleanup-org-tables  nil 'make-it-local)))
+
+;;-----------------------------------------------------------------------------
+;; MARKDOWN enable MATH Desativei pq fica muito colorido e confunde
+;;http://jblevins.org/projects/markdown-mode/
+(setq markdown-enable-math t)
+
+
+;;-----------------------------------------------------------------------------
+;; MARKDOWN VIEWER LIVE
+;; https://github.com/ancane/markdown-preview-mode
+(add-to-list 'load-path "~/.emacs.d/")
+(require 'websocket)
+
+
+;;-----------------------------------------------------------------------------
+;; TECLA TAB para 4 espaços Desativei pq inibe o POLYMODE
+;; https://ikiwiki.info/tips/Emacs_and_markdown/
+;;(autoload 'markdown-mode "markdown-mode")
+;;(add-to-list 'auto-mode-alist '("\\.md" . markdown-mode))
+
+;;(add-hook 'markdown-mode-hook  
+;;           '(lambda () 
+;;               (make-local-hook 'write-contents-hooks) 
+;;                (add-hook 'write-contents-hooks 'ska-untabify nil t)))
 
 
 ;;===========================================================================
@@ -587,6 +569,7 @@ load-path))
 ;; Modo matemático para LaTex (Math no menu com atalhos para símbolos,
 ;; etc).
 (add-hook 'LaTeX-mode-hook 'LaTeX-math-mode)
+
 ;;-----------------------------------------------------------------------------
 
 ;;-----------------------------------------------------------------------------
@@ -594,6 +577,9 @@ load-path))
 ;; navegação, sumário).
 ;; http://piotrkazmierczak.com/2010/05/13/emacs-as-the-ultimate-latex-editor/
 ;; Para ativar: C-c =  it means CTRL + c + = 
+
+;; So that RefTeX finds my bibliography If you want assign a file to BIBTEX
+;;(setq reftex-default-bibliography '("/home/rafatieppo/Dropbox/PROFISSIONAL/DOUTORADO/TESE/PAPER_TESE/PAPER_TESE.bib"))
 
 
 ;; Esse deu erro: TESTANDO: FUNCIONOU PERFEITO
@@ -739,6 +725,25 @@ load-path))
 ;; '(custom-safe-themes (quote ("0eebf69ceadbbcdd747713f2f3f839fe0d4a45bd0d4d9f46145e40878fc9b098" default)))
 ;;)
 
+;;---------------------------------------------------------------------------
+;; cor de fundo cursor Macro highlight-current-line.el
+;; http://www.emacswiki.org/emacs/highlight-current-line.el
+;;(require 'highlight-current-line)
+;;(highlight-current-line-on t)
+;; To customize the background color
+;; Para ver a lista de cores 
+;; M-x list-color-display
+;;(set-face-background 'highlight-current-line-face "#1F0F0F") ;; soothe
+;;(set-face-background 'highlight-current-line-face "#2F2F2F") ;;MONOKAI
+;;(set-face-background 'highlight-current-line-face   "#121212") ;; HICKEY#ffff0
+;;(set-face-background 'highlight-current-line-face   "#ffff00") ;; gold
+
+;;Padrao do EMACS cursor linha; Must be after of THEME to do not overlayer
+(global-hl-line-mode +1)
+;;(set-face-background hl-line-face "#191970") ;; midnightblue
+(set-face-background hl-line-face "#1a1a1a") ;; darkgray  
+;;---------------------------------------------------------------------------
+
 ;;===========================================================================
 
 ;;===========================================================================
@@ -779,8 +784,18 @@ load-path))
 ;;http://stackoverflow.com/questions/1587972/how-to-display-indentation-guides-in-emacs
 ;;https://github.com/antonj/Highlight-Indentation-for-Emacs/blob/
 ;;master/highlight-indentation.el
+;; other is better
+;;(require 'highlight-indentation)
 
-(require 'highlight-indentation)
+
+;;===========================================================================
+;; INDENT GUIDE
+;;===========================================================================
+;; https://raw.githubusercontent.com/zk-phi/indent-guide/master/indent-guide.el
+
+(require 'indent-guide)
+(setq indent-guide-recursive t)
+
 
 ;;-----------------------------------------------------------------------------
 
@@ -831,10 +846,3 @@ load-path))
                              (TeX-fold-mode 1)))
 ;;(add-hook 'find-file-hook 'TeX-fold-buffer t)
 ;;-----------------------------------------------------------------------------
-
-(custom-set-faces
- ;; custom-set-faces was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- )
