@@ -89,6 +89,9 @@
         (org-agenda-start-with-clockreport-mode t)
         (org-agenda-clockreport-parameter-plist '(:link t :maxlevel 3)))
     (org-agenda-list nil start-date 'month)))
+
+
+  
     
 ;;-----------------------------------------------------------------------------
 ;; ORG SHORCUT
@@ -127,7 +130,6 @@
 
 (setq org-src-fontify-natively t)
 
-
 ;;-----------------------------------------------------------------------------
 ;; multiple-cursors.el
 ;; https://github.com/magnars/multiple-cursors.el
@@ -135,12 +137,14 @@
 (require 'multiple-cursors)
 
 ;; continuous lines
-(global-set-key (kbd "C-S-c C-S-c") 'mc/edit-lines)
+;;(global-set-key (kbd "C-S-c C-S-c") 'mc/edit-lines)
+(global-set-key (kbd "C-. C-c") 'mc/edit-lines)
+
 
 ;; not based on continuous lines
 (global-set-key (kbd "C->") 'mc/mark-next-like-this)
 (global-set-key (kbd "C-<") 'mc/mark-previous-like-this)
-(global-set-key (kbd "C-c C-<") 'mc/mark-all-like-this)
+(global-set-key (kbd "C-. C-<") 'mc/mark-all-like-this)
 
 
 ;;-----------------------------------------------------------------------------
@@ -220,7 +224,7 @@
 ;;-----------------------------------------------------------------------------
 ;; Quebra de linhas ao exceder largura do texto (padrão é 72
 ;; caracteres).
-(setq-default fill-column 76)
+(setq-default fill-column 99)
 ;; (setq fill-column 76)
 ;; (setq-default truncate-lines t)
 ;;-----------------------------------------------------------------------------
@@ -772,10 +776,10 @@ load-path))
 ;;-----------------------------------------------------------------------------
 
 ;;===========================================================================
-;; MINIMAP
+;; MINIMAP (desativei, conflito com o clone)
 ;;===========================================================================
 ;;-----------------------------------------------------------------------------
-(require 'minimap)
+;;(require 'minimap)
 ;;-----------------------------------------------------------------------------
 
 ;;===========================================================================
@@ -846,3 +850,4 @@ load-path))
                              (TeX-fold-mode 1)))
 ;;(add-hook 'find-file-hook 'TeX-fold-buffer t)
 ;;-----------------------------------------------------------------------------
+ 
