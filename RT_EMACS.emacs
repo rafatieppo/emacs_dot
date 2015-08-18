@@ -161,16 +161,6 @@
         "pdflatex -shell-escape -interaction nonstopmode -output-directory %o %f"))
 
 ;;-----------------------------------------------------------------------------
-;; WORPRESS ORG MODE
-
-(setq load-path (cons "~/.emacs.d/org2blog-master/" load-path))
-(require 'org2blog-autoloads)
-
-
-(add-to-list 'load-path "~/.emacs.d/")
-(require 'metaweblog)
-(add-to-list 'load-path "~/.emacs.d/")
-(require 'xml-rpc)
 
 
 ;;===========================================================================
