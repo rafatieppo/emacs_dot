@@ -11,7 +11,6 @@
 ;;TO INSTALL FROM MELPA
 ;;===========================================================================
 ;;-----------------------------------------------------------------------------
-
   
 (add-to-list 'load-path "~/.emacs.d/")
 (load "package")
@@ -20,8 +19,6 @@
 ;;    '("marmalade" .
 ;;      "http://marmalade-repo.org/packages/"))
 (package-initialize) 
-  
-
 
 (setq package-enable-at-startup nil)
 
@@ -42,8 +39,6 @@
 (define-key global-map "\C-ca" 'org-agenda)
 (setq org-log-done t)
 
-;;Para buscar um arquivo TODO
-;;(setq org-agenda-files (list "~/Dropbox/EMACS_ORG_MODE/work.org"))
 ;; arquivo para o org agendasorg-agenda
 (setq org-agenda-files '("/home/rafatieppo/Dropbox/EMACS_ORG_MODE/RAFA.org"))
 
@@ -62,19 +57,13 @@
 
 ;;(setq default-buffer-file-coding-system 'utf-8)
 
-(setq org-mobile-files '("/home/rafatieppo/Dropbox/EMACS_ORG_MODE/RAFA.org"
-                                                                           ))
+(setq org-mobile-files '("/home/rafatieppo/Dropbox/EMACS_ORG_MODE/RAFA.org"))
 (setq org-mobile-agendas '("a"))
-
-;;(setq org-agenda-files '("/home/rafatieppo/Dropbox/EMACS_ORG_MODE/RAFA.org"))
-
 
 ;;-----------------------------------------------------------------------------
 ;; Chronometer Task
 (setq org-clock-persist 'history)
 (org-clock-persistence-insinuate)
-                             
-
 
 ;;-----------------------------------------------------------------------------
 ;; ORG MONTH REPORT
@@ -89,10 +78,40 @@
         (org-agenda-start-with-clockreport-mode t)
         (org-agenda-clockreport-parameter-plist '(:link t :maxlevel 3)))
     (org-agenda-list nil start-date 'month)))
-
-
   
-    
+;;-----------------------------------------------------------------------------
+;; ORG REPORTING TIME BY DAY
+;; http://sachachua.com/blog/2007/12/clocking-time-with-emacs-org/
+
+(defun org-dblock-write:rangereport (params)
+  "Display day-by-day time reports."
+  (let* ((ts (plist-get params :tstart))
+         (te (plist-get params :tend))
+         (start (time-to-seconds
+                 (apply 'encode-time (org-parse-time-string ts))))
+         (end (time-to-seconds
+               (apply 'encode-time (org-parse-time-string te))))
+         day-numbers)
+    (setq params (plist-put params :tstart nil))
+    (setq params (plist-put params :end nil))
+    (while (<= start end)
+      (save-excursion
+        (insert "\n\n"
+                (format-time-string (car org-time-stamp-formats)
+                                    (seconds-to-time start))
+                "----------------\n")
+        (org-dblock-write:clocktable
+         (plist-put
+          (plist-put
+           params
+           :tstart
+           (format-time-string (car org-time-stamp-formats)
+                               (seconds-to-time start)))
+          :tend
+          (format-time-string (car org-time-stamp-formats)
+                              (seconds-to-time end))))
+        (setq start (+ 86400 start))))))
+
 ;;-----------------------------------------------------------------------------
 ;; ORG SHORCUT
 ;;; Quick inserts via <s TAB and similar 
@@ -144,7 +163,7 @@
 ;; not based on continuous lines
 (global-set-key (kbd "C->") 'mc/mark-next-like-this)
 (global-set-key (kbd "C-<") 'mc/mark-previous-like-this)
-(global-set-key (kbd "C-. C-<") 'mc/mark-all-like-this)
+(global-set-key (kbd "C-; C-<") 'mc/mark-all-like-this)
 
 
 ;;-----------------------------------------------------------------------------
@@ -159,8 +178,6 @@
       '("pdflatex -shell-escape -interaction nonstopmode -output-directory %o %f"
         "pdflatex -shell-escape -interaction nonstopmode -output-directory %o %f"
         "pdflatex -shell-escape -interaction nonstopmode -output-directory %o %f"))
-
-;;-----------------------------------------------------------------------------
 
 
 ;;===========================================================================
@@ -214,7 +231,7 @@
 ;;-----------------------------------------------------------------------------
 ;; Quebra de linhas ao exceder largura do texto (padrão é 72
 ;; caracteres).
-(setq-default fill-column 99)
+(setq-default fill-column 80)
 ;; (setq fill-column 76)
 ;; (setq-default truncate-lines t)
 ;;-----------------------------------------------------------------------------
@@ -272,6 +289,10 @@
 (setq auto-save-default nil) ;; Para o #autosave#.
 (setq make-backup-files nil) ;; Para o backup~.
 ;;---------------------------------------------------------------------------
+
+;;---------------------------------------------------------------------------
+;; Speedbar embed
+(require 'sr-speedbar)
 
 ;;-----------------------------------------------------------------------------
 ;;-----------------------------------------------------------------------------
@@ -543,6 +564,20 @@ load-path))
 (add-to-list 'load-path "~/.emacs.d/")
 (require 'websocket)
 
+;;-----------------------------------------------------------------------------
+;; MARKDOWN AND REFTEX CITATION PANDOC
+;; http://www.unknownerror.org/opensource/jgm/pandoc/q/stackoverflow/13607156/autocomplete-pandoc-style-citations-from-a-bibtex-file-in-emacs
+;;http://tex.stackexchange.com/a/31992/5701
+
+;; So that RefTeX finds my bibliography
+(setq reftex-default-bibliography '("~/Dropbox/BIBTEX/PAPER_TESE.bib"))
+
+;; How to solve @
+(eval-after-load 'reftex-vars
+  '(progn 
+     (setq reftex-cite-format '((?\C-m . "@%l")))))
+     
+;; I changed the code, before "[@%l]" cite between brackets
 
 ;;-----------------------------------------------------------------------------
 ;; TECLA TAB para 4 espaços Desativei pq inibe o POLYMODE
@@ -629,31 +664,11 @@ load-path))
 ;;===========================================================================
 ;; THEMES - SEVERAL SCHEMES
 ;;===========================================================================
-;; ESQUEMA de cores solarized-dark.
-;; 1) # Debian and derived  apt-get install emacs-goodies-el
-;;       http://www.nongnu.org/color-theme/#sec5
-;; 2) copiar o zip de https://github.com/sellout/emacs-color-theme-solarized
-;; 3) descompacter em /home/rafatieppo/.emacs.d/emacs-color-theme-solarized-master
-;; Para ver as cores e demais configurações do tema faça.
-;; M-x color-theme-print
-;;-----------------------------------------------------------------------------
-
-;;===========================================================================
-;; THEMES - SEVERAL SCHEMES
-;;===========================================================================
-;;-----------------------------------------------------------------------------
-;; ESQUEMA de cores solarized-dark.
-;; 1) # Debian and derived  apt-get install emacs-goodies-el
-;;       http://www.nongnu.org/color-theme/#sec5
-;; 2) copiar o zip de https://github.com/sellout/emacs-color-theme-solarized
-;; 3) descompacter em /home/rafatieppo/.emacs.d/emacs-color-theme-solarized-master
-;; Para ver as cores e demais configurações do tema faça.
-;; M-x color-theme-print
-;;-----------------------------------------------------------------------------
 ;;-----------------------------------------------------------------------------
 ;; THEMES from: http://emacsthemes.caisah.info/
 ;; https://github.com/owainlewis/emacs-color-themes
 ;; themes from: http://emacsthemes.caisah.info/
+;;-----------------------------------------------------------------------------
 
 (add-to-list 'load-path "/home/rafatieppo/.emacs.d/emacs-color-theme-solarized-master")
 ;;(require 'solarized-light-theme)
@@ -706,21 +721,8 @@ load-path))
 ;;TEMA VEM PADRAO EMACS
 ;;===========================================================================
 
-;;(custom-set-faces
- ;; custom-set-faces was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
-
-
-;; '(custom-enabled-themes (quote (solarized)))
-;; '(custom-safe-themes (quote ("8db4b03b9ae654d4a57804286eb3e332725c84d7cdab38463cb6b97d5762ad26" default))) ;;to confirm lisp code
-;; '(custom-enabled-themes (quote (monokai) ) )
-;; '(custom-safe-themes (quote ("0eebf69ceadbbcdd747713f2f3f839fe0d4a45bd0d4d9f46145e40878fc9b098" default)))
-;;)
-
 ;;---------------------------------------------------------------------------
-;; cor de fundo cursor Macro highlight-current-line.el
+;; COR DE FUNDO cursor Macro highlight-current-line.el
 ;; http://www.emacswiki.org/emacs/highlight-current-line.el
 ;;(require 'highlight-current-line)
 ;;(highlight-current-line-on t)
@@ -737,8 +739,8 @@ load-path))
 ;;(set-face-background hl-line-face "#191970") ;; midnightblue
 (set-face-background hl-line-face "#1a1a1a") ;; darkgray  
 ;;---------------------------------------------------------------------------
-
 ;;===========================================================================
+
 
 ;;===========================================================================
 ;; CONFIGURACOES AVANCADAS AUCTEX
@@ -754,7 +756,7 @@ load-path))
  '(TeX-source-correlate-method (quote synctex))
  '(TeX-source-correlate-mode t)
  '(TeX-source-correlate-start-server t)
- )
+ '(custom-safe-themes (quote ("3cc2385c39257fed66238921602d8104d8fd6266ad88a006d0a4325336f5ee02" default))))
 ;;-----------------------------------------------------------------------------
 
 ;;===========================================================================
@@ -828,6 +830,51 @@ load-path))
 ;;-----------------------------------------------------------------------------
 
 ;;===========================================================================
+;; FOLDING BY INDENTATION
+;;===========================================================================
+;; Folding code blocks based on indentation.
+;; git clone https://github.com/zenozeng/yafolding.el.git
+
+(add-to-list 'load-path "~/.emacs.d/yafolding.el/")
+(require 'yafolding)
+
+(global-set-key [?\C-{] #'yafolding-hide-parent-element)
+(global-set-key [?\C-}] #'yafolding-toggle-element)
+
+;;-----------------------------------------------------------------------------
+
+
+;;===========================================================================
+;; ADD HIGHLIGHT FOR CERTAIN KEYWORDS
+;;===========================================================================
+;; http://lists.gnu.org/archive/html/emacs-orgmode/2010-09/txtb5ChQJCDny.txt
+;; http://emacs.1067599.n5.nabble.com/Adding-keywords-for-font-lock-experts-td95645.html
+
+(make-face 'special-words) 
+(set-face-attribute 'special-words nil :foreground "White" :background "Firebrick") 
+
+(dolist
+    (mode '(fundamental-mode
+            gnus-article-mode
+            org-mode
+            shell-mode
+            sh-mode
+            muse-mode
+            ess-mode
+            polymode-mode
+            markdown-mode
+            TeX-mode)) 
+  (font-lock-add-keywords
+   mode 
+   '(("\\<\\(COMMENT\\|DONE\\|TODO\\|STOP\\|IMPORTANT\\|NOTE\\|OBS\\|ATTENTION\\|REVIEW\\)" 
+      0 'font-lock-warning-face t) 
+     ("\\<\\(BUG\\|WARNING\\|DANGER\\|FIXME\\)" 
+      0 'special-words t)))
+  ) 
+
+;;-----------------------------------------------------------------------------
+
+;;===========================================================================
 ;; ESS - MINOR MODE C-c @ C-h   C-c @ C-s  Para ocultar os blocos etc.
 ;;===========================================================================
 ;;http://www.linuxquestions.org/questions/programming-9/automatic-hs-minor-mode-in-emacs-for-php-mode-732087/ 
@@ -841,3 +888,10 @@ load-path))
 ;;(add-hook 'find-file-hook 'TeX-fold-buffer t)
 ;;-----------------------------------------------------------------------------
  
+
+(custom-set-faces
+ ;; custom-set-faces was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ )
