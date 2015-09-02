@@ -676,6 +676,11 @@ load-path))
 ;;(require 'solarized-theme)
 (require 'color-theme-solarized)
 
+(custom-set-variables '(solarized-termcolors 256))
+(custom-set-variables '(solarized-contrast 'high))
+(custom-set-variables '(solarized-visibility 'high))
+
+
 ;;(add-to-list 'load-path "/home/rafatieppo/.emacs.d/themess")
 ;;(require 'monokai-theme)
 
