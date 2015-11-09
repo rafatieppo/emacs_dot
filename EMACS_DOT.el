@@ -682,7 +682,7 @@ load-path))
 
 
 (add-to-list 'load-path "/home/rafatieppo/.emacs.d/themess")
-(require 'monokai-theme_modifc)
+(require 'monokai-theme)
 
 ;;(add-to-list 'load-path "/home/rafatieppo/.emacs.d/themess")
 ;;(require 'Amelie-theme)
