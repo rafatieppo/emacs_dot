@@ -674,15 +674,15 @@ load-path))
 (require 'solarized-dark-theme)
 ;(require 'solarized-definitions)
 ;;(require 'solarized-theme)
-(require 'color-theme-solarized)
+;(require 'color-theme-solarized)
 
-(custom-set-variables '(solarized-termcolors 256))
-(custom-set-variables '(solarized-contrast 'high))
-(custom-set-variables '(solarized-visibility 'high))
+;(custom-set-variables '(solarized-termcolors 256))
+;(custom-set-variables '(solarized-contrast 'high))
+;(custom-set-variables '(solarized-visibility 'high))
 
 
-;;(add-to-list 'load-path "/home/rafatieppo/.emacs.d/themess")
-;;(require 'monokai-theme)
+(add-to-list 'load-path "/home/rafatieppo/.emacs.d/themess")
+(require 'monokai-theme_modifc)
 
 ;;(add-to-list 'load-path "/home/rafatieppo/.emacs.d/themess")
 ;;(require 'Amelie-theme)
@@ -705,8 +705,8 @@ load-path))
 ;;(add-to-list 'load-path "/home/rafatieppo/.emacs.d/themess")
 ;;(require 'hickey-theme)
 
-;;(add-to-list 'load-path "/home/rafatieppo/.emacs.d/themess")
-;;(require 'spolsky-theme)
+;(add-to-list 'load-path "/home/rafatieppo/.emacs.d/themess")
+;(require 'spolsky-theme)
 
 ;;(add-to-list 'load-path "/home/rafatieppo/.emacs.d/themess")
 ;;(require 'fogus-theme)
