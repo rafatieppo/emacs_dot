@@ -741,7 +741,11 @@ load-path))
 ;;(set-face-background 'highlight-current-line-face   "#ffff00") ;; gold
 
 ;;Padrao do EMACS cursor linha; Must be after of THEME to do not overlayer
+;;http://stackoverflow.com/questions/2718189/emacshighlight-the-current-line-by-underline-it/2718543#2718543
 (global-hl-line-mode 1)
+;; Underline in current line
+(set-face-attribute hl-line-face nil :underline t)
+(set-face-background hl-line-face "#2F2F2F") ;;MONOKAI
 ;;(set-face-background hl-line-face "#191970") ;; midnightblue
 ;;(set-face-background hl-line-face "#1a1a1a") ;; darkgray  
 ;;---------------------------------------------------------------------------
