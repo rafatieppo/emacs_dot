@@ -670,8 +670,8 @@ load-path))
 ;; themes from: http://emacsthemes.caisah.info/
 ;;-----------------------------------------------------------------------------
 
-(add-to-list 'load-path "/home/rafatieppo/.emacs.d/emacs-color-theme-solarized-master")
-(require 'solarized-dark-theme)
+;(add-to-list 'load-path "/home/rafatieppo/.emacs.d/emacs-color-theme-solarized-master")
+;(require 'solarized-dark-theme)
 ;(require 'solarized-definitions)
 ;;(require 'solarized-theme)
 ;(require 'color-theme-solarized)
@@ -679,7 +679,6 @@ load-path))
 ;(custom-set-variables '(solarized-termcolors 256))
 ;(custom-set-variables '(solarized-contrast 'high))
 ;(custom-set-variables '(solarized-visibility 'high))
-
 
 (add-to-list 'load-path "/home/rafatieppo/.emacs.d/themess")
 (require 'monokai-theme)
@@ -705,21 +704,29 @@ load-path))
 ;;(add-to-list 'load-path "/home/rafatieppo/.emacs.d/themess")
 ;;(require 'hickey-theme)
 
+;;(add-to-list 'load-path "/home/rafatieppo/.emacs.d/themess")
+;;(require 'spolsky-theme)
+
 ;(add-to-list 'load-path "/home/rafatieppo/.emacs.d/themess")
-;(require 'spolsky-theme)
+;(require 'fogus-theme)
 
-;;(add-to-list 'load-path "/home/rafatieppo/.emacs.d/themess")
-;;(require 'fogus-theme)
-
-;;(add-to-list 'load-path "/home/rafatieppo/.emacs.d/themess")
-;;(require 'junio-theme)
+(add-to-list 'load-path "/home/rafatieppo/.emacs.d/themess")
+(require 'junio-theme)
 
 ;;(add-to-list 'load-path "/home/rafatieppo/.emacs.d/themess")
 ;;(require 'wilson-theme)
 
+;;(add-to-list 'load-path "/home/rafatieppo/.emacs.d/themess")
+;;(require 'granger-theme)
+
+;;(add-to-list 'load-path "/home/rafatieppo/.emacs.d/themess")
+;;(require 'odersky-theme)
+
+
+
 ;;https://github.com/juba/color-theme-tangotango/blob/master/tangotango-theme.el
-;(add-to-list 'load-path "/home/rafatieppo/.emacs.d/themess")
-;(require 'tangotango-theme)
+;;(add-to-list 'load-path "/home/rafatieppo/.emacs.d/themess")
+;;(require 'tangotango-theme)
 
 
 
@@ -745,9 +752,13 @@ load-path))
 (global-hl-line-mode 1)
 ;; Underline in current line
 (set-face-attribute hl-line-face nil :underline t)
-(set-face-background hl-line-face "#2F2F2F") ;;MONOKAI
+;;(set-face-background hl-line-face "#2F2F2F") ;;MONOKAI
 ;;(set-face-background hl-line-face "#191970") ;; midnightblue
 ;;(set-face-background hl-line-face "#1a1a1a") ;; darkgray  
+;;(set-face-background hl-line-face "#1F0F0F") ;; soothe  
+;;(set-face-background hl-line-face "#8b1a1a") ;; firebrick4  
+;;(set-face-background hl-line-face "#68228b") ;; darkorchid4
+;;(set-face-background hl-line-face "#008b8b") ;; darkcyan 
 ;;---------------------------------------------------------------------------
 ;;===========================================================================
 
