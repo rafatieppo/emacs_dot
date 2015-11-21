@@ -191,7 +191,9 @@
 
 ;;---------------------------------------------------------------------------
 ;; Tipo e tamanho da fonte do editor.
-(set-default-font "monofur-13")
+;(set-default-font "monofur-13")
+(custom-set-faces
+ '(default ((t (:family "Anonymous Pro" :foundry "unknown" :slant normal :weight normal :height 128 :width normal)))))
 ;;---------------------------------------------------------------------------
 
 ;;---------------------------------------------------------------------------
@@ -750,7 +752,10 @@ load-path))
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '(TeX-PDF-mode t))
+ '(TeX-PDF-mode t)
+ '(column-number-mode t)
+ '(cua-mode t nil (cua-base))
+ '(show-paren-mode t))
  ;; '(TeX-source-correlate-method (quote synctex))
  ;; '(TeX-source-correlate-mode t)
  ;; '(TeX-source-correlate-start-server t)
@@ -883,5 +888,6 @@ load-path))
 ;;(add-hook 'find-file-hook 'TeX-fold-buffer t)
 ;;-----------------------------------------------------------------------------
  
+
 
 
