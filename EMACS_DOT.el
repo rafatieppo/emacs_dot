@@ -166,6 +166,31 @@
 
 
 ;;-----------------------------------------------------------------------------
+;; ace-jump-mode.el --- a quick cursor location minor mode for emacs -*- coding: utf-8-unix -*-
+;; https://github.com/winterTTr/ace-jump-mode
+;; ace jump mode major function
+;; 
+(add-to-list 'load-path "/home/rafatieppo/.emacs.d/")
+(autoload
+  'ace-jump-mode
+  "ace-jump-mode"
+  "Emacs quick move minor mode"
+  t)
+;; you can select the key you prefer to
+(define-key global-map (kbd "C-c SPC") 'ace-jump-mode)
+
+;; enable a more powerful jump back function from ace jump mode
+;;
+(autoload
+  'ace-jump-mode-pop-mark
+  "ace-jump-mode"
+  "Ace jump back:-)"
+  t)
+(eval-after-load "ace-jump-mode"
+  '(ace-jump-mode-enable-mark-sync))
+(define-key global-map (kbd "C-x SPC") 'ace-jump-mode-pop-mark)
+
+;;-----------------------------------------------------------------------------
 ;; Provide Highlight in LATEX and PDF
 ;; http://stackoverflow.com/questions/21005885/export-org-mode-code-block-and-result-with-different-styles
 
@@ -578,7 +603,7 @@ load-path))
 ;;http://tex.stackexchange.com/a/31992/5701
 
 ;; So that RefTeX finds my bibliography
-(setq reftex-default-bibliography '("~/Dropbox/BIBTEX/PAPER_TESE.bib"))
+(setq reftex-default-bibliography '("~/Dropbox/BIBTEX/REFERENCES.bib"))
 
 ;; How to solve @
 (eval-after-load 'reftex-vars
@@ -592,6 +617,8 @@ load-path))
 ;; https://ikiwiki.info/tips/Emacs_and_markdown/
 ;;(autoload 'markdown-mode "markdown-mode")
 ;;(add-to-list 'auto-mode-alist '("\\.md" . markdown-mode))
+
+;;-----------------------------------------------------------------------------
 
 
 ;;===========================================================================
@@ -702,10 +729,11 @@ load-path))
 ;;(require 'odersky-theme)
 ;;(require 'tangotango-theme)
 ;;(require 'atom-one-dark-theme)
+(require 'seti-theme)
 ;;(require 'ample-zen-theme)
 ;;(require 'underwater-theme)
 ;;(require 'moe-dark-theme)
-(require 'molokai-theme)
+;;(require 'molokai-theme)
 
 ;;===========================================================================
 ;;TEMA VEM PADRAO EMACS
