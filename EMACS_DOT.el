@@ -201,6 +201,31 @@
 (setq ido-file-extensions-order '(".md" ".R" ".Rmd" ".csv" ".txt" ".org" ".emacs" ".xml" ".el" ".ini" ".cfg" ".cnf"))
 
 
+;;---------------------------------------------------------------------------
+;; Improving Ido Search FILE
+
+;;http://sachachua.com/blog/2014/03/emacs-basics-call-commands-name-m-x-tips-better-completion-using-ido-helm/
+(add-to-list 'load-path "/home/rafatieppo/.emacs.d")
+;(load "highlight-symbol.el")
+(require 'smex)
+(require 'ido-vertical-mode)
+(require 'ido-hacks)
+(require 'flx)
+(require 'flx-ido)
+
+
+(ido-mode 1)
+(require 'ido-hacks nil t)
+(if (commandp 'ido-vertical-mode) 
+    (progn
+      (ido-vertical-mode 1)
+      (setq ido-vertical-define-keys 'C-n-C-p-up-down-left-right)))
+(if (commandp 'smex)
+    (global-set-key (kbd "M-x") 'smex))
+(if (commandp 'flx-ido-mode)
+    (flx-ido-mode 1))
+
+
 ;;-----------------------------------------------------------------------------
 ;; Provide Highlight in LATEX and PDF
 ;; http://stackoverflow.com/questions/21005885/export-org-mode-code-block-and-result-with-different-styles
