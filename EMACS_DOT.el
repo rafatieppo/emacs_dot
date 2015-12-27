@@ -190,6 +190,17 @@
   '(ace-jump-mode-enable-mark-sync))
 (define-key global-map (kbd "C-x SPC") 'ace-jump-mode-pop-mark)
 
+;;---------------------------------------------------------------------------
+;; Ido Search FILE
+
+(ido-mode t)
+;(setq ido-everywhere t)
+(setq ido-enable-flex-matching t
+      ido-use-virtual-buffers t)
+
+(setq ido-file-extensions-order '(".md" ".R" ".Rmd" ".csv" ".txt" ".org" ".emacs" ".xml" ".el" ".ini" ".cfg" ".cnf"))
+
+
 ;;-----------------------------------------------------------------------------
 ;; Provide Highlight in LATEX and PDF
 ;; http://stackoverflow.com/questions/21005885/export-org-mode-code-block-and-result-with-different-styles
@@ -916,6 +927,5 @@ load-path))
 ;;(add-hook 'find-file-hook 'TeX-fold-buffer t)
 ;;-----------------------------------------------------------------------------
  
-
 
 
