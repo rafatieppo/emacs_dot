@@ -251,6 +251,14 @@
 ;;---------------------------------------------------------------------------
 
 ;;---------------------------------------------------------------------------
+;; Default open new window
+;;for horizontal split
+(setq split-width-threshold nil )
+;;for vertical split
+;;(setq split-width-threshold 1 ) 
+;;---------------------------------------------------------------------------
+
+;;---------------------------------------------------------------------------
 ;; Tipo e tamanho da fonte do editor.
 ;(set-default-font "monofur-13")
 (custom-set-faces
@@ -566,6 +574,7 @@ e.g. Sunday, September 17, 2000."
 "Major mode for editing Markdown files" t)
 (add-to-list 'auto-mode-alist '("\\.markdown\\'" . markdown-mode))
 (add-to-list 'auto-mode-alist '("\\.md\\'" . markdown-mode))
+
 ;;-----------------------------------------------------------------------------
 
 ;; PASSOS
@@ -770,6 +779,7 @@ load-path))
 ;;(require 'underwater-theme)
 ;;(require 'moe-dark-theme)
 ;;(require 'molokai-theme)
+
 
 ;;===========================================================================
 ;;TEMA VEM PADRAO EMACS
