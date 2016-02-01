@@ -228,6 +228,15 @@
 (add-hook 'before-save-hook 'delete-trailing-whitespace)
 ;;-----------------------------------------------------------------------------
 
+;;-----------------------------------------------------------------------------
+;; http://emacsredux.com/blog/2013/05/31/highlight-lines-that-exceed-a-certain-length-limit/
+;; (require 'whitespace)
+(setq whitespace-line-column fill-column)
+(setq whitespace-style
+      '(face lines-tail trailing spaces tabs empty))
+(global-whitespace-mode +1)
+;;-----------------------------------------------------------------------------
+
 ;;---------------------------------------------------------------------------
 ;; Desativa o auto salvar e auto backup.
 (setq auto-save-default nil) ;; Para o #autosave#.
@@ -843,5 +852,6 @@ load-path))
 
 ;;-----------------------------------------------------------------------------
  
+
 
 
