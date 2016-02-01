@@ -150,83 +150,6 @@
 (setq org-src-fontify-natively t)
 
 ;;-----------------------------------------------------------------------------
-;; multiple-cursors.el
-;; https://github.com/magnars/multiple-cursors.el
-
-(require 'multiple-cursors)
-
-;; continuous lines
-;;(global-set-key (kbd "C-S-c C-S-c") 'mc/edit-lines)
-(global-set-key (kbd "C-. C-c") 'mc/edit-lines)
-
-;; not based on continuous lines
-(global-set-key (kbd "C->") 'mc/mark-next-like-this)
-(global-set-key (kbd "C-<") 'mc/mark-previous-like-this)
-(global-set-key (kbd "C-; C-<") 'mc/mark-all-like-this)
-
-
-;;-----------------------------------------------------------------------------
-;; ace-jump-mode.el --- a quick cursor location minor mode for emacs -*- coding: utf-8-unix -*-
-;; https://github.com/winterTTr/ace-jump-mode
-;; ace jump mode major function
-;; 
-(add-to-list 'load-path "/home/rafatieppo/.emacs.d/")
-(autoload
-  'ace-jump-mode
-  "ace-jump-mode"
-  "Emacs quick move minor mode"
-  t)
-;; you can select the key you prefer to
-(define-key global-map (kbd "C-c SPC") 'ace-jump-mode)
-
-;; enable a more powerful jump back function from ace jump mode
-;;
-(autoload
-  'ace-jump-mode-pop-mark
-  "ace-jump-mode"
-  "Ace jump back:-)"
-  t)
-(eval-after-load "ace-jump-mode"
-  '(ace-jump-mode-enable-mark-sync))
-(define-key global-map (kbd "C-x SPC") 'ace-jump-mode-pop-mark)
-
-;;---------------------------------------------------------------------------
-;; Ido Search FILE
-
-(ido-mode t)
-;(setq ido-everywhere t)
-(setq ido-enable-flex-matching t
-      ido-use-virtual-buffers t)
-
-(setq ido-file-extensions-order '(".md" ".R" ".Rmd" ".csv" ".txt" ".org" ".emacs" ".xml" ".el" ".ini" ".cfg" ".cnf"))
-
-
-;;---------------------------------------------------------------------------
-;; Improving Ido Search FILE
-
-;;http://sachachua.com/blog/2014/03/emacs-basics-call-commands-name-m-x-tips-better-completion-using-ido-helm/
-(add-to-list 'load-path "/home/rafatieppo/.emacs.d")
-;(load "highlight-symbol.el")
-(require 'smex)
-(require 'ido-vertical-mode)
-(require 'ido-hacks)
-(require 'flx)
-(require 'flx-ido)
-
-
-(ido-mode 1)
-(require 'ido-hacks nil t)
-(if (commandp 'ido-vertical-mode) 
-    (progn
-      (ido-vertical-mode 1)
-      (setq ido-vertical-define-keys 'C-n-C-p-up-down-left-right)))
-(if (commandp 'smex)
-    (global-set-key (kbd "M-x") 'smex))
-(if (commandp 'flx-ido-mode)
-    (flx-ido-mode 1))
-
-
-;;-----------------------------------------------------------------------------
 ;; Provide Highlight in LATEX and PDF
 ;; http://stackoverflow.com/questions/21005885/export-org-mode-code-block-and-result-with-different-styles
 
@@ -241,7 +164,7 @@
 
 
 ;;===========================================================================
-;;DEFINICAO PADRAO
+;;STANDARD SETTINGS
 ;;===========================================================================
 ;;---------------------------------------------------------------------------
 ; Abre o emacs sem a janela de boas vindas.
@@ -251,18 +174,10 @@
 ;;---------------------------------------------------------------------------
 
 ;;---------------------------------------------------------------------------
-;; Default open new window
-;;for horizontal split
-(setq split-width-threshold nil )
-;;for vertical split
-;;(setq split-width-threshold 1 ) 
-;;---------------------------------------------------------------------------
-
-;;---------------------------------------------------------------------------
 ;; Tipo e tamanho da fonte do editor.
 ;(set-default-font "monofur-13")
 (custom-set-faces
- '(default ((t (:family "Anonymous Pro" :foundry "unknown" :slant normal :weight normal :height 128 :width normal)))))
+ '(default ((t (:family "Anonymous Pro" :foundry "unknown" :slant normal :weight normal :height 138 :width normal)))))
 ;;---------------------------------------------------------------------------
 
 ;;---------------------------------------------------------------------------
@@ -288,32 +203,41 @@
 ;;---------------------------------------------------------------------------
 
 ;;-----------------------------------------------------------------------------
-;; Modo de linhas de tela (screen lines) e não lógicas (logical lines).
-(visual-line-mode 1)
-;;-----------------------------------------------------------------------------
-
-;;-----------------------------------------------------------------------------
-;; Usa espaços ao ínves de tabs para indentar.
-;; http://xenon.stanford.edu/~manku/dotemacs.html
-(setq-default indent-tabs-mode nil)
-;;-----------------------------------------------------------------------------
-
-;;-----------------------------------------------------------------------------
 ;; Quebra de linhas ao exceder largura do texto (padrão é 72
 ;; caracteres).
-(setq-default fill-column 80)
-;; (setq fill-column 76)
-;; (setq-default truncate-lines t)
+(setq-default fill-column 72)
 ;;-----------------------------------------------------------------------------
 
 ;;-----------------------------------------------------------------------------
-;; Não quebrar linhas.
+;; Não quebrar linhas, útil para tabelas longas
 (setq-default truncate-lines t)
 ;;-----------------------------------------------------------------------------
 
 ;;-----------------------------------------------------------------------------
 ;; Ativa o auto-fill-mode para fazer quebra automática de linhas.
 (setq-default auto-fill-function 'do-auto-fill)
+;;-----------------------------------------------------------------------------
+
+;;-----------------------------------------------------------------------------
+;; Modo de linhas de tela (screen lines) e não lógicas (logical lines).
+(visual-line-mode 1)
+;;-----------------------------------------------------------------------------
+
+;;-----------------------------------------------------------------------------
+;; Remove white espace at end when save buffer.
+(add-hook 'before-save-hook 'delete-trailing-whitespace)
+;;-----------------------------------------------------------------------------
+
+;;---------------------------------------------------------------------------
+;; Desativa o auto salvar e auto backup.
+(setq auto-save-default nil) ;; Para o #autosave#.
+(setq make-backup-files nil) ;; Para o backup~.
+;;---------------------------------------------------------------------------
+
+;;-----------------------------------------------------------------------------
+;; Usa espaços ao ínves de tabs para indentar.
+;; http://xenon.stanford.edu/~manku/dotemacs.html
+(setq-default indent-tabs-mode nil)
 ;;-----------------------------------------------------------------------------
 
 ;;---------------------------------------------------------------------------
@@ -361,16 +285,8 @@
 ;;-----------------------------------------------------------------------------
 
 ;;---------------------------------------------------------------------------
-;; Desativa o auto salvar e auto backup.
-(setq auto-save-default nil) ;; Para o #autosave#.
-(setq make-backup-files nil) ;; Para o backup~.
-;;---------------------------------------------------------------------------
-
-;;---------------------------------------------------------------------------
 ;; Speedbar embed
 (require 'sr-speedbar)
-
-;;-----------------------------------------------------------------------------
 ;;-----------------------------------------------------------------------------
 
 ;;===========================================================================
@@ -417,146 +333,167 @@
 (global-set-key (kbd "<f12>") 'toggle-tool-bar-mode-from-frame)
 ;;----------------------------------------------------------------------------- 
 
-
 ;;===========================================================================
-;; SETTING TO WORK WITH ESS and R
+;; SPECIAL PROGRAMMING TOOLS
 ;;===========================================================================
-;;---------------------------------------------------------------------------
-;; faz com que apareceça os argumentos das funções do R no minibuffer
-(require 'ess-eldoc)
-(setq-default ess-dialect "R")
-;;-----------------------------------------------------------------------------
-
-;;---------------------------------------------------------------------------
-;; If you want all help buffers to go into one frame do:
-(setq ess-help-own-frame 'one)
-;;-----------------------------------------------------------------------------
-;;-----------------------------------------------------------------------------
-
-
-;;===========================================================================
-;;FUNCOES
-;;===========================================================================
-;;-----------------------------------------------------------------------------
-;; Funções inserir o dia e a hora no buffer.
-;; http://stackoverflow.com/questions/251908/how-can-i-insert-current-date-and-time-into-a-file-using-emacs
-(defun today ()
-"Insert string for today's date nicely formatted in American style,
-e.g. Sunday, September 17, 2000."
-(interactive) ; permit invocation in minibuffer
-;; (insert (format-time-string "%A, %e de %B , %Y"))
-(insert (format-time-string "%e/%m/%Y"))
-)
-
-(defun header ()
-"Insere cabeçalho."
-(interactive)
-;; (insert (comment-dwim 2) (make-string 65 ?=) "\n")
-(insert (make-string 65 ?=) "\n")
-(insert (make-string 45 ? ) "Rafael Tieppo\n")
-(insert (make-string 45 ? ) "tiepporc@unemat.br\n")
-(insert (make-string 45 ? ) (format-time-string "%d-%m-%Y\n"))
-(insert (make-string 65 ?=) "\n")
-)
-
-(defun header_org ()
-"Insere cabecalho org-mode"
-(interactive)
-(insert (make-string 0 ? ) "#+LaTeX_CLASS_OPTIONS: [article,a4paper,times,12pt] \n")
-(insert (make-string 0 ? ) "#+latex_header: \\usepackage[hmargin=2.5cm,vmargin=2.5cm]{geometry} \n")
-(insert (make-string 0 ? ) "#+LaTeX_HEADER: \\usepackage[alf,abnt-repeated-title-omit=yes,abnt-show-options=warn,abnt-emphasize=bf,abnt-etal-list=0]{abntcite} \n") 
-(insert (make-string 0 ? ) "#+LaTeX_HEADER: \\usemintedstyle{tango} \n")
-(insert (make-string 0 ? ) "#+TITLE: Title \n")
-(insert (make-string 0 ? ) "#+DATE: \n")
-(insert (make-string 0 ? ) "#+AUTHOR: Rafael Tieppo \n")
-(insert (make-string 0 ? ) "#+EMAIL: tiepporc@unemat.br \n")
-)
-
-
-(defun header_md ()
-"Insere cabecalho markdown-mode"
-(interactive)
-(insert (make-string 0 ? ) "--- \n")
-(insert (make-string 0 ? ) "title: TITLE \n")
-(insert (make-string 0 ? ) "author: Rafael Tieppo \n")
-(insert (make-string 0 ? ) "date: Maio, 201 \n")
-(insert (make-string 0 ? ) "--- \n")
-)
-
-
-(defun figure_md ()
-"Insere cabecalho markdown-mode"
-(interactive)
-(insert (make-string 0 ? ) "![caption here](file here.png){#fig:label_here} \n")
-)
-
-
-
-;; Insert a new (empty) chunk to R markdown.
-(defun insert-chunk ()
-  "Insert chunk environment Rmd sessions."
-  (interactive)
-  (insert "```R\n\n```")
-  (forward-line -1)
-  )
-
-(global-set-key (kbd "C-c i") 'insert-chunk)
-
 
 ;;-----------------------------------------------------------------------------
-;; Função para duplicar linhas (esse comando/atalho é muito útil).
-;; http://stackoverflow.com/questions/88399/how-do-i-duplicate-a-whole-line-in-emacs
-;; Define função para duplicar linhas.
-(defun duplicate-line ()
-(interactive)
-(move-beginning-of-line 1)
-(kill-line)
-(yank)
-(newline)
-(yank)
-)
-;; Define atalho para duplicar linhas.
-(global-set-key (kbd "\C-c d") 'duplicate-line)
+;; multiple-cursors.el
+;; https://github.com/magnars/multiple-cursors.el
+
+(require 'multiple-cursors)
+
+;; continuous lines
+;;(global-set-key (kbd "C-S-c C-S-c") 'mc/edit-lines)
+(global-set-key (kbd "C-. C-c") 'mc/edit-lines)
+
+;; not based on continuous lines
+(global-set-key (kbd "C->") 'mc/mark-next-like-this)
+(global-set-key (kbd "C-<") 'mc/mark-previous-like-this)
+(global-set-key (kbd "C-; C-<") 'mc/mark-all-like-this)
+;;-----------------------------------------------------------------------------
+
+;;-----------------------------------------------------------------------------
+;; ace-jump-mode.el --- a quick cursor location minor mode for emacs -*- coding: utf-8-unix -*-
+;; https://github.com/winterTTr/ace-jump-mode
+;; ace jump mode major function
+;; 
+;;(add-to-list 'load-path "/home/rafatieppo/.emacs.d/")
+(autoload
+  'ace-jump-mode
+  "ace-jump-mode"
+  "Emacs quick move minor mode"
+  t)
+;; you can select the key you prefer to
+(define-key global-map (kbd "C-c SPC") 'ace-jump-mode)
+
+;; enable a more powerful jump back function from ace jump mode
+;;
+(autoload
+  'ace-jump-mode-pop-mark
+  "ace-jump-mode"
+  "Ace jump back:-)"
+  t)
+(eval-after-load "ace-jump-mode"
+  '(ace-jump-mode-enable-mark-sync))
+(define-key global-map (kbd "C-x SPC") 'ace-jump-mode-pop-mark)
 ;;-----------------------------------------------------------------------------
 
 ;;---------------------------------------------------------------------------
-;; https://github.com/magnars/.emacs.d/blob/master/sane-defaults.el
-;; Salva lista de aquivos recentes. Abrir lista com C-x f
-(recentf-mode 1)
-(setq recentf-max-saved-items 25) ;; 20 é muito pouco.
-;; Salva histórico de comandos do minibuffer.
-(savehist-mode 1)
-(setq history-length 1000)
-;;---------------------------------------------------------------------------
+;; Ido Search FILE
 
-;;===========================================================================
+(ido-mode t)
+;(setq ido-everywhere t)
+(setq ido-enable-flex-matching t
+      ido-use-virtual-buffers t)
+
+(setq ido-file-extensions-order '(".md" ".R" ".Rmd" ".csv" ".txt" ".org" ".emacs" ".xml" ".el" ".ini" ".cfg" ".cnf"))
+;;---------------------------------------------------------------------------
+;; Improving Ido Search FILE
+
+;;http://sachachua.com/blog/2014/03/emacs-basics-call-commands-name-m-x-tips-better-completion-using-ido-helm/
+;(add-to-list 'load-path "/home/rafatieppo/.emacs.d")
+(require 'smex)
+(require 'ido-vertical-mode)
+(require 'ido-hacks)
+(require 'flx)
+(require 'flx-ido)
+
+
+(ido-mode 1)
+(require 'ido-hacks nil t)
+(if (commandp 'ido-vertical-mode) 
+    (progn
+      (ido-vertical-mode 1)
+      (setq ido-vertical-define-keys 'C-n-C-p-up-down-left-right)))
+(if (commandp 'smex)
+    (global-set-key (kbd "M-x") 'smex))
+(if (commandp 'flx-ido-mode)
+    (flx-ido-mode 1))
+;;-----------------------------------------------------------------------------
+
+;;-----------------------------------------------------------------------------
 ;; FUNCTION HIGHLIGHTS LISP
-;;===========================================================================
-;; HIGHLIGHT
 ;;Add the following to your .emacs file:
-    (add-to-list 'load-path "/home/rafatieppo/.emacs.d")
-    (load "highlight-symbol.el")
+;    (add-to-list 'load-path "/home/rafatieppo/.emacs.d")
+
     (require 'highlight-symbol)
     (global-set-key [(control f3)] 'highlight-symbol-at-point)
     (global-set-key [f3] 'highlight-symbol-next)
     (global-set-key [(shift f3)] 'highlight-symbol-prev)
     (global-set-key [(meta f3)] 'highlight-symbol-query-replace)
 ;;-----------------------------------------------------------------------------
+
 ;;-----------------------------------------------------------------------------
-
-
-;;===========================================================================
 ;; AUTO COMPLETE FUNCTION
-;;===========================================================================
 ;;aciona AUTO-COMPLETE
-(add-to-list 'load-path "~/.emacs.d/")
+;(add-to-list 'load-path "~/.emacs.d/")
 (require 'auto-complete-config)
 (add-to-list 'ac-dictionary-directories "~/.emacs.d//ac-dict")
 (ac-config-default)
 ;;If you want AC only in your ESS buffers do:`Funciona`
 (setq ess-use-auto-complete 'script-only)
 ;;-----------------------------------------------------------------------------
+
+;;===========================================================================
+;; SETTING TO WORK WITH ESS and R
+;;===========================================================================
+;;---------------------------------------------------------------------------
+;; faz com que apareceça os argumentos das funções do R no minibuffer
+(require 'ess-site)
+(setq-default ess-dialect "R")
+(require 'ess-eldoc)
+
+;(require 'ess-eldoc)
+;(setq-default ess-dialect "R")
 ;;-----------------------------------------------------------------------------
+
+;;---------------------------------------------------------------------------
+;; If you want all help buffers to go into one frame do:
+(setq ess-help-own-frame 'one)
+;;-----------------------------------------------------------------------------
+
+;;-----------------------------------------------------------------------------
+;; ESS - HIGHLIGHTS ON PROGRAMING CODES
+;;-----------------------------------------------------------------------------
+ (setq ess-R-font-lock-keywords
+         '((ess-R-fl-keyword:modifiers . t) ; default
+           (ess-R-fl-keyword:fun-defs . t) ; default
+           (ess-R-fl-keyword:keywords . t) ; default
+           (ess-R-fl-keyword:assign-ops . t) ; default
+           (ess-R-fl-keyword:constants . t) ; default
+           (ess-fl-keyword:fun-calls . t)
+           (ess-fl-keyword:numbers . t)  ;;se ativar fica muita colorido
+           (ess-fl-keyword:operators . nil)
+           (ess-fl-keyword:delimiters . t) ;;se ativar fica muita colorido
+           (ess-fl-keyword:= . nil) ;;se ativar fica muita colorido
+           (ess-R-fl-keyword:F&T . t)))
+
+   (setq inferior-R-font-lock-keywords
+         '((ess-S-fl-keyword:prompt . t) ; default
+           (ess-R-fl-keyword:messages . t) ; default
+           (ess-R-fl-keyword:modifiers . nil) ; default
+           (ess-R-fl-keyword:fun-defs . nil) ; default
+           (ess-R-fl-keyword:keywords . t) ; default
+           (ess-R-fl-keyword:assign-ops . nil) ; default
+           (ess-R-fl-keyword:constants . t) ; default
+           (ess-fl-keyword:matrix-labels . t) ; default
+           (ess-fl-keyword:fun-calls . t)
+;;           (ess-fl-keyword:numbers . nil)
+;;           (ess-fl-keyword:operators . nil)
+;;           (ess-fl-keyword:delimiters . nil)
+;;           (ess-fl-keyword:= . t)
+           (ess-R-fl-keyword:F&T . t)))
+
+;;-----------------------------------------------------------------------------
+
+;;===========================================================================
+;;FUNCOES functions
+;;===========================================================================
+
+;(add-to-list 'load-path "/home/rafatieppo/.emacs.d/lisp")
+(load "~/.emacs.d/lisp/functions")
+;(require 'functions)
 
 ;;===========================================================================
 ;; POLY-MODE MAKDOWN ;; (DEVE ESTAR ANTES DO SUPORTE PARA LATEX.)
@@ -639,8 +576,8 @@ load-path))
 ;;-----------------------------------------------------------------------------
 ;; MARKDOWN VIEWER LIVE
 ;; https://github.com/ancane/markdown-preview-mode
-(add-to-list 'load-path "~/.emacs.d/")
-(require 'websocket)
+;;(add-to-list 'load-path "~/.emacs.d/")
+;;(require 'websocket)
 
 ;;-----------------------------------------------------------------------------
 ;; MARKDOWN AND REFTEX CITATION PANDOC
@@ -773,13 +710,13 @@ load-path))
 ;;(require 'granger-theme)
 ;;(require 'odersky-theme)
 ;;(require 'tangotango-theme)
-;;(require 'atom-one-dark-theme)
-(require 'seti-theme)
+(require 'atom-one-dark-theme)
+;(require 'seti-theme)
 ;;(require 'ample-zen-theme)
 ;;(require 'underwater-theme)
 ;;(require 'moe-dark-theme)
 ;;(require 'molokai-theme)
-
+;;(require 'dracula-themes)
 
 ;;===========================================================================
 ;;TEMA VEM PADRAO EMACS
@@ -836,14 +773,6 @@ load-path))
 ;;-----------------------------------------------------------------------------
 
 ;;===========================================================================
-;; WORD COUNT LISP wc.el
-;;===========================================================================
-;;CONTAR PALAVRAS LATEX,  M-x wc RET
-(add-to-list 'load-path "/home/rafatieppo/.emacs.d")
-(load "wc.el")
-;;-----------------------------------------------------------------------------
-
-;;===========================================================================
 ;; MINIMAP (desativei, conflito com o clone)
 ;;===========================================================================
 ;;-----------------------------------------------------------------------------
@@ -870,38 +799,6 @@ load-path))
 ;;-----------------------------------------------------------------------------
 
 ;;===========================================================================
-;; ESS - HIGHLIGHTS ON PROGRAMING CODES
-;;===========================================================================
- (setq ess-R-font-lock-keywords
-         '((ess-R-fl-keyword:modifiers . t) ; default
-           (ess-R-fl-keyword:fun-defs . t) ; default
-           (ess-R-fl-keyword:keywords . t) ; default
-           (ess-R-fl-keyword:assign-ops . t) ; default
-           (ess-R-fl-keyword:constants . t) ; default
-           (ess-fl-keyword:fun-calls . t)
-           (ess-fl-keyword:numbers . t)  ;;se ativar fica muita colorido
-           (ess-fl-keyword:operators . nil)
-           (ess-fl-keyword:delimiters . t) ;;se ativar fica muita colorido
-           (ess-fl-keyword:= . nil) ;;se ativar fica muita colorido
-           (ess-R-fl-keyword:F&T . t)))
-
-   (setq inferior-R-font-lock-keywords
-         '((ess-S-fl-keyword:prompt . t) ; default
-           (ess-R-fl-keyword:messages . t) ; default
-           (ess-R-fl-keyword:modifiers . nil) ; default
-           (ess-R-fl-keyword:fun-defs . nil) ; default
-           (ess-R-fl-keyword:keywords . t) ; default
-           (ess-R-fl-keyword:assign-ops . nil) ; default
-           (ess-R-fl-keyword:constants . t) ; default
-           (ess-fl-keyword:matrix-labels . t) ; default
-           (ess-fl-keyword:fun-calls . t)
-;;           (ess-fl-keyword:numbers . nil)
-;;           (ess-fl-keyword:operators . nil)
-;;           (ess-fl-keyword:delimiters . nil)
-;;           (ess-fl-keyword:= . t)
-           (ess-R-fl-keyword:F&T . t)))
-
-;;-----------------------------------------------------------------------------
 
 ;;===========================================================================
 ;; FOLDING BY INDENTATION
@@ -909,12 +806,10 @@ load-path))
 ;; Folding code blocks based on indentation.
 ;; git clone https://github.com/zenozeng/yafolding.el.git
 
-(add-to-list 'load-path "~/.emacs.d/yafolding.el/")
 (require 'yafolding)
 
 (global-set-key [?\C-{] #'yafolding-hide-parent-element)
 (global-set-key [?\C-}] #'yafolding-toggle-element)
-
 ;;-----------------------------------------------------------------------------
 
 
@@ -946,20 +841,6 @@ load-path))
       0 'special-words t)))
   ) 
 
-;;-----------------------------------------------------------------------------
-
-;;===========================================================================
-;; ESS - MINOR MODE C-c @ C-h   C-c @ C-s  Para ocultar os blocos etc.
-;;===========================================================================
-;;http://www.linuxquestions.org/questions/programming-9/automatic-hs-minor-mode-in-emacs-for-php-mode-732087/ 
-
-(add-hook 'ess-mode-hook         'hs-minor-mode)
-;;(add-hook 'TeX-mode-hook         'hs-minor-mode)
-	
-;;TEST to fold AUCTEX
-(add-hook 'LaTeX-mode-hook (lambda ()
-                             (TeX-fold-mode 1)))
-;;(add-hook 'find-file-hook 'TeX-fold-buffer t)
 ;;-----------------------------------------------------------------------------
  
 
