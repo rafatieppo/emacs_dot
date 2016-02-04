@@ -1,6 +1,5 @@
 ;;=============================================================================
 ;; Arquivo de configuração do Emacs (>=24.3.1) por Rafael Tieppo.
-
 ;; Este arquivo encontra-se disponível em
 ;; A grande maioria do conteúdo aqui disponível foi obtido/inspirado a
 ;; partir de consultas na internet. Encaminhe dúvidas, problemas e/ou
@@ -21,12 +20,9 @@
 (package-initialize) 
 
 (setq package-enable-at-startup nil)
-
-
 ;;(add-to-list 'package-archives '("marmalade" . "https://marmalade-repo.org/packages/"))
 (add-to-list 'package-archives '("melpa" . "http://melpa.org/packages/"))
 ;;(add-to-list 'package-archives '("org" . "http://orgmode.org/elpa/") t) ;;Org-mode's repository
-  
 ;;-----------------------------------------------------------------------------
 
 
@@ -113,28 +109,7 @@
         (setq start (+ 86400 start))))))
 
 ;;-----------------------------------------------------------------------------
-;; ORG SHORCUT
-;;; Quick inserts via <s TAB and similar 
-
-(setq org-structure-template-alist '(("s" "#+BEGIN_SRC ?\n\n#+END_SRC")
-                                     ("e" "#+BEGIN_EXAMPLE\n?\n#+END_EXAMPLE")
-                                     ("q" "#+BEGIN_QUOTE\n?\n#+END_QUOTE")
-                                     ("v" "#+BEGIN_VERSE\n?\n#+END_VERSE")
-                                     ("V" "#+BEGIN_VERBATIM\n?\n#+END_VERBATIM")
-                                     ("c" "#+BEGIN_CENTER\n?\n#+END_CENTER")
-                                     ("l" "#+BEGIN_LaTeX\n?\n#+END_LaTeX")
-                                     ("L" "#+LaTeX: ")
-                                     ("h" "#+BEGIN_HTML\n?\n#+END_HTML")
-                                     ("H" "#+HTML: ")
-                                     ("a" "#+BEGIN_ASCII\n?\n#+END_ASCII")
-                                     ("A" "#+ASCII: ")
-                                     ("i" "#+INDEX: ?")
-                                     ("I" "#+INCLUDE: %file ?")
-                                     ("x" "#+BEGIN_COMMENT\n?\n#+END_COMMENT")))
-
-;;-----------------------------------------------------------------------------
 ;; Provide to run R code
-
 (org-babel-do-load-languages
  'org-babel-load-languages
  '((emacs-lisp . t)
@@ -142,26 +117,11 @@
    (clojure . t)
    (python . t)
    (R . t)))
-
-
 ;;-----------------------------------------------------------------------------
 ;; Provide Highlight code in SRC
 
 (setq org-src-fontify-natively t)
-
 ;;-----------------------------------------------------------------------------
-;; Provide Highlight in LATEX and PDF
-;; http://stackoverflow.com/questions/21005885/export-org-mode-code-block-and-result-with-different-styles
-
-;;(require 'ox-latex)
-(add-to-list 'org-latex-packages-alist '("" "minted"))
-(setq org-latex-listings 'minted)
-
-(setq org-latex-pdf-process
-      '("pdflatex -shell-escape -interaction nonstopmode -output-directory %o %f"
-        "pdflatex -shell-escape -interaction nonstopmode -output-directory %o %f"
-        "pdflatex -shell-escape -interaction nonstopmode -output-directory %o %f"))
-
 
 ;;===========================================================================
 ;;STANDARD SETTINGS
@@ -177,7 +137,7 @@
 ;; Tipo e tamanho da fonte do editor.
 ;(set-default-font "monofur-13")
 (custom-set-faces
- '(default ((t (:family "Anonymous Pro" :foundry "unknown" :slant normal :weight normal :height 138 :width normal)))))
+ '(default ((t (:family "Anonymous Pro" :foundry "unknown" :slant normal :weight normal :height 158 :width normal)))))
 ;;---------------------------------------------------------------------------
 
 ;;---------------------------------------------------------------------------
@@ -331,11 +291,6 @@
 ;;-----------------------------------------------------------------------------
 
 ;;----------------------------------------------------------------------------- 
-;; Define C-= para fazer linha com 60 sinais de -.
-(global-set-key [?\C--] (kbd "C-u 6 0 ="))
-;;-----------------------------------------------------------------------------
-
-;;----------------------------------------------------------------------------- 
 ;; Define F11 e F12 para trocar entre modo com e sem menus.
 ;; (global-set-key (kbd "<f11>") 'toggle-fullscreen)
 (global-set-key (kbd "<f11>") 'toggle-menu-bar-mode-from-frame)
@@ -408,7 +363,6 @@
 (require 'flx)
 (require 'flx-ido)
 
-
 (ido-mode 1)
 (require 'ido-hacks nil t)
 (if (commandp 'ido-vertical-mode) 
@@ -434,6 +388,13 @@
 ;;-----------------------------------------------------------------------------
 
 ;;-----------------------------------------------------------------------------
+;; INDENT GUIDE
+;; https://raw.githubusercontent.com/zk-phi/indent-guide/master/indent-guide.el
+(require 'indent-guide)
+(setq indent-guide-recursive t)
+;;-----------------------------------------------------------------------------
+
+;;-----------------------------------------------------------------------------
 ;; AUTO COMPLETE FUNCTION
 ;;aciona AUTO-COMPLETE
 ;(add-to-list 'load-path "~/.emacs.d/")
@@ -443,6 +404,46 @@
 ;;If you want AC only in your ESS buffers do:`Funciona`
 (setq ess-use-auto-complete 'script-only)
 ;;-----------------------------------------------------------------------------
+
+;;-----------------------------------------------------------------------------
+;; FOLDING BY INDENTATION
+;; Folding code blocks based on indentation.
+;; git clone https://github.com/zenozeng/yafolding.el.git
+
+(require 'yafolding)
+
+(global-set-key [?\C-{] #'yafolding-hide-parent-element)
+(global-set-key [?\C-}] #'yafolding-toggle-element)
+;;-----------------------------------------------------------------------------
+
+;;-----------------------------------------------------------------------------
+;; ADD HIGHLIGHT FOR CERTAIN KEYWORDS
+;; http://lists.gnu.org/archive/html/emacs-orgmode/2010-09/txtb5ChQJCDny.txt
+;; http://emacs.1067599.n5.nabble.com/Adding-keywords-for-font-lock-experts-td95645.html
+
+(make-face 'special-words) 
+(set-face-attribute 'special-words nil :foreground "White" :background "Firebrick") 
+
+(dolist
+    (mode '(fundamental-mode
+            gnus-article-mode
+            org-mode
+            shell-mode
+            sh-mode
+            muse-mode
+            ess-mode
+            polymode-mode
+            markdown-mode
+            TeX-mode)) 
+  (font-lock-add-keywords
+   mode 
+   '(("\\<\\(COMMENT\\|DONE\\|TODO\\|STOP\\|IMPORTANT\\|NOTE\\|OBS\\|ATTENTION\\|REVIEW\\)" 
+      0 'font-lock-warning-face t) 
+     ("\\<\\(BUG\\|WARNING\\|DANGER\\|FIXME\\)" 
+      0 'special-words t)))
+  ) 
+;;-----------------------------------------------------------------------------
+ 
 
 ;;===========================================================================
 ;; SETTING TO WORK WITH ESS and R
@@ -550,7 +551,6 @@ load-path))
 "Major mode for editing R-Markdown files" t)
 (add-to-list 'auto-mode-alist '("\\.Rmd\\'" . poly-markdown-mode))
 (add-to-list 'auto-mode-alist '("\\.md\\'" . poly-markdown-mode))
-
 
 ;;/home/rafatieppo/.emacs.d/elpa/polymode-20141204.2346/
 
@@ -680,6 +680,24 @@ load-path))
    (add-hook 'foo-mode-hook 'ac-l-setup)
 
 
+;;===========================================================================
+;; CONFIGURACOES AVANCADAS AUCTEX
+;;===========================================================================
+;;http://tex.stackexchange.com/questions/161797/how-to-configure-emacs-and-auctex-to-perform-forward-and-inverse-search
+
+(custom-set-variables
+ ;; custom-set-variables was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ '(TeX-PDF-mode t)
+ '(column-number-mode t)
+ '(cua-mode t nil (cua-base))
+ '(show-paren-mode t))
+ ;; '(TeX-source-correlate-method (quote synctex))
+ ;; '(TeX-source-correlate-mode t)
+ ;; '(TeX-source-correlate-start-server t)
+;;-----------------------------------------------------------------------------
 
 ;;===========================================================================
 ;; THEMES - SEVERAL SCHEMES
@@ -704,7 +722,7 @@ load-path))
 
 (add-to-list 'load-path "/home/rafatieppo/.emacs.d/themess")
 
-(require 'monokai-theme)
+(require 'monokai-theme) ;; load first to improve ORG visualization
 ;;(require 'Amelie-theme)
 ;;(require 'assemblage-theme)
 ;;(require 'soothe-theme)
@@ -719,12 +737,12 @@ load-path))
 ;;(require 'granger-theme)
 ;;(require 'odersky-theme)
 ;;(require 'tangotango-theme)
-(require 'atom-one-dark-theme)
+;(require 'atom-one-dark-theme)
 ;(require 'seti-theme)
 ;;(require 'ample-zen-theme)
 ;;(require 'underwater-theme)
 ;;(require 'moe-dark-theme)
-;;(require 'molokai-theme)
+;(require 'molokai-theme)
 ;;(require 'dracula-themes)
 
 ;;===========================================================================
@@ -762,96 +780,6 @@ load-path))
 ;;===========================================================================
 
 
-;;===========================================================================
-;; CONFIGURACOES AVANCADAS AUCTEX
-;;===========================================================================
-;;http://tex.stackexchange.com/questions/161797/how-to-configure-emacs-and-auctex-to-perform-forward-and-inverse-search
-
-(custom-set-variables
- ;; custom-set-variables was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- '(TeX-PDF-mode t)
- '(column-number-mode t)
- '(cua-mode t nil (cua-base))
- '(show-paren-mode t))
- ;; '(TeX-source-correlate-method (quote synctex))
- ;; '(TeX-source-correlate-mode t)
- ;; '(TeX-source-correlate-start-server t)
-;;-----------------------------------------------------------------------------
-
-;;===========================================================================
-;; MINIMAP (desativei, conflito com o clone)
-;;===========================================================================
-;;-----------------------------------------------------------------------------
-;;(require 'minimap)
-;;-----------------------------------------------------------------------------
-
-;;===========================================================================
-;; VERTICAL INDENTATION GUIDES
-;;===========================================================================
-;;http://stackoverflow.com/questions/1587972/how-to-display-indentation-guides-in-emacs
-;;https://github.com/antonj/Highlight-Indentation-for-Emacs/blob/
-;;master/highlight-indentation.el
-;; other is better
-;;(require 'highlight-indentation)
-;;-----------------------------------------------------------------------------
-
-
-;;===========================================================================
-;; INDENT GUIDE
-;;===========================================================================
-;; https://raw.githubusercontent.com/zk-phi/indent-guide/master/indent-guide.el
-(require 'indent-guide)
-(setq indent-guide-recursive t)
-;;-----------------------------------------------------------------------------
-
-;;===========================================================================
-
-;;===========================================================================
-;; FOLDING BY INDENTATION
-;;===========================================================================
-;; Folding code blocks based on indentation.
-;; git clone https://github.com/zenozeng/yafolding.el.git
-
-(require 'yafolding)
-
-(global-set-key [?\C-{] #'yafolding-hide-parent-element)
-(global-set-key [?\C-}] #'yafolding-toggle-element)
-;;-----------------------------------------------------------------------------
-
-
-;;===========================================================================
-;; ADD HIGHLIGHT FOR CERTAIN KEYWORDS
-;;===========================================================================
-;; http://lists.gnu.org/archive/html/emacs-orgmode/2010-09/txtb5ChQJCDny.txt
-;; http://emacs.1067599.n5.nabble.com/Adding-keywords-for-font-lock-experts-td95645.html
-
-(make-face 'special-words) 
-(set-face-attribute 'special-words nil :foreground "White" :background "Firebrick") 
-
-(dolist
-    (mode '(fundamental-mode
-            gnus-article-mode
-            org-mode
-            shell-mode
-            sh-mode
-            muse-mode
-            ess-mode
-            polymode-mode
-            markdown-mode
-            TeX-mode)) 
-  (font-lock-add-keywords
-   mode 
-   '(("\\<\\(COMMENT\\|DONE\\|TODO\\|STOP\\|IMPORTANT\\|NOTE\\|OBS\\|ATTENTION\\|REVIEW\\)" 
-      0 'font-lock-warning-face t) 
-     ("\\<\\(BUG\\|WARNING\\|DANGER\\|FIXME\\)" 
-      0 'special-words t)))
-  ) 
-
-;;-----------------------------------------------------------------------------
- 
 
 
 
