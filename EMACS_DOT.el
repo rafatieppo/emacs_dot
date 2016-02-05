@@ -183,20 +183,6 @@
 (visual-line-mode 1)
 ;;-----------------------------------------------------------------------------
 
-;;-----------------------------------------------------------------------------
-;; Remove white espace at end when save buffer.
-(add-hook 'before-save-hook 'delete-trailing-whitespace)
-;;-----------------------------------------------------------------------------
-
-;;-----------------------------------------------------------------------------
-;; http://emacsredux.com/blog/2013/05/31/highlight-lines-that-exceed-a-certain-length-limit/
-;; (require 'whitespace)
-(setq whitespace-line-column fill-column)
-(setq whitespace-style
-      '(face lines-tail trailing spaces tabs empty))
-(global-whitespace-mode +1)
-;;-----------------------------------------------------------------------------
-
 ;;---------------------------------------------------------------------------
 ;; Desativa o auto salvar e auto backup.
 (setq auto-save-default nil) ;; Para o #autosave#.
@@ -722,7 +708,7 @@ load-path))
 
 (add-to-list 'load-path "/home/rafatieppo/.emacs.d/themess")
 
-(require 'monokai-theme) ;; load first to improve ORG visualization
+;(require 'monokai-theme) ;; load first to improve ORG visualization
 ;;(require 'Amelie-theme)
 ;;(require 'assemblage-theme)
 ;;(require 'soothe-theme)
@@ -737,7 +723,7 @@ load-path))
 ;;(require 'granger-theme)
 ;;(require 'odersky-theme)
 ;;(require 'tangotango-theme)
-;(require 'atom-one-dark-theme)
+(require 'atom-one-dark-theme)
 ;(require 'seti-theme)
 ;;(require 'ample-zen-theme)
 ;;(require 'underwater-theme)
