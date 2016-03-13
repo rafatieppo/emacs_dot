@@ -225,10 +225,18 @@
 ;;-----------------------------------------------------------------------------
 
 ;;-----------------------------------------------------------------------------
-;; realçador de pareamento de parenteses, chaves, colchetes, aspas...
-(show-paren-mode 1)
-(global-font-lock-mode t) ; turn on syntax highlighting
-;;---------------------------------------------------------------------------
+;; custom variables
+(custom-set-variables
+	;; stop cursor blinking
+	'(blink-cursor-mode nil)
+	;; removes tool bar
+	'(tool-bar-mode nil)
+	;; mark matching brackets
+	'(show-paren-mode t)
+	;; removes terminal bell (make it visible only)
+;;	'(visible-bell t)
+	)
+;;-----------------------------------------------------------------------------
 
 ;;---------------------------------------------------------------------------
 ;;How to have emacs highlight text selections?	
@@ -247,7 +255,15 @@
 ;;----------------------------------------------------------------------------- 
 ;; Define C-TAB para mudar o cursor de janelas (buffers ativos).
 (global-set-key [(control tab)] 'other-window)
+;;----------------------------------------------------------------------------- 
 
+;;----------------------------------------------------------------------------- 
+;; enable iswitchb mode: C-x b now shows a list of buffers
+;; ref: http://emacs-fu.blogspot.com.br/2009/02/switching-buffers.html
+(iswitchb-mode t)
+;;----------------------------------------------------------------------------- 
+
+;;----------------------------------------------------------------------------- 
 ;; Define C-page down e C-page up para mover entre buffers.
 (global-set-key (kbd "C-<next>") 'next-buffer)
 (global-set-key (kbd "C-<prior>") 'previous-buffer)
@@ -530,10 +546,9 @@ load-path))
 (require 'poly-noweb)
 (autoload 'poly-markdown-mode "poly-markdown-mode"
 "Major mode for editing R-Markdown files" t)
-(add-to-list 'auto-mode-alist '("\\.Rmd\\'" . poly-markdown-mode))
-(add-to-list 'auto-mode-alist '("\\.md\\'" . poly-markdown-mode))
-
-;;/home/rafatieppo/.emacs.d/elpa/polymode-20141204.2346/
+(add-to-list 'auto-mode-alist '("\\.md" . poly-markdown-mode))
+(add-to-list 'auto-mode-alist '("\\.org" . poly-org-mode))
+(add-to-list 'auto-mode-alist '("\\.Rmd" . poly-markdown+r-mode))
 
 ;;-----------------------------------------------------------------------------
 
@@ -579,14 +594,6 @@ load-path))
 ;; I changed the code, before "[@%l]" cite between brackets
 ;;-----------------------------------------------------------------------------
 
-;;-----------------------------------------------------------------------------
-;; TECLA TAB para 4 espaços Desativei pq inibe o POLYMODE
-;; https://ikiwiki.info/tips/Emacs_and_markdown/
-;;(autoload 'markdown-mode "markdown-mode")
-;;(add-to-list 'auto-mode-alist '("\\.md" . markdown-mode))
-;;-----------------------------------------------------------------------------
-
-
 ;;===========================================================================
 ;; LATEX
 ;;===========================================================================
@@ -594,7 +601,6 @@ load-path))
 ;; Modo matemático para LaTex (Math no menu com atalhos para símbolos,
 ;; etc).
 (add-hook 'LaTeX-mode-hook 'LaTeX-math-mode)
-
 ;;-----------------------------------------------------------------------------
 
 ;;-----------------------------------------------------------------------------
@@ -614,11 +620,23 @@ load-path))
 ;;;;;section preview: C-c C-p C-s; (see the screenshot on the right)
 
 
-;; TESTE: USEI ESSE PQ O ACIMA ESTAVA com erro (digitei errado). TESTANDO O SUPERIOR AGORA
-;; esse FICA NA RESERVA
-;; Usei:
-;;(add-hook 'LaTeX-mode-hook (lambda () (turn-on-reftex) (setq reftex-plug-into-AUCTeX t)))
-;; fonte:http://stackoverflow.com/questions/5722816/reftex-in-emacs-menu-bar
+;;===========================================================================
+;; CONFIGURACOES AVANCADAS AUCTEX
+;;===========================================================================
+;;http://tex.stackexchange.com/questions/161797/how-to-configure-emacs-and-auctex-to-perform-forward-and-inverse-search
+
+(custom-set-variables
+ ;; custom-set-variables was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ '(TeX-PDF-mode t)
+ '(column-number-mode t)
+ '(cua-mode t nil (cua-base))
+ '(show-paren-mode t))
+ ;; '(TeX-source-correlate-method (quote synctex))
+ ;; '(TeX-source-correlate-mode t)
+ ;; '(TeX-source-correlate-start-server t)
 ;;-----------------------------------------------------------------------------
 
 ;;===========================================================================
@@ -653,26 +671,6 @@ load-path))
 ;; If necessary, add the following into your init file.
    (setq ac-modes (append ac-modes '(foo-mode)))
    (add-hook 'foo-mode-hook 'ac-l-setup)
-
-
-;;===========================================================================
-;; CONFIGURACOES AVANCADAS AUCTEX
-;;===========================================================================
-;;http://tex.stackexchange.com/questions/161797/how-to-configure-emacs-and-auctex-to-perform-forward-and-inverse-search
-
-(custom-set-variables
- ;; custom-set-variables was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- '(TeX-PDF-mode t)
- '(column-number-mode t)
- '(cua-mode t nil (cua-base))
- '(show-paren-mode t))
- ;; '(TeX-source-correlate-method (quote synctex))
- ;; '(TeX-source-correlate-mode t)
- ;; '(TeX-source-correlate-start-server t)
-;;-----------------------------------------------------------------------------
 
 ;;===========================================================================
 ;; THEMES - SEVERAL SCHEMES
@@ -733,7 +731,7 @@ load-path))
 ;; Para ver a lista de cores 
 ;; M-x list-color-display
 ;;(set-face-background 'highlight-current-line-face "#1F0F0F") ;; soothe
-;;(set-face-background 'highlight-current-line-face "#2F2F2F") ;;MONOKAI
+;(set-face-background 'highlight-current-line-face "#2F2F2F") ;;MONOKAI
 ;;(set-face-background 'highlight-current-line-face   "#121212") ;; HICKEY#ffff0
 ;;(set-face-background 'highlight-current-line-face   "#ffff00") ;; gold
 
@@ -743,7 +741,7 @@ load-path))
 ;; Underline in current line
 (set-face-attribute hl-line-face nil :underline t)
 ;;(set-face-background hl-line-face "#2F2F2F") ;;MONOKAI
-;(set-face-background hl-line-face "#191970") ;; midnightblue
+;;(set-face-background hl-line-face "#191970") ;; midnightblue
 ;;(set-face-background hl-line-face "#1a1a1a") ;; darkgray  
 ;;(set-face-background hl-line-face "#1F0F0F") ;; soothe  
 ;;(set-face-background hl-line-face "#8b1a1a") ;; firebrick4  
