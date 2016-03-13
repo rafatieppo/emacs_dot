@@ -221,6 +221,10 @@
 (global-set-key (kbd "<") 'skeleton-pair-insert-maybe)
 ;;;; make electric-pair-mode work on more brackets
 (electric-pair-mode 1)	
+
+
+
+
 ;;-----------------------------------------------------------------------------
 
 ;;-----------------------------------------------------------------------------
@@ -508,24 +512,8 @@
 ;; POLY-MODE MAKDOWN ;; (DEVE ESTAR ANTES DO SUPORTE PARA LATEX.)
 ;;===========================================================================
 
-;; Suporte para MarkDown.
-;; (DEVE ESTAR ANTES DO SUPORTE PARA LATEX.)
-;; O markdown-mode.el vem com a instalação do emacs-goodies-el.
-;; sudo apt-get install emacs-goodies-el
-;; Inicia no modo para markdown para arquivos *.md e *.markdown.
-
-;; http://jblevins.org/projects/markdown-mode/
-
-(autoload 'markdown-mode "markdown-mode"
-"Major mode for editing Markdown files" t)
-(add-to-list 'auto-mode-alist '("\\.markdown\\'" . markdown-mode))
-(add-to-list 'auto-mode-alist '("\\.md\\'" . markdown-mode))
-
-;;-----------------------------------------------------------------------------
-
 ;; PASSOS
 ;; Suporte para R+MarkDown (requer emacs >= 24.3.1).
-;; (DEVE ESTAR ANTES DO SUPORTE PARA LATEX.)
 ;; Obter polymode da origem (em constante modificação).
 ;; http://stackoverflow.com/questions/16567348/knitr-markdown-highlighting-in-emacs
 ;; cd ~/Downloads/
@@ -537,20 +525,23 @@
 ;; cd .. && rm -rf polymode
 ;; Adicionar os diretórios com os modos.
 
-(setq load-path
-(append '("/home/rafatieppo/.emacs.d/polymode/"
-"/home/rafatieppo/.emacs.d/polymode/modes")
-load-path))
+;(setq load-path
+;(append '("/home/rafatieppo/.emacs.d/polymode/"
+;"/home/rafatieppo/.emacs.d/polymode/modes")
+;load-path))
 
 ;; Chama os modos.
+
 (require 'poly-R)
 (require 'poly-markdown)
 (require 'poly-noweb)
+
 (autoload 'poly-markdown-mode "poly-markdown-mode"
-"Major mode for editing R-Markdown files" t)
-(add-to-list 'auto-mode-alist '("\\.md" . poly-markdown-mode))
-(add-to-list 'auto-mode-alist '("\\.org" . poly-org-mode))
-(add-to-list 'auto-mode-alist '("\\.Rmd" . poly-markdown+r-mode))
+  "Major mode for editing R-Markdown files" t)
+(add-to-list 'auto-mode-alist '("\\.md\\'" . poly-markdown-mode))
+(add-to-list 'auto-mode-alist '("\\.Rmd\\'" . poly-markdown-mode))
+(add-to-list 'auto-mode-alist '("\\.Rpres\\'" . poly-markdown-mode))
+
 
 ;;-----------------------------------------------------------------------------
 
