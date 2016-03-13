@@ -211,8 +211,7 @@
 ; Automatic brackets, etc
 ;; ref: http://www.emacswiki.org/emacs/ESSAutoParens
 ;; enable skeleton-pair insert globally
-(setq skeleton-pair t)
-;;(setq skeleton-pair-on-word t)
+(setq skeleton-pair-on-word t)
 (global-set-key (kbd "(") 'skeleton-pair-insert-maybe)
 (global-set-key (kbd "[") 'skeleton-pair-insert-maybe)
 (global-set-key (kbd "{") 'skeleton-pair-insert-maybe)
@@ -221,7 +220,7 @@
 (global-set-key (kbd "\`") 'skeleton-pair-insert-maybe)
 (global-set-key (kbd "<") 'skeleton-pair-insert-maybe)
 ;;;; make electric-pair-mode work on more brackets
-;;(electric-pair-mode 1)	
+(electric-pair-mode 1)	
 ;;-----------------------------------------------------------------------------
 
 ;;-----------------------------------------------------------------------------
@@ -232,10 +231,13 @@
 	;; removes tool bar
 	'(tool-bar-mode nil)
 	;; mark matching brackets
-	'(show-paren-mode t)
+;;	'(show-paren-mode t)
 	;; removes terminal bell (make it visible only)
 ;;	'(visible-bell t)
 	)
+
+(show-paren-mode 1)
+
 ;;-----------------------------------------------------------------------------
 
 ;;---------------------------------------------------------------------------
