@@ -244,7 +244,7 @@
 
 ;;-----------------------------------------------------------------------------
 
-;;---------------------------------------------------------------------------
+;;-----------------------------------------------------------------------------
 ;;How to have emacs highlight text selections?	
 ;;	(transient-mark-mode 1) ; highlight text selection
 (delete-selection-mode 1) ; delete seleted text when typing
