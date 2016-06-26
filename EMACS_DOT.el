@@ -132,10 +132,16 @@
 ;;---------------------------------------------------------------------------
 
 ;;---------------------------------------------------------------------------
+;Abre novo buffer na horizontal
+;https://www.emacswiki.org/emacs/HorizontalSplitting
+(setq split-width-threshold 9999)
+;;---------------------------------------------------------------------------
+
+;;---------------------------------------------------------------------------
 ;; Tipo e tamanho da fonte do editor.
 ;(set-default-font "monofur-13")
 (custom-set-faces
- '(default ((t (:family "Anonymous Pro" :foundry "unknown" :slant normal :weight normal :height 158 :width normal)))))
+ '(default ((t (:family "Anonymous Pro" :foundry "unknown" :slant normal :weight normal :height 180 :width normal)))))
 ;;---------------------------------------------------------------------------
 
 ;;---------------------------------------------------------------------------
@@ -223,10 +229,6 @@
 (electric-pair-mode 1)	
 
 
-
-
-;;-----------------------------------------------------------------------------
-
 ;;-----------------------------------------------------------------------------
 ;; custom variables
 (custom-set-variables
@@ -244,7 +246,7 @@
 
 ;;-----------------------------------------------------------------------------
 
-;;-----------------------------------------------------------------------------
+;;---------------------------------------------------------------------------
 ;;How to have emacs highlight text selections?	
 ;;	(transient-mark-mode 1) ; highlight text selection
 (delete-selection-mode 1) ; delete seleted text when typing
@@ -266,7 +268,7 @@
 ;;----------------------------------------------------------------------------- 
 ;; enable iswitchb mode: C-x b now shows a list of buffers
 ;; ref: http://emacs-fu.blogspot.com.br/2009/02/switching-buffers.html
-(iswitchb-mode t)
+;;(iswitchb-mode t) ;; is obsolete
 ;;----------------------------------------------------------------------------- 
 
 ;;----------------------------------------------------------------------------- 
@@ -456,6 +458,11 @@
 (require 'ess-site)
 (setq-default ess-dialect "R")
 (require 'ess-eldoc)
+
+(setq-default ess-dialect "r")
+(require 'ess-eldoc)
+
+
 
 ;(require 'ess-eldoc)
 ;(setq-default ess-dialect "R")
@@ -744,6 +751,7 @@
 ;;(set-face-background hl-line-face "#121212") ;; gray7
 ;;---------------------------------------------------------------------------
 ;;===========================================================================
+
 
 
 
