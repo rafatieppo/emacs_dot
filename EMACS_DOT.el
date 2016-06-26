@@ -104,6 +104,13 @@
                               (seconds-to-time end))))
         (setq start (+ 86400 start))))))
 
+
+;;----------------------------------------------------------------------
+;; Check for packages.
+;;----------------------------------------------------------------------
+;(require 'prelude-packages)
+;;----------------------------------------------------------------------
+
 ;;-----------------------------------------------------------------------------
 ;; Provide to run R code
 (org-babel-do-load-languages
@@ -404,7 +411,7 @@
 ;;aciona AUTO-COMPLETE
 ;(add-to-list 'load-path "~/.emacs.d/")
 (require 'auto-complete-config)
-(add-to-list 'ac-dictionary-directories "~/.emacs.d//ac-dict")
+;(add-to-list 'ac-dictionary-directories "~/.emacs.d//ac-dict")
 (ac-config-default)
 ;;If you want AC only in your ESS buffers do:`Funciona`
 (setq ess-use-auto-complete 'script-only)
@@ -514,6 +521,19 @@
 ;(add-to-list 'load-path "/home/rafatieppo/.emacs.d/lisp")
 (load "~/.emacs.d/lisp/functions")
 ;(require 'functions)
+
+;;----------------------------------------------------------------------
+;; MARKDOWN EXTENSIONS.
+;; (IT MUST BE BEFORE LATEX EXTENSIONS.)
+
+(autoload 'markdown-mode "markdown-mode"
+  "Major mode for editing Markdown files" t)
+(add-to-list 'auto-mode-alist '("\\.markdown\\'" . markdown-mode))
+(add-to-list 'auto-mode-alist '("\\.md\\'" . markdown-mode))
+
+;; Org-struct minor mode active in markdown mode.
+(add-hook 'markdown-mode-hook 'turn-on-orgstruct)
+(add-hook 'markdown-mode-hook 'turn-on-orgstruct++)
 
 ;;===========================================================================
 ;; POLY-MODE MAKDOWN ;; (DEVE ESTAR ANTES DO SUPORTE PARA LATEX.)
@@ -666,7 +686,7 @@
 ;;PARA USAR COM O AUCTEX
 ;;Put this file into your load-path and add the following into your init file.
 
-   (require 'auto-complete-latex)
+   ;(require 'auto-complete-latex)
 
 ;; If necessary, add the following into your init file.
    (setq ac-modes (append ac-modes '(foo-mode)))
