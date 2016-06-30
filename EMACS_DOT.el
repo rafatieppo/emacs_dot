@@ -11,7 +11,7 @@
 ;;===========================================================================
 ;;-----------------------------------------------------------------------------
   
-(add-to-list 'load-path "~/.emacs.d/")
+(add-to-list 'load-path "/home/rafatieppo/.emacs.d/")
 (load "package")
 (require 'package)
 ;;(add-to-list 'package-archives
@@ -109,6 +109,15 @@
 ;; Check for packages.
 ;;----------------------------------------------------------------------
 ;(require 'prelude-packages)
+;;----------------------------------------------------------------------
+
+
+;;----------------------------------------------------------------------
+;; POWERLINES
+;;----------------------------------------------------------------------
+;;https://github.com/milkypostman/powerline/
+(require 'powerline)
+(powerline-default-theme)
 ;;----------------------------------------------------------------------
 
 ;;-----------------------------------------------------------------------------
@@ -469,8 +478,6 @@
 (setq-default ess-dialect "r")
 (require 'ess-eldoc)
 
-
-
 ;(require 'ess-eldoc)
 ;(setq-default ess-dialect "R")
 ;;-----------------------------------------------------------------------------
@@ -519,7 +526,7 @@
 ;;===========================================================================
 
 ;(add-to-list 'load-path "/home/rafatieppo/.emacs.d/lisp")
-(load "~/.emacs.d/lisp/functions")
+(load "/home/rafatieppo/.emacs.d/lisp/functions")
 ;(require 'functions)
 
 ;;----------------------------------------------------------------------
@@ -604,12 +611,15 @@
 ;;http://tex.stackexchange.com/a/31992/5701
 
 ;; So that RefTeX finds my bibliography
-(setq reftex-default-bibliography '("~/Dropbox/BIBTEX/REFERENCES.bib"))
+(setq reftex-default-bibliography '("/home/rafatieppo/Dropbox/BIBTEX/REFERENCES.bib"))
 
 ;; How to solve @
 (eval-after-load 'reftex-vars
   '(progn 
-     (setq reftex-cite-format '((?\C-m . "@%l")))))
+     (setq reftex-cite-format '((?\C-m . "@%l")
+                                (?\C-l . "\\cite{%l\}")
+                                (?\C-o . "\\citeonline{%l\}")
+                                ))))
      
 ;; I changed the code, before "[@%l]" cite between brackets
 ;;-----------------------------------------------------------------------------
@@ -678,15 +688,7 @@
      (append '(ac-source-math-unicode ac-source-math-latex ac-source-latex-commands)
                ac-sources)))
 
-;;USAR ESSE SOMENTE SE NAO USAR O AUCTEX
-;;(add-hook 'TeX-mode-hook 'ac-latex-mode-setup) 
-
 (ac-flyspell-workaround)
-
-;;PARA USAR COM O AUCTEX
-;;Put this file into your load-path and add the following into your init file.
-
-   ;(require 'auto-complete-latex)
 
 ;; If necessary, add the following into your init file.
    (setq ac-modes (append ac-modes '(foo-mode)))

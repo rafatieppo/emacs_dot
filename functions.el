@@ -46,21 +46,35 @@ e.g. Sunday, September 17, 2000."
 (defun figure_md ()
 "Insere cabecalho markdown-mode"
 (interactive)
-(insert (make-string 0 ? ) "![caption here](file here.png){#fig:label_here} \n")
+(insert (make-string 0 ? ) "![cap](file){#fig:label} \n")
 )
 ;;-----------------------------------------------------------------------------
 
 ;;-----------------------------------------------------------------------------
 ;; Insert a new (empty) chunk to R markdown.
+;; Changed to ```{r}```, before was ```R\n\n```
 ;;-----------------------------------------------------------------------------
 (defun insert-chunk ()
   "Insert chunk environment Rmd sessions."
   (interactive)
-  (insert "```R\n\n```")
+  (insert "```{r}\n\n```")
   (forward-line -1)
   )
 
 (global-set-key (kbd "C-c i") 'insert-chunk)
+;;-----------------------------------------------------------------------------
+
+;;-----------------------------------------------------------------------------
+;; Insert a new (empty) FULL chunk to R markdown.
+;;-----------------------------------------------------------------------------
+(defun insert-chunk-full ()
+  "Insert chunk environment Rmd sessions."
+  (interactive)
+  (insert "```{r, echo = TRUE, result = 'hide', eval = TRUE}\n\n```")
+  (forward-line -1)
+  )
+
+(global-set-key (kbd "C-c r") 'insert-chunk-full)
 ;;-----------------------------------------------------------------------------
 
 ;;-----------------------------------------------------------------------------
