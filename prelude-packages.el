@@ -25,7 +25,7 @@
     polymode
     popup
     powerline
-    r-autoyas
+    smartparens
     smex
     sr-speedbar
     yafolding,

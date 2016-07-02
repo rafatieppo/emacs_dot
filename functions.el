@@ -25,7 +25,7 @@ e.g. Sunday, September 17, 2000."
 (insert (make-string 65 ?=) "\n")
 (insert (make-string 45 ? ) "Rafael Tieppo\n")
 (insert (make-string 45 ? ) "rafaelt@unemat.br\n")
-(insert (make-string 45 ? ) "http://www2.unemat.br/rafaeltieppo/\n")
+(insert (make-string 45 ? ) "http://docente.unemat.br/rafaeltieppo/\n")
 (insert (make-string 45 ? ) (format-time-string "%d-%m-%Y\n"))
 (insert (make-string 65 ?=) "\n")
 )

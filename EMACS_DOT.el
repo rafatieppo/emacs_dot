@@ -229,22 +229,6 @@
 )
 ;;-----------------------------------------------------------------------------
 
-;;---------------------------------------------------------------------------
-; Automatic brackets, etc
-;; ref: http://www.emacswiki.org/emacs/ESSAutoParens
-;; enable skeleton-pair insert globally
-(setq skeleton-pair-on-word t)
-(global-set-key (kbd "(") 'skeleton-pair-insert-maybe)
-(global-set-key (kbd "[") 'skeleton-pair-insert-maybe)
-(global-set-key (kbd "{") 'skeleton-pair-insert-maybe)
-(global-set-key (kbd "\"") 'skeleton-pair-insert-maybe)
-(global-set-key (kbd "\'") 'skeleton-pair-insert-maybe)
-(global-set-key (kbd "\`") 'skeleton-pair-insert-maybe)
-(global-set-key (kbd "<") 'skeleton-pair-insert-maybe)
-;;;; make electric-pair-mode work on more brackets
-(electric-pair-mode 1)	
-
-
 ;;-----------------------------------------------------------------------------
 ;; custom variables
 (custom-set-variables
@@ -418,12 +402,71 @@
 ;;-----------------------------------------------------------------------------
 ;; AUTO COMPLETE FUNCTION
 ;;aciona AUTO-COMPLETE
-;(add-to-list 'load-path "~/.emacs.d/")
+
 (require 'auto-complete-config)
-;(add-to-list 'ac-dictionary-directories "~/.emacs.d//ac-dict")
 (ac-config-default)
+
+;; CHANGE 'ac-complete FROM ENTER to TAB.
+(define-key ac-completing-map "\r" nil)
+(define-key ac-completing-map "\t" 'ac-complete)
+
+;; DROPDOWN DELAY
+(setq ac-auto-show-menu    0.2)
+
 ;;If you want AC only in your ESS buffers do:`Funciona`
 (setq ess-use-auto-complete 'script-only)
+
+
+;;===========================================================================
+;;AUTO COMLETE
+;;===========================================================================
+(setq ac-math-unicode-in-math-p t)
+
+```lisp
+(defvar ac-source-math-latex-everywhere;;
+'((candidates . ac-math-symbols-latex)
+  (prefix . ac-math-prefix)
+  (action . ac-math-action-latex)
+  (symbol . "l")))
+```
+;(require 'ac-math) ; This is not needed when you install from MELPA
+(add-to-list 'ac-modes 'latex-mode)   ; make auto-complete aware of `latex-mode`
+;(add-to-list 'ac-modes 'markdown-mode)   ; make auto-complete aware of `markdown-mode`
+(defun ac-latex-mode-setup ()         ; add ac-sources to default ac-sources
+  (setq ac-sources
+     (append '(ac-source-math-unicode ac-source-math-latex ac-source-latex-commands)
+               ac-sources)))
+
+(ac-flyspell-workaround)
+
+;; If necessary, add the following into your init file.
+   (setq ac-modes (append ac-modes '(foo-mode)))
+   (add-hook 'foo-mode-hook 'ac-l-setup)
+
+;;----------------------------------------------------------------------
+
+;;---------------------------------------------------------------------------
+; Automatic brackets, etc
+;; ref: http://www.emacswiki.org/emacs/ESSAutoParens
+;; enable skeleton-pair insert globally
+;(setq skeleton-pair-on-word t)
+;(global-set-key (kbd "(") 'skeleton-pair-insert-maybe)
+;(global-set-key (kbd "[") 'skeleton-pair-insert-maybe)
+;(global-set-key (kbd "{") 'skeleton-pair-insert-maybe)
+;(global-set-key (kbd "\"") 'skeleton-pair-insert-maybe)
+;(global-set-key (kbd "\'") 'skeleton-pair-insert-maybe)
+;(global-set-key (kbd "\`") 'skeleton-pair-insert-maybe)
+;(global-set-key (kbd "<") 'skeleton-pair-insert-maybe)
+;;;; make electric-pair-mode work on more brackets
+;(electric-pair-mode 1)	
+
+;; Smart Parenthesis.
+;; https://github.com/Fuco1/smartparens
+
+(require 'smartparens)
+(require 'smartparens-config)
+(smartparens-global-mode 1)
+
 ;;-----------------------------------------------------------------------------
 
 ;;-----------------------------------------------------------------------------
@@ -668,31 +711,6 @@
  ;; '(TeX-source-correlate-mode t)
  ;; '(TeX-source-correlate-start-server t)
 ;;-----------------------------------------------------------------------------
-
-;;===========================================================================
-;;AUTO COMLETE
-;;===========================================================================
-(setq ac-math-unicode-in-math-p t)
-
-```lisp
-(defvar ac-source-math-latex-everywhere;;
-'((candidates . ac-math-symbols-latex)
-  (prefix . ac-math-prefix)
-  (action . ac-math-action-latex)
-  (symbol . "l")))
-```
-(require 'ac-math) ; This is not needed when you install from MELPA
-(add-to-list 'ac-modes 'latex-mode)   ; make auto-complete aware of `latex-mode`
-(defun ac-latex-mode-setup ()         ; add ac-sources to default ac-sources
-  (setq ac-sources
-     (append '(ac-source-math-unicode ac-source-math-latex ac-source-latex-commands)
-               ac-sources)))
-
-(ac-flyspell-workaround)
-
-;; If necessary, add the following into your init file.
-   (setq ac-modes (append ac-modes '(foo-mode)))
-   (add-hook 'foo-mode-hook 'ac-l-setup)
 
 ;;===========================================================================
 ;; THEMES - SEVERAL SCHEMES
