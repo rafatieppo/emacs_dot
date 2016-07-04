@@ -70,7 +70,7 @@ e.g. Sunday, September 17, 2000."
 (defun insert-chunk-full ()
   "Insert chunk environment Rmd sessions."
   (interactive)
-  (insert "```{r, echo = TRUE, result = 'hide', eval = TRUE}\n\n```")
+  (insert "```{r, echo = TRUE, results = 'markup', eval = TRUE}\n\n```")
   (forward-line -1)
   )
 
