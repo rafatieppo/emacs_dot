@@ -90,9 +90,52 @@ e.g. Sunday, September 17, 2000."
 (newline)
 (yank)
 )
-;; Define atalho para duplicar linhas.
-(global-set-key (kbd "\C-c d") 'duplicate-line)
+
 ;;-----------------------------------------------------------------------------
+
+;;-----------------------------------------------------------------------------
+;; Move lines. ;; http://www.emacswiki.org/emacs/MoveLine
+;;-----------------------------------------------------------------------------
+(defun move-line (n)
+  "Move the current line up or down by N lines."
+  (interactive "p")
+  (setq col (current-column))
+  (beginning-of-line) (setq start (point))
+  (end-of-line) (forward-char) (setq end (point))
+  (let ((line-text (delete-and-extract-region start end)))
+    (forward-line n)
+    (insert line-text)
+    ;; restore point to original column in moved line
+    (forward-line -1)
+    (forward-char col)))
+
+(defun move-line-up (n)
+  "Move the current line up by N lines."
+  (interactive "p")
+  (move-line (if (null n) -1 (- n))))
+
+(defun move-line-down (n)
+  "Move the current line down by N lines."
+  (interactive "p")
+(move-line (if (null n) 1 n)))
+;;-----------------------------------------------------------------------------
+
+
+(defun comment-line-or-region ()
+  "Comment or uncomment current line, or current text selection."
+  (interactive)
+  (if (region-active-p)
+      (comment-or-uncomment-region
+       (region-beginning)
+       (region-end)
+       )
+    (comment-or-uncomment-region
+     (line-beginning-position)
+     (line-beginning-position 2)
+     )
+    )
+  )
+
 
 ;;---------------------------------------------------------------------------
 ;; https://github.com/magnars/.emacs.d/blob/master/sane-defaults.el
@@ -104,6 +147,63 @@ e.g. Sunday, September 17, 2000."
 (savehist-mode 1)
 (setq history-length 500)
 ;;---------------------------------------------------------------------------
+
+;;===========================================================================
+;; TECLAS DE ATALHO
+;;===========================================================================
+;;----------------------------------------------------------------------------- 
+;; Define C-TAB para mudar o cursor de janelas (buffers ativos).
+(global-set-key [(control tab)] 'other-window)
+;;-----------------------------------------------------------------------------
+;; enable iswitchb mode: C-x b now shows a list of buffers
+;; ref: http://emacs-fu.blogspot.com.br/2009/02/switching-buffers.html
+;; Define C-page down e C-page up para mover entre buffers.
+(global-set-key (kbd "C-<next>") 'next-buffer)
+(global-set-key (kbd "C-<prior>") 'previous-buffer)
+;;-----------------------------------------------------------------------------
+;; Define C-F4 para fechar um buffer.
+(define-key global-map [(control f4)] 'kill-buffer)
+;;-----------------------------------------------------------------------------
+;; Define C-F1 para (des)ativar o flyspell.
+(define-key global-map [(control f1)] 'flyspell-mode)
+;;-----------------------------------------------------------------------------
+;; Para passar o corretor ortográfico em uma região.
+(define-key global-map [(control f2)] 'flyspell-region)
+;;-----------------------------------------------------------------------------
+;; Define C-- para fazer linha com 60 sinais de -.
+(global-set-key [?\C--] (kbd "C-u 6 0 -"))
+;;-----------------------------------------------------------------------------
+;; Define F11 e F12 para trocar entre modo com e sem menus.
+;; (global-set-key (kbd "<f11>") 'toggle-fullscreen)
+(global-set-key (kbd "<f11>") 'toggle-menu-bar-mode-from-frame)
+(global-set-key (kbd "<f12>") 'toggle-tool-bar-mode-from-frame)
+;;-----------------------------------------------------------------------------
+;; multiple-cursors.el ;; continuous lines
+;;(global-set-key (kbd "C-S-c C-S-c") 'mc/edit-lines)
+(global-set-key (kbd "C-. C-c") 'mc/edit-lines)
+;; not based on continuous lines
+(global-set-key (kbd "C->") 'mc/mark-next-like-this)
+(global-set-key (kbd "C-<") 'mc/mark-previous-like-this)
+(global-set-key (kbd "C-; C-<") 'mc/mark-all-like-this)
+;; you can select the key you prefer to
+(define-key global-map (kbd "C-c SPC") 'ace-jump-mode)
+;;-----------------------------------------------------------------------------
+;; FUNCTION HIGHLIGHTS LISP
+(global-set-key [(control f3)] 'highlight-symbol-at-point)
+(global-set-key [f3] 'highlight-symbol-next)
+(global-set-key [(shift f3)] 'highlight-symbol-prev)
+(global-set-key [(meta f3)] 'highlight-symbol-query-replace)
+;;-----------------------------------------------------------------------------
+;; Define atalho para duplicar linhas.
+(global-set-key (kbd "\C-c d") 'duplicate-line)
+;;-----------------------------------------------------------------------------
+;; Move lines.
+(global-set-key (kbd "M-<") 'move-line-up)
+(global-set-key (kbd "M->") 'move-line-down)
+
+;;-----------------------------------------------------------------------------
+;; (un)Comment line oir region
+(global-set-key (kbd "M-;") 'comment-line-or-region)
 
 
 

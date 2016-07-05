@@ -257,52 +257,6 @@
 (require 'sr-speedbar)
 ;;-----------------------------------------------------------------------------
 
-;;===========================================================================
-;; TECLAS DE ATALHO
-;;===========================================================================
-;;----------------------------------------------------------------------------- 
-;; Define C-TAB para mudar o cursor de janelas (buffers ativos).
-(global-set-key [(control tab)] 'other-window)
-;;----------------------------------------------------------------------------- 
-
-;;----------------------------------------------------------------------------- 
-;; enable iswitchb mode: C-x b now shows a list of buffers
-;; ref: http://emacs-fu.blogspot.com.br/2009/02/switching-buffers.html
-;;(iswitchb-mode t) ;; is obsolete
-;;----------------------------------------------------------------------------- 
-
-;;----------------------------------------------------------------------------- 
-;; Define C-page down e C-page up para mover entre buffers.
-(global-set-key (kbd "C-<next>") 'next-buffer)
-(global-set-key (kbd "C-<prior>") 'previous-buffer)
-;;----------------------------------------------------------------------------- 
-
-;;----------------------------------------------------------------------------- 
-;; Define C-F4 para fechar um buffer.
-(define-key global-map [(control f4)] 'kill-buffer)
-;;----------------------------------------------------------------------------- 
-
-;;----------------------------------------------------------------------------- 
-;; Define C-F1 para (des)ativar o flyspell.
-(define-key global-map [(control f1)] 'flyspell-mode)
-;;----------------------------------------------------------------------------- 
-
-;;----------------------------------------------------------------------------- 
-;; Para passar o corretor ortográfico em uma região.
-(define-key global-map [(control f2)] 'flyspell-region)
-;;----------------------------------------------------------------------------- 
-
-;;----------------------------------------------------------------------------- 
-;; Define C-- para fazer linha com 60 sinais de -.
-(global-set-key [?\C--] (kbd "C-u 6 0 -"))
-;;-----------------------------------------------------------------------------
-
-;;----------------------------------------------------------------------------- 
-;; Define F11 e F12 para trocar entre modo com e sem menus.
-;; (global-set-key (kbd "<f11>") 'toggle-fullscreen)
-(global-set-key (kbd "<f11>") 'toggle-menu-bar-mode-from-frame)
-(global-set-key (kbd "<f12>") 'toggle-tool-bar-mode-from-frame)
-;;----------------------------------------------------------------------------- 
 
 ;;===========================================================================
 ;; SPECIAL PROGRAMMING TOOLS
@@ -313,13 +267,6 @@
 ;; https://github.com/magnars/multiple-cursors.el
 (require 'multiple-cursors)
 ;; continuous lines
-;;(global-set-key (kbd "C-S-c C-S-c") 'mc/edit-lines)
-(global-set-key (kbd "C-. C-c") 'mc/edit-lines)
-
-;; not based on continuous lines
-(global-set-key (kbd "C->") 'mc/mark-next-like-this)
-(global-set-key (kbd "C-<") 'mc/mark-previous-like-this)
-(global-set-key (kbd "C-; C-<") 'mc/mark-all-like-this)
 ;;-----------------------------------------------------------------------------
 
 ;;-----------------------------------------------------------------------------
@@ -333,8 +280,6 @@
   "ace-jump-mode"
   "Emacs quick move minor mode"
   t)
-;; you can select the key you prefer to
-(define-key global-map (kbd "C-c SPC") 'ace-jump-mode)
 
 ;; enable a more powerful jump back function from ace jump mode
 ;;
@@ -386,10 +331,6 @@
 ;    (add-to-list 'load-path "/home/rafatieppo/.emacs.d")
 
     (require 'highlight-symbol)
-    (global-set-key [(control f3)] 'highlight-symbol-at-point)
-    (global-set-key [f3] 'highlight-symbol-next)
-    (global-set-key [(shift f3)] 'highlight-symbol-prev)
-    (global-set-key [(meta f3)] 'highlight-symbol-query-replace)
 ;;-----------------------------------------------------------------------------
 
 ;;-----------------------------------------------------------------------------
