@@ -676,28 +676,35 @@
 
 (add-to-list 'load-path "/home/rafatieppo/.emacs.d/themess")
 
-;(require 'monokai-theme) ;; load first to improve ORG visualization
+;;(require 'monokai-theme) ;; load first to improve ORG visualization
 ;;(require 'Amelie-theme)
-;;(require 'assemblage-theme)
-;;(require 'soothe-theme)
-;;(require 'deep-thought-theme)
-;;(require 'erosiond-theme)
-;;(require 'zenburn-theme)
-;;(require 'hickey-theme)
-;;(require 'spolsky-theme)
-;;(require 'fogus-theme)
-;;(require 'junio-theme)
-;;(require 'wilson-theme)
-;;(require 'granger-theme)
-;;(require 'odersky-theme)
-;;(require 'tangotango-theme)
-(require 'atom-one-dark-theme)
-;(require 'seti-theme)
 ;;(require 'ample-zen-theme)
-;;(require 'underwater-theme)
-;;(require 'moe-dark-theme)
-;(require 'molokai-theme)
+;;(require 'assemblage-theme)
+;;(require 'atom-one-dark-theme)
+;;(require 'deep-thought-theme)
 ;;(require 'dracula-themes)
+;;(require 'erosiond-theme)
+;;(require 'fogus-theme)
+;;(require 'granger-theme)
+;;(require 'hickey-theme)
+;;(require 'junio-theme)
+;;(require 'material-light-theme)
+(require 'material-theme)
+;;(require 'moe-dark-theme)
+;;(require 'molokai-theme)
+;;(require 'odersky-theme)
+;;(require 'seti-theme)
+;;(require 'soothe-theme)
+;;(require 'spolsky-theme)
+;;(require 'tangotango-theme)
+;;(require 'ujelly-theme)
+;;(require 'underwater-theme)
+;;(require 'wilson-theme)
+;;(require 'zenburn-theme)
+
+
+
+
 
 ;;===========================================================================
 ;;TEMA VEM PADRAO EMACS
