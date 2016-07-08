@@ -156,9 +156,20 @@
 ;;---------------------------------------------------------------------------
 ;; Tipo e tamanho da fonte do editor.
 ;(set-default-font "monofur-13")
-(custom-set-faces
- '(default ((t (:family "Anonymous Pro" :foundry "unknown" :slant normal :weight normal :height 180 :width normal)))))
+;(set-default-font "Tex Gyre Adventor-11")
+(set-default-font "Anonymous Pro-13.5")
+;(custom-set-faces
+; '(default ((t (:family "Anonymous Pro" :foundry "unknown" :slant normal :weight normal :height 120 :width normal)))))
 ;;---------------------------------------------------------------------------
+
+;;---------------------------------------------------------------------------
+;; Space between lines and between line numbers and text (like margin)
+(setq-default line-spacing 3) 
+(setq-default left-fringe-width  3)
+;(setq-default right-fringe-width  0)
+;(set-face-attribute 'fringe nil :background "black")
+;;---------------------------------------------------------------------------
+
 
 ;;---------------------------------------------------------------------------
 ;; ativa DEAD keys quando usar LATEX
