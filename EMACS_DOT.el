@@ -40,8 +40,18 @@
 
 
 
+;;-----------------------------------------------------------------------------
+;; ORG mode CLASSES and COLORS for TASKS
 (setq org-todo-keywords
        '((sequence "TODO(t)" "WAIT(w@/!)" "|" "DONE(d!)" "CANCELED(c@)")))
+
+
+     (setq org-todo-keyword-faces
+           '(
+             ("TODO" . (:foreground "red" :weight bold))
+             ("WAIT" . (:foreground "blue" :weight bold))
+             ("DONE" . (:foreground "green" :weight bold))
+             ))
 
 ;;-----------------------------------------------------------------------------
 ;; ORG mode for Android
