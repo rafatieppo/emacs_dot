@@ -39,6 +39,10 @@
 (setq org-agenda-files '("/home/rafatieppo/Dropbox/EMACS_ORG_MODE/RAFA.org"))
 
 
+
+(setq org-todo-keywords
+       '((sequence "TODO(t)" "WAIT(w@/!)" "|" "DONE(d!)" "CANCELED(c@)")))
+
 ;;-----------------------------------------------------------------------------
 ;; ORG mode for Android
 ;;http://stackoverflow.com/questions/11822353/how-to-make-org-mobile-work-in-android
