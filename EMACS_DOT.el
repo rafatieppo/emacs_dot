@@ -49,7 +49,7 @@
      (setq org-todo-keyword-faces
            '(
              ("TODO" . (:foreground "red" :weight bold))
-             ("WAIT" . (:foreground "blue" :weight bold))
+             ("WAIT" . (:foreground "orange" :weight bold))
              ("DONE" . (:foreground "green" :weight bold))
              ))
 
@@ -171,9 +171,9 @@
 ;; Tipo e tamanho da fonte do editor.
 ;(set-default-font "monofur-13")
 ;(set-default-font "Tex Gyre Adventor-11")
-(set-default-font "Anonymous Pro-13.5")
+(set-default-font "Anonymous Pro-14.5")
 ;(custom-set-faces
-; '(default ((t (:family "Anonymous Pro" :foundry "unknown" :slant normal :weight normal :height 120 :width normal)))))
+; '(default ((t (:family "Anonymous Pro" :foundry "unknown" :slant normal :weight normal :height 240 :width normal)))))
 ;;---------------------------------------------------------------------------
 
 ;;---------------------------------------------------------------------------
@@ -365,54 +365,73 @@
 (setq indent-guide-recursive t)
 ;;-----------------------------------------------------------------------------
 
-;;-----------------------------------------------------------------------------
-;; AUTO COMPLETE FUNCTION
-;;aciona AUTO-COMPLETE
-
-(require 'auto-complete-config)
-(ac-config-default)
-
-;; CHANGE 'ac-complete FROM ENTER to TAB.
-(define-key ac-completing-map "\r" nil)
-(define-key ac-completing-map "\t" 'ac-complete)
-
-;; DROPDOWN DELAY
-(setq ac-auto-show-menu    0.2)
-
-;;If you want AC only in your ESS buffers do:`Funciona`
-(setq ess-use-auto-complete 'script-only)
-
 
 ;;===========================================================================
 ;;AUTO COMLETE
 ;;===========================================================================
+
+(require 'yasnippet)
+(yas-global-mode 1)
+
+;;-----------------------------------------------------------------------------
+;; AUTO COMPLETE FUNCTION
+;;aciona AUTO-COMPLETE
+;;-----------------------------------------------------------------------------
+
+;; https://www.emacswiki.org/emacs/AutoCompleteSources
+(require 'auto-complete)
+(require 'auto-complete-config)
+(ac-config-default)
+
+;; macro .el, not necessary
+;; auto-complete for latex 
+;;(require 'auto-complete-auctex)
+
+(require 'ac-math) 
+(add-to-list 'ac-modes 'latex-mode)   ; make auto-complete aware of `latex-mode`
+
+ (defun ac-LaTeX-mode-setup () ; add ac-sources to default ac-sources
+   (setq ac-sources
+         (append '(ac-source-math-unicode ac-source-math-latex ac-source-latex-commands)
+                 ac-sources))
+   )
+(add-hook 'LaTeX-mode-hook 'ac-LaTeX-mode-setup)
+;(global-auto-complete-mode t)
+ 
 (setq ac-math-unicode-in-math-p t)
 
-```lisp
-(defvar ac-source-math-latex-everywhere;;
-'((candidates . ac-math-symbols-latex)
-  (prefix . ac-math-prefix)
-  (action . ac-math-action-latex)
-  (symbol . "l")))
-```
-;(require 'ac-math) ; This is not needed when you install from MELPA
-(add-to-list 'ac-modes 'latex-mode)   ; make auto-complete aware of `latex-mode`
-;(add-to-list 'ac-modes 'markdown-mode)   ; make auto-complete aware of `markdown-mode`
-(defun ac-latex-mode-setup ()         ; add ac-sources to default ac-sources
-  (setq ac-sources
-     (append '(ac-source-math-unicode ac-source-math-latex ac-source-latex-commands)
-               ac-sources)))
+;;----------------------------------------------------------------------
+;; To activate ESS auto-complete for R.
+;;----------------------------------------------------------------------
 
-(ac-flyspell-workaround)
-
-;; If necessary, add the following into your init file.
-   (setq ac-modes (append ac-modes '(foo-mode)))
-   (add-hook 'foo-mode-hook 'ac-l-setup)
+(setq ess-use-auto-complete 'script-only)
 
 ;;----------------------------------------------------------------------
+;; CHANGE 'ac-complete FROM ENTER to TAB.
+;;----------------------------------------------------------------------
+(define-key ac-completing-map "\r" nil)
+(define-key ac-completing-map "\t" 'ac-complete)
+
+;;----------------------------------------------------------------------
+;; DROPDOWN DELAY
+;;----------------------------------------------------------------------
+(setq ac-auto-show-menu    0.2)
+
+;;----------------------------------------------------------------------
+;; auto complete markdown
+;; http://wiki.dreamrunner.org/public_html/Emacs/markdown.html
+;;----------------------------------------------------------------------
+
+;(add-hook 'markdown-mode-hook
+;          '(lambda ()
+;             (auto-complete-mode t)
+;             (local-unset-key [tab])
+;             (setq-local yas-fallback-behavior '(apply auto-complete))))
 
 ;;---------------------------------------------------------------------------
 ; Automatic brackets, etc
+;;----------------------------------------------------------------------
+
 ;; ref: http://www.emacswiki.org/emacs/ESSAutoParens
 ;; enable skeleton-pair insert globally
 ;(setq skeleton-pair-on-word t)
@@ -426,19 +445,20 @@
 ;;;; make electric-pair-mode work on more brackets
 ;(electric-pair-mode 1)	
 
+;;----------------------------------------------------------------------
 ;; Smart Parenthesis.
 ;; https://github.com/Fuco1/smartparens
+;;----------------------------------------------------------------------
 
 (require 'smartparens)
 (require 'smartparens-config)
 (smartparens-global-mode 1)
 
 ;;-----------------------------------------------------------------------------
-
-;;-----------------------------------------------------------------------------
 ;; FOLDING BY INDENTATION
 ;; Folding code blocks based on indentation.
 ;; git clone https://github.com/zenozeng/yafolding.el.git
+;;-----------------------------------------------------------------------------
 
 (require 'yafolding)
 
@@ -654,6 +674,7 @@
 ;; Esse deu erro: TESTANDO: FUNCIONOU PERFEITO
 (add-hook 'LaTeX-mode-hook 'turn-on-reftex)
 (setq reftex-plug-into-AUCTeX t)
+
 ;;atalhos UTEIS
 ;;;;;automatic formatting of a section: C-c C-q C-s;
 ;;;;;section preview: C-c C-p C-s; (see the screenshot on the right)
