@@ -171,7 +171,7 @@
 ;; Tipo e tamanho da fonte do editor.
 ;(set-default-font "monofur-13")
 ;(set-default-font "Tex Gyre Adventor-11")
-(set-default-font "Anonymous Pro-14.5")
+(set-default-font "Anonymous Pro-18.5")
 ;(custom-set-faces
 ; '(default ((t (:family "Anonymous Pro" :foundry "unknown" :slant normal :weight normal :height 240 :width normal)))))
 ;;---------------------------------------------------------------------------
@@ -279,7 +279,7 @@
 
 ;;---------------------------------------------------------------------------
 ;; Speedbar embed
-(require 'sr-speedbar)
+;(require 'sr-speedbar)
 ;;-----------------------------------------------------------------------------
 
 
@@ -379,6 +379,7 @@
 ;;-----------------------------------------------------------------------------
 
 ;; https://www.emacswiki.org/emacs/AutoCompleteSources
+
 (require 'auto-complete)
 (require 'auto-complete-config)
 (ac-config-default)
@@ -399,6 +400,11 @@
 ;(global-auto-complete-mode t)
  
 (setq ac-math-unicode-in-math-p t)
+
+(ac-flyspell-workaround) ;; to make flyspell works with auto-complete
+
+
+
 
 ;;----------------------------------------------------------------------
 ;; To activate ESS auto-complete for R.
