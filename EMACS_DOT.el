@@ -171,7 +171,7 @@
 ;; Tipo e tamanho da fonte do editor.
 ;(set-default-font "monofur-13")
 ;(set-default-font "Tex Gyre Adventor-11")
-(set-default-font "Anonymous Pro-18.5")
+(set-default-font "Anonymous Pro-14.5")
 ;(custom-set-faces
 ; '(default ((t (:family "Anonymous Pro" :foundry "unknown" :slant normal :weight normal :height 240 :width normal)))))
 ;;---------------------------------------------------------------------------
@@ -704,6 +704,20 @@
  ;; '(TeX-source-correlate-mode t)
  ;; '(TeX-source-correlate-start-server t)
 ;;-----------------------------------------------------------------------------
+
+
+
+;;===========================================================================
+;; HTML
+;;===========================================================================
+;;-----------------------------------------------------------------------------
+;; https://www.emacswiki.org/emacs/IndentingHtml
+    (add-hook 'html-mode-hook
+        (lambda ()
+          ;; Default indentation is usually 2 spaces, changing to 4.
+          (set (make-local-variable 'sgml-basic-offset) 4)))
+;;-----------------------------------------------------------------------------
+
 
 ;;===========================================================================
 ;; THEMES - SEVERAL SCHEMES
