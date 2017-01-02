@@ -22,12 +22,12 @@ e.g. Sunday, September 17, 2000."
 "Insere cabeçalho."
 (interactive)
 ;; (insert (comment-dwim 2) (make-string 65 ?=) "\n")
-(insert (make-string 65 ?=) "\n")
-(insert (make-string 45 ? ) "Rafael Tieppo\n")
-(insert (make-string 45 ? ) "rafaelt@unemat.br\n")
-(insert (make-string 45 ? ) "http://docente.unemat.br/rafaeltieppo/\n")
-(insert (make-string 45 ? ) (format-time-string "%d-%m-%Y\n"))
-(insert (make-string 65 ?=) "\n")
+(insert "###" (make-string 63 ?=) "\n")
+(insert "###" (make-string 23 ? ) "Rafael Tieppo\n")
+(insert "###" (make-string 23 ? ) "rafaelt@unemat.br\n")
+(insert "###" (make-string 23 ? ) "http://docente.unemat.br/rafaeltieppo/\n")
+(insert "###" (make-string 23 ? ) (format-time-string "%d-%m-%Y\n"))
+(insert "###" (make-string 63 ?=) "\n")
 )
 
 ;;-----------------------------------------------------------------------------
@@ -170,8 +170,8 @@ e.g. Sunday, September 17, 2000."
 ;; Para passar o corretor ortográfico em uma região.
 (define-key global-map [(control f2)] 'flyspell-region)
 ;;-----------------------------------------------------------------------------
-;; Define C-- para fazer linha com 60 sinais de -.
-(global-set-key [?\C--] (kbd "C-u 6 0 -"))
+;; Define C-- para fazer linha com 60 sinais de =.
+(global-set-key [?\C--] (kbd "C-u 6 0 ="))
 ;;-----------------------------------------------------------------------------
 ;; Define F11 e F12 para trocar entre modo com e sem menus.
 ;; (global-set-key (kbd "<f11>") 'toggle-fullscreen)
