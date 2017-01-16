@@ -331,7 +331,7 @@
 ;; Improving Ido Search FILE
 
 ;;http://sachachua.com/blog/2014/03/emacs-basics-call-commands-name-m-x-tips-better-completion-using-ido-helm/
-;(add-to-list 'load-path "/home/rafatieppo/.emacs.d")
+;(add-to-list 'load-path "/home/rafatieppo/.emacs.d/lisp")
 (require 'smex)
 (require 'ido-vertical-mode)
 (require 'ido-hacks)
@@ -352,8 +352,6 @@
 
 ;;-----------------------------------------------------------------------------
 ;; FUNCTION HIGHLIGHTS LISP
-;;Add the following to your .emacs file:
-;    (add-to-list 'load-path "/home/rafatieppo/.emacs.d")
 
     (require 'highlight-symbol)
 ;;-----------------------------------------------------------------------------
