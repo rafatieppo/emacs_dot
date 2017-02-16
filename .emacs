@@ -43,15 +43,41 @@
 ;;-----------------------------------------------------------------------------
 ;; ORG mode CLASSES and COLORS for TASKS
 (setq org-todo-keywords
-       '((sequence "TODO(t)" "WAIT(w@/!)" "|" "DONE(d!)" "CANCELED(c@)")))
+       '((sequence "TODO(t)" "RUNN(w@/!)" "WAIT(w@/!)" "|" "DONE(d!)" "CANCELED(c@)")))
 
 
      (setq org-todo-keyword-faces
            '(
              ("TODO" . (:foreground "red" :weight bold))
+             ("RUNN" . (:foreground "yellow" :weight bold))
              ("WAIT" . (:foreground "orange" :weight bold))
              ("DONE" . (:foreground "green" :weight bold))
              ))
+
+
+
+;;-----------------------------------------------------------------------------
+;; ORG CAPTURE
+
+;; I use C-c c to start capture mode
+(global-set-key (kbd "C-c c") 'org-capture)
+
+(setq org-capture-templates
+  '(    ;; ... other templates
+
+    ("j" "Journal Entry"
+         entry (file+datetree "~/Dropbox/EMACS_ORG_MODE/CAPTURE.org")
+         "* %?"
+         :empty-lines 1)
+
+    ("p" "Phone" entry (file+headline 
+         "~/Dropbox/EMACS_ORG_MODE/CAPTURE.org" "Phone") 
+         "* NUMBER %^{Description} %^g
+         %?
+         Added: %U")
+
+        ;; ... other templates
+    ))
 
 ;;-----------------------------------------------------------------------------
 ;; ORG mode for Android
@@ -171,7 +197,8 @@
 ;; Tipo e tamanho da fonte do editor.
 ;(set-default-font "monofur-13")
 ;(set-default-font "Tex Gyre Adventor-11")
-(set-default-font "Anonymous Pro-14.5")
+;(set-default-font "Anonymous Pro-14.5")
+(set-default-font "Menlo-16")
 ;(custom-set-faces
 ; '(default ((t (:family "Anonymous Pro" :foundry "unknown" :slant normal :weight normal :height 240 :width normal)))))
 ;;---------------------------------------------------------------------------
@@ -652,6 +679,8 @@
      (setq reftex-cite-format '((?\C-m . "@%l")
                                 (?\C-l . "\\cite{%l\}")
                                 (?\C-o . "\\citeonline{%l\}")
+                                (?\C-t . "\\citet{%l\}")
+                                (?\C-p . "\\citep{%l\}")
                                 ))))
      
 ;; I changed the code, before "[@%l]" cite between brackets
@@ -728,15 +757,15 @@
 ;; http://emacsthemes.com
 ;;-----------------------------------------------------------------------------
 
-;(add-to-list 'load-path "/home/rafatieppo/.emacs.d/emacs-color-theme-solarized-master")
-;(require 'solarized-dark-theme)
-;(require 'solarized-definitions)
+;;(add-to-list 'load-path "/home/rafatieppo/.emacs.d/themess/emacs-color-theme-solarized-master")
+;;(require 'solarized-dark-theme)
+;;(require 'solarized-definitions)
 ;;(require 'solarized-theme)
-;(require 'color-theme-solarized)
+;;(require 'color-theme-solarized)
 
-;(custom-set-variables '(solarized-termcolors 256))
-;(custom-set-variables '(solarized-contrast 'high))
-;(custom-set-variables '(solarized-visibility 'high))
+(custom-set-variables '(solarized-termcolors 256))
+(custom-set-variables '(solarized-contrast 'high))
+(custom-set-variables '(solarized-visibility 'high))
 
 (add-to-list 'load-path "/home/rafatieppo/.emacs.d/themess")
 
@@ -744,7 +773,7 @@
 ;;(require 'Amelie-theme)
 ;;(require 'ample-zen-theme)
 ;;(require 'assemblage-theme)
-;;(require 'atom-one-dark-theme)
+;(require 'atom-one-dark-theme)
 ;;(require 'deep-thought-theme)
 ;;(require 'dracula-themes)
 ;;(require 'erosiond-theme)

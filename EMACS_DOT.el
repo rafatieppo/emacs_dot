@@ -43,15 +43,41 @@
 ;;-----------------------------------------------------------------------------
 ;; ORG mode CLASSES and COLORS for TASKS
 (setq org-todo-keywords
-       '((sequence "TODO(t)" "WAIT(w@/!)" "|" "DONE(d!)" "CANCELED(c@)")))
+       '((sequence "TODO(t)" "RUNN(w@/!)" "WAIT(w@/!)" "|" "DONE(d!)" "CANCELED(c@)")))
 
 
      (setq org-todo-keyword-faces
            '(
              ("TODO" . (:foreground "red" :weight bold))
+             ("RUNN" . (:foreground "yellow" :weight bold))
              ("WAIT" . (:foreground "orange" :weight bold))
              ("DONE" . (:foreground "green" :weight bold))
              ))
+
+
+
+;;-----------------------------------------------------------------------------
+;; ORG CAPTURE
+
+;; I use C-c c to start capture mode
+(global-set-key (kbd "C-c c") 'org-capture)
+
+(setq org-capture-templates
+  '(    ;; ... other templates
+
+    ("j" "Journal Entry"
+         entry (file+datetree "~/Dropbox/EMACS_ORG_MODE/CAPTURE.org")
+         "* %?"
+         :empty-lines 1)
+
+    ("p" "Phone" entry (file+headline 
+         "~/Dropbox/EMACS_ORG_MODE/CAPTURE.org" "Phone") 
+         "* NUMBER %^{Description} %^g
+         %?
+         Added: %U")
+
+        ;; ... other templates
+    ))
 
 ;;-----------------------------------------------------------------------------
 ;; ORG mode for Android
@@ -172,7 +198,7 @@
 ;(set-default-font "monofur-13")
 ;(set-default-font "Tex Gyre Adventor-11")
 ;(set-default-font "Anonymous Pro-14.5")
-;(set-default-font "Menlo-16")
+(set-default-font "Menlo-16")
 ;(custom-set-faces
 ; '(default ((t (:family "Anonymous Pro" :foundry "unknown" :slant normal :weight normal :height 240 :width normal)))))
 ;;---------------------------------------------------------------------------
