@@ -435,8 +435,6 @@
 (ac-flyspell-workaround) ;; to make flyspell works with auto-complete
 
 
-
-
 ;;----------------------------------------------------------------------
 ;; To activate ESS auto-complete for R.
 ;;----------------------------------------------------------------------
@@ -595,9 +593,45 @@
 (load "/home/rafatieppo/.emacs.d/lisp/functions")
 ;(require 'functions)
 
-;;----------------------------------------------------------------------
+
+;;===========================================================================
+;;MARKDOWN MODE 
+;;===========================================================================
+
+;;-----------------------------------------------------------------------------
+;; ORG MOMDE MINOR mode markdown
+;; http://stackoverflow.com/questions/14275122/editing-markdown-pipe-tables-in-emacs
+(require 'org-table)
+
+(defun cleanup-org-tables ()
+  (save-excursion
+    (goto-char (point-min))
+    (while (search-forward "-+-" nil t) (replace-match "-|-"))
+    ))
+
+(add-hook 'markdown-mode-hook 'orgtbl-mode)
+(add-hook 'markdown-mode-hook
+          (lambda()
+            (add-hook 'after-save-hook 'cleanup-org-tables  nil 'make-it-local)))
+
+;;-----------------------------------------------------------------------------
+;; If using markdown-mode yasnippets’s TAB completion doesn’t work, it’s just because TAB key is bind to markdown-cycle function
+;; http://wiki.dreamrunner.org/public_html/Emacs/markdown.html
+(add-hook 'markdown-mode-hook
+          '(lambda ()
+             (auto-complete-mode t)
+             (local-unset-key [tab])
+             (setq-local yas-fallback-behavior '(apply auto-complete))))
+
+;;-----------------------------------------------------------------------------
+;; MARKDOWN enable MATH Desativei pq fica muito colorido e confunde
+;;http://jblevins.org/projects/markdown-mode/
+(setq markdown-enable-math t)
+
+;;===========================================================================
 ;; MARKDOWN EXTENSIONS.
 ;; (IT MUST BE BEFORE LATEX EXTENSIONS.)
+;;===========================================================================
 
 (autoload 'markdown-mode "markdown-mode"
   "Major mode for editing Markdown files" t)
@@ -641,40 +675,13 @@
 (add-to-list 'auto-mode-alist '("\\.md\\'" . poly-markdown-mode))
 (add-to-list 'auto-mode-alist '("\\.Rmd\\'" . poly-markdown-mode))
 (add-to-list 'auto-mode-alist '("\\.Rpres\\'" . poly-markdown-mode))
-
-
 ;;-----------------------------------------------------------------------------
 
 ;;===========================================================================
-;;MARKDOWN MODE 
-;;===========================================================================
-
-;;-----------------------------------------------------------------------------
-;; ORG MOMDE MINOR mode markdown
-;; http://stackoverflow.com/questions/14275122/editing-markdown-pipe-tables-in-emacs
-(require 'org-table)
-
-(defun cleanup-org-tables ()
-  (save-excursion
-    (goto-char (point-min))
-    (while (search-forward "-+-" nil t) (replace-match "-|-"))
-    ))
-
-(add-hook 'markdown-mode-hook 'orgtbl-mode)
-(add-hook 'markdown-mode-hook
-          (lambda()
-            (add-hook 'after-save-hook 'cleanup-org-tables  nil 'make-it-local)))
-
-;;-----------------------------------------------------------------------------
-;; MARKDOWN enable MATH Desativei pq fica muito colorido e confunde
-;;http://jblevins.org/projects/markdown-mode/
-(setq markdown-enable-math t)
-;;-----------------------------------------------------------------------------
-
-;;-----------------------------------------------------------------------------
-;; MARKDOWN AND REFTEX CITATION PANDOC
+;; REFTEX CITATION PANDOC
 ;; http://www.unknownerror.org/opensource/jgm/pandoc/q/stackoverflow/13607156/autocomplete-pandoc-style-citations-from-a-bibtex-file-in-emacs
-;;http://tex.stackexchange.com/a/31992/5701
+;; http://tex.stackexchange.com/a/31992/5701
+;;===========================================================================
 
 ;; So that RefTeX finds my bibliography
 (setq reftex-default-bibliography '("/home/rafatieppo/Dropbox/BIBTEX/REFERENCES.bib"))
@@ -738,8 +745,6 @@
  ;; '(TeX-source-correlate-start-server t)
 ;;-----------------------------------------------------------------------------
 
-
-
 ;;===========================================================================
 ;; HTML
 ;;===========================================================================
@@ -800,10 +805,6 @@
 ;;(require 'underwater-theme)
 ;;(require 'wilson-theme)
 ;;(require 'zenburn-theme)
-
-
-
-
 
 ;;===========================================================================
 ;;TEMA VEM PADRAO EMACS
