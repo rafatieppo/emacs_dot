@@ -301,7 +301,6 @@
 	)
 
 (show-paren-mode 1)
-
 ;;-----------------------------------------------------------------------------
 
 ;;---------------------------------------------------------------------------
@@ -314,7 +313,6 @@
 ;; Speedbar embed
 ;(require 'sr-speedbar)
 ;;-----------------------------------------------------------------------------
-
 
 ;;===========================================================================
 ;; SPECIAL PROGRAMMING TOOLS
@@ -331,8 +329,7 @@
 ;; ace-jump-mode.el --- a quick cursor location minor mode for emacs -*- coding: utf-8-unix -*-
 ;; https://github.com/winterTTr/ace-jump-mode
 ;; ace jump mode major function
-;; 
-;;(add-to-list 'load-path "/home/rafatieppo/.emacs.d/")
+
 (autoload
   'ace-jump-mode
   "ace-jump-mode"
@@ -340,7 +337,7 @@
   t)
 
 ;; enable a more powerful jump back function from ace jump mode
-;;
+
 (autoload
   'ace-jump-mode-pop-mark
   "ace-jump-mode"
@@ -360,6 +357,8 @@
       ido-use-virtual-buffers t)
 
 (setq ido-file-extensions-order '(".md" ".R" ".Rmd" ".csv" ".txt" ".org" ".emacs" ".xml" ".el" ".ini" ".cfg" ".cnf"))
+;;---------------------------------------------------------------------------
+
 ;;---------------------------------------------------------------------------
 ;; Improving Ido Search FILE
 
@@ -546,7 +545,7 @@
 ;(setq-default ess-dialect "R")
 ;;-----------------------------------------------------------------------------
 
-;;---------------------------------------------------------------------------
+;;-----------------------------------------------------------------------------
 ;; If you want all help buffers to go into one frame do:
 (setq ess-help-own-frame 'one)
 ;;-----------------------------------------------------------------------------
@@ -582,7 +581,6 @@
 ;;           (ess-fl-keyword:delimiters . nil)
 ;;           (ess-fl-keyword:= . t)
            (ess-R-fl-keyword:F&T . t)))
-
 ;;-----------------------------------------------------------------------------
 
 ;;===========================================================================
@@ -613,6 +611,7 @@
 (add-hook 'markdown-mode-hook
           (lambda()
             (add-hook 'after-save-hook 'cleanup-org-tables  nil 'make-it-local)))
+;;-----------------------------------------------------------------------------
 
 ;;-----------------------------------------------------------------------------
 ;; If using markdown-mode yasnippets’s TAB completion doesn’t work, it’s just because TAB key is bind to markdown-cycle function
@@ -622,6 +621,7 @@
              (auto-complete-mode t)
              (local-unset-key [tab])
              (setq-local yas-fallback-behavior '(apply auto-complete))))
+;;-----------------------------------------------------------------------------
 
 ;;-----------------------------------------------------------------------------
 ;; MARKDOWN enable MATH Desativei pq fica muito colorido e confunde
@@ -724,7 +724,7 @@
 ;;atalhos UTEIS
 ;;;;;automatic formatting of a section: C-c C-q C-s;
 ;;;;;section preview: C-c C-p C-s; (see the screenshot on the right)
-
+;;-----------------------------------------------------------------------------
 
 ;;===========================================================================
 ;; CONFIGURACOES AVANCADAS AUCTEX
