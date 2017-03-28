@@ -90,7 +90,6 @@ e.g. Sunday, September 17, 2000."
 (newline)
 (yank)
 )
-
 ;;-----------------------------------------------------------------------------
 
 ;;-----------------------------------------------------------------------------
@@ -120,7 +119,6 @@ e.g. Sunday, September 17, 2000."
 (move-line (if (null n) 1 n)))
 ;;-----------------------------------------------------------------------------
 
-
 (defun comment-line-or-region ()
   "Comment or uncomment current line, or current text selection."
   (interactive)
@@ -135,11 +133,11 @@ e.g. Sunday, September 17, 2000."
      )
     )
   )
-
+;;-----------------------------------------------------------------------------
 
 ;;---------------------------------------------------------------------------
-;; https://github.com/magnars/.emacs.d/blob/master/sane-defaults.el
 ;; Salva lista de aquivos recentes. Abrir lista com C-x f
+;; https://github.com/magnars/.emacs.d/blob/master/sane-defaults.el
 ;;-----------------------------------------------------------------------------
 (recentf-mode 1)
 (setq recentf-max-saved-items 25) ;; 20 é muito pouco.
@@ -147,6 +145,20 @@ e.g. Sunday, September 17, 2000."
 (savehist-mode 1)
 (setq history-length 500)
 ;;---------------------------------------------------------------------------
+
+;;---------------------------------------------------------------------------
+;; fill-paragraph. Takes a multi-line paragraph and makes ;;; it into a single line of text.
+;; https://josephhall.org/nqb2/index.php/unfill
+;;-----------------------------------------------------------------------------
+(defun unfill-paragraph ()
+  (interactive)
+  (let ((fill-column (point-max)))
+    (fill-paragraph nil)))
+;;-----------------------------------------------------------------------------
+
+
+
+
 
 ;;===========================================================================
 ;; TECLAS DE ATALHO
