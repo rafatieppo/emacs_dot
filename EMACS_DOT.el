@@ -14,17 +14,11 @@
 (add-to-list 'load-path "/home/rafatieppo/.emacs.d/")
 (load "package")
 (require 'package)
-;;(add-to-list 'package-archives
-;;    '("marmalade" .
-;;      "http://marmalade-repo.org/packages/"))
 (package-initialize) 
 
 (setq package-enable-at-startup nil)
-;;(add-to-list 'package-archives '("marmalade" . "https://marmalade-repo.org/packages/"))
 (add-to-list 'package-archives '("melpa" . "http://melpa.org/packages/"))
-;;(add-to-list 'package-archives '("org" . "http://orgmode.org/elpa/") t) ;;Org-mode's repository
 ;;-----------------------------------------------------------------------------
-
 
 ;;===========================================================================
 ;;ORG MODE
@@ -37,8 +31,6 @@
 
 ;; arquivo para o org agendasorg-agenda
 (setq org-agenda-files '("/home/rafatieppo/Dropbox/EMACS_ORG_MODE/RAFA.org"))
-
-
 
 ;;-----------------------------------------------------------------------------
 ;; ORG mode CLASSES and COLORS for TASKS
@@ -53,8 +45,6 @@
              ("WAIT" . (:foreground "orange" :weight bold))
              ("DONE" . (:foreground "green" :weight bold))
              ))
-
-
 
 ;;-----------------------------------------------------------------------------
 ;; ORG CAPTURE
@@ -157,7 +147,6 @@
 ;(require 'prelude-packages)
 ;;----------------------------------------------------------------------
 
-
 ;;----------------------------------------------------------------------
 ;; POWERLINES
 ;;----------------------------------------------------------------------
@@ -205,8 +194,6 @@
 ;(set-default-font "Tex Gyre Adventor-11")
 ;(set-default-font "Anonymous Pro-14.5")
 (set-default-font "Menlo-12")
-;(custom-set-faces
-; '(default ((t (:family "Anonymous Pro" :foundry "unknown" :slant normal :weight normal :height 240 :width normal)))))
 ;;---------------------------------------------------------------------------
 
 ;;---------------------------------------------------------------------------
@@ -216,7 +203,6 @@
 ;(setq-default right-fringe-width  0)
 ;(set-face-attribute 'fringe nil :background "black")
 ;;---------------------------------------------------------------------------
-
 
 ;;---------------------------------------------------------------------------
 ;; ativa DEAD keys quando usar LATEX
@@ -414,10 +400,6 @@
 (require 'auto-complete-config)
 (ac-config-default)
 
-;; macro .el, not necessary
-;; auto-complete for latex 
-;;(require 'auto-complete-auctex)
-
 (require 'ac-math) 
 (add-to-list 'ac-modes 'latex-mode)   ; make auto-complete aware of `latex-mode`
 
@@ -432,7 +414,6 @@
 (setq ac-math-unicode-in-math-p t)
 
 (ac-flyspell-workaround) ;; to make flyspell works with auto-complete
-
 
 ;;----------------------------------------------------------------------
 ;; To activate ESS auto-complete for R.
@@ -689,7 +670,7 @@
 ;; How to solve @
 (eval-after-load 'reftex-vars
   '(progn 
-     (setq reftex-cite-format '((?\C-m . "@%l")
+     (setq reftex-cite-format '((?\C-m . "[@%l]")
                                 (?\C-l . "\\cite{%l\}")
                                 (?\C-o . "\\citeonline{%l\}")
                                 (?\C-t . "\\citet{%l\}")
@@ -709,15 +690,14 @@
 ;;-----------------------------------------------------------------------------
 
 ;;-----------------------------------------------------------------------------
-;; Suporte do refTex para navegar por grandes documentos (Ref no menu,
-;; navegação, sumário).
+;; Suporte do refTex para navegar por grandes documentos (Ref no menu, navegação, sumário).
 ;; http://piotrkazmierczak.com/2010/05/13/emacs-as-the-ultimate-latex-editor/
-;; Para ativar: C-c =  it means CTRL + c + = 
+;; Para ativar: C-c =   
 
 ;; So that RefTeX finds my bibliography If you want assign a file to BIBTEX
 ;;(setq reftex-default-bibliography '("/home/rafatieppo/Dropbox/PROFISSIONAL/DOUTORADO/TESE/PAPER_TESE/PAPER_TESE.bib"))
 
-;; Esse deu erro: TESTANDO: FUNCIONOU PERFEITO
+;; Esse deu erro: TESTANDO: FUNCIONOU
 (add-hook 'LaTeX-mode-hook 'turn-on-reftex)
 (setq reftex-plug-into-AUCTeX t)
 
@@ -745,6 +725,11 @@
  ;; '(TeX-source-correlate-start-server t)
 ;;-----------------------------------------------------------------------------
 
+;; BIBLATEX to use biber instead bibtex
+;; https://tex.stackexchange.com/questions/154751/biblatex-with-biber-configuring-my-editor-to-avoid-undefined-citations/154753#154753
+(setq TeX-parse-self t)
+;;-----------------------------------------------------------------------------
+
 ;;===========================================================================
 ;; HTML
 ;;===========================================================================
@@ -761,9 +746,7 @@
 ;; THEMES - SEVERAL SCHEMES
 ;;===========================================================================
 ;;-----------------------------------------------------------------------------
-;; THEMES from: http://emacsthemes.caisah.info/
 ;; https://github.com/owainlewis/emacs-color-themes
-;; themes from: http://emacsthemes.caisah.info/
 ;; https://github.com/juba/color-theme-tangotango/blob/master/tangotango-theme.el
 ;; http://emacsthemes.com
 ;;-----------------------------------------------------------------------------
@@ -837,11 +820,6 @@
 ;;(set-face-background hl-line-face "#008b8b") ;; darkcyan 
 ;;(set-face-background hl-line-face "#0a0a0a") ;; gray4
 ;;(set-face-background hl-line-face "#121212") ;; gray7
+
 ;;---------------------------------------------------------------------------
 ;;===========================================================================
-
-
-
-
-
-
