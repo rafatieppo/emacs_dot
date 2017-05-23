@@ -9,15 +9,18 @@
     ac-math
     auctex
     auto-complete
+    elpy
     ess
     ess-R-data-view
     ess-R-object-popup
     flx
     flx-ido
+    flycheck
     highlight-symbol
     ido-hacks
     ido-vertical-mode
     indent-guide
+    jedi
     julia-mode
     markdown-mode
     markdown-toc
@@ -25,10 +28,11 @@
     polymode
     popup
     powerline
+    py-autopep8
     smartparens
     smex
     sr-speedbar
-    yafolding,
+    yafolding
     yasnippet)
   "A list of packages to ensure are installed at launch.")
 
