@@ -82,6 +82,13 @@
          %?
          Added: %U")
 
+    ("t" "Ted Talks" entry (file+headline 
+         "~/Dropbox/EMACS_ORG_MODE/CAPTURE.org" "Link") 
+         "* TED %^{Description} %^g
+         %?
+         Added: %U")
+
+
         ;; ... other templates
     ))
 
@@ -204,7 +211,7 @@
 ;(set-default-font "monofur-13")
 ;(set-default-font "Tex Gyre Adventor-11")
 ;(set-default-font "Anonymous Pro-14.5")
-(set-default-font "Menlo-12")
+(set-default-font "Menlo-16")
 ;(custom-set-faces
 ; '(default ((t (:family "Anonymous Pro" :foundry "unknown" :slant normal :weight normal :height 240 :width normal)))))
 ;;---------------------------------------------------------------------------
@@ -862,4 +869,5 @@
 ;;(set-face-background hl-line-face "#2F2F2F") ;;MONOKAI
 ;;---------------------------------------------------------------------------
 ;;===========================================================================
+
 
