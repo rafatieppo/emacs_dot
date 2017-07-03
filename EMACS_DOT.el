@@ -200,16 +200,17 @@
 ;;STANDARD SETTINGS
 ;;===========================================================================
 ;;---------------------------------------------------------------------------
-; Abre o emacs sem a janela de boas vindas.
+; There is no welcome windows
 ;; http://blog.droidzone.in/2012/05/22/remove-startup-split-screen-in-emacs/
 (setq inhibit-startup-screen t)
 (add-hook 'emacs-startup-hook 'delete-other-windows)[/code]
 ;;---------------------------------------------------------------------------
 
 ;;---------------------------------------------------------------------------
-;Abre novo buffer na horizontal
+;New buffer horizontal or vertical
 ;https://www.emacswiki.org/emacs/HorizontalSplitting
-(setq split-width-threshold 9999)
+;(setq split-width-threshold 9999)
+(setq split-width-threshold 0)
 ;;---------------------------------------------------------------------------
 
 ;;---------------------------------------------------------------------------
