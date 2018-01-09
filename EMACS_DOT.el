@@ -218,7 +218,7 @@
 ;(set-default-font "monofur-13")
 ;(set-default-font "Tex Gyre Adventor-11")
 ;(set-default-font "Anonymous Pro-14.5")
-(set-default-font "Menlo-12")
+(set-default-font "Menlo-16")
 ;(custom-set-faces
 ; '(default ((t (:family "Anonymous Pro" :foundry "unknown" :slant normal :weight normal :height 240 :width normal)))))
 ;;---------------------------------------------------------------------------
@@ -535,6 +535,7 @@
             muse-mode
             ess-mode
             polymode-mode
+            python-mode
             markdown-mode
             TeX-mode)) 
   (font-lock-add-keywords
@@ -787,6 +788,20 @@
 (add-hook 'python-mode-hook 'jedi:setup)
 (setq jedi:complete-on-dot t)                 ; optional
 
+;-----------------------------------------------------------------------------
+; FIX to EMACS 25.1
+
+;https://emacs.stackexchange.com/questions/30082/your-python-shell-interpreter-doesn-t-seem-to-support-readline
+(with-eval-after-load 'python
+  (defun python-shell-completion-native-try ()
+    "Return non-nil if can trigger native completion."
+    (let ((python-shell-completion-native-enable t)
+          (python-shell-completion-native-output-timeout
+           python-shell-completion-native-try-output-timeout))
+      (python-shell-completion-native-get-completions
+       (get-buffer-process (current-buffer))
+       nil "_"))))
+
 ;;-----------------------------------------------------------------------------
 ;; ALT ENTER to send line
 
@@ -804,14 +819,37 @@
   (comint-send-input)
   (switch-to-buffer-other-window the_script_buffer)
   (yank))
+  (beginning-of-line) ;; or (end-of-line)
+  (next-line)
 )
 
 (global-set-key (kbd "M-RET") 'my-python-line) ; Enter/Return key
 
-;;;;;;
-(eval-after-load "python"
-  '(progn
-     (define-key python-mode-map (kbd "M-/") 'python-shell-send-region)))
+;;-----------------------------------------------------------------------------
+;; ALT / to send region
+
+(defun python-shell-send-region-or-line nil
+  "Sends from python-mode buffer to a python shell, intelligently."
+  (interactive)
+  (cond ((region-active-p)
+     (setq deactivate-mark t)
+     (python-shell-send-region (region-beginning) (region-end))
+     (python-nav-forward-statement)
+ ) (t (elpy-shell-send-current-statement))))
+;elpy-shell-send-region
+
+;https://emacs.stackexchange.com/questions/27674/make-elpy-shell-send-more-intelligent
+
+(global-set-key (kbd "M-/") 'python-shell-send-region-or-line) ; alt + /
+
+
+;;-----------------------------------------------------------------------------
+;; Set Python3 interpreter
+
+(setq python-shell-interpreter "python3")
+;(setq py-python-command "python3")
+(setq elpy-rpc-python-command "python3")
+
 
 ;;===========================================================================
 ;; THEMES - SEVERAL SCHEMES
