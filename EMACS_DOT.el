@@ -425,10 +425,17 @@
 ;;-----------------------------------------------------------------------------
 
 ;; https://www.emacswiki.org/emacs/AutoCompleteSources
-
 (require 'auto-complete)
 (require 'auto-complete-config)
 (ac-config-default)
+
+;; stop (auto-complete-mode) from being called in python
+;; https://stackoverflow.com/questions/24814988/emacs-disable-auto-complete-in-python-mode
+;(defadvice auto-complete-mode (around disable-auto-complete-for-python)
+;  (unless (eq major-mode 'python-mode) ad-do-it))
+
+;(ad-activate 'auto-complete-mode)
+
 
 ;; macro .el, not necessary
 ;; auto-complete for latex 
@@ -769,14 +776,22 @@
 ;;===========================================================================
 ;; PYTHON CONFIGURATION
 ;;===========================================================================
+
+;; Anaconda
+(add-hook 'python-mode-hook 'anaconda-mode)
+(add-hook 'python-mode-hook 'anaconda-eldoc-mode)
+
+;; Elpy
 (elpy-enable)
 ;(elpy-use-ipython)
 
+;; Flycheck
 ;; use flycheck not flymake with elpy
 (when (require 'flycheck nil t)
   (setq elpy-modules (delq 'elpy-module-flymake elpy-modules))
   (add-hook 'elpy-mode-hook 'flycheck-mode))
 
+;; Autopep8
 ;; enable autopep8 formatting on save
 (require 'py-autopep8)
 (add-hook 'elpy-mode-hook 'py-autopep8-enable-on-save)
@@ -787,7 +802,6 @@
 (require 'jedi)
 (add-hook 'python-mode-hook 'jedi:setup)
 (setq jedi:complete-on-dot t)                 ; optional
-
 ;-----------------------------------------------------------------------------
 ; FIX to EMACS 25.1
 
