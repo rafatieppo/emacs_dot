@@ -218,7 +218,7 @@
 ;(set-default-font "monofur-13")
 ;(set-default-font "Tex Gyre Adventor-11")
 ;(set-default-font "Anonymous Pro-14.5")
-(set-default-font "Menlo-16")
+(set-default-font "Menlo-13")
 ;(custom-set-faces
 ; '(default ((t (:family "Anonymous Pro" :foundry "unknown" :slant normal :weight normal :height 240 :width normal)))))
 ;;---------------------------------------------------------------------------
@@ -776,7 +776,6 @@
 ;;===========================================================================
 ;; PYTHON CONFIGURATION
 ;;===========================================================================
-
 ;; Anaconda
 (add-hook 'python-mode-hook 'anaconda-mode)
 (add-hook 'python-mode-hook 'anaconda-eldoc-mode)
@@ -861,7 +860,7 @@
 ;; Set Python3 interpreter
 
 (setq python-shell-interpreter "python3")
-;(setq py-python-command "python3")
+;;;;;(setq py-python-command "python3")
 (setq elpy-rpc-python-command "python3")
 
 
@@ -876,15 +875,52 @@
 ;; http://emacsthemes.com
 ;;-----------------------------------------------------------------------------
 
-;;(add-to-list 'load-path "/home/rafatieppo/.emacs.d/themess/emacs-color-theme-solarized-master")
-;;(require 'solarized-dark-theme)
-;;(require 'solarized-definitions)
-;;(require 'solarized-theme)
-;;(require 'color-theme-solarized)
+;;-----------------------------------------------------------------------------
+;; Solarized
 
-;(custom-set-variables '(solarized-termcolors 256))
-;(custom-set-variables '(solarized-contrast 'high))
-;(custom-set-variables '(solarized-visibility 'high))
+(add-to-list 'load-path "/home/rafatieppo/.emacs.d/themess/emacs-color-theme-solarized-master")
+(require 'solarized-dark-theme)
+(require 'solarized-definitions)
+(require 'solarized-theme)
+(require 'color-theme-solarized)
+
+(custom-set-variables '(solarized-termcolors 256))
+(custom-set-variables '(solarized-contrast 'high))
+(custom-set-variables '(solarized-visibility 'high))
+
+;;-----------------------------------------------------------------------------
+;; Solarized https://github.com/bbatsov/solarized-emacs
+
+;(add-to-list 'load-path "/home/rafatieppo/.emacs.d/themess/solarized")
+;(require 'solarized-dark-theme)
+
+;; options
+;; make the fringe stand out from the background
+;(setq solarized-distinct-fringe-background t)
+;; Don't change the font for some headings and titles
+;(setq solarized-use-variable-pitch nil)
+;; make the modeline high contrast
+;(setq solarized-high-contrast-mode-line t)
+;; Use less bolding
+;(setq solarized-use-less-bold t)
+;; Use more italics
+;(setq solarized-use-more-italic t)
+;; Use less colors for indicators such as git:gutter, flycheck and similar
+(setq solarized-emphasize-indicators nil)
+;; Don't change size of org-mode headlines (but keep other size-changes)
+(setq solarized-scale-org-headlines nil)
+;; Avoid all font-size changes
+;(setq solarized-height-minus-1 1.0)
+;(setq solarized-height-plus-1 1.0)
+;(setq solarized-height-plus-2 1.0)
+;(setq solarized-height-plus-3 1.0)
+;(setq solarized-height-plus-4 1.0)
+
+
+
+
+
+
 
 (add-to-list 'load-path "/home/rafatieppo/.emacs.d/themess")
 
@@ -892,7 +928,7 @@
 ;;(require 'Amelie-theme)
 ;;(require 'ample-zen-theme)
 ;;(require 'assemblage-theme)
-;(require 'atom-one-dark-theme)
+;;(require 'atom-one-dark-theme)
 ;;(require 'deep-thought-theme)
 ;(require 'challenger-deep-theme.el)
 ;;(require 'dracula-themes)
@@ -902,7 +938,7 @@
 ;;(require 'hickey-theme)
 ;;(require 'junio-theme)
 ;;(require 'material-light-theme)
-(require 'material-theme)
+;(require 'material-theme)
 ;;(require 'moe-dark-theme)
 ;;(require 'molokai-theme)
 ;;(require 'odersky-theme)
@@ -924,7 +960,7 @@
 ;;http://stackoverflow.com/questions/2718189/emacshighlight-the-current-line-by-underline-it/2718543#2718543
 (global-hl-line-mode 1)
 ;; Underline in current line
-(set-face-attribute hl-line-face nil :underline t)
+;(set-face-attribute hl-line-face nil :underline t)
 ;;(set-face-background hl-line-face "#2F2F2F") ;;MONOKAI
 ;;---------------------------------------------------------------------------
 ;;===========================================================================
