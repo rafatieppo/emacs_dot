@@ -1,8 +1,6 @@
 ;;-----------------------------------------------------------------------------
 ;; Insert date
 ;;-----------------------------------------------------------------------------
-
-;;-----------------------------------------------------------------------------
 ;; Funções inserir o dia e a hora no buffer.
 ;; http://stackoverflow.com/questions/251908/how-can-i-insert-current-date-and-time-into-a-file-using-emacs
 (defun today ()
@@ -15,8 +13,6 @@ e.g. Sunday, September 17, 2000."
 
 ;;-----------------------------------------------------------------------------
 ;; Insert headerS
-;;-----------------------------------------------------------------------------
-
 ;;-----------------------------------------------------------------------------
 (defun header ()
 "Insere cabeçalho."
@@ -40,15 +36,13 @@ e.g. Sunday, September 17, 2000."
 (insert (make-string 0 ? ) "date: Maio, 201 \n")
 (insert (make-string 0 ? ) "--- \n")
 )
-;;-----------------------------------------------------------------------------
 
 ;;-----------------------------------------------------------------------------
 (defun figure_md ()
 "Insere cabecalho markdown-mode"
 (interactive)
-(insert (make-string 0 ? ) "![cap](file){#fig:label} \n")
+(insert (make-string 0 ? ) "![cap](PICS/file.png){width=16cm height=9cm #fig:figbal} \n")
 )
-;;-----------------------------------------------------------------------------
 
 ;;-----------------------------------------------------------------------------
 ;; Insert a new (empty) chunk to R markdown.
@@ -60,9 +54,7 @@ e.g. Sunday, September 17, 2000."
   (insert "```{r}\n\n```")
   (forward-line -1)
   )
-
 (global-set-key (kbd "C-c i") 'insert-chunk)
-;;-----------------------------------------------------------------------------
 
 ;;-----------------------------------------------------------------------------
 ;; Insert a new (empty) FULL chunk to R markdown.
@@ -73,7 +65,6 @@ e.g. Sunday, September 17, 2000."
   (insert "```{r, echo = TRUE, results = 'markup', eval = TRUE}\n\n```")
   (forward-line -1)
   )
-
 (global-set-key (kbd "C-c r") 'insert-chunk-full)
 ;;-----------------------------------------------------------------------------
 
@@ -90,7 +81,6 @@ e.g. Sunday, September 17, 2000."
 (newline)
 (yank)
 )
-;;-----------------------------------------------------------------------------
 
 ;;-----------------------------------------------------------------------------
 ;; Move lines. ;; http://www.emacswiki.org/emacs/MoveLine
@@ -133,7 +123,6 @@ e.g. Sunday, September 17, 2000."
      )
     )
   )
-;;-----------------------------------------------------------------------------
 
 ;;---------------------------------------------------------------------------
 ;; Salva lista de aquivos recentes. Abrir lista com C-x f
@@ -144,7 +133,6 @@ e.g. Sunday, September 17, 2000."
 ;; Salva histórico de comandos do minibuffer.
 (savehist-mode 1)
 (setq history-length 500)
-;;---------------------------------------------------------------------------
 
 ;;---------------------------------------------------------------------------
 ;; fill-paragraph. Takes a multi-line paragraph and makes ;;; it into a single line of text.
@@ -155,6 +143,56 @@ e.g. Sunday, September 17, 2000."
   (let ((fill-column (point-max)))
     (fill-paragraph nil)))
 ;;-----------------------------------------------------------------------------
+
+;;---------------------------------------------------------------------------
+;; ORG-MODE
+;;---------------------------------------------------------------------------
+;;-----------------------------------------------------------------------------
+;; ORG MONTH REPORT
+
+(defun my/org-review-month (start-date)
+  "Review the month's clocked tasks and time."
+  (interactive (list (org-read-date)))
+  ;; Set to the beginning of the month
+  (setq start-date (concat (substring start-date 0 8) "01"))
+  (let ((org-agenda-show-log t)
+        (org-agenda-start-with-log-mode t)
+        (org-agenda-start-with-clockreport-mode t)
+        (org-agenda-clockreport-parameter-plist '(:link t :maxlevel 3)))
+    (org-agenda-list nil start-date 'month)))
+  
+;;-----------------------------------------------------------------------------
+;; ORG REPORTING TIME BY DAY
+;; http://sachachua.com/blog/2007/12/clocking-time-with-emacs-org/
+
+(defun org-dblock-write:rangereport (params)
+  "Display day-by-day time reports."
+  (let* ((ts (plist-get params :tstart))
+         (te (plist-get params :tend))
+         (start (time-to-seconds
+                 (apply 'encode-time (org-parse-time-string ts))))
+         (end (time-to-seconds
+               (apply 'encode-time (org-parse-time-string te))))
+         day-numbers)
+    (setq params (plist-put params :tstart nil))
+    (setq params (plist-put params :end nil))
+    (while (<= start end)
+      (save-excursion
+        (insert "\n\n"
+                (format-time-string (car org-time-stamp-formats)
+                                    (seconds-to-time start))
+                "----------------\n")
+        (org-dblock-write:clocktable
+         (plist-put
+          (plist-put
+           params
+           :tstart
+           (format-time-string (car org-time-stamp-formats)
+                               (seconds-to-time start)))
+          :tend
+          (format-time-string (car org-time-stamp-formats)
+                              (seconds-to-time end))))
+        (setq start (+ 86400 start))))))
 
 ;;===========================================================================
 ;; TECLAS DE ATALHO
@@ -208,7 +246,6 @@ e.g. Sunday, September 17, 2000."
 ;; Move lines.
 (global-set-key (kbd "M-<") 'move-line-up)
 (global-set-key (kbd "M->") 'move-line-down)
-
 ;;-----------------------------------------------------------------------------
 ;; (un)Comment line oir region
 (global-set-key (kbd "M-;") 'comment-line-or-region)
