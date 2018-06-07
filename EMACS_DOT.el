@@ -14,15 +14,10 @@
 (add-to-list 'load-path "/home/rafatieppo/.emacs.d/")
 (load "package")
 (require 'package)
-;;(add-to-list 'package-archives
-;;    '("marmalade" .
-;;      "http://marmalade-repo.org/packages/"))
 (package-initialize) 
 
 (setq package-enable-at-startup nil)
-;;(add-to-list 'package-archives '("marmalade" . "https://marmalade-repo.org/packages/"))
 (add-to-list 'package-archives '("melpa" . "http://melpa.org/packages/"))
-;;(add-to-list 'package-archives '("org" . "http://orgmode.org/elpa/") t) ;;Org-mode's repository
 ;;-----------------------------------------------------------------------------
 
 
@@ -38,13 +33,10 @@
 ;; arquivo para o org agendasorg-agenda
 (setq org-agenda-files '("/home/rafatieppo/Dropbox/EMACS_ORG_MODE/RAFA.org"))
 
-
-
 ;;-----------------------------------------------------------------------------
 ;; ORG mode CLASSES and COLORS for TASKS
 (setq org-todo-keywords
        '((sequence "TODO(t)" "RUNN(w@/!)" "WAIT(w@/!)" "|" "DONE(d!)" "CANCELED(c@)")))
-
 
      (setq org-todo-keyword-faces
            '(
@@ -53,8 +45,6 @@
              ("WAIT" . (:foreground "orange" :weight bold))
              ("DONE" . (:foreground "green" :weight bold))
              ))
-
-
 
 ;;-----------------------------------------------------------------------------
 ;; ORG CAPTURE
@@ -97,19 +87,6 @@
 
         ;; ... other templates
     ))
-
-;;-----------------------------------------------------------------------------
-;; ORG mode for Android
-;;http://stackoverflow.com/questions/11822353/how-to-make-org-mobile-work-in-android
-;; http://blog.gabrielsaldana.org/mobileorg-for-android-setup-and-workflow/
-;; where all your org files will be stored
-
-(setq org-directory "/home/rafatieppo/Dropbox/EMACS_ORG_MODE")
-(setq org-mobile-directory "/home/rafatieppo/Dropbox/MOBILEORG")
-(setq org-mobile-inbox-for-pull "/home/rafatieppo/Dropbox/EMACS_ORG_MODE/mobile.org")
-;;(setq default-buffer-file-coding-system 'utf-8)
-(setq org-mobile-files '("/home/rafatieppo/Dropbox/EMACS_ORG_MODE/RAFA.org"))
-(setq org-mobile-agendas '("a"))
 
 ;;-----------------------------------------------------------------------------
 ;; Chronometer Task
@@ -402,7 +379,7 @@
 ;;-----------------------------------------------------------------------------
 ;; FUNCTION HIGHLIGHTS LISP
 
-    (require 'highlight-symbol)
+(require 'highlight-symbol)
 ;;-----------------------------------------------------------------------------
 
 ;;-----------------------------------------------------------------------------
@@ -433,13 +410,6 @@
 ;; https://stackoverflow.com/questions/24814988/emacs-disable-auto-complete-in-python-mode
 ;(defadvice auto-complete-mode (around disable-auto-complete-for-python)
 ;  (unless (eq major-mode 'python-mode) ad-do-it))
-
-;(ad-activate 'auto-complete-mode)
-
-
-;; macro .el, not necessary
-;; auto-complete for latex 
-;;(require 'auto-complete-auctex)
 
 (require 'ac-math) 
 (add-to-list 'ac-modes 'latex-mode)   ; make auto-complete aware of `latex-mode`
@@ -520,7 +490,6 @@
 ;;-----------------------------------------------------------------------------
 
 (require 'yafolding)
-
 (global-set-key [?\C-{] #'yafolding-hide-parent-element)
 (global-set-key [?\C-}] #'yafolding-toggle-element)
 ;;-----------------------------------------------------------------------------
@@ -746,20 +715,6 @@
 ;; Esse deu erro: TESTANDO: FUNCIONOU PERFEITO
 (add-hook 'LaTeX-mode-hook 'turn-on-reftex)
 (setq reftex-plug-into-AUCTeX t)
-
-;;atalhos UTEIS
-;;;;;automatic formatting of a section: C-c C-q C-s;
-;;;;;section preview: C-c C-p C-s; (see the screenshot on the right)
-;;-----------------------------------------------------------------------------
-
-;;===========================================================================
-;; CONFIGURACOES AVANCADAS AUCTEX
-;;===========================================================================
-;;http://tex.stackexchange.com/questions/161797/how-to-configure-emacs-and-auctex-to-perform-forward-and-inverse-search
-
- ;; '(TeX-source-correlate-method (quote synctex))
- ;; '(TeX-source-correlate-mode t)
- ;; '(TeX-source-correlate-start-server t)
 ;;-----------------------------------------------------------------------------
 
 ;;===========================================================================
@@ -777,12 +732,18 @@
 ;; PYTHON CONFIGURATION
 ;;===========================================================================
 ;; Anaconda
-(add-hook 'python-mode-hook 'anaconda-mode)
-(add-hook 'python-mode-hook 'anaconda-eldoc-mode)
+;(add-hook 'python-mode-hook 'anaconda-mode)
+;(add-hook 'python-mode-hook 'anaconda-eldoc-mode)
 
 ;; Elpy
 (elpy-enable)
-;(elpy-use-ipython)
+(elpy-use-ipython)
+
+;; Elpy another binding to complete
+(add-hook 'elpy-mode-hook
+    (lambda ()
+    (local-unset-key (kbd "M-TAB"))
+    (define-key elpy-mode-map (kbd "<f5>") 'elpy-company-backend)))
 
 ;; Flycheck
 ;; use flycheck not flymake with elpy
@@ -852,77 +813,52 @@
 ;elpy-shell-send-region
 
 ;https://emacs.stackexchange.com/questions/27674/make-elpy-shell-send-more-intelligent
-
 (global-set-key (kbd "M-/") 'python-shell-send-region-or-line) ; alt + /
 
 
 ;;-----------------------------------------------------------------------------
 ;; Set Python3 interpreter
 
-(setq python-shell-interpreter "python3")
+;(setq python-shell-interpreter "python3")
 ;;;;;(setq py-python-command "python3")
-(setq elpy-rpc-python-command "python3")
+;(setq elpy-rpc-python-command "python3")
 
+;;leg:
+(setq python-shell-interpreter "/usr/bin/python3")
 
 ;;===========================================================================
 ;; THEMES - SEVERAL SCHEMES
 ;;===========================================================================
-;;-----------------------------------------------------------------------------
-;; THEMES from: http://emacsthemes.caisah.info/
-;; https://github.com/owainlewis/emacs-color-themes
-;; themes from: http://emacsthemes.caisah.info/
-;; https://github.com/juba/color-theme-tangotango/blob/master/tangotango-theme.el
-;; http://emacsthemes.com
-;;-----------------------------------------------------------------------------
-
-;;-----------------------------------------------------------------------------
-;; Solarized
-
-(add-to-list 'load-path "/home/rafatieppo/.emacs.d/themess/emacs-color-theme-solarized-master")
-(require 'solarized-dark-theme)
-(require 'solarized-definitions)
-(require 'solarized-theme)
-(require 'color-theme-solarized)
-
-(custom-set-variables '(solarized-termcolors 256))
-(custom-set-variables '(solarized-contrast 'high))
-(custom-set-variables '(solarized-visibility 'high))
 
 ;;-----------------------------------------------------------------------------
 ;; Solarized https://github.com/bbatsov/solarized-emacs
 
-;(add-to-list 'load-path "/home/rafatieppo/.emacs.d/themess/solarized")
-;(require 'solarized-dark-theme)
+(add-to-list 'load-path "/home/rafatieppo/.emacs.d/themess/solarized")
+(require 'solarized-dark-theme)
 
 ;; options
 ;; make the fringe stand out from the background
-;(setq solarized-distinct-fringe-background t)
+(setq solarized-distinct-fringe-background t)
 ;; Don't change the font for some headings and titles
-;(setq solarized-use-variable-pitch nil)
+(setq solarized-use-variable-pitch nil)
 ;; make the modeline high contrast
-;(setq solarized-high-contrast-mode-line t)
+(setq solarized-high-contrast-mode-line t)
 ;; Use less bolding
-;(setq solarized-use-less-bold t)
+(setq solarized-use-less-bold t)
 ;; Use more italics
-;(setq solarized-use-more-italic t)
+(setq solarized-use-more-italic t)
 ;; Use less colors for indicators such as git:gutter, flycheck and similar
 (setq solarized-emphasize-indicators nil)
 ;; Don't change size of org-mode headlines (but keep other size-changes)
 (setq solarized-scale-org-headlines nil)
 ;; Avoid all font-size changes
-;(setq solarized-height-minus-1 1.0)
-;(setq solarized-height-plus-1 1.0)
-;(setq solarized-height-plus-2 1.0)
-;(setq solarized-height-plus-3 1.0)
-;(setq solarized-height-plus-4 1.0)
+(setq solarized-height-minus-1 1.0)
+(setq solarized-height-plus-1 1.0)
+(setq solarized-height-plus-2 1.0)
+(setq solarized-height-plus-3 1.0)
+(setq solarized-height-plus-4 1.0)
 
-
-
-
-
-
-
-(add-to-list 'load-path "/home/rafatieppo/.emacs.d/themess")
+;(add-to-list 'load-path "/home/rafatieppo/.emacs.d/themess")
 
 ;;(require 'monokai-theme) ;; load first to improve ORG visualization
 ;;(require 'Amelie-theme)
