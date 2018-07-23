@@ -143,7 +143,7 @@
 ;(set-default-font "monofur-13")
 ;(set-default-font "Tex Gyre Adventor-11")
 ;(set-default-font "Anonymous Pro-14.5")
-(set-default-font "Menlo-17")
+(set-default-font "Menlo-13")
 ;(custom-set-faces
 ; '(default ((t (:family "Anonymous Pro" :foundry "unknown" :slant normal :weight normal :height 240 :width normal)))))
 ;;---------------------------------------------------------------------------
@@ -300,8 +300,8 @@
 
 ;; stop (auto-complete-mode) from being called in python
 ;; https://stackoverflow.com/questions/24814988/emacs-disable-auto-complete-in-python-mode
-;(defadvice auto-complete-mode (around disable-auto-complete-for-python)
-;  (unless (eq major-mode 'python-mode) ad-do-it))
+(defadvice auto-complete-mode (around disable-auto-complete-for-python)
+  (unless (eq major-mode 'python-mode) ad-do-it))
 
 (require 'ac-math) 
 (add-to-list 'ac-modes 'latex-mode)   ; make auto-complete aware of `latex-mode`
@@ -343,14 +343,6 @@
 (require 'smartparens)
 (require 'smartparens-config)
 (smartparens-global-mode 1)
-;;-----------------------------------------------------------------------------
-;; FOLDING BY INDENTATION
-;; Folding code blocks based on indentation.
-;; git clone https://github.com/zenozeng/yafolding.el.git
-;;-----------------------------------------------------------------------------
-(require 'yafolding)
-(global-set-key [?\C-{] #'yafolding-hide-parent-element)
-(global-set-key [?\C-}] #'yafolding-toggle-element)
 ;;-----------------------------------------------------------------------------
 ;; ADD HIGHLIGHT FOR CERTAIN KEYWORDS
 ;; http://lists.gnu.org/archive/html/emacs-orgmode/2010-09/txtb5ChQJCDny.txt
@@ -660,32 +652,32 @@
 ;;-----------------------------------------------------------------------------
 ;; Solarized https://github.com/bbatsov/solarized-emacs
 
-(add-to-list 'load-path "/home/rafatieppo/.emacs.d/themess/solarized")
-(require 'solarized-dark-theme)
+;(add-to-list 'load-path "/home/rafatieppo/.emacs.d/themess/solarized")
+;(require 'solarized-dark-theme)
 
 ;; options
 ;; make the fringe stand out from the background
-(setq solarized-distinct-fringe-background t)
+;(setq solarized-distinct-fringe-background t)
 ;; Don't change the font for some headings and titles
-(setq solarized-use-variable-pitch nil)
+;(setq solarized-use-variable-pitch nil)
 ;; make the modeline high contrast
-(setq solarized-high-contrast-mode-line t)
+;(setq solarized-high-contrast-mode-line t)
 ;; Use less bolding
-(setq solarized-use-less-bold t)
+;(setq solarized-use-less-bold t)
 ;; Use more italics
-(setq solarized-use-more-italic t)
+;(setq solarized-use-more-italic t)
 ;; Use less colors for indicators such as git:gutter, flycheck and similar
 (setq solarized-emphasize-indicators nil)
 ;; Don't change size of org-mode headlines (but keep other size-changes)
 (setq solarized-scale-org-headlines nil)
 ;; Avoid all font-size changes
-(setq solarized-height-minus-1 1.0)
-(setq solarized-height-plus-1 1.0)
-(setq solarized-height-plus-2 1.0)
-(setq solarized-height-plus-3 1.0)
-(setq solarized-height-plus-4 1.0)
+;(setq solarized-height-minus-1 1.0)
+;(setq solarized-height-plus-1 1.0)
+;(setq solarized-height-plus-2 1.0)
+;(setq solarized-height-plus-3 1.0)
+;(setq solarized-height-plus-4 1.0)
 
-;(add-to-list 'load-path "/home/rafatieppo/.emacs.d/themess")
+(add-to-list 'load-path "/home/rafatieppo/.emacs.d/themess")
 ;;(require 'monokai-theme) ;; load first to improve ORG visualization
 ;;(require 'Amelie-theme)
 ;;(require 'ample-zen-theme)
@@ -700,9 +692,9 @@
 ;;(require 'hickey-theme)
 ;;(require 'junio-theme)
 ;;(require 'material-light-theme)
-;(require 'material-theme)
+;;(require 'material-theme)
 ;;(require 'moe-dark-theme)
-;;(require 'molokai-theme)
+(require 'molokai-theme)
 ;;(require 'odersky-theme)
 ;;(require 'seti-theme)
 ;;(require 'soothe-theme)
@@ -722,3 +714,17 @@
 ;;(set-face-background hl-line-face "#2F2F2F") ;;MONOKAI
 ;;---------------------------------------------------------------------------
 
+(custom-set-variables
+ ;; custom-set-variables was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ '(package-selected-packages
+   (quote
+    (yafolding virtualenv sr-speedbar smex smartparens r-autoyas py-autopep8 powerline polymode multiple-cursors markdown-toc jedi indent-guide ido-vertical-mode ido-hacks highlight-symbol flycheck flx-ido ess-R-object-popup ess-R-data-view elpy ein csv-mode auctex anaconda-mode ace-jump-mode ac-math))))
+(custom-set-faces
+ ;; custom-set-faces was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ )
