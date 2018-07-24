@@ -18,13 +18,17 @@ improved defaults and extended support for the following:
 
 # Supported Emacs versions and requirements
 
-Currently I am running `GNU Emacs 25.1.1 (x86_64-unknown-linux-gnu, GTK+
-Version 2.24.30) of 2017-05-08`. Before I used `Emacs 24.1`.
+Currently I am running **GNU Emacs 27.0.50 (build 2, x86_64-pc-linux-gnu, GTK+ Version 3.22.30) of 2018-07-23**. 
+
+- Before GNU Emacs 25.1.1 (x86_64-unknown-linux-gnu, GTK+ Version 2.24.30) of 2017-05-08
+- Before I used `Emacs 24.1`.
 
 ## Operational system
 
-- OS: Ubuntu 16.04 xenial
-- Kernel: x86_64 Linux 4.4.0-78-generic
+- Distributor ID: Ubuntu
+- Description: Ubuntu 18.04 LTS
+- Release: 18.04
+- Codename: bionic
 - DE: Mate
 
 >Enjoy Emacs!

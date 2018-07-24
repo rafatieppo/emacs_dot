@@ -14,7 +14,7 @@
 (add-to-list 'load-path "/home/rafatieppo/.emacs.d/")
 (load "package")
 (require 'package)
-(package-initialize) 
+;(package-initialize) 
 
 (setq package-enable-at-startup nil)
 (add-to-list 'package-archives '("melpa" . "http://melpa.org/packages/"))
@@ -143,9 +143,9 @@
 ;(set-default-font "monofur-13")
 ;(set-default-font "Tex Gyre Adventor-11")
 ;(set-default-font "Anonymous Pro-14.5")
-(set-default-font "Menlo-13")
-;(custom-set-faces
-; '(default ((t (:family "Anonymous Pro" :foundry "unknown" :slant normal :weight normal :height 240 :width normal)))))
+;(set-default-font "Menlo-13")
+(custom-set-faces
+ '(default ((t (:family "Menlo" :foundry "unknown" :slant normal :weight normal :height 130 :width normal)))))
 ;;---------------------------------------------------------------------------
 ;; Space between lines and between line numbers and text (like margin)
 (setq-default line-spacing 3) 
@@ -213,6 +213,7 @@
 ;;How to have emacs highlight text selections?	
 ;;	(transient-mark-mode 1) ; highlight text selection
 (delete-selection-mode 1) ; delete seleted text when typing
+;;---------------------------------------------------------------------------
 
 ;;===========================================================================
 ;; SPECIAL PROGRAMMING TOOLS
@@ -426,7 +427,6 @@
 (load "/home/rafatieppo/.emacs.d/lisp/functions")
 ;(require 'functions)
 
-
 ;;===========================================================================
 ;;MARKDOWN MODE 
 ;;===========================================================================
@@ -567,7 +567,7 @@
 
 ;; Elpy
 (elpy-enable)
-(elpy-use-ipython)
+;(elpy-use-ipython)
 
 ;; Elpy another binding to complete
 (add-hook 'elpy-mode-hook
@@ -591,17 +591,7 @@
 (add-hook 'python-mode-hook 'jedi:setup)
 (setq jedi:complete-on-dot t)                 ; optional
 ;-----------------------------------------------------------------------------
-; FIX to EMACS 25.1
-;https://emacs.stackexchange.com/questions/30082/your-python-shell-interpreter-doesn-t-seem-to-support-readline
-(with-eval-after-load 'python
-  (defun python-shell-completion-native-try ()
-    "Return non-nil if can trigger native completion."
-    (let ((python-shell-completion-native-enable t)
-          (python-shell-completion-native-output-timeout
-           python-shell-completion-native-try-output-timeout))
-      (python-shell-completion-native-get-completions
-       (get-buffer-process (current-buffer))
-       nil "_"))))
+
 ;;-----------------------------------------------------------------------------
 ;; ALT ENTER to send line
 (defun my-python-line ()
@@ -641,6 +631,7 @@
 ;; Set Python3 interpreter
 (setq python-shell-interpreter "/usr/bin/python3")
 
+
 ;;===========================================================================
 ;; THEMES - SEVERAL SCHEMES
 ;;===========================================================================
@@ -663,9 +654,9 @@
 ;; Use more italics
 ;(setq solarized-use-more-italic t)
 ;; Use less colors for indicators such as git:gutter, flycheck and similar
-(setq solarized-emphasize-indicators nil)
+;(setq solarized-emphasize-indicators nil)
 ;; Don't change size of org-mode headlines (but keep other size-changes)
-(setq solarized-scale-org-headlines nil)
+;(setq solarized-scale-org-headlines nil)
 ;; Avoid all font-size changes
 ;(setq solarized-height-minus-1 1.0)
 ;(setq solarized-height-plus-1 1.0)
@@ -673,8 +664,9 @@
 ;(setq solarized-height-plus-3 1.0)
 ;(setq solarized-height-plus-4 1.0)
 
-(add-to-list 'load-path "/home/rafatieppo/.emacs.d/themess")
-;;(require 'monokai-theme) ;; load first to improve ORG visualization
+(add-to-list 'custom-theme-load-path "/home/rafatieppo/.emacs.d/themess")
+;(add-to-list 'load-path "/home/rafatieppo/.emacs.d/themess")
+;(require 'monokai-theme) ;; load first to improve ORG visualization
 ;;(require 'Amelie-theme)
 ;;(require 'ample-zen-theme)
 ;;(require 'assemblage-theme)
@@ -684,13 +676,14 @@
 ;;(require 'dracula-themes)
 ;;(require 'erosiond-theme)
 ;;(require 'fogus-theme)
+;;(load-theme 'gotham t)
 ;;(require 'granger-theme)
 ;;(require 'hickey-theme)
 ;;(require 'junio-theme)
 ;;(require 'material-light-theme)
-;;(require 'material-theme)
+;;(load-theme 'material t)
 ;;(require 'moe-dark-theme)
-(require 'molokai-theme)
+(load-theme 'molokai t)
 ;;(require 'odersky-theme)
 ;;(require 'seti-theme)
 ;;(require 'soothe-theme)
@@ -710,17 +703,4 @@
 ;;(set-face-background hl-line-face "#2F2F2F") ;;MONOKAI
 ;;---------------------------------------------------------------------------
 
-(custom-set-variables
- ;; custom-set-variables was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- '(package-selected-packages
-   (quote
-    (yafolding virtualenv sr-speedbar smex smartparens r-autoyas py-autopep8 powerline polymode multiple-cursors markdown-toc jedi indent-guide ido-vertical-mode ido-hacks highlight-symbol flycheck flx-ido ess-R-object-popup ess-R-data-view elpy ein csv-mode auctex anaconda-mode ace-jump-mode ac-math))))
-(custom-set-faces
- ;; custom-set-faces was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- )
+
