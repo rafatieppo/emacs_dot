@@ -283,7 +283,7 @@
 ;;===========================================================================
 
 (require 'yasnippet)
-(yas-global-mode 1)
+(yas-global-mode 0)
 ;;-----------------------------------------------------------------------------
 ;; AUTO COMPLETE FUNCTION ;;aciona AUTO-COMPLETE
 ;;-----------------------------------------------------------------------------
@@ -448,7 +448,7 @@
 ;; http://wiki.dreamrunner.org/public_html/Emacs/markdown.html
 (add-hook 'markdown-mode-hook
           '(lambda ()
-             (auto-complete-mode t)
+             (auto-complete-mode 1)
              (local-unset-key [tab])
              (setq-local yas-fallback-behavior '(apply auto-complete))))
 ;;-----------------------------------------------------------------------------
