@@ -583,10 +583,10 @@
 (require 'py-autopep8)
 (add-hook 'elpy-mode-hook 'py-autopep8-enable-on-save)
 ;;-----------------------------------------------------------------------------
-;; JEDI
-(require 'jedi)
-(add-hook 'python-mode-hook 'jedi:setup)
-(setq jedi:complete-on-dot t)                 ; optional
+;; JEDI: it was blocking windows with informations about function
+;(require 'jedi)
+;(add-hook 'python-mode-hook 'jedi:setup)
+;(setq jedi:complete-on-dot t)                 ; optional
 ;-----------------------------------------------------------------------------
 
 ;;-----------------------------------------------------------------------------
@@ -678,9 +678,9 @@
 ;;(require 'hickey-theme)
 ;;(require 'junio-theme)
 ;;(require 'material-light-theme)
-;;(load-theme 'material t)
+(load-theme 'material t)
 ;;(require 'moe-dark-theme)
-(load-theme 'molokai t)
+;(load-theme 'molokai t)
 ;;(require 'odersky-theme)
 ;;(require 'seti-theme)
 ;;(require 'soothe-theme)
