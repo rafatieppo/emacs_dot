@@ -668,41 +668,6 @@
 (add-hook 'markdown-mode-hook 'turn-on-orgstruct++)
 
 ;;===========================================================================
-;; POLY-MODE MAKDOWN ;; (DEVE ESTAR ANTES DO SUPORTE PARA LATEX.)
-;;===========================================================================
-
-;; PASSOS
-;; Suporte para R+MarkDown (requer emacs >= 24.3.1).
-;; Obter polymode da origem (em constante modificação).
-;; http://stackoverflow.com/questions/16567348/knitr-markdown-highlighting-in-emacs
-;; cd ~/Downloads/
-;; git clone https://github.com/vitoshka/polymode.git
-;; cd polymode
-;; mkdir ~/.emacs.d/polymode/
-;; cp -v *.el ~/.emacs.d/polymode/
-;; cp -rv ./modes/ ~/.emacs.d/polymode/
-;; cd .. && rm -rf polymode
-;; Adicionar os diretórios com os modos.
-
-;(setq load-path
-;(append '("/home/rafatieppo/.emacs.d/polymode/"
-;"/home/rafatieppo/.emacs.d/polymode/modes")
-;load-path))
-
-;; Chama os modos.
-
-;(require 'poly-R)
-;(require 'poly-markdown)
-;(require 'poly-noweb)
-
-(autoload 'poly-markdown-mode "poly-markdown-mode"
-  "Major mode for editing R-Markdown files" t)
-(add-to-list 'auto-mode-alist '("\\.md\\'" . poly-markdown-mode))
-(add-to-list 'auto-mode-alist '("\\.Rmd\\'" . poly-markdown-mode))
-(add-to-list 'auto-mode-alist '("\\.Rpres\\'" . poly-markdown-mode))
-;;-----------------------------------------------------------------------------
-
-;;===========================================================================
 ;; REFTEX CITATION PANDOC
 ;; http://www.unknownerror.org/opensource/jgm/pandoc/q/stackoverflow/13607156/autocomplete-pandoc-style-citations-from-a-bibtex-file-in-emacs
 ;; http://tex.stackexchange.com/a/31992/5701
