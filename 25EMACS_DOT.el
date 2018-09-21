@@ -51,10 +51,6 @@
 ;    (package-install package)))
 ;-----------------------------------------------------------------------------
 
-
-
-
-
 ;;===========================================================================
 ;;ORG MODE
 ;;===========================================================================
@@ -128,19 +124,6 @@
     ))
 
 ;;-----------------------------------------------------------------------------
-;; ORG mode for Android
-;;http://stackoverflow.com/questions/11822353/how-to-make-org-mobile-work-in-android
-;; http://blog.gabrielsaldana.org/mobileorg-for-android-setup-and-workflow/
-;; where all your org files will be stored
-
-(setq org-directory "/home/rafatieppo/Dropbox/EMACS_ORG_MODE")
-(setq org-mobile-directory "/home/rafatieppo/Dropbox/MOBILEORG")
-(setq org-mobile-inbox-for-pull "/home/rafatieppo/Dropbox/EMACS_ORG_MODE/mobile.org")
-;;(setq default-buffer-file-coding-system 'utf-8)
-(setq org-mobile-files '("/home/rafatieppo/Dropbox/EMACS_ORG_MODE/RAFA.org"))
-(setq org-mobile-agendas '("a"))
-
-;;-----------------------------------------------------------------------------
 ;; Chronometer Task
 (setq org-clock-persist 'history)
 (org-clock-persistence-insinuate)
@@ -194,13 +177,6 @@
 
 
 ;;----------------------------------------------------------------------
-;; Check for packages.
-;;----------------------------------------------------------------------
-(require 'prelude-packages)
-;;----------------------------------------------------------------------
-
-
-;;----------------------------------------------------------------------
 ;; POWERLINES
 ;;----------------------------------------------------------------------
 ;;https://github.com/milkypostman/powerline/
@@ -247,7 +223,7 @@
 ;(set-default-font "monofur-13")
 ;(set-default-font "Tex Gyre Adventor-11")
 ;(set-default-font "Anonymous Pro-14.5")
-(set-default-font "Menlo-13")
+(set-default-font "Menlo-15")
 ;(custom-set-faces
 ; '(default ((t (:family "Anonymous Pro" :foundry "unknown" :slant normal :weight normal :height 240 :width normal)))))
 ;;---------------------------------------------------------------------------
@@ -588,16 +564,10 @@
 ;; SETTING TO WORK WITH ESS and R
 ;;===========================================================================
 ;;---------------------------------------------------------------------------
+;; IF YOU GET ERROR TO LOAD ESS: The immediate fix is to delete <user-emacs-directory>/elpa/archives/melpa/archive-contents; it will be rebuilt on the next package-initialize.
 ;; faz com que apareceça os argumentos das funções do R no minibuffer
 (require 'ess-site)
 (setq-default ess-dialect "R")
-(require 'ess-eldoc)
-
-(setq-default ess-dialect "r")
-(require 'ess-eldoc)
-
-;(require 'ess-eldoc)
-;(setq-default ess-dialect "R")
 ;;-----------------------------------------------------------------------------
 
 ;;-----------------------------------------------------------------------------
@@ -769,10 +739,6 @@
 ;; http://piotrkazmierczak.com/2010/05/13/emacs-as-the-ultimate-latex-editor/
 ;; Para ativar: C-c =  it means CTRL + c + = 
 
-;; So that RefTeX finds my bibliography If you want assign a file to BIBTEX
-;;(setq reftex-default-bibliography '("/home/rafatieppo/Dropbox/PROFISSIONAL/DOUTORADO/TESE/PAPER_TESE/PAPER_TESE.bib"))
-
-;; Esse deu erro: TESTANDO: FUNCIONOU PERFEITO
 (add-hook 'LaTeX-mode-hook 'turn-on-reftex)
 (setq reftex-plug-into-AUCTeX t)
 
@@ -806,8 +772,8 @@
 ;; PYTHON CONFIGURATION
 ;;===========================================================================
 ;; Anaconda
-(add-hook 'python-mode-hook 'anaconda-mode)
-(add-hook 'python-mode-hook 'anaconda-eldoc-mode)
+;(add-hook 'python-mode-hook 'anaconda-mode)
+;(add-hook 'python-mode-hook 'anaconda-eldoc-mode)
 
 ;; Elpy
 (elpy-enable)
@@ -829,20 +795,10 @@
 
 (require 'jedi)
 (add-hook 'python-mode-hook 'jedi:setup)
-(setq jedi:complete-on-dot t)                 ; optional
+;(setq jedi:complete-on-dot t)                 ; optional
 ;-----------------------------------------------------------------------------
 ; FIX to EMACS 25.1
 
-;https://emacs.stackexchange.com/questions/30082/your-python-shell-interpreter-doesn-t-seem-to-support-readline
-(with-eval-after-load 'python
-  (defun python-shell-completion-native-try ()
-    "Return non-nil if can trigger native completion."
-    (let ((python-shell-completion-native-enable t)
-          (python-shell-completion-native-output-timeout
-           python-shell-completion-native-try-output-timeout))
-      (python-shell-completion-native-get-completions
-       (get-buffer-process (current-buffer))
-       nil "_"))))
 
 ;;-----------------------------------------------------------------------------
 ;; ALT ENTER to send line
@@ -888,9 +844,8 @@
 ;;-----------------------------------------------------------------------------
 ;; Set Python3 interpreter
 
-(setq python-shell-interpreter "python3")
-;;;;;(setq py-python-command "python3")
-(setq elpy-rpc-python-command "python3")
+;(setq python-shell-interpreter "/usr/bin/python3")
+(setq python-shell-interpreter "/home/rafatieppo/anaconda3/bin/python3")
 
 
 ;;===========================================================================
@@ -989,3 +944,18 @@
 ;;===========================================================================
 
 
+
+(custom-set-variables
+ ;; custom-set-variables was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ '(package-selected-packages
+   (quote
+    (yafolding sr-speedbar smex smartparens py-autopep8 powerline polymode multiple-cursors markdown-toc jedi indent-guide ido-vertical-mode ido-hacks highlight-symbol flycheck flx-ido ess-R-object-popup ess-R-data-view elpy auctex ace-jump-mode ac-math))))
+(custom-set-faces
+ ;; custom-set-faces was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ )
