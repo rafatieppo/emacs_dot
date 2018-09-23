@@ -31,7 +31,7 @@
 ;;===========================================================================
 
 ;; list the packages you want
-;(setq package-list '(ace-jump-mode ac-math auctex anaconda-mode auto-complete company-anaconda elpy ess ess-R-data-view flx flx-ido flycheck highlight-symbol ido-hacks ido-;vertical-mode indent-guide jedi markdown-mode multiple-cursors polymode popup powerline py-autopep8 smartparens smex yafolding yasnippet))
+;(setq package-list '(ace-jump-mode ac-math auctex anaconda-mode auto-complete company-anaconda elpy ess ess-R-data-view flx flx-ido flycheck highlight-symbol ido-hacks ido-vertical-mode indent-guide jedi markdown-mode multiple-cursors polymode popup powerline py-autopep8 smartparens smex yafolding yasnippet))
 ;;ess-R-object-popup
 
 ;; list the repositories containing them
