@@ -31,7 +31,8 @@
 ;;===========================================================================
 
 ;; list the packages you want
-;(setq package-list '(ace-jump-mode ac-math auctex auto-complete elpy ess ess-R-data-view ess-R-object-popup flx flx-ido flycheck highlight-symbol ido-hacks ido-vertical-mode indent-guide jedi markdown-mode multiple-cursors polymode popup powerline py-autopep8 smartparens smex yafolding yasnippet))
+;(setq package-list '(ace-jump-mode ac-math auctex anaconda-mode auto-complete company-anaconda elpy ess ess-R-data-view flx flx-ido flycheck highlight-symbol ido-hacks ido-;vertical-mode indent-guide jedi markdown-mode multiple-cursors polymode popup powerline py-autopep8 smartparens smex yafolding yasnippet))
+;;ess-R-object-popup
 
 ;; list the repositories containing them
 ;(setq package-archives '(("elpa" . "http://tromey.com/elpa/")
@@ -39,7 +40,7 @@
 ;                         ("marmalade" . "http://marmalade-repo.org/packages/")))
 
 ;; activate all the packages (in particular autoloads)
-;(package-initialize)
+(package-initialize)
 
 ;; fetch the list of packages available 
 ;(unless package-archive-contents
@@ -123,59 +124,6 @@
         ;; ... other templates
     ))
 
-;;-----------------------------------------------------------------------------
-;; Chronometer Task
-(setq org-clock-persist 'history)
-(org-clock-persistence-insinuate)
-
-;;-----------------------------------------------------------------------------
-;; ORG MONTH REPORT
-
-(defun my/org-review-month (start-date)
-  "Review the month's clocked tasks and time."
-  (interactive (list (org-read-date)))
-  ;; Set to the beginning of the month
-  (setq start-date (concat (substring start-date 0 8) "01"))
-  (let ((org-agenda-show-log t)
-        (org-agenda-start-with-log-mode t)
-        (org-agenda-start-with-clockreport-mode t)
-        (org-agenda-clockreport-parameter-plist '(:link t :maxlevel 3)))
-    (org-agenda-list nil start-date 'month)))
-  
-;;-----------------------------------------------------------------------------
-;; ORG REPORTING TIME BY DAY
-;; http://sachachua.com/blog/2007/12/clocking-time-with-emacs-org/
-
-(defun org-dblock-write:rangereport (params)
-  "Display day-by-day time reports."
-  (let* ((ts (plist-get params :tstart))
-         (te (plist-get params :tend))
-         (start (time-to-seconds
-                 (apply 'encode-time (org-parse-time-string ts))))
-         (end (time-to-seconds
-               (apply 'encode-time (org-parse-time-string te))))
-         day-numbers)
-    (setq params (plist-put params :tstart nil))
-    (setq params (plist-put params :end nil))
-    (while (<= start end)
-      (save-excursion
-        (insert "\n\n"
-                (format-time-string (car org-time-stamp-formats)
-                                    (seconds-to-time start))
-                "----------------\n")
-        (org-dblock-write:clocktable
-         (plist-put
-          (plist-put
-           params
-           :tstart
-           (format-time-string (car org-time-stamp-formats)
-                               (seconds-to-time start)))
-          :tend
-          (format-time-string (car org-time-stamp-formats)
-                              (seconds-to-time end))))
-        (setq start (+ 86400 start))))))
-
-
 ;;----------------------------------------------------------------------
 ;; POWERLINES
 ;;----------------------------------------------------------------------
@@ -197,7 +145,6 @@
 
 ;;-----------------------------------------------------------------------------
 ;; Provide Highlight code in SRC
-
 (setq org-src-fontify-natively t)
 ;;-----------------------------------------------------------------------------
 
@@ -205,8 +152,7 @@
 ;;STANDARD SETTINGS
 ;;===========================================================================
 ;;---------------------------------------------------------------------------
-; There is no welcome windows
-;; http://blog.droidzone.in/2012/05/22/remove-startup-split-screen-in-emacs/
+; There is no welcome windows ;; http://blog.droidzone.in/2012/05/22/remove-startup-split-screen-in-emacs/
 (setq inhibit-startup-screen t)
 (add-hook 'emacs-startup-hook 'delete-other-windows)[/code]
 ;;---------------------------------------------------------------------------
@@ -223,7 +169,7 @@
 ;(set-default-font "monofur-13")
 ;(set-default-font "Tex Gyre Adventor-11")
 ;(set-default-font "Anonymous Pro-14.5")
-(set-default-font "Menlo-15")
+(set-default-font "Menlo-13")
 ;(custom-set-faces
 ; '(default ((t (:family "Anonymous Pro" :foundry "unknown" :slant normal :weight normal :height 240 :width normal)))))
 ;;---------------------------------------------------------------------------
@@ -348,10 +294,7 @@
 ;;-----------------------------------------------------------------------------
 
 ;;-----------------------------------------------------------------------------
-;; ace-jump-mode.el --- a quick cursor location minor mode for emacs -*- coding: utf-8-unix -*-
-;; https://github.com/winterTTr/ace-jump-mode
-;; ace jump mode major function
-
+;; ace-jump-mode.el https://github.com/winterTTr/ace-jump-mode
 (autoload
   'ace-jump-mode
   "ace-jump-mode"
@@ -359,7 +302,6 @@
   t)
 
 ;; enable a more powerful jump back function from ace jump mode
-
 (autoload
   'ace-jump-mode-pop-mark
   "ace-jump-mode"
@@ -406,8 +348,7 @@
 
 ;;-----------------------------------------------------------------------------
 ;; FUNCTION HIGHLIGHTS LISP
-
-    (require 'highlight-symbol)
+(require 'highlight-symbol)
 ;;-----------------------------------------------------------------------------
 
 ;;-----------------------------------------------------------------------------
@@ -420,7 +361,6 @@
 ;;===========================================================================
 ;;AUTO COMLETE
 ;;===========================================================================
-
 (require 'yasnippet)
 (yas-global-mode 1)
 
@@ -428,7 +368,6 @@
 ;; AUTO COMPLETE FUNCTION
 ;;aciona AUTO-COMPLETE
 ;;-----------------------------------------------------------------------------
-
 ;; https://www.emacswiki.org/emacs/AutoCompleteSources
 (require 'auto-complete)
 (require 'auto-complete-config)
@@ -440,7 +379,6 @@
 ;  (unless (eq major-mode 'python-mode) ad-do-it))
 
 ;(ad-activate 'auto-complete-mode)
-
 
 ;; macro .el, not necessary
 ;; auto-complete for latex 
@@ -458,7 +396,6 @@
 ;(global-auto-complete-mode t)
  
 (setq ac-math-unicode-in-math-p t)
-
 (ac-flyspell-workaround) ;; to make flyspell works with auto-complete
 
 ;; to use biber instead bibtex
@@ -492,28 +429,9 @@
 ;             (local-unset-key [tab])
 ;             (setq-local yas-fallback-behavior '(apply auto-complete))))
 
-;;---------------------------------------------------------------------------
-; Automatic brackets, etc
 ;;----------------------------------------------------------------------
-
-;; ref: http://www.emacswiki.org/emacs/ESSAutoParens
-;; enable skeleton-pair insert globally
-;(setq skeleton-pair-on-word t)
-;(global-set-key (kbd "(") 'skeleton-pair-insert-maybe)
-;(global-set-key (kbd "[") 'skeleton-pair-insert-maybe)
-;(global-set-key (kbd "{") 'skeleton-pair-insert-maybe)
-;(global-set-key (kbd "\"") 'skeleton-pair-insert-maybe)
-;(global-set-key (kbd "\'") 'skeleton-pair-insert-maybe)
-;(global-set-key (kbd "\`") 'skeleton-pair-insert-maybe)
-;(global-set-key (kbd "<") 'skeleton-pair-insert-maybe)
-;;;; make electric-pair-mode work on more brackets
-;(electric-pair-mode 1)	
-
+;; Smart Parenthesis https://github.com/Fuco1/smartparens
 ;;----------------------------------------------------------------------
-;; Smart Parenthesis.
-;; https://github.com/Fuco1/smartparens
-;;----------------------------------------------------------------------
-
 (require 'smartparens)
 (require 'smartparens-config)
 (smartparens-global-mode 1)
@@ -569,11 +487,8 @@
 (require 'ess-site)
 (setq-default ess-dialect "R")
 ;;-----------------------------------------------------------------------------
-
-;;-----------------------------------------------------------------------------
 ;; If you want all help buffers to go into one frame do:
 (setq ess-help-own-frame 'one)
-;;-----------------------------------------------------------------------------
 
 ;;-----------------------------------------------------------------------------
 ;; ESS - HIGHLIGHTS ON PROGRAMING CODES
@@ -606,7 +521,6 @@
 ;;           (ess-fl-keyword:delimiters . nil)
 ;;           (ess-fl-keyword:= . t)
            (ess-R-fl-keyword:F&T . t)))
-;;-----------------------------------------------------------------------------
 
 ;;===========================================================================
 ;;FUNCOES functions
@@ -693,24 +607,15 @@
 ;; LATEX
 ;;===========================================================================
 ;;-----------------------------------------------------------------------------
-;; Modo matemático para LaTex (Math no menu com atalhos para símbolos,
-;; etc).
+;; Modo matemático para LaTex (Math no menu com atalhos para símbolos, etc
 (add-hook 'LaTeX-mode-hook 'LaTeX-math-mode)
 ;;-----------------------------------------------------------------------------
 
 ;;-----------------------------------------------------------------------------
-;; Suporte do refTex para navegar por grandes documentos (Ref no menu,
-;; navegação, sumário).
-;; http://piotrkazmierczak.com/2010/05/13/emacs-as-the-ultimate-latex-editor/
+;; Suporte do refTex para navega http://piotrkazmierczak.com/2010/05/13/emacs-as-the-ultimate-latex-editor/
 ;; Para ativar: C-c =  it means CTRL + c + = 
-
 (add-hook 'LaTeX-mode-hook 'turn-on-reftex)
 (setq reftex-plug-into-AUCTeX t)
-
-;;atalhos UTEIS
-;;;;;automatic formatting of a section: C-c C-q C-s;
-;;;;;section preview: C-c C-p C-s; (see the screenshot on the right)
-;;-----------------------------------------------------------------------------
 
 ;;===========================================================================
 ;; CONFIGURACOES AVANCADAS AUCTEX
@@ -737,37 +642,30 @@
 ;; PYTHON CONFIGURATION
 ;;===========================================================================
 ;; Anaconda
-;(add-hook 'python-mode-hook 'anaconda-mode)
-;(add-hook 'python-mode-hook 'anaconda-eldoc-mode)
+(add-hook 'python-mode-hook 'anaconda-mode)
+(add-hook 'python-mode-hook 'anaconda-eldoc-mode)
+(eval-after-load "company"
+ '(add-to-list 'company-backends '(company-anaconda :with company-capf)))
 
 ;; Elpy
-(elpy-enable)
+;(elpy-enable)
 ;(elpy-use-ipython)
 
-;; Flycheck
-;; use flycheck not flymake with elpy
-(when (require 'flycheck nil t)
-  (setq elpy-modules (delq 'elpy-module-flymake elpy-modules))
-  (add-hook 'elpy-mode-hook 'flycheck-mode))
+;; Flycheck -- use flycheck not flymake with elpy
+;(when (require 'flycheck nil t)
+;  (setq elpy-modules (delq 'elpy-module-flymake elpy-modules))
+;  (add-hook 'elpy-mode-hook 'flycheck-mode))
 
-;; Autopep8
-;; enable autopep8 formatting on save
+;; Autopep8 - enable autopep8 formatting on save
 (require 'py-autopep8)
 (add-hook 'elpy-mode-hook 'py-autopep8-enable-on-save)
 
-;;-----------------------------------------------------------------------------
-;; JEDI
-
+;; Jedi
 (require 'jedi)
 (add-hook 'python-mode-hook 'jedi:setup)
-;(setq jedi:complete-on-dot t)                 ; optional
-;-----------------------------------------------------------------------------
-; FIX to EMACS 25.1
+(setq jedi:complete-on-dot t)                 ; optional
 
-
-;;-----------------------------------------------------------------------------
 ;; ALT ENTER to send line
-
 (defun my-python-line ()
  (interactive)
   (save-excursion
@@ -785,12 +683,9 @@
   (beginning-of-line) ;; or (end-of-line)
   (next-line)
 )
-
 (global-set-key (kbd "M-RET") 'my-python-line) ; Enter/Return key
 
-;;-----------------------------------------------------------------------------
 ;; ALT / to send region
-
 (defun python-shell-send-region-or-line nil
   "Sends from python-mode buffer to a python shell, intelligently."
   (interactive)
@@ -800,15 +695,10 @@
      (python-nav-forward-statement)
  ) (t (elpy-shell-send-current-statement))))
 ;elpy-shell-send-region
-
 ;https://emacs.stackexchange.com/questions/27674/make-elpy-shell-send-more-intelligent
-
 (global-set-key (kbd "M-/") 'python-shell-send-region-or-line) ; alt + /
 
-
-;;-----------------------------------------------------------------------------
 ;; Set Python3 interpreter
-
 ;(setq python-shell-interpreter "/usr/bin/python3")
 (setq python-shell-interpreter "/home/rafatieppo/anaconda3/bin/python3")
 
@@ -816,17 +706,7 @@
 ;;===========================================================================
 ;; THEMES - SEVERAL SCHEMES
 ;;===========================================================================
-;;-----------------------------------------------------------------------------
-;; THEMES from: http://emacsthemes.caisah.info/
-;; https://github.com/owainlewis/emacs-color-themes
-;; themes from: http://emacsthemes.caisah.info/
-;; https://github.com/juba/color-theme-tangotango/blob/master/tangotango-theme.el
-;; http://emacsthemes.com
-;;-----------------------------------------------------------------------------
-
-;;-----------------------------------------------------------------------------
 ;; Solarized
-
 ;(add-to-list 'load-path "/home/rafatieppo/.emacs.d/themess/emacs-color-theme-solarized-master")
 ;(require 'solarized-dark-theme)
 ;(require 'solarized-definitions)
@@ -877,6 +757,7 @@
 ;;(require 'dracula-themes)
 ;;(require 'erosiond-theme)
 ;;(require 'fogus-theme)
+;;(require 'gotham)
 ;;(require 'granger-theme)
 ;;(require 'hickey-theme)
 ;;(require 'junio-theme)
@@ -894,21 +775,17 @@
 ;;(require 'wilson-theme)
 ;;(require 'zenburn-theme)
 
-;;===========================================================================
-;;TEMA VEM PADRAO EMACS
-;;===========================================================================
 
-;;---------------------------------------------------------------------------
-;;Padrao do EMACS cursor linha; Must be after of THEME to do not overlayer
-;;http://stackoverflow.com/questions/2718189/emacshighlight-the-current-line-by-underline-it/2718543#2718543
-(global-hl-line-mode 1)
+
+;;===========================================================================
+;;Horizontal line
+;;===========================================================================
+;(global-hl-line-mode 1)
 ;; Underline in current line
 ;(set-face-attribute hl-line-face nil :underline t)
 ;;(set-face-background hl-line-face "#2F2F2F") ;;MONOKAI
 ;;---------------------------------------------------------------------------
 ;;===========================================================================
-
-
 
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
@@ -917,10 +794,5 @@
  ;; If there is more than one, they won't work right.
  '(package-selected-packages
    (quote
-    (yafolding sr-speedbar smex smartparens py-autopep8 powerline polymode multiple-cursors markdown-toc jedi indent-guide ido-vertical-mode ido-hacks highlight-symbol flycheck flx-ido ess-R-object-popup ess-R-data-view elpy auctex ace-jump-mode ac-math))))
-(custom-set-faces
- ;; custom-set-faces was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- )
+    (company-anaconda anaconda-mode yafolding sr-speedbar smex smartparens py-autopep8 powerline polymode multiple-cursors markdown-toc jedi indent-guide ido-vertical-mode ido-hacks highlight-symbol flycheck flx-ido ess-R-data-view elpy auctex ace-jump-mode ac-math))))
+
