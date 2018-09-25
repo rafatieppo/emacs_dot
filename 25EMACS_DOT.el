@@ -31,7 +31,7 @@
 ;;===========================================================================
 
 ;; list the packages you want
-;(setq package-list '(ace-jump-mode ac-math auctex anaconda-mode auto-complete company-anaconda elpy ess ess-R-data-view flx flx-ido flycheck highlight-symbol ido-hacks ido-vertical-mode indent-guide jedi markdown-mode multiple-cursors polymode popup powerline py-autopep8 smartparens smex yafolding yasnippet))
+;(setq package-list '(ace-jump-mode ac-math auctex anaconda-mode auto-complete company-anaconda elpy ess ess-R-data-view flx flx-ido flycheck highlight-symbol ido-hacks ido-;vertical-mode indent-guide jedi markdown-mode multiple-cursors polymode popup powerline py-autopep8 smartparens smex yafolding yasnippet))
 ;;ess-R-object-popup
 
 ;; list the repositories containing them
@@ -641,30 +641,35 @@
 ;;===========================================================================
 ;; PYTHON CONFIGURATION
 ;;===========================================================================
-;; Anaconda
+;; Set Python3 interpreter
+;(setq python-shell-interpreter "/usr/bin/python3")
+(setq python-shell-interpreter "/home/rafatieppo/anaconda3/bin/python3")
+;;-----------------------------------------------------------------------------
+;; for ANACONDA
 (add-hook 'python-mode-hook 'anaconda-mode)
 (add-hook 'python-mode-hook 'anaconda-eldoc-mode)
 (eval-after-load "company"
  '(add-to-list 'company-backends '(company-anaconda :with company-capf)))
-
-;; Elpy
+;(global-flycheck-mode)
+(add-hook 'python-mode-hook 'flycheck-mode)
+;;-----------------------------------------------------------------------------
+;; for ELPY - ;; Flycheck -- use flycheck not flymake with elpy
 ;(elpy-enable)
 ;(elpy-use-ipython)
-
-;; Flycheck -- use flycheck not flymake with elpy
 ;(when (require 'flycheck nil t)
 ;  (setq elpy-modules (delq 'elpy-module-flymake elpy-modules))
 ;  (add-hook 'elpy-mode-hook 'flycheck-mode))
-
+;;-----------------------------------------------------------------------------
 ;; Autopep8 - enable autopep8 formatting on save
 (require 'py-autopep8)
-(add-hook 'elpy-mode-hook 'py-autopep8-enable-on-save)
-
+;(add-hook 'elpy-mode-hook 'py-autopep8-enable-on-save)
+;(add-hook 'anaconda-mode-hook 'py-autopep8-enable-on-save)
+;;-----------------------------------------------------------------------------
 ;; Jedi
 (require 'jedi)
 (add-hook 'python-mode-hook 'jedi:setup)
 (setq jedi:complete-on-dot t)                 ; optional
-
+;;-----------------------------------------------------------------------------
 ;; ALT ENTER to send line
 (defun my-python-line ()
  (interactive)
@@ -684,7 +689,7 @@
   (next-line)
 )
 (global-set-key (kbd "M-RET") 'my-python-line) ; Enter/Return key
-
+;;-----------------------------------------------------------------------------
 ;; ALT / to send region
 (defun python-shell-send-region-or-line nil
   "Sends from python-mode buffer to a python shell, intelligently."
@@ -697,11 +702,6 @@
 ;elpy-shell-send-region
 ;https://emacs.stackexchange.com/questions/27674/make-elpy-shell-send-more-intelligent
 (global-set-key (kbd "M-/") 'python-shell-send-region-or-line) ; alt + /
-
-;; Set Python3 interpreter
-;(setq python-shell-interpreter "/usr/bin/python3")
-(setq python-shell-interpreter "/home/rafatieppo/anaconda3/bin/python3")
-
 
 ;;===========================================================================
 ;; THEMES - SEVERAL SCHEMES
@@ -747,24 +747,27 @@
 
 (add-to-list 'load-path "/home/rafatieppo/.emacs.d/themess")
 
+(require 'ayu-theme)
 ;;(require 'monokai-theme) ;; load first to improve ORG visualization
 ;;(require 'Amelie-theme)
 ;;(require 'ample-zen-theme)
 ;;(require 'assemblage-theme)
 ;;(require 'atom-one-dark-theme)
 ;;(require 'deep-thought-theme)
-;(require 'challenger-deep-theme.el)
+;;(require 'challenger-deep-theme.el)
 ;;(require 'dracula-themes)
 ;;(require 'erosiond-theme)
+;;(require 'forest-blue-theme)
 ;;(require 'fogus-theme)
 ;;(require 'gotham)
 ;;(require 'granger-theme)
 ;;(require 'hickey-theme)
 ;;(require 'junio-theme)
 ;;(require 'material-light-theme)
-(require 'material-theme)
+;(require 'material-theme)
 ;;(require 'moe-dark-theme)
 ;;(require 'molokai-theme)
+;;(require 'nimbus-theme)
 ;;(require 'odersky-theme)
 ;;(require 'seti-theme)
 ;;(require 'soothe-theme)
@@ -780,10 +783,10 @@
 ;;===========================================================================
 ;;Horizontal line
 ;;===========================================================================
-;(global-hl-line-mode 1)
+(global-hl-line-mode 1)
 ;; Underline in current line
 ;(set-face-attribute hl-line-face nil :underline t)
-;;(set-face-background hl-line-face "#2F2F2F") ;;MONOKAI
+(set-face-background hl-line-face "#2F2F2F") ;;MONOKAI
 ;;---------------------------------------------------------------------------
 ;;===========================================================================
 
