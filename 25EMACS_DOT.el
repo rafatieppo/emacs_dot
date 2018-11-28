@@ -31,7 +31,7 @@
 ;;===========================================================================
 
 ;; list the packages you want
-;(setq package-list '(ace-jump-mode ac-math auctex anaconda-mode auto-complete company-anaconda company-irony company-jedi company-quickhelp elpy ess ess-R-data-view flx flx-ido flycheck highlight-symbol ido-hacks ido-vertical-mode indent-guide jedi markdown-mode multiple-cursors neotree polymode popup powerline py-autopep8 smartparens smex yafolding yasnippet))
+;(setq package-list '(ace-jump-mode ac-math auctex anaconda-mode auto-complete company-anaconda company-jedi company-quickhelp elpy ess ess-R-data-view flx flx-ido flycheck highlight-symbol ido-hacks ido-vertical-mode indent-guide jedi markdown-mode multiple-cursors neotree polymode popup powerline py-autopep8 smartparens smex yafolding yasnippet))
 
 ;;ess-R-object-popup
 
@@ -626,9 +626,9 @@
 (setq company-minimum-prefix-length 3)
 (global-company-mode t)
 
-(add-to-list 'company-backends 'company-irony)
-(add-hook 'irony-mode-hook 'irony-cdb-autosetup-compile-options)
-(add-hook 'irony-mode-hook #'irony-eldoc)
+;(add-to-list 'company-backends 'company-irony)
+;(add-hook 'irony-mode-hook 'irony-cdb-autosetup-compile-options)
+;(add-hook 'irony-mode-hook #'irony-eldoc)
 (add-hook 'python-mode-hook 'jedi:setup)
 ;;(defun my/python-mode-hook ())
 ;;(add-to-list 'company-backends 'company-jedi)
@@ -763,3 +763,17 @@
 ;;---------------------------------------------------------------------------
 ;;===========================================================================
 
+(custom-set-variables
+ ;; custom-set-variables was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ '(package-selected-packages
+   (quote
+    (company-irony yafolding smex smartparens py-autopep8 powerline polymode neotree multiple-cursors markdown-mode jedi indent-guide ido-vertical-mode ido-hacks highlight-symbol flycheck flx-ido ess-R-data-view elpy company-quickhelp company-jedi company-anaconda auctex ace-jump-mode ac-math))))
+(custom-set-faces
+ ;; custom-set-faces was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ )
