@@ -613,26 +613,19 @@
 ;; Set Python3 interpreter
 ;(setq python-shell-interpreter "/usr/bin/python3")
 (setq python-shell-interpreter "/home/rafatieppo/anaconda3/bin/python3")
-;;-----------------------------------------------------------------------------
 
-;;-----------------------------------------------------------------------------
-;; COMPANY quick help
-(company-quickhelp-mode 1)
-(setq company-quickhelp-delay 0)
-
-;; company 
+;;company 
 (global-company-mode t)
 (setq company-idle-delay 0)
 (setq company-minimum-prefix-length 3)
-(global-company-mode t)
+;;company quick help
+(company-quickhelp-mode 1)
+(setq company-quickhelp-delay 0)
 
-;(add-to-list 'company-backends 'company-irony)
-;(add-hook 'irony-mode-hook 'irony-cdb-autosetup-compile-options)
-;(add-hook 'irony-mode-hook #'irony-eldoc)
 (add-hook 'python-mode-hook 'jedi:setup)
-;;(defun my/python-mode-hook ())
-;;(add-to-list 'company-backends 'company-jedi)
-;;(add-hook 'python-mode-hook 'my/python-mode-hook)
+;(defun my/python-mode-hook ())
+; (add-to-list 'company-backends 'company-jedi)
+; (add-hook 'python-mode-hook 'my/python-mode-hook)
 
 ;;-----------------------------------------------------------------------------
 ;; Autopep8 - enable autopep8 formatting on save
