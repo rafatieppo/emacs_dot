@@ -633,6 +633,7 @@
 
 ;(add-hook 'elpy-mode-hook 'py-autopep8-enable-on-save)
 ;(add-hook 'anaconda-mode-hook 'py-autopep8-enable-on-save)
+(add-hook 'python-mode-hook 'py-autopep8-enable-on-save)
 ;;-----------------------------------------------------------------------------
 ;; ALT ENTER to send line
 (defun my-python-line ()
