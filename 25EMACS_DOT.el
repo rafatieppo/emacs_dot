@@ -1,9 +1,7 @@
 ;;=============================================================================
-;; Arquivo de configuração do Emacs (>=24.3.1) por Rafael Tieppo.
-;; Este arquivo encontra-se disponível em
-;; A grande maioria do conteúdo aqui disponível foi obtido/inspirado a
-;; partir de consultas na internet. Encaminhe dúvidas, problemas e/ou
-;; sugestões como um issue no diretório GitHub desse arquivo.
+;; init.el file for EMACS (25.2.2) by Rafael Tieppo.
+;; Most of all from this content was from internet. Feel free to copy and share.
+;; Any question, please, you can open a issue in this repo
 ;;=============================================================================
 
 ;;===========================================================================
@@ -32,17 +30,12 @@
 
 ;; list the packages you want
 ;(setq package-list '(ace-jump-mode ac-math auctex anaconda-mode auto-complete company-anaconda company-jedi company-quickhelp elpy ess ess-R-data-view flx flx-ido flycheck highlight-symbol ido-hacks ido-vertical-mode indent-guide jedi markdown-mode multiple-cursors neotree polymode popup powerline py-autopep8 smartparens smex yafolding yasnippet))
-
-;;ess-R-object-popup
-
 ;; list the repositories containing them
 ;(setq package-archives '(("elpa" . "http://tromey.com/elpa/")
 ;                         ("gnu" . "http://elpa.gnu.org/packages/")
 ;                         ("marmalade" . "http://marmalade-repo.org/packages/")))
-
 ;; activate all the packages (in particular autoloads)
 (package-initialize)
-
 ;; fetch the list of packages available 
 ;(unless package-archive-contents
 ;  (package-refresh-contents))
@@ -52,7 +45,6 @@
 ;  (unless (package-installed-p package)
 ;    (package-install package)))
 ;-----------------------------------------------------------------------------
-
 ;;===========================================================================
 ;;ORG MODE
 ;;===========================================================================
@@ -62,8 +54,6 @@
 (setq org-log-done t)
 
 ;; arquivo para o org agendasorg-agenda
-;(setq org-agenda-files '("/home/rafatieppo/Dropbox/EMACS_ORG_MODE/RAFA.org"))
-
 (setq org-agenda-files (list "/home/rafatieppo/Dropbox/EMACS_ORG_MODE/RAFA.org"
                              "/home/rafatieppo/Dropbox/PROFISSIONAL/PROJETOS_PESQUISA/ALLPROJECT_MANAG.org" 
                              ))
@@ -83,10 +73,8 @@
 ;; ORG CAPTURE
 ;; I use C-c c to start capture mode
 (global-set-key (kbd "C-c c") 'org-capture)
-
 (setq org-capture-templates
   '(    ;; ... other templates
-
     ("l" "Link" entry (file+headline 
          "~/Dropbox/EMACS_ORG_MODE/CAPTURE.org" "Link") 
          "* LINK %^{Description} %^g
@@ -122,22 +110,6 @@
 (powerline-default-theme)
 ;;----------------------------------------------------------------------
 
-;;-----------------------------------------------------------------------------
-;; Provide to run R code
-(org-babel-do-load-languages
- 'org-babel-load-languages
- '((emacs-lisp . t)
-   (latex . t)
-   (clojure . t)
-   (python . t)
-   (R . t)))
-;;-----------------------------------------------------------------------------
-
-;;-----------------------------------------------------------------------------
-;; Provide Highlight code in SRC
-(setq org-src-fontify-natively t)
-;;-----------------------------------------------------------------------------
-
 ;;===========================================================================
 ;;STANDARD SETTINGS
 ;;===========================================================================
@@ -172,11 +144,10 @@
 ;(set-face-attribute 'fringe nil :background "black")
 ;;---------------------------------------------------------------------------
 
-;;---------------------------------------------------------------------------
-;; ativa DEAD keys quando usar LATEX
-;; Para funcionar acentuação no Sony Vaio.
-(require 'iso-transl)
-;;---------------------------------------------------------------------------
+;;-----------------------------------------------------------------------------
+;; Provide Highlight code in SRC
+(setq org-src-fontify-natively t)
+;;-----------------------------------------------------------------------------
 
 ;;---------------------------------------------------------------------------
 ;; numeração das linhas na margem esquerda
@@ -228,8 +199,9 @@
 ;;-----------------------------------------------------------------------------
 
 ;;---------------------------------------------------------------------------
-;; inicia Emacs com ctrl-{zxcv} abilitado para desf/recor/cop/colar
-(cua-mode t)
+;; inicia Emacs com ctrl-{zxcv} habilitado para desf/cut/copy/paste
+;(cua-mode t)
+(cua-selection-mode t)
 ;;-----------------------------------------------------------------------------
 
 ;;-----------------------------------------------------------------------------
@@ -268,10 +240,8 @@
 ;;===========================================================================
 
 ;;-----------------------------------------------------------------------------
-;; multiple-cursors.el
-;; https://github.com/magnars/multiple-cursors.el
+;; multiple-cursors.el https://github.com/magnars/multiple-cursors.el
 (require 'multiple-cursors)
-;; continuous lines
 ;;-----------------------------------------------------------------------------
 
 ;;-----------------------------------------------------------------------------
@@ -281,7 +251,6 @@
   "ace-jump-mode"
   "Emacs quick move minor mode"
   t)
-
 ;; enable a more powerful jump back function from ace jump mode
 (autoload
   'ace-jump-mode-pop-mark
@@ -295,20 +264,15 @@
 
 ;;---------------------------------------------------------------------------
 ;; Ido Search FILE
-
 (ido-mode t)
 ;(setq ido-everywhere t)
 (setq ido-enable-flex-matching t
       ido-use-virtual-buffers t)
-
 (setq ido-file-extensions-order '(".md" ".R" ".Rmd" ".csv" ".txt" ".org" ".emacs" ".xml" ".el" ".ini" ".cfg" ".cnf"))
 ;;---------------------------------------------------------------------------
 
 ;;---------------------------------------------------------------------------
-;; Improving Ido Search FILE
-
-;;http://sachachua.com/blog/2014/03/emacs-basics-call-commands-name-m-x-tips-better-completion-using-ido-helm/
-;(add-to-list 'load-path "/home/rafatieppo/.emacs.d/lisp")
+;; Improving Ido Search FILE http://sachachua.com/blog/2014/03/emacs-basics-call-commands-name-m-x-tips-better-completion-using-ido-helm/
 (require 'smex)
 (require 'ido-vertical-mode)
 (require 'ido-hacks)
@@ -350,12 +314,11 @@
 ;;aciona AUTO-COMPLETE
 ;;-----------------------------------------------------------------------------
 ;; https://www.emacswiki.org/emacs/AutoCompleteSources
-;(require 'auto-complete)
-;(require 'auto-complete-config)
-;(ac-config-default)
+(require 'auto-complete)
+(require 'auto-complete-config)
+(ac-config-default)
 
-;; stop (auto-complete-mode) from being called in python
-;; https://stackoverflow.com/questions/24814988/emacs-disable-auto-complete-in-python-mode
+;; stop (auto-complete-mode) from being called in python https://stackoverflow.com/questions/24814988/emacs-disable-auto-complete-in-python-mode
 ;(defadvice auto-complete-mode (around disable-auto-complete-for-python)) ;; one extra parentesis
 ;  (unless (eq major-mode 'python-mode) ad-do-it))
 
@@ -385,18 +348,13 @@
 ;;----------------------------------------------------------------------
 ;; To activate ESS auto-complete for R.
 ;;----------------------------------------------------------------------
-;(setq ess-use-auto-complete 'script-only)
+(setq ess-use-auto-complete 'script-only)
 
 ;;----------------------------------------------------------------------
 ;; CHANGE 'ac-complete FROM ENTER to TAB.
 ;;----------------------------------------------------------------------
-(define-key ac-completing-map "\r" nil)
-(define-key ac-completing-map "\t" 'ac-complete)
-
-;;----------------------------------------------------------------------
-;; DROPDOWN DELAY
-;;----------------------------------------------------------------------
-;(setq ac-auto-show-menu    0.2)
+;(define-key ac-completing-map "\r" nil)
+;(define-key ac-completing-map "\t" 'ac-complete)
 
 ;;----------------------------------------------------------------------
 ;; auto complete markdown
@@ -407,16 +365,16 @@
 ;             (auto-complete-mode t)
 ;             (local-unset-key [tab])
 ;             (setq-local yas-fallback-behavior '(apply auto-complete))))
+
 ;;----------------------------------------------------------------------
 ;; Smart Parenthesis https://github.com/Fuco1/smartparens
 ;;----------------------------------------------------------------------
 (require 'smartparens)
 (require 'smartparens-config)
 (smartparens-global-mode 1)
+
 ;;-----------------------------------------------------------------------------
-;; FOLDING BY INDENTATION
-;; Folding code blocks based on indentation.
-;; git clone https://github.com/zenozeng/yafolding.el.git
+;; FOLDING BY INDENTATION ;; git clone https://github.com/zenozeng/yafolding.el.git
 ;;-----------------------------------------------------------------------------
 (require 'yafolding)
 (global-set-key [?\C-{] #'yafolding-hide-parent-element)
@@ -425,9 +383,7 @@
 
 ;;-----------------------------------------------------------------------------
 ;; ADD HIGHLIGHT FOR CERTAIN KEYWORDS
-;; http://lists.gnu.org/archive/html/emacs-orgmode/2010-09/txtb5ChQJCDny.txt
-;; http://emacs.1067599.n5.nabble.com/Adding-keywords-for-font-lock-experts-td95645.html
-
+;;-----------------------------------------------------------------------------
 (make-face 'special-words) 
 (set-face-attribute 'special-words nil :foreground "White" :background "Firebrick") 
 (dolist
@@ -459,6 +415,10 @@
 ;; faz com que apareceça os argumentos das funções do R no minibuffer
 ;(require 'ess-site)
 ;(setq-default ess-dialect "R")
+;(require 'ess-eldoc)
+
+;(setq-default ess-dialect "r")
+;(require 'ess-eldoc)
 ;;-----------------------------------------------------------------------------
 ;; If you want all help buffers to go into one frame do:
 (setq ess-help-own-frame 'one)
@@ -501,6 +461,7 @@
 ;(add-to-list 'load-path "/home/rafatieppo/.emacs.d/lisp")
 (load "/home/rafatieppo/.emacs.d/lisp/functions")
 ;(require 'functions)
+
 ;;===========================================================================
 ;;MARKDOWN MODE 
 ;;===========================================================================
@@ -532,8 +493,7 @@
 ;;-----------------------------------------------------------------------------
 
 ;;-----------------------------------------------------------------------------
-;; MARKDOWN enable MATH Desativei pq fica muito colorido e confunde
-;;http://jblevins.org/projects/markdown-mode/
+;; MARKDOWN enable MATH ;http://jblevins.org/projects/markdown-mode/
 (setq markdown-enable-math t)
 
 ;;===========================================================================
@@ -568,15 +528,14 @@
                                 (?\C-t . "\\citet{%l\}")
                                 (?\C-p . "\\citep{%l\}")
                                 ))))
-     
 ;; I changed the code, before "[@%l]" cite between brackets
 ;;-----------------------------------------------------------------------------
 
 ;;===========================================================================
 ;; LATEX
 ;;===========================================================================
+
 ;;-----------------------------------------------------------------------------
-;; Modo matemático para LaTex (Math no menu com atalhos para símbolos, etc
 (add-hook 'LaTeX-mode-hook 'LaTeX-math-mode)
 ;;-----------------------------------------------------------------------------
 
@@ -585,16 +544,6 @@
 ;; Para ativar: C-c =  it means CTRL + c + = 
 (add-hook 'LaTeX-mode-hook 'turn-on-reftex)
 (setq reftex-plug-into-AUCTeX t)
-
-;;===========================================================================
-;; CONFIGURACOES AVANCADAS AUCTEX
-;;===========================================================================
-;;http://tex.stackexchange.com/questions/161797/how-to-configure-emacs-and-auctex-to-perform-forward-and-inverse-search
-
- ;; '(TeX-source-correlate-method (quote synctex))
- ;; '(TeX-source-correlate-mode t)
- ;; '(TeX-source-correlate-start-server t)
-;;-----------------------------------------------------------------------------
 
 ;;===========================================================================
 ;; HTML
@@ -614,26 +563,20 @@
 ;(setq python-shell-interpreter "/usr/bin/python3")
 (setq python-shell-interpreter "/home/rafatieppo/anaconda3/bin/python3")
 
-;;company 
-(global-company-mode t)
-(setq company-idle-delay 0)
-(setq company-minimum-prefix-length 3)
-;;company quick help
-(company-quickhelp-mode 1)
-(setq company-quickhelp-delay 0)
-
-(add-hook 'python-mode-hook 'jedi:setup)
-;(defun my/python-mode-hook ())
-; (add-to-list 'company-backends 'company-jedi)
-; (add-hook 'python-mode-hook 'my/python-mode-hook)
+;; auto-complete
+(elpy-enable)
+(setf elpy:complete-on-dot t)
+;(company-quickhelp-mode 1) ;; faz aparecer quickhelp
+(add-hook 'elpy-mode-hook
+          (lambda ()
+            (delq 'ac-source-dictionary ac-sources)
+            (delq 'ac-source-abbrev ac-sources)
+            (delq 'ac-source-words-in-same-mode-buffers ac-sources)))
 
 ;;-----------------------------------------------------------------------------
 ;; Autopep8 - enable autopep8 formatting on save
 ;(require 'py-autopep8)
-
-;(add-hook 'elpy-mode-hook 'py-autopep8-enable-on-save)
-;(add-hook 'anaconda-mode-hook 'py-autopep8-enable-on-save)
-(add-hook 'python-mode-hook 'py-autopep8-enable-on-save)
+(add-hook 'elpy-mode-hook 'py-autopep8-enable-on-save)
 ;;-----------------------------------------------------------------------------
 ;; ALT ENTER to send line
 (defun my-python-line ()
@@ -669,6 +612,17 @@
 (global-set-key (kbd "M-/") 'python-shell-send-region-or-line) ; alt + /
 
 ;;===========================================================================
+;;Neotree A emacs tree plugin like NERD tree for Vim.
+;;===========================================================================
+(require 'neotree)
+  (global-set-key [f8] 'neotree-toggle)
+
+;;===========================================================================
+;; Flycheck
+;;===========================================================================
+;(add-hook 'after-init-hook #'global-flycheck-mode)
+
+;;===========================================================================
 ;; THEMES - SEVERAL SCHEMES
 ;;===========================================================================
 ;; Solarized
@@ -678,42 +632,16 @@
 ;(require 'solarized-theme)
 ;(require 'color-theme-solarized)
 
-;(custom-set-variables '(solarized-termcolors 256))
-;(custom-set-variables '(solarized-contrast 'high))
-;(custom-set-variables '(solarized-visibility 'high))
-
 ;;-----------------------------------------------------------------------------
 ;; Solarized https://github.com/bbatsov/solarized-emacs
 
 ;(add-to-list 'load-path "/home/rafatieppo/.emacs.d/themess/solarized")
 ;(require 'solarized-dark-theme)
 
-;; options
-;; make the fringe stand out from the background
-;(setq solarized-distinct-fringe-background t)
-;; Don't change the font for some headings and titles
-;(setq solarized-use-variable-pitch nil)
-;; make the modeline high contrast
-;(setq solarized-high-contrast-mode-line t)
-;; Use less bolding
-;(setq solarized-use-less-bold t)
-;; Use more italics
-;(setq solarized-use-more-italic t)
-;; Use less colors for indicators such as git:gutter, flycheck and similar
-;(setq solarized-emphasize-indicators nil)
-;; Don't change size of org-mode headlines (but keep other size-changes)
-;(setq solarized-scale-org-headlines nil)
-;; Avoid all font-size changes
-;(setq solarized-height-minus-1 1.0)
-;(setq solarized-height-plus-1 1.0)
-;(setq solarized-height-plus-2 1.0)
-;(setq solarized-height-plus-3 1.0)
-;(setq solarized-height-plus-4 1.0)
-
 (add-to-list 'load-path "/home/rafatieppo/.emacs.d/themess")
 
-(require 'ayu-theme)
-;;(require 'monokai-theme) ;; load first to improve ORG visualization
+;(require 'ayu-theme)
+;(require 'monokai-theme) ;; load first to improve ORG visualization
 ;;(require 'Amelie-theme)
 ;;(require 'ample-zen-theme)
 ;;(require 'assemblage-theme)
@@ -729,31 +657,28 @@
 ;;(require 'hickey-theme)
 ;;(require 'junio-theme)
 ;;(require 'material-light-theme)
-;(require 'material-theme)
+;;(require 'material-theme)
 ;;(require 'moe-dark-theme)
+;(require 'moe-light-theme)
 ;;(require 'molokai-theme)
-;;(require 'nimbus-theme)
+(require 'nimbus-theme)
 ;;(require 'odersky-theme)
 ;;(require 'seti-theme)
 ;;(require 'soothe-theme)
 ;;(require 'spolsky-theme)
 ;;(require 'tangotango-theme)
 ;;(require 'ujelly-theme)
-;;(require 'underwater-theme)
+;(require 'underwater-theme)
 ;;(require 'wilson-theme)
 ;;(require 'zenburn-theme)
-;;===========================================================================
-;;Neotree A emacs tree plugin like NERD tree for Vim.
-;;===========================================================================
-(require 'neotree)
-  (global-set-key [f8] 'neotree-toggle)
+
 ;;===========================================================================
 ;;Horizontal line
 ;;===========================================================================
 (global-hl-line-mode 1)
 ;; Underline in current line
 ;(set-face-attribute hl-line-face nil :underline t)
-(set-face-background hl-line-face "#2F2F2F") ;;MONOKAI
+;(set-face-background hl-line-face "#2F2F2F") ;;MONOKAI
 ;;---------------------------------------------------------------------------
 ;;===========================================================================
 
@@ -765,9 +690,4 @@
  '(package-selected-packages
    (quote
     (company-irony yafolding smex smartparens py-autopep8 powerline polymode neotree multiple-cursors markdown-mode jedi indent-guide ido-vertical-mode ido-hacks highlight-symbol flycheck flx-ido ess-R-data-view elpy company-quickhelp company-jedi company-anaconda auctex ace-jump-mode ac-math))))
-(custom-set-faces
- ;; custom-set-faces was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- )
+
