@@ -565,13 +565,20 @@
 
 
 ;; ANACONDA
-
+(require 'rx)
+;(eval-after-load "company"
+; '(add-to-list 'company-backends 'company-anaconda))
+;;or
+(eval-after-load "company"
+ '(add-to-list 'company-backends '(company-anaconda :with company-capf)))
 (add-hook 'python-mode-hook 'anaconda-mode)
 (add-hook 'python-mode-hook 'anaconda-eldoc-mode)
+
 ;;-----------------------------------------------------------------------------
 ;; Autopep8 - enable autopep8 formatting on save
 ;(require 'py-autopep8)
-(add-hook 'elpy-mode-hook 'py-autopep8-enable-on-save)
+;(add-hook 'elpy-mode-hook 'py-autopep8-enable-on-save)
+(add-hook 'anaconda-mode-hook 'py-autopep8-enable-on-save)
 ;;-----------------------------------------------------------------------------
 ;; ALT ENTER to send line
 (defun my-python-line ()
@@ -678,17 +685,4 @@
 ;;---------------------------------------------------------------------------
 ;;===========================================================================
 
-(custom-set-variables
- ;; custom-set-variables was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- '(package-selected-packages
-   (quote
-    (elpygen yafolding spacemacs-theme smex smartparens py-autopep8 powerline polymode neotree multiple-cursors markdown-mode jedi indent-guide ido-vertical-mode ido-hacks highlight-symbol flycheck flx-ido ess-R-data-view elpy company-quickhelp company-jedi company-irony company-anaconda auctex ace-jump-mode ac-math))))
-(custom-set-faces
- ;; custom-set-faces was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- )
+
