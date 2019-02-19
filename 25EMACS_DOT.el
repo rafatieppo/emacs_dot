@@ -314,9 +314,9 @@
 ;;aciona AUTO-COMPLETE
 ;;-----------------------------------------------------------------------------
 ;; https://www.emacswiki.org/emacs/AutoCompleteSources
-(require 'auto-complete)
-(require 'auto-complete-config)
-(ac-config-default)
+;(require 'auto-complete)
+;(require 'auto-complete-config)
+;(ac-config-default)
 
 ;; stop (auto-complete-mode) from being called in python https://stackoverflow.com/questions/24814988/emacs-disable-auto-complete-in-python-mode
 ;(defadvice auto-complete-mode (around disable-auto-complete-for-python)) ;; one extra parentesis
@@ -348,7 +348,7 @@
 ;;----------------------------------------------------------------------
 ;; To activate ESS auto-complete for R.
 ;;----------------------------------------------------------------------
-(setq ess-use-auto-complete 'script-only)
+; (setq ess-use-auto-complete 'script-only)
 
 ;;----------------------------------------------------------------------
 ;; CHANGE 'ac-complete FROM ENTER to TAB.
@@ -563,16 +563,11 @@
 ;(setq python-shell-interpreter "/usr/bin/python3")
 (setq python-shell-interpreter "/home/rafatieppo/anaconda3/bin/python3")
 
-;; auto-complete
-(elpy-enable)
-(setf elpy:complete-on-dot t)
-;(company-quickhelp-mode 1) ;; faz aparecer quickhelp
-(add-hook 'elpy-mode-hook
-          (lambda ()
-            (delq 'ac-source-dictionary ac-sources)
-            (delq 'ac-source-abbrev ac-sources)
-            (delq 'ac-source-words-in-same-mode-buffers ac-sources)))
 
+;; ANACONDA
+
+(add-hook 'python-mode-hook 'anaconda-mode)
+(add-hook 'python-mode-hook 'anaconda-eldoc-mode)
 ;;-----------------------------------------------------------------------------
 ;; Autopep8 - enable autopep8 formatting on save
 ;(require 'py-autopep8)
@@ -639,29 +634,30 @@
 ;(require 'solarized-dark-theme)
 
 (add-to-list 'load-path "/home/rafatieppo/.emacs.d/themess")
-
+;(require 'afternoon-theme)
 ;(require 'ayu-theme)
-;(require 'monokai-theme) ;; load first to improve ORG visualization
+;;(require 'monokai-theme) ;; load first to improve ORG visualization
 ;;(require 'Amelie-theme)
 ;;(require 'ample-zen-theme)
 ;;(require 'assemblage-theme)
-;;(require 'atom-one-dark-theme)
+;(require 'atom-one-dark-theme)
 ;;(require 'deep-thought-theme)
 ;;(require 'challenger-deep-theme.el)
+;;(require 'clues-theme)
 ;;(require 'dracula-themes)
 ;;(require 'erosiond-theme)
-;;(require 'forest-blue-theme)
+;(require 'forest-blue-theme)
 ;;(require 'fogus-theme)
 ;;(require 'gotham)
 ;;(require 'granger-theme)
 ;;(require 'hickey-theme)
 ;;(require 'junio-theme)
 ;;(require 'material-light-theme)
-;;(require 'material-theme)
+(require 'material-theme)
 ;;(require 'moe-dark-theme)
 ;(require 'moe-light-theme)
-;;(require 'molokai-theme)
-(require 'nimbus-theme)
+;(require 'molokai-theme)
+;;(require 'nimbus-theme)
 ;;(require 'odersky-theme)
 ;;(require 'seti-theme)
 ;;(require 'soothe-theme)
@@ -678,7 +674,7 @@
 (global-hl-line-mode 1)
 ;; Underline in current line
 ;(set-face-attribute hl-line-face nil :underline t)
-;(set-face-background hl-line-face "#2F2F2F") ;;MONOKAI
+(set-face-background hl-line-face "#2F2F2F") ;;MONOKAI
 ;;---------------------------------------------------------------------------
 ;;===========================================================================
 
@@ -689,5 +685,10 @@
  ;; If there is more than one, they won't work right.
  '(package-selected-packages
    (quote
-    (company-irony yafolding smex smartparens py-autopep8 powerline polymode neotree multiple-cursors markdown-mode jedi indent-guide ido-vertical-mode ido-hacks highlight-symbol flycheck flx-ido ess-R-data-view elpy company-quickhelp company-jedi company-anaconda auctex ace-jump-mode ac-math))))
-
+    (elpygen yafolding spacemacs-theme smex smartparens py-autopep8 powerline polymode neotree multiple-cursors markdown-mode jedi indent-guide ido-vertical-mode ido-hacks highlight-symbol flycheck flx-ido ess-R-data-view elpy company-quickhelp company-jedi company-irony company-anaconda auctex ace-jump-mode ac-math))))
+(custom-set-faces
+ ;; custom-set-faces was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ )

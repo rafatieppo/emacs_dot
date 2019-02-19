@@ -107,6 +107,9 @@ e.g. Sunday, September 17, 2000."
   "Move the current line down by N lines."
   (interactive "p")
 (move-line (if (null n) 1 n)))
+
+(global-set-key (kbd "M-<up>") 'move-line-up)
+(global-set-key (kbd "M-<down>") 'move-line-down)
 ;;-----------------------------------------------------------------------------
 
 (defun comment-line-or-region ()
