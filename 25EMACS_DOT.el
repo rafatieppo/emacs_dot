@@ -560,7 +560,7 @@
 ;; PYTHON CONFIGURATION
 ;;===========================================================================
 ;; Set Python3 interpreter
-;(setq python-shell-interpreter "/usr/bin/python3")
+;;(setq python-shell-interpreter "/usr/bin/python3")
 (setq python-shell-interpreter "/home/rafatieppo/anaconda3/bin/python3")
 
 
@@ -573,6 +573,10 @@
  '(add-to-list 'company-backends '(company-anaconda :with company-capf)))
 (add-hook 'python-mode-hook 'anaconda-mode)
 (add-hook 'python-mode-hook 'anaconda-eldoc-mode)
+
+(setq company-idle-delay 0)
+(setq company-minimum-prefix-length 2)
+
 
 ;;-----------------------------------------------------------------------------
 ;; Autopep8 - enable autopep8 formatting on save
@@ -641,17 +645,18 @@
 ;(require 'solarized-dark-theme)
 
 (add-to-list 'load-path "/home/rafatieppo/.emacs.d/themess")
-;(require 'afternoon-theme)
+(require 'afternoon-theme)
 ;(require 'ayu-theme)
-;;(require 'monokai-theme) ;; load first to improve ORG visualization
+;(require 'monokai-theme) ;; load first to improve ORG visualization
 ;;(require 'Amelie-theme)
 ;;(require 'ample-zen-theme)
 ;;(require 'assemblage-theme)
 ;(require 'atom-one-dark-theme)
+;;(require 'blackboard-theme)
 ;;(require 'deep-thought-theme)
 ;;(require 'challenger-deep-theme.el)
-;;(require 'clues-theme)
-;;(require 'dracula-themes)
+;(require 'clues-theme)
+;(require 'dracula-theme)
 ;;(require 'erosiond-theme)
 ;(require 'forest-blue-theme)
 ;;(require 'fogus-theme)
@@ -659,22 +664,28 @@
 ;;(require 'granger-theme)
 ;;(require 'hickey-theme)
 ;;(require 'junio-theme)
-;;(require 'material-light-theme)
-(require 'material-theme)
+;(require 'material-light-theme)
+;(require 'material-theme)
 ;;(require 'moe-dark-theme)
 ;(require 'moe-light-theme)
 ;(require 'molokai-theme)
-;;(require 'nimbus-theme)
+;(require 'nimbus-theme)
 ;;(require 'odersky-theme)
 ;;(require 'seti-theme)
 ;;(require 'soothe-theme)
 ;;(require 'spolsky-theme)
 ;;(require 'tangotango-theme)
+;(require 'tron-theme)
 ;;(require 'ujelly-theme)
-;(require 'underwater-theme)
+;;(require 'underwater-theme)
 ;;(require 'wilson-theme)
 ;;(require 'zenburn-theme)
-
+;(require 'color-theme-tomorrow)
+;(color-theme-tomorrow--define-theme night-blue)
+;(color-theme-tomorrow--define-theme night-eighties)
+;;(color-theme-tomorrow--define-theme night-bright)
+;;(color-theme-tomorrow--define-theme night)
+;;(color-theme-tomorrow--define-theme day)
 ;;===========================================================================
 ;;Horizontal line
 ;;===========================================================================
