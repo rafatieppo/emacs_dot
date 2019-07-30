@@ -575,7 +575,7 @@
 (add-hook 'python-mode-hook 'anaconda-eldoc-mode)
 
 (setq company-idle-delay 0)
-(setq company-minimum-prefix-length 2)
+(setq company-minimum-prefix-length 3)
 
 
 ;;-----------------------------------------------------------------------------
@@ -645,7 +645,7 @@
 ;(require 'solarized-dark-theme)
 
 (add-to-list 'load-path "/home/rafatieppo/.emacs.d/themess")
-(require 'afternoon-theme)
+;(require 'afternoon-theme)
 ;(require 'ayu-theme)
 ;(require 'monokai-theme) ;; load first to improve ORG visualization
 ;;(require 'Amelie-theme)
@@ -686,6 +686,21 @@
 ;;(color-theme-tomorrow--define-theme night-bright)
 ;;(color-theme-tomorrow--define-theme night)
 ;;(color-theme-tomorrow--define-theme day)
+
+
+(require 'doom-themes)
+
+;;; Settings (defaults)
+(setq doom-themes-enable-bold t    ; if nil, bold is universally disabled
+      doom-themes-enable-italic t  ; if nil, italics is universally disabled
+
+      ;; doom-one specific settings
+      doom-one-brighter-modeline nil
+      doom-one-brighter-comments nil)
+
+;; Load the theme (doom-one, doom-dark, etc.)
+(load-theme 'doom-tomorrow-night t)
+
 ;;===========================================================================
 ;;Horizontal line
 ;;===========================================================================
