@@ -27,17 +27,21 @@ Before I used `Emacs 24.1`, `GNU Emacs 25.1.1 x86_64-unknown-linux-gnu, GTK+ Ver
 There are four available files in this repository:
 
 - `24EMACS_DOT.el`: My init file for emacs 24 (it is old)
-- `25EMACS_DOT.el`: My init file for emacs 25 (Currently)
+- `25EMACS_DOT.el`: My init file for emacs 25 (it is old)
+- `26EMACS_DOT.el`: My init file for emacs 26 (Currently)
 - `27EMACS_DOT.el`: My init file for emacs 27 (Just for test)
 - `functions.el`: My functions for emacs.
 
 ## Currently operational system
 
-- Distributor ID: Ubuntu
-- Description: Ubuntu 18.04 LTS
-- Release: 18.04
-- Codename: bionic
-- DE: Mate
+- PRETTY_NAME="Debian GNU/Linux 10 (buster)"
+- NAME="Debian GNU/Linux"
+- VERSION_ID="10"
+- VERSION="10 (buster)"
+- VERSION_CODENAME=buster
+- ID=debian
+- HOME_URL="https://www.debian.org/"
+- DE="XFCE"
 
 >Enjoy Emacs!
 
