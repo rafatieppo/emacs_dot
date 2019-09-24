@@ -1,5 +1,5 @@
 ;;=============================================================================
-;; init.el file for EMACS (25.2.2) by Rafael Tieppo.
+;; init.el file for EMACS (26) by Rafael Tieppo.
 ;; Most of all from this content was from internet. Feel free to copy and share.
 ;; Any question, please, you can open a issue in this repo
 ;;=============================================================================
@@ -12,25 +12,20 @@
 (add-to-list 'load-path "/home/rafatieppo/.emacs.d/")
 (load "package")
 (require 'package)
-;;(add-to-list 'package-archives
-;;    '("marmalade" .
-;;      "http://marmalade-repo.org/packages/"))
 (package-initialize) 
-
-(setq package-enable-at-startup nil)
-;;(add-to-list 'package-archives '("marmalade" . "https://marmalade-repo.org/packages/"))
-(add-to-list 'package-archives '("melpa" . "http://melpa.org/packages/"))
-;;(add-to-list 'package-archives '("org" . "http://orgmode.org/elpa/") t) ;;Org-mode's repository
-;;-----------------------------------------------------------------------------
-
 
 ;;===========================================================================
 ;;EMACS auto install packs GREAT - active only in the first session
 ;;===========================================================================
-;
+;auctex
 ;; list the packages you want
-(setq package-list '(ace-jump-mode ac-math auctex anaconda-mode auto-complete  company-anaconda company-jedi company-quickhelp elpy ess ess-R-data-view flx flx-ido flycheck highlight-symbol ido-hacks ido-vertical-mode indent-guide jedi markdown-mode multiple-cursors neotree polymode popup powerline py-autopep8 smartparens smex yafolding yasnippet))
-
+;(setq package-list '(ace-jump-mode ac-math anaconda-mode auto-complete  company-anaconda company-jedi company-quickhelp elpy ess ess-R-data-view flx flx-ido flycheck highlight-symbol ido-hacks ido-vertical-mode indent-guide jedi markdown-mode multiple-cursors neotree polymode popup powerline py-autopep8 smartparens smex yafolding yasnippet))
+;; list the repositories containing them
+;(setq package-archives '(;("elpa" . "http://tromey.com/elpa/")
+                         ;("gnu" . "http://elpa.gnu.org/packages/")
+;                         ("melpa" . "http://melpa.org/packages/")
+                         ;("marmalade" . "http://marmalade-repo.org/packages/")
+;                         ))
 ;; activate all the packages (in particular autoloads)
 (package-initialize)
 ;; fetch the list of packages available 
@@ -560,26 +555,22 @@
 (setq python-shell-interpreter "/usr/bin/python3")
 ;;(setq python-shell-interpreter "/home/rafatieppo/anaconda3/bin/python3")
 
+(setq elpy-rpc-python-command "/usr/bin/python3")
 
-;; ANACONDA
-(require 'rx)
-;(eval-after-load "company"
-; '(add-to-list 'company-backends 'company-anaconda))
-;;or
-(eval-after-load "company"
- '(add-to-list 'company-backends '(company-anaconda :with company-capf)))
-(add-hook 'python-mode-hook 'anaconda-mode)
-(add-hook 'python-mode-hook 'anaconda-eldoc-mode)
-
-(setq company-idle-delay 0)
-(setq company-minimum-prefix-length 3)
-
+(elpy-enable)
+;;(setf elpy:complete-on-dot t)
+;;(company-quickhelp-mode 1) ;; faz aparecer quickhelp
+(add-hook 'elpy-mode-hook
+          (lambda ()
+            (delq 'ac-source-dictionary ac-sources)
+            (delq 'ac-source-abbrev ac-sources)
+            (delq 'ac-source-words-in-same-mode-buffers ac-sources)))
 
 ;;-----------------------------------------------------------------------------
 ;; Autopep8 - enable autopep8 formatting on save
 ;(require 'py-autopep8)
-;(add-hook 'elpy-mode-hook 'py-autopep8-enable-on-save)
-(add-hook 'anaconda-mode-hook 'py-autopep8-enable-on-save)
+(add-hook 'elpy-mode-hook 'py-autopep8-enable-on-save)
+;(add-hook 'anaconda-mode-hook 'py-autopep8-enable-on-save)
 ;;-----------------------------------------------------------------------------
 ;; ALT ENTER to send line
 (defun my-python-line ()
