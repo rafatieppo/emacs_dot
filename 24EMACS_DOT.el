@@ -1,6 +1,6 @@
 ;;=============================================================================
 ;; Arquivo de configuração do Emacs (>=24.3.1) por Rafael Tieppo.
-;; Este arquivo encontra-se disponível em
+;; Este arquivo encontra-se disponível emm
 ;; A grande maioria do conteúdo aqui disponível foi obtido/inspirado a
 ;; partir de consultas na internet. Encaminhe dúvidas, problemas e/ou
 ;; sugestões como um issue no diretório GitHub desse arquivo.
