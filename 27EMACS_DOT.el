@@ -1,5 +1,5 @@
 ;;=============================================================================
-;; Arquivo de configuração do Emacs (>=24.3.1) por Rafael Tieppo.
+;; Arquivo de configuração do Emacs (>=27) por Rafael Tieppo.
 ;; Este arquivo encontra-se disponível em
 ;; A grande maioria do conteúdo aqui disponível foi obtido/inspirado a
 ;; partir de consultas na internet. Encaminhe dúvidas, problemas e/ou
