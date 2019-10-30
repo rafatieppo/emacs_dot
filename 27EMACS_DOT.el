@@ -6,7 +6,7 @@
 ;; sugestões como um issue no diretório GitHub desse arquivo.
 ;;=============================================================================
 
-;; SOMENTE TESTE ATTENTION
+;; SOMENTE TESTE 
 
 ;;===========================================================================
 ;;TO INSTALL FROM MELPA
