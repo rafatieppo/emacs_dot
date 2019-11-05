@@ -198,7 +198,7 @@
 
 ;;-----------------------------------------------------------------------------
 ;; stop cursor blinking
-(blink-cursor-mode 0)
+(blink-cursor-mode 1)
 ;;-----------------------------------------------------------------------------
 
 ;;-----------------------------------------------------------------------------
@@ -558,8 +558,7 @@
 (setq elpy-rpc-python-command "/usr/bin/python3")
 
 (elpy-enable)
-;;(setf elpy:complete-on-dot t)
-;;(company-quickhelp-mode 1) ;; faz aparecer quickhelp
+(add-hook 'python-mode-hook 'jedi:setup)
 (add-hook 'elpy-mode-hook
           (lambda ()
             (delq 'ac-source-dictionary ac-sources)
@@ -633,13 +632,14 @@
 ;(require 'solarized-dark-theme)
 
 (add-to-list 'load-path "/home/rafatieppo/.emacs.d/themess")
+(require 'acario-dark-theme)
 ;(require 'afternoon-theme)
 ;(require 'ayu-theme)
 ;(require 'monokai-theme) ;; load first to improve ORG visualization
 ;;(require 'Amelie-theme)
 ;;(require 'ample-zen-theme)
 ;;(require 'assemblage-theme)
-(require 'atom-one-dark-theme)
+;(require 'atom-one-dark-theme)
 ;;(require 'blackboard-theme)
 ;;(require 'deep-thought-theme)
 ;;(require 'challenger-deep-theme.el)
@@ -652,14 +652,16 @@
 ;;(require 'granger-theme)
 ;;(require 'hickey-theme)
 ;;(require 'junio-theme)
+;(require 'lucius-theme)
 ;(require 'material-light-theme)
 ;(require 'material-theme)
 ;;(require 'moe-dark-theme)
 ;(require 'moe-light-theme)
 ;(require 'molokai-theme)
 ;(require 'nimbus-theme)
+;;(require 'nord-theme)
 ;;(require 'odersky-theme)
-;;(require 'seti-theme)
+;(require 'seti-theme)
 ;;(require 'soothe-theme)
 ;;(require 'spolsky-theme)
 ;;(require 'tangotango-theme)
@@ -682,6 +684,7 @@
 ;; Underline in current line
 ;(set-face-attribute hl-line-face nil :underline t)
 (set-face-background hl-line-face "#2F2F2F") ;;MONOKAI
+;(set-face-background hl-line-face "#3F4F1F") ;;acario
 ;;---------------------------------------------------------------------------
 ;;===========================================================================
 
