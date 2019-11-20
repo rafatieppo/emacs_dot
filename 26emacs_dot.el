@@ -1,9 +1,7 @@
 ;;=============================================================================
-;; Arquivo de configuração do Emacs (>=24.3.1) por Rafael Tieppo.
-;; Este arquivo encontra-se disponível em
-;; A grande maioria do conteúdo aqui disponível foi obtido/inspirado a
-;; partir de consultas na internet. Encaminhe dúvidas, problemas e/ou
-;; sugestões como um issue no diretório GitHub desse arquivo.
+;; init.el file for EMACS (26) by Rafael Tieppo.
+;; Most of all from this content was from internet. Feel free to copy and share.
+;; Any question, please, you can open a issue in this repo
 ;;=============================================================================
 
 ;;===========================================================================
@@ -14,35 +12,22 @@
 (add-to-list 'load-path "/home/rafatieppo/.emacs.d/")
 (load "package")
 (require 'package)
-;;(add-to-list 'package-archives
-;;    '("marmalade" .
-;;      "http://marmalade-repo.org/packages/"))
 (package-initialize) 
-
-(setq package-enable-at-startup nil)
-;;(add-to-list 'package-archives '("marmalade" . "https://marmalade-repo.org/packages/"))
-(add-to-list 'package-archives '("melpa" . "http://melpa.org/packages/"))
-;;(add-to-list 'package-archives '("org" . "http://orgmode.org/elpa/") t) ;;Org-mode's repository
-;;-----------------------------------------------------------------------------
-
 
 ;;===========================================================================
 ;;EMACS auto install packs GREAT - active only in the first session
 ;;===========================================================================
-
+;auctex
 ;; list the packages you want
-;(setq package-list '(ace-jump-mode ac-math auctex anaconda-mode auto-complete company-anaconda company-quickhelp elpy ess ess-R-data-view flx flx-ido flycheck highlight-symbol ido-hacks ido-vertical-mode indent-guide jedi markdown-mode multiple-cursors polymode popup powerline py-autopep8 smartparens smex yafolding yasnippet))
-
-;;ess-R-object-popup
-
+;(setq package-list '(ace-jump-mode ac-math anaconda-mode auto-complete  company-anaconda company-jedi company-quickhelp elpy ess ess-R-data-view flx flx-ido flycheck highlight-symbol ido-hacks ido-vertical-mode indent-guide jedi markdown-mode multiple-cursors neotree polymode popup powerline py-autopep8 smartparens smex yafolding yasnippet))
 ;; list the repositories containing them
-;(setq package-archives '(("elpa" . "http://tromey.com/elpa/")
-;                         ("gnu" . "http://elpa.gnu.org/packages/")
-;                         ("marmalade" . "http://marmalade-repo.org/packages/")))
-
+;(setq package-archives '(;("elpa" . "http://tromey.com/elpa/")
+                         ;("gnu" . "http://elpa.gnu.org/packages/")
+;                         ("melpa" . "http://melpa.org/packages/")
+                         ;("marmalade" . "http://marmalade-repo.org/packages/")
+;                         ))
 ;; activate all the packages (in particular autoloads)
 (package-initialize)
-
 ;; fetch the list of packages available 
 ;(unless package-archive-contents
 ;  (package-refresh-contents))
@@ -52,27 +37,23 @@
 ;  (unless (package-installed-p package)
 ;    (package-install package)))
 ;-----------------------------------------------------------------------------
-
 ;;===========================================================================
 ;;ORG MODE
 ;;===========================================================================
-
 (require 'org)
 (define-key global-map "\C-cl" 'org-store-link)
 (define-key global-map "\C-ca" 'org-agenda)
 (setq org-log-done t)
 
 ;; arquivo para o org agendasorg-agenda
-(setq org-agenda-files '("/home/rafatieppo/Dropbox/EMACS_ORG_MODE/RAFA.org"))
-
-
+(setq org-agenda-files (list "/home/rafatieppo/Dropbox/EMACS_ORG_MODE/RAFA.org"
+                             "/home/rafatieppo/Dropbox/PROFISSIONAL/PROJETOS_PESQUISA/ALLPROJECT_MANAG.org" 
+                             ))
 
 ;;-----------------------------------------------------------------------------
 ;; ORG mode CLASSES and COLORS for TASKS
 (setq org-todo-keywords
        '((sequence "TODO(t)" "RUNN(w@/!)" "WAIT(w@/!)" "|" "DONE(d!)" "CANCELED(c@)")))
-
-
      (setq org-todo-keyword-faces
            '(
              ("TODO" . (:foreground "red" :weight bold))
@@ -80,48 +61,36 @@
              ("WAIT" . (:foreground "orange" :weight bold))
              ("DONE" . (:foreground "green" :weight bold))
              ))
-
-
-
 ;;-----------------------------------------------------------------------------
 ;; ORG CAPTURE
-
 ;; I use C-c c to start capture mode
 (global-set-key (kbd "C-c c") 'org-capture)
-
 (setq org-capture-templates
   '(    ;; ... other templates
-
     ("l" "Link" entry (file+headline 
          "~/Dropbox/EMACS_ORG_MODE/CAPTURE.org" "Link") 
          "* LINK %^{Description} %^g
          %?
          Added: %U")
-
     ("j" "Journal Entry"
          entry (file+datetree "~/Dropbox/EMACS_ORG_MODE/CAPTURE.org")
          "* %?"
          :empty-lines 1)
-
     ("p" "Phone" entry (file+headline 
          "~/Dropbox/EMACS_ORG_MODE/CAPTURE.org" "Phone") 
          "* NUMBER %^{Description} %^g
          %?
          Added: %U")
-
     ("q" "Quote" entry (file+headline 
          "~/Dropbox/EMACS_ORG_MODE/CAPTURE.org" "Quote") 
          "* QUOTE %^{Description} %^g
          %?
          Added: %U")
-
     ("t" "Ted Talks" entry (file+headline 
          "~/Dropbox/EMACS_ORG_MODE/CAPTURE.org" "Ted") 
          "* TED %^{Description} %^g
          %?
          Added: %U")
-
-
         ;; ... other templates
     ))
 
@@ -132,22 +101,6 @@
 (require 'powerline)
 (powerline-default-theme)
 ;;----------------------------------------------------------------------
-
-;;-----------------------------------------------------------------------------
-;; Provide to run R code
-(org-babel-do-load-languages
- 'org-babel-load-languages
- '((emacs-lisp . t)
-   (latex . t)
-   (clojure . t)
-   (python . t)
-   (R . t)))
-;;-----------------------------------------------------------------------------
-
-;;-----------------------------------------------------------------------------
-;; Provide Highlight code in SRC
-(setq org-src-fontify-natively t)
-;;-----------------------------------------------------------------------------
 
 ;;===========================================================================
 ;;STANDARD SETTINGS
@@ -183,11 +136,10 @@
 ;(set-face-attribute 'fringe nil :background "black")
 ;;---------------------------------------------------------------------------
 
-;;---------------------------------------------------------------------------
-;; ativa DEAD keys quando usar LATEX
-;; Para funcionar acentuação no Sony Vaio.
-(require 'iso-transl)
-;;---------------------------------------------------------------------------
+;;-----------------------------------------------------------------------------
+;; Provide Highlight code in SRC
+(setq org-src-fontify-natively t)
+;;-----------------------------------------------------------------------------
 
 ;;---------------------------------------------------------------------------
 ;; numeração das linhas na margem esquerda
@@ -239,13 +191,14 @@
 ;;-----------------------------------------------------------------------------
 
 ;;---------------------------------------------------------------------------
-;; inicia Emacs com ctrl-{zxcv} abilitado para desf/recor/cop/colar
-(cua-mode t)
+;; inicia Emacs com ctrl-{zxcv} habilitado para desf/cut/copy/paste
+;(cua-mode t)
+(cua-selection-mode t)
 ;;-----------------------------------------------------------------------------
 
 ;;-----------------------------------------------------------------------------
 ;; stop cursor blinking
-(blink-cursor-mode 0)
+(blink-cursor-mode 1)
 ;;-----------------------------------------------------------------------------
 
 ;;-----------------------------------------------------------------------------
@@ -279,10 +232,8 @@
 ;;===========================================================================
 
 ;;-----------------------------------------------------------------------------
-;; multiple-cursors.el
-;; https://github.com/magnars/multiple-cursors.el
+;; multiple-cursors.el https://github.com/magnars/multiple-cursors.el
 (require 'multiple-cursors)
-;; continuous lines
 ;;-----------------------------------------------------------------------------
 
 ;;-----------------------------------------------------------------------------
@@ -292,7 +243,6 @@
   "ace-jump-mode"
   "Emacs quick move minor mode"
   t)
-
 ;; enable a more powerful jump back function from ace jump mode
 (autoload
   'ace-jump-mode-pop-mark
@@ -306,20 +256,15 @@
 
 ;;---------------------------------------------------------------------------
 ;; Ido Search FILE
-
 (ido-mode t)
 ;(setq ido-everywhere t)
 (setq ido-enable-flex-matching t
       ido-use-virtual-buffers t)
-
 (setq ido-file-extensions-order '(".md" ".R" ".Rmd" ".csv" ".txt" ".org" ".emacs" ".xml" ".el" ".ini" ".cfg" ".cnf"))
 ;;---------------------------------------------------------------------------
 
 ;;---------------------------------------------------------------------------
-;; Improving Ido Search FILE
-
-;;http://sachachua.com/blog/2014/03/emacs-basics-call-commands-name-m-x-tips-better-completion-using-ido-helm/
-;(add-to-list 'load-path "/home/rafatieppo/.emacs.d/lisp")
+;; Improving Ido Search FILE http://sachachua.com/blog/2014/03/emacs-basics-call-commands-name-m-x-tips-better-completion-using-ido-helm/
 (require 'smex)
 (require 'ido-vertical-mode)
 (require 'ido-hacks)
@@ -361,13 +306,12 @@
 ;;aciona AUTO-COMPLETE
 ;;-----------------------------------------------------------------------------
 ;; https://www.emacswiki.org/emacs/AutoCompleteSources
-(require 'auto-complete)
-(require 'auto-complete-config)
-(ac-config-default)
+;(require 'auto-complete)
+;(require 'auto-complete-config)
+;(ac-config-default)
 
-;; stop (auto-complete-mode) from being called in python
-;; https://stackoverflow.com/questions/24814988/emacs-disable-auto-complete-in-python-mode
-(defadvice auto-complete-mode (around disable-auto-complete-for-python)) ;; one extra parentesis
+;; stop (auto-complete-mode) from being called in python https://stackoverflow.com/questions/24814988/emacs-disable-auto-complete-in-python-mode
+;(defadvice auto-complete-mode (around disable-auto-complete-for-python)) ;; one extra parentesis
 ;  (unless (eq major-mode 'python-mode) ad-do-it))
 
 ;(ad-activate 'auto-complete-mode)
@@ -392,28 +336,22 @@
 ;; to use biber instead bibtex
 ;; https://tex.stackexchange.com/questions/154751/biblatex-with-biber-configuring-my-editor-to-avoid-undefined-citations/154753#154753
 (setq TeX-parse-self t)
+
 ;;----------------------------------------------------------------------
 ;; To activate ESS auto-complete for R.
 ;;----------------------------------------------------------------------
-
-(setq ess-use-auto-complete 'script-only)
+; (setq ess-use-auto-complete 'script-only)
 
 ;;----------------------------------------------------------------------
 ;; CHANGE 'ac-complete FROM ENTER to TAB.
 ;;----------------------------------------------------------------------
-(define-key ac-completing-map "\r" nil)
-(define-key ac-completing-map "\t" 'ac-complete)
-
-;;----------------------------------------------------------------------
-;; DROPDOWN DELAY
-;;----------------------------------------------------------------------
-(setq ac-auto-show-menu    0.2)
+;(define-key ac-completing-map "\r" nil)
+;(define-key ac-completing-map "\t" 'ac-complete)
 
 ;;----------------------------------------------------------------------
 ;; auto complete markdown
 ;; http://wiki.dreamrunner.org/public_html/Emacs/markdown.html
 ;;----------------------------------------------------------------------
-
 ;(add-hook 'markdown-mode-hook
 ;          '(lambda ()
 ;             (auto-complete-mode t)
@@ -428,25 +366,18 @@
 (smartparens-global-mode 1)
 
 ;;-----------------------------------------------------------------------------
-;; FOLDING BY INDENTATION
-;; Folding code blocks based on indentation.
-;; git clone https://github.com/zenozeng/yafolding.el.git
+;; FOLDING BY INDENTATION ;; git clone https://github.com/zenozeng/yafolding.el.git
 ;;-----------------------------------------------------------------------------
-
 (require 'yafolding)
-
 (global-set-key [?\C-{] #'yafolding-hide-parent-element)
 (global-set-key [?\C-}] #'yafolding-toggle-element)
 ;;-----------------------------------------------------------------------------
 
 ;;-----------------------------------------------------------------------------
 ;; ADD HIGHLIGHT FOR CERTAIN KEYWORDS
-;; http://lists.gnu.org/archive/html/emacs-orgmode/2010-09/txtb5ChQJCDny.txt
-;; http://emacs.1067599.n5.nabble.com/Adding-keywords-for-font-lock-experts-td95645.html
-
+;;-----------------------------------------------------------------------------
 (make-face 'special-words) 
 (set-face-attribute 'special-words nil :foreground "White" :background "Firebrick") 
-
 (dolist
     (mode '(fundamental-mode
             gnus-article-mode
@@ -468,15 +399,18 @@
   ) 
 ;;-----------------------------------------------------------------------------
  
-
 ;;===========================================================================
 ;; SETTING TO WORK WITH ESS and R
 ;;===========================================================================
 ;;---------------------------------------------------------------------------
 ;; IF YOU GET ERROR TO LOAD ESS: The immediate fix is to delete <user-emacs-directory>/elpa/archives/melpa/archive-contents; it will be rebuilt on the next package-initialize.
 ;; faz com que apareceça os argumentos das funções do R no minibuffer
-(require 'ess-site)
-(setq-default ess-dialect "R")
+;(require 'ess-site)
+;(setq-default ess-dialect "R")
+;(require 'ess-eldoc)
+
+;(setq-default ess-dialect "r")
+;(require 'ess-eldoc)
 ;;-----------------------------------------------------------------------------
 ;; If you want all help buffers to go into one frame do:
 (setq ess-help-own-frame 'one)
@@ -516,16 +450,13 @@
 ;;===========================================================================
 ;;FUNCOES functions
 ;;===========================================================================
-
 ;(add-to-list 'load-path "/home/rafatieppo/.emacs.d/lisp")
 (load "/home/rafatieppo/.emacs.d/lisp/functions")
 ;(require 'functions)
 
-
 ;;===========================================================================
 ;;MARKDOWN MODE 
 ;;===========================================================================
-
 ;;-----------------------------------------------------------------------------
 ;; ORG MOMDE MINOR mode markdown
 ;; http://stackoverflow.com/questions/14275122/editing-markdown-pipe-tables-in-emacs
@@ -554,8 +485,7 @@
 ;;-----------------------------------------------------------------------------
 
 ;;-----------------------------------------------------------------------------
-;; MARKDOWN enable MATH Desativei pq fica muito colorido e confunde
-;;http://jblevins.org/projects/markdown-mode/
+;; MARKDOWN enable MATH ;http://jblevins.org/projects/markdown-mode/
 (setq markdown-enable-math t)
 
 ;;===========================================================================
@@ -590,15 +520,14 @@
                                 (?\C-t . "\\citet{%l\}")
                                 (?\C-p . "\\citep{%l\}")
                                 ))))
-     
 ;; I changed the code, before "[@%l]" cite between brackets
 ;;-----------------------------------------------------------------------------
 
 ;;===========================================================================
 ;; LATEX
 ;;===========================================================================
+
 ;;-----------------------------------------------------------------------------
-;; Modo matemático para LaTex (Math no menu com atalhos para símbolos, etc
 (add-hook 'LaTeX-mode-hook 'LaTeX-math-mode)
 ;;-----------------------------------------------------------------------------
 
@@ -607,16 +536,6 @@
 ;; Para ativar: C-c =  it means CTRL + c + = 
 (add-hook 'LaTeX-mode-hook 'turn-on-reftex)
 (setq reftex-plug-into-AUCTeX t)
-
-;;===========================================================================
-;; CONFIGURACOES AVANCADAS AUCTEX
-;;===========================================================================
-;;http://tex.stackexchange.com/questions/161797/how-to-configure-emacs-and-auctex-to-perform-forward-and-inverse-search
-
- ;; '(TeX-source-correlate-method (quote synctex))
- ;; '(TeX-source-correlate-mode t)
- ;; '(TeX-source-correlate-start-server t)
-;;-----------------------------------------------------------------------------
 
 ;;===========================================================================
 ;; HTML
@@ -633,56 +552,24 @@
 ;; PYTHON CONFIGURATION
 ;;===========================================================================
 ;; Set Python3 interpreter
-;(setq python-shell-interpreter "/usr/bin/python3")
-(setq python-shell-interpreter "/home/rafatieppo/anaconda3/bin/python3")
-;;-----------------------------------------------------------------------------
+(setq python-shell-interpreter "/usr/bin/python3")
+;;(setq python-shell-interpreter "/home/rafatieppo/anaconda3/bin/python3")
 
-;;-----------------------------------------------------------------------------
-;; for ANACONDA company
-(add-hook 'after-init-hook 'global-company-mode)
-(global-company-mode t)
-(setq company-minimum-prefix-lengh 1)
-(setq company-idle-delay 0)
+(setq elpy-rpc-python-command "/usr/bin/python3")
 
-;; COMPANY quick help
-(company-quickhelp-mode 1)
-(setq company-quickhelp-delay 0)
+(elpy-enable)
+(add-hook 'python-mode-hook 'jedi:setup)
+(add-hook 'elpy-mode-hook
+          (lambda ()
+            (delq 'ac-source-dictionary ac-sources)
+            (delq 'ac-source-abbrev ac-sources)
+            (delq 'ac-source-words-in-same-mode-buffers ac-sources)))
 
-;; ANACONDA
-(add-hook 'python-mode-hook 'anaconda-mode)
-
-;; company ANACONDA
-(require 'rx)
-(add-to-list 'company-backends 'company-anaconda)
-
-
-
-
-;;;;;;;;;;;;;;;;;;;;;
-;; for ANACONDA
-;(add-hook 'python-mode-hook 'anaconda-mode)
-;(add-hook 'python-mode-hook 'anaconda-eldoc-mode)
-;(eval-after-load "company"
-; '(add-to-list 'company-backends '(company-anaconda :with company-capf)))
-;(global-flycheck-mode)
-;(add-hook 'python-mode-hook 'flycheck-mode)
-;;-----------------------------------------------------------------------------
-;; for ELPY - ;; Flycheck -- use flycheck not flymake with elpy
-;(elpy-enable)
-;(elpy-use-ipython)
-;(when (require 'flycheck nil t)
-;  (setq elpy-modules (delq 'elpy-module-flymake elpy-modules))
-;  (add-hook 'elpy-mode-hook 'flycheck-mode))
 ;;-----------------------------------------------------------------------------
 ;; Autopep8 - enable autopep8 formatting on save
-(require 'py-autopep8)
+;(require 'py-autopep8)
 (add-hook 'elpy-mode-hook 'py-autopep8-enable-on-save)
-(add-hook 'anaconda-mode-hook 'py-autopep8-enable-on-save)
-;;-----------------------------------------------------------------------------
-;; Jedi
-;(require 'jedi)
-;(add-hook 'python-mode-hook 'jedi:setup)
-;(setq jedi:complete-on-dot t)                 ; optional
+;(add-hook 'anaconda-mode-hook 'py-autopep8-enable-on-save)
 ;;-----------------------------------------------------------------------------
 ;; ALT ENTER to send line
 (defun my-python-line ()
@@ -718,6 +605,17 @@
 (global-set-key (kbd "M-/") 'python-shell-send-region-or-line) ; alt + /
 
 ;;===========================================================================
+;;Neotree A emacs tree plugin like NERD tree for Vim.
+;;===========================================================================
+(require 'neotree)
+  (global-set-key [f8] 'neotree-toggle)
+
+;;===========================================================================
+;; Flycheck
+;;===========================================================================
+;(add-hook 'after-init-hook #'global-flycheck-mode)
+
+;;===========================================================================
 ;; THEMES - SEVERAL SCHEMES
 ;;===========================================================================
 ;; Solarized
@@ -727,72 +625,57 @@
 ;(require 'solarized-theme)
 ;(require 'color-theme-solarized)
 
-;(custom-set-variables '(solarized-termcolors 256))
-;(custom-set-variables '(solarized-contrast 'high))
-;(custom-set-variables '(solarized-visibility 'high))
-
 ;;-----------------------------------------------------------------------------
 ;; Solarized https://github.com/bbatsov/solarized-emacs
 
 ;(add-to-list 'load-path "/home/rafatieppo/.emacs.d/themess/solarized")
 ;(require 'solarized-dark-theme)
 
-;; options
-;; make the fringe stand out from the background
-;(setq solarized-distinct-fringe-background t)
-;; Don't change the font for some headings and titles
-;(setq solarized-use-variable-pitch nil)
-;; make the modeline high contrast
-;(setq solarized-high-contrast-mode-line t)
-;; Use less bolding
-;(setq solarized-use-less-bold t)
-;; Use more italics
-;(setq solarized-use-more-italic t)
-;; Use less colors for indicators such as git:gutter, flycheck and similar
-(setq solarized-emphasize-indicators nil)
-;; Don't change size of org-mode headlines (but keep other size-changes)
-(setq solarized-scale-org-headlines nil)
-;; Avoid all font-size changes
-;(setq solarized-height-minus-1 1.0)
-;(setq solarized-height-plus-1 1.0)
-;(setq solarized-height-plus-2 1.0)
-;(setq solarized-height-plus-3 1.0)
-;(setq solarized-height-plus-4 1.0)
-
 (add-to-list 'load-path "/home/rafatieppo/.emacs.d/themess")
-
-(require 'ayu-theme)
-;;(require 'monokai-theme) ;; load first to improve ORG visualization
+(require 'acario-dark-theme)
+;(require 'afternoon-theme)
+;(require 'ayu-theme)
+;(require 'monokai-theme) ;; load first to improve ORG visualization
 ;;(require 'Amelie-theme)
 ;;(require 'ample-zen-theme)
 ;;(require 'assemblage-theme)
-;;(require 'atom-one-dark-theme)
+;(require 'atom-one-dark-theme)
+;;(require 'blackboard-theme)
 ;;(require 'deep-thought-theme)
 ;;(require 'challenger-deep-theme.el)
-;;(require 'dracula-themes)
+;(require 'clues-theme)
+;(require 'dracula-theme)
 ;;(require 'erosiond-theme)
-;;(require 'forest-blue-theme)
+;(require 'forest-blue-theme)
 ;;(require 'fogus-theme)
 ;;(require 'gotham)
 ;;(require 'granger-theme)
 ;;(require 'hickey-theme)
 ;;(require 'junio-theme)
-;;(require 'material-light-theme)
+;(require 'lucius-theme)
+;(require 'material-light-theme)
 ;(require 'material-theme)
 ;;(require 'moe-dark-theme)
-;;(require 'molokai-theme)
-;;(require 'nimbus-theme)
+;(require 'moe-light-theme)
+;(require 'molokai-theme)
+;(require 'nimbus-theme)
+;;(require 'nord-theme)
 ;;(require 'odersky-theme)
-;;(require 'seti-theme)
+;(require 'seti-theme)
 ;;(require 'soothe-theme)
 ;;(require 'spolsky-theme)
 ;;(require 'tangotango-theme)
+;(require 'tron-theme)
 ;;(require 'ujelly-theme)
 ;;(require 'underwater-theme)
 ;;(require 'wilson-theme)
 ;;(require 'zenburn-theme)
-
-
+;(require 'color-theme-tomorrow)
+;(color-theme-tomorrow--define-theme night-blue)
+;(color-theme-tomorrow--define-theme night-eighties)
+;;(color-theme-tomorrow--define-theme night-bright)
+;;(color-theme-tomorrow--define-theme night)
+;;(color-theme-tomorrow--define-theme day)
 
 ;;===========================================================================
 ;;Horizontal line
@@ -801,21 +684,16 @@
 ;; Underline in current line
 ;(set-face-attribute hl-line-face nil :underline t)
 (set-face-background hl-line-face "#2F2F2F") ;;MONOKAI
+;(set-face-background hl-line-face "#3F4F1F") ;;acario
+
+; how to assign font lock colors
+;(custom-set-variables)
+;(custom-set-faces
+; '(font-lock-comment-face ((t (:background "green" :foreground "#5C6773" :slant italic)))))
+;;---------------------------------------------------------------------------
+
 ;;---------------------------------------------------------------------------
 ;;===========================================================================
 
-(custom-set-variables
- ;; custom-set-variables was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- '(package-selected-packages
-   (quote
-    (company-quickhelp company-anaconda anaconda-mode yafolding sr-speedbar smex smartparens py-autopep8 powerline polymode multiple-cursors markdown-toc jedi indent-guide ido-vertical-mode ido-hacks highlight-symbol flycheck flx-ido ess-R-data-view elpy auctex ace-jump-mode ac-math))))
 
-(custom-set-faces
- ;; custom-set-faces was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- )
+
