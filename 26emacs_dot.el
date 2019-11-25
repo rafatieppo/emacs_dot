@@ -46,8 +46,8 @@
 (setq org-log-done t)
 
 ;; arquivo para o org agendasorg-agenda
-(setq org-agenda-files (list "/home/rafatieppo/Dropbox/EMACS_ORG_MODE/RAFA.org"
-                             "/home/rafatieppo/Dropbox/PROFISSIONAL/PROJETOS_PESQUISA/ALLPROJECT_MANAG.org" 
+(setq org-agenda-files (list "/home/rafatieppo/Dropbox/emacs_org_mode/rafa.org"
+                             "/home/rafatieppo/Dropbox/profissional/projetos_pesquisa/allproject_manag.org" 
                              ))
 
 ;;-----------------------------------------------------------------------------
@@ -685,13 +685,6 @@
 ;(set-face-attribute hl-line-face nil :underline t)
 (set-face-background hl-line-face "#2F2F2F") ;;MONOKAI
 ;(set-face-background hl-line-face "#3F4F1F") ;;acario
-
-; how to assign font lock colors
-;(custom-set-variables)
-;(custom-set-faces
-; '(font-lock-comment-face ((t (:background "green" :foreground "#5C6773" :slant italic)))))
-;;---------------------------------------------------------------------------
-
 ;;---------------------------------------------------------------------------
 ;;===========================================================================
 
