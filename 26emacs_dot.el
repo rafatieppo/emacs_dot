@@ -120,10 +120,12 @@
 
 ;;---------------------------------------------------------------------------
 ;; Tipo e tamanho da fonte do editor.
+;(set-default-font "Envy Code R-13")
+(set-default-font "Hack-13")
 ;(set-default-font "monofur-13")
 ;(set-default-font "Tex Gyre Adventor-11")
 ;(set-default-font "Anonymous Pro-14.5")
-(set-default-font "Menlo-13")
+;(set-default-font "Menlo-12")
 ;(custom-set-faces
 ; '(default ((t (:family "Anonymous Pro" :foundry "unknown" :slant normal :weight normal :height 240 :width normal)))))
 ;;---------------------------------------------------------------------------
@@ -632,7 +634,7 @@
 ;(require 'solarized-dark-theme)
 
 (add-to-list 'load-path "/home/rafatieppo/.emacs.d/themess")
-(require 'acario-dark-theme)
+;(require 'acario-dark-theme)
 ;(require 'afternoon-theme)
 ;(require 'ayu-theme)
 ;(require 'monokai-theme) ;; load first to improve ORG visualization
@@ -644,7 +646,7 @@
 ;;(require 'deep-thought-theme)
 ;;(require 'challenger-deep-theme.el)
 ;(require 'clues-theme)
-;(require 'dracula-theme)
+(require 'dracula-theme)
 ;;(require 'erosiond-theme)
 ;(require 'forest-blue-theme)
 ;;(require 'fogus-theme)
