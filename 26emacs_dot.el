@@ -46,8 +46,8 @@
 (setq org-log-done t)
 
 ;; arquivo para o org agendasorg-agenda
-(setq org-agenda-files (list "/home/rafatieppo/Dropbox/emacs_org_mode/rafa.org"
-                             "/home/rafatieppo/Dropbox/profissional/projetos_pesquisa/allproject_manag.org" 
+(setq org-agenda-files (list "/home/rafatieppo/Dropbox/EMACS_ORG_MODE/RAFA.org"
+                             "/home/rafatieppo/Dropbox/PROFISSIONAL/PROJETOS_PESQUISA/ALLPROJECT_MANAG.org" 
                              ))
 
 ;;-----------------------------------------------------------------------------
@@ -120,12 +120,10 @@
 
 ;;---------------------------------------------------------------------------
 ;; Tipo e tamanho da fonte do editor.
-;(set-default-font "Envy Code R-13")
-(set-default-font "Hack-13")
 ;(set-default-font "monofur-13")
 ;(set-default-font "Tex Gyre Adventor-11")
 ;(set-default-font "Anonymous Pro-14.5")
-;(set-default-font "Menlo-12")
+(set-default-font "Menlo-13")
 ;(custom-set-faces
 ; '(default ((t (:family "Anonymous Pro" :foundry "unknown" :slant normal :weight normal :height 240 :width normal)))))
 ;;---------------------------------------------------------------------------
@@ -200,7 +198,7 @@
 
 ;;-----------------------------------------------------------------------------
 ;; stop cursor blinking
-(blink-cursor-mode 1)
+(blink-cursor-mode 0)
 ;;-----------------------------------------------------------------------------
 
 ;;-----------------------------------------------------------------------------
@@ -370,9 +368,12 @@
 ;;-----------------------------------------------------------------------------
 ;; FOLDING BY INDENTATION ;; git clone https://github.com/zenozeng/yafolding.el.git
 ;;-----------------------------------------------------------------------------
+
 (require 'yafolding)
-(global-set-key [?\C-{] #'yafolding-hide-parent-element)
-(global-set-key [?\C-}] #'yafolding-toggle-element)
+(define-key yafolding-mode-map (kbd "C-c {") 'yafolding-toggle-all)
+(define-key yafolding-mode-map (kbd "C-c }") 'yafolding-hide-parent-element)
+(define-key yafolding-mode-map (kbd "C-c ]") 'yafolding-toggle-element)
+
 ;;-----------------------------------------------------------------------------
 
 ;;-----------------------------------------------------------------------------
@@ -560,7 +561,8 @@
 (setq elpy-rpc-python-command "/usr/bin/python3")
 
 (elpy-enable)
-(add-hook 'python-mode-hook 'jedi:setup)
+;;(setf elpy:complete-on-dot t)
+;;(company-quickhelp-mode 1) ;; faz aparecer quickhelp
 (add-hook 'elpy-mode-hook
           (lambda ()
             (delq 'ac-source-dictionary ac-sources)
@@ -634,7 +636,6 @@
 ;(require 'solarized-dark-theme)
 
 (add-to-list 'load-path "/home/rafatieppo/.emacs.d/themess")
-;(require 'acario-dark-theme)
 ;(require 'afternoon-theme)
 ;(require 'ayu-theme)
 ;(require 'monokai-theme) ;; load first to improve ORG visualization
@@ -646,7 +647,7 @@
 ;;(require 'deep-thought-theme)
 ;;(require 'challenger-deep-theme.el)
 ;(require 'clues-theme)
-(require 'dracula-theme)
+;(require 'dracula-theme)
 ;;(require 'erosiond-theme)
 ;(require 'forest-blue-theme)
 ;;(require 'fogus-theme)
@@ -654,16 +655,14 @@
 ;;(require 'granger-theme)
 ;;(require 'hickey-theme)
 ;;(require 'junio-theme)
-;(require 'lucius-theme)
 ;(require 'material-light-theme)
 ;(require 'material-theme)
 ;;(require 'moe-dark-theme)
 ;(require 'moe-light-theme)
-;(require 'molokai-theme)
+(require 'molokai-theme)
 ;(require 'nimbus-theme)
-;;(require 'nord-theme)
 ;;(require 'odersky-theme)
-;(require 'seti-theme)
+;;(require 'seti-theme)
 ;;(require 'soothe-theme)
 ;;(require 'spolsky-theme)
 ;;(require 'tangotango-theme)
@@ -686,9 +685,22 @@
 ;; Underline in current line
 ;(set-face-attribute hl-line-face nil :underline t)
 (set-face-background hl-line-face "#2F2F2F") ;;MONOKAI
-;(set-face-background hl-line-face "#3F4F1F") ;;acario
 ;;---------------------------------------------------------------------------
 ;;===========================================================================
 
 
 
+(custom-set-variables
+ ;; custom-set-variables was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ '(package-selected-packages
+   (quote
+    (ess yafolding smex smartparens py-autopep8 powerline polymode neotree multiple-cursors markdown-mode julia-mode jedi indent-guide ido-vertical-mode ido-hacks highlight-symbol flycheck flx-ido elpy company-quickhelp company-jedi company-anaconda auctex ace-jump-mode ac-math))))
+(custom-set-faces
+ ;; custom-set-faces was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ )
