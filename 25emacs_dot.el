@@ -1,5 +1,5 @@
 ;;=============================================================================
-;; init.el file for EMACS (25.2.2) by Rafael Tieppo.
+;; init.el file for EMACS (26) by Rafael Tieppo.
 ;; Most of all from this content was from internet. Feel free to copy and share.
 ;; Any question, please, you can open a issue in this repo
 ;;=============================================================================
@@ -12,28 +12,20 @@
 (add-to-list 'load-path "/home/rafatieppo/.emacs.d/")
 (load "package")
 (require 'package)
-;;(add-to-list 'package-archives
-;;    '("marmalade" .
-;;      "http://marmalade-repo.org/packages/"))
 (package-initialize) 
-
-(setq package-enable-at-startup nil)
-;;(add-to-list 'package-archives '("marmalade" . "https://marmalade-repo.org/packages/"))
-(add-to-list 'package-archives '("melpa" . "http://melpa.org/packages/"))
-;;(add-to-list 'package-archives '("org" . "http://orgmode.org/elpa/") t) ;;Org-mode's repository
-;;-----------------------------------------------------------------------------
-
 
 ;;===========================================================================
 ;;EMACS auto install packs GREAT - active only in the first session
 ;;===========================================================================
-
+;auctex
 ;; list the packages you want
-;(setq package-list '(ace-jump-mode ac-math auctex anaconda-mode auto-complete company-anaconda company-jedi company-quickhelp elpy ess ess-R-data-view flx flx-ido flycheck highlight-symbol ido-hacks ido-vertical-mode indent-guide jedi markdown-mode multiple-cursors neotree polymode popup powerline py-autopep8 smartparens smex yafolding yasnippet))
+;(setq package-list '(ace-jump-mode ac-math anaconda-mode auto-complete  company-anaconda company-jedi company-quickhelp elpy ess ess-R-data-view flx flx-ido flycheck highlight-symbol ido-hacks ido-vertical-mode indent-guide jedi markdown-mode multiple-cursors neotree polymode popup powerline py-autopep8 smartparens smex yafolding yasnippet))
 ;; list the repositories containing them
-;(setq package-archives '(("elpa" . "http://tromey.com/elpa/")
-;                         ("gnu" . "http://elpa.gnu.org/packages/")
-;                         ("marmalade" . "http://marmalade-repo.org/packages/")))
+;(setq package-archives '(;("elpa" . "http://tromey.com/elpa/")
+                         ;("gnu" . "http://elpa.gnu.org/packages/")
+;                         ("melpa" . "http://melpa.org/packages/")
+                         ;("marmalade" . "http://marmalade-repo.org/packages/")
+;                         ))
 ;; activate all the packages (in particular autoloads)
 (package-initialize)
 ;; fetch the list of packages available 
@@ -54,8 +46,8 @@
 (setq org-log-done t)
 
 ;; arquivo para o org agendasorg-agenda
-(setq org-agenda-files (list "/home/rafatieppo/Dropbox/EMACS_ORG_MODE/RAFA.org"
-                             "/home/rafatieppo/Dropbox/PROFISSIONAL/PROJETOS_PESQUISA/ALLPROJECT_MANAG.org" 
+(setq org-agenda-files (list "/home/rafatieppo/Dropbox/emacs_org_mode/rafa.org"
+                             "/home/rafatieppo/Dropbox/profissional/projetos_pesquisa/allproject_manag.org" 
                              ))
 
 ;;-----------------------------------------------------------------------------
@@ -76,26 +68,26 @@
 (setq org-capture-templates
   '(    ;; ... other templates
     ("l" "Link" entry (file+headline 
-         "~/Dropbox/EMACS_ORG_MODE/CAPTURE.org" "Link") 
+         "~/Dropbox/emacs_org_mode/capture.org" "Link") 
          "* LINK %^{Description} %^g
          %?
          Added: %U")
     ("j" "Journal Entry"
-         entry (file+datetree "~/Dropbox/EMACS_ORG_MODE/CAPTURE.org")
+         entry (file+datetree "~/Dropbox/emacs_org_mode/capture.org")
          "* %?"
          :empty-lines 1)
     ("p" "Phone" entry (file+headline 
-         "~/Dropbox/EMACS_ORG_MODE/CAPTURE.org" "Phone") 
+         "~/Dropbox/emacs_org_mode/capture.org" "Phone") 
          "* NUMBER %^{Description} %^g
          %?
          Added: %U")
     ("q" "Quote" entry (file+headline 
-         "~/Dropbox/EMACS_ORG_MODE/CAPTURE.org" "Quote") 
+         "~/Dropbox/emacs_org_mode/capture.org" "Quote") 
          "* QUOTE %^{Description} %^g
          %?
          Added: %U")
     ("t" "Ted Talks" entry (file+headline 
-         "~/Dropbox/EMACS_ORG_MODE/CAPTURE.org" "Ted") 
+         "~/Dropbox/emacs_org_mode/capture.org" "Ted") 
          "* TED %^{Description} %^g
          %?
          Added: %U")
@@ -376,9 +368,12 @@
 ;;-----------------------------------------------------------------------------
 ;; FOLDING BY INDENTATION ;; git clone https://github.com/zenozeng/yafolding.el.git
 ;;-----------------------------------------------------------------------------
+
 (require 'yafolding)
-(global-set-key [?\C-{] #'yafolding-hide-parent-element)
-(global-set-key [?\C-}] #'yafolding-toggle-element)
+(define-key yafolding-mode-map (kbd "C-c {") 'yafolding-toggle-all)
+(define-key yafolding-mode-map (kbd "C-c }") 'yafolding-hide-parent-element)
+(define-key yafolding-mode-map (kbd "C-c ]") 'yafolding-toggle-element)
+
 ;;-----------------------------------------------------------------------------
 
 ;;-----------------------------------------------------------------------------
@@ -517,7 +512,7 @@
 ;;===========================================================================
 
 ;; So that RefTeX finds my bibliography
-(setq reftex-default-bibliography '("/home/rafatieppo/Dropbox/BIBTEX/REFERENCES.bib"))
+(setq reftex-default-bibliography '("/home/rafatieppo/Dropbox/bibtex/references.bib"))
 
 ;; How to solve @
 (eval-after-load 'reftex-vars
@@ -560,29 +555,25 @@
 ;; PYTHON CONFIGURATION
 ;;===========================================================================
 ;; Set Python3 interpreter
-;;(setq python-shell-interpreter "/usr/bin/python3")
-(setq python-shell-interpreter "/home/rafatieppo/anaconda3/bin/python3")
+(setq python-shell-interpreter "/usr/bin/python3")
+;;(setq python-shell-interpreter "/home/rafatieppo/anaconda3/bin/python3")
 
+(setq elpy-rpc-python-command "/usr/bin/python3")
 
-;; ANACONDA
-(require 'rx)
-;(eval-after-load "company"
-; '(add-to-list 'company-backends 'company-anaconda))
-;;or
-(eval-after-load "company"
- '(add-to-list 'company-backends '(company-anaconda :with company-capf)))
-(add-hook 'python-mode-hook 'anaconda-mode)
-(add-hook 'python-mode-hook 'anaconda-eldoc-mode)
-
-(setq company-idle-delay 0)
-(setq company-minimum-prefix-length 3)
-
+(elpy-enable)
+;;(setf elpy:complete-on-dot t)
+;;(company-quickhelp-mode 1) ;; faz aparecer quickhelp
+(add-hook 'elpy-mode-hook
+          (lambda ()
+            (delq 'ac-source-dictionary ac-sources)
+            (delq 'ac-source-abbrev ac-sources)
+            (delq 'ac-source-words-in-same-mode-buffers ac-sources)))
 
 ;;-----------------------------------------------------------------------------
 ;; Autopep8 - enable autopep8 formatting on save
 ;(require 'py-autopep8)
-;(add-hook 'elpy-mode-hook 'py-autopep8-enable-on-save)
-(add-hook 'anaconda-mode-hook 'py-autopep8-enable-on-save)
+(add-hook 'elpy-mode-hook 'py-autopep8-enable-on-save)
+;(add-hook 'anaconda-mode-hook 'py-autopep8-enable-on-save)
 ;;-----------------------------------------------------------------------------
 ;; ALT ENTER to send line
 (defun my-python-line ()
@@ -651,7 +642,7 @@
 ;;(require 'Amelie-theme)
 ;;(require 'ample-zen-theme)
 ;;(require 'assemblage-theme)
-;(require 'atom-one-dark-theme)
+(require 'atom-one-dark-theme)
 ;;(require 'blackboard-theme)
 ;;(require 'deep-thought-theme)
 ;;(require 'challenger-deep-theme.el)
@@ -687,20 +678,6 @@
 ;;(color-theme-tomorrow--define-theme night)
 ;;(color-theme-tomorrow--define-theme day)
 
-
-(require 'doom-themes)
-
-;;; Settings (defaults)
-(setq doom-themes-enable-bold t    ; if nil, bold is universally disabled
-      doom-themes-enable-italic t  ; if nil, italics is universally disabled
-
-      ;; doom-one specific settings
-      doom-one-brighter-modeline nil
-      doom-one-brighter-comments nil)
-
-;; Load the theme (doom-one, doom-dark, etc.)
-(load-theme 'doom-tomorrow-night t)
-
 ;;===========================================================================
 ;;Horizontal line
 ;;===========================================================================
@@ -710,5 +687,7 @@
 (set-face-background hl-line-face "#2F2F2F") ;;MONOKAI
 ;;---------------------------------------------------------------------------
 ;;===========================================================================
+
+
 
 
