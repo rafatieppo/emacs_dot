@@ -123,7 +123,7 @@
 ;(set-default-font "monofur-13")
 ;(set-default-font "Tex Gyre Adventor-11")
 ;(set-default-font "Anonymous Pro-14.5")
-(set-default-font "Menlo-13")
+(set-default-font "Menlo-16")
 ;(custom-set-faces
 ; '(default ((t (:family "Anonymous Pro" :foundry "unknown" :slant normal :weight normal :height 240 :width normal)))))
 ;;---------------------------------------------------------------------------
@@ -131,7 +131,7 @@
 ;;---------------------------------------------------------------------------
 ;; Space between lines and between line numbers and text (like margin)
 (setq-default line-spacing 3) 
-(setq-default left-fringe-width  3)
+(setq-default left-fringe-width  15)
 ;(setq-default right-fringe-width  0)
 ;(set-face-attribute 'fringe nil :background "black")
 ;;---------------------------------------------------------------------------
@@ -198,7 +198,7 @@
 
 ;;-----------------------------------------------------------------------------
 ;; stop cursor blinking
-(blink-cursor-mode 0)
+(blink-cursor-mode 1)
 ;;-----------------------------------------------------------------------------
 
 ;;-----------------------------------------------------------------------------
@@ -294,6 +294,13 @@
 (require 'indent-guide)
 (setq indent-guide-recursive t)
 ;;-----------------------------------------------------------------------------
+
+;;-----------------------------------------------------------------------------
+;; HIGHLIGHT-INDENTATION-MODE
+(add-hook 'elpy-mode-hook (lambda () (highlight-indentation-mode -1)))
+
+;;-----------------------------------------------------------------------------
+
 
 ;;===========================================================================
 ;;AUTO COMLETE
@@ -642,14 +649,14 @@
 ;;(require 'Amelie-theme)
 ;;(require 'ample-zen-theme)
 ;;(require 'assemblage-theme)
-(require 'atom-one-dark-theme)
+;(require 'atom-one-dark-theme)
 ;;(require 'blackboard-theme)
 ;;(require 'deep-thought-theme)
 ;;(require 'challenger-deep-theme.el)
 ;(require 'clues-theme)
 ;(require 'dracula-theme)
 ;;(require 'erosiond-theme)
-;(require 'forest-blue-theme)
+(require 'forest-blue-theme)
 ;;(require 'fogus-theme)
 ;;(require 'gotham)
 ;;(require 'granger-theme)
