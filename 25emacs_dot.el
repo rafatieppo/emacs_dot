@@ -9,10 +9,10 @@
 ;;===========================================================================
 ;;-----------------------------------------------------------------------------
   
-(add-to-list 'load-path "/home/rafatieppo/.emacs.d/")
-(load "package")
-(require 'package)
-(package-initialize) 
+;(add-to-list 'load-path "/home/rafatieppo/.emacs.d/")
+;(load "package")
+;(require 'package)
+;(package-initialize) 
 
 ;;===========================================================================
 ;;EMACS auto install packs GREAT - active only in the first session
@@ -22,7 +22,7 @@
 ;(setq package-list '(ace-jump-mode ac-math anaconda-mode auto-complete  company-anaconda company-jedi company-quickhelp elpy ess ess-R-data-view flx flx-ido flycheck highlight-symbol ido-hacks ido-vertical-mode indent-guide jedi markdown-mode multiple-cursors neotree polymode popup powerline py-autopep8 smartparens smex yafolding yasnippet))
 ;; list the repositories containing them
 ;(setq package-archives '(;("elpa" . "http://tromey.com/elpa/")
-                         ;("gnu" . "http://elpa.gnu.org/packages/")
+;                         ("gnu" . "http://elpa.gnu.org/packages/")
 ;                         ("melpa" . "http://melpa.org/packages/")
                          ;("marmalade" . "http://marmalade-repo.org/packages/")
 ;                         ))
@@ -123,8 +123,10 @@
 ;(set-default-font "monofur-13")
 ;(set-default-font "Tex Gyre Adventor-11")
 ;(set-default-font "Anonymous Pro-14.5")
-(set-default-font "Menlo-16")
-;(custom-set-faces
+;(set-default-font "Menlo-16")
+
+(custom-set-faces
+ '(default ((t (:family "IBMPlexMono-Regular" :foundry "unknown" :slant normal :weight normal :height 160 :width normal)))))
 ; '(default ((t (:family "Anonymous Pro" :foundry "unknown" :slant normal :weight normal :height 240 :width normal)))))
 ;;---------------------------------------------------------------------------
 
@@ -656,10 +658,11 @@
 ;(require 'clues-theme)
 ;(require 'dracula-theme)
 ;;(require 'erosiond-theme)
-(require 'forest-blue-theme)
+;(require 'forest-blue-theme)
 ;;(require 'fogus-theme)
 ;;(require 'gotham)
 ;;(require 'granger-theme)
+(require 'ibm-dark-theme)
 ;;(require 'hickey-theme)
 ;;(require 'junio-theme)
 ;(require 'material-light-theme)
@@ -669,7 +672,7 @@
 ;(require 'molokai-theme)
 ;(require 'nimbus-theme)
 ;;(require 'odersky-theme)
-;;(require 'seti-theme)
+;(require 'seti-theme)
 ;;(require 'soothe-theme)
 ;;(require 'spolsky-theme)
 ;;(require 'tangotango-theme)
@@ -691,7 +694,7 @@
 (global-hl-line-mode 1)
 ;; Underline in current line
 ;(set-face-attribute hl-line-face nil :underline t)
-(set-face-background hl-line-face "#2F2F2F") ;;MONOKAI
+;(set-face-background hl-line-face "#2F2F2F") ;;MONOKAI
 ;;---------------------------------------------------------------------------
 ;;===========================================================================
 
