@@ -624,10 +624,11 @@
   (global-set-key [f8] 'neotree-toggle)
 
 ;;===========================================================================
-;; Flycheck
+;; Flymake and Flycheck
 ;;===========================================================================
-;(add-hook 'after-init-hook #'global-flycheck-mode)
-
+;(remove-hook 'flymake-diagnostic-functions 'flymake-elpy)
+(setq elpy-modules (delete 'elpy-module-flymake elpy-modules))
+(add-hook 'after-init-hook #'global-flycheck-mode)
 ;;===========================================================================
 ;; THEMES - SEVERAL SCHEMES
 ;;===========================================================================
@@ -691,7 +692,7 @@
 ;;===========================================================================
 ;;Horizontal line
 ;;===========================================================================
-(global-hl-line-mode 1)
+;(global-hl-line-mode 1)
 ;; Underline in current line
 ;(set-face-attribute hl-line-face nil :underline t)
 ;(set-face-background hl-line-face "#2F2F2F") ;;MONOKAI
