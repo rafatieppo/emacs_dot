@@ -19,7 +19,7 @@
 ;;===========================================================================
 ;auctex
 ;; list the packages you want
-;(setq package-list '(ace-jump-mode ac-math anaconda-mode auto-complete  company-anaconda company-jedi company-quickhelp elpy ess ess-R-data-view flx flx-ido flycheck highlight-symbol ido-hacks ido-vertical-mode indent-guide jedi markdown-mode multiple-cursors neotree polymode popup powerline py-autopep8 smartparens smex yafolding yasnippet))
+;(setq package-list '(ace-jump-mode ac-math anaconda-mode auto-complete  company-anaconda company-irony company-jedi company-quickhelp elpy ess ess-R-data-view flx flx-ido flycheck highlight-symbol ido-hacks ido-vertical-mode indent-guide jedi markdown-mode multiple-cursors neotree polymode popup powerline py-autopep8 smartparens smex yafolding yasnippet))
 ;; list the repositories containing them
 ;(setq package-archives '(;("elpa" . "http://tromey.com/elpa/")
 ;                         ("gnu" . "http://elpa.gnu.org/packages/")
@@ -37,6 +37,7 @@
 ;  (unless (package-installed-p package)
 ;    (package-install package)))
 ;-----------------------------------------------------------------------------
+
 ;;===========================================================================
 ;;ORG MODE
 ;;===========================================================================
@@ -126,7 +127,7 @@
 ;(set-default-font "Menlo-16")
 
 (custom-set-faces
- '(default ((t (:family "IBMPlexMono-Regular" :foundry "unknown" :slant normal :weight normal :height 160 :width normal)))))
+ '(default ((t (:family "IBMPlexMono" :foundry "unknown" :slant normal :weight normal :height 160 :width normal)))))
 ; '(default ((t (:family "Anonymous Pro" :foundry "unknown" :slant normal :weight normal :height 240 :width normal)))))
 ;;---------------------------------------------------------------------------
 
@@ -559,6 +560,14 @@
           ;; Default indentation is usually 2 spaces, changing to 4.
           (set (make-local-variable 'sgml-basic-offset) 4)))
 ;;-----------------------------------------------------------------------------
+
+;;===========================================================================
+;; CPP CONFIGURATION
+;;===========================================================================
+(add-hook 'c++-mode-hook 'irony-mode)
+(add-hook 'c-mode-hook 'irony-mode)
+(add-hook 'objc-mode-hook 'irony-mode)
+(add-hook 'irony-mode-hook 'irony-cdb-autosetup-compile-options)
 
 ;;===========================================================================
 ;; PYTHON CONFIGURATION
