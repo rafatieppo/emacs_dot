@@ -48,8 +48,9 @@
 
 ;; arquivo para o org agendasorg-agenda
 (setq org-agenda-files (list "/home/rafatieppo/Dropbox/emacs_org_mode/rafa.org"
-                             "/home/rafatieppo/Dropbox/profissional/projetos_pesquisa/allproject_manag.org" 
-                             ))
+                             "/home/rafatieppo/Dropbox/profissional/projetos_pessoais/all_person_proj_manag.org"
+                             "/home/rafatieppo/Dropbox/profissional/projetos_pesquisa/all_resear_proj_manag.org"
+                        ))
 
 ;;-----------------------------------------------------------------------------
 ;; ORG mode CLASSES and COLORS for TASKS
