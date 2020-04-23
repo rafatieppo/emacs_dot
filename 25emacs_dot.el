@@ -128,7 +128,7 @@
 ;(set-default-font "Menlo-16")
 
 (custom-set-faces
- '(default ((t (:family "IBMPlexMono" :foundry "unknown" :slant normal :weight normal :height 160 :width normal)))))
+ '(default ((t (:family "IBMPlexMono" :foundry "unknown" :slant normal :weight normal :height 170 :width normal)))))
 ; '(default ((t (:family "Anonymous Pro" :foundry "unknown" :slant normal :weight normal :height 240 :width normal)))))
 ;;---------------------------------------------------------------------------
 
@@ -656,6 +656,8 @@
 ;(require 'solarized-dark-theme)
 
 (add-to-list 'load-path "/home/rafatieppo/.emacs.d/themess")
+
+
 ;(require 'afternoon-theme)
 ;(require 'ayu-theme)
 ;(require 'monokai-theme) ;; load first to improve ORG visualization
@@ -673,7 +675,7 @@
 ;;(require 'fogus-theme)
 ;;(require 'gotham)
 ;;(require 'granger-theme)
-(require 'ibm-dark-theme)
+;(require 'ibm-dark-theme)
 ;;(require 'hickey-theme)
 ;;(require 'junio-theme)
 ;(require 'material-light-theme)
@@ -698,6 +700,10 @@
 ;;(color-theme-tomorrow--define-theme night-bright)
 ;;(color-theme-tomorrow--define-theme night)
 ;;(color-theme-tomorrow--define-theme day)
+
+(if (display-graphic-p) 
+    (require 'ibm-dark-theme) 
+  (require 'forest-blue-theme))
 
 ;;===========================================================================
 ;;Horizontal line
