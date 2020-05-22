@@ -21,10 +21,10 @@
 ;; list the packages you want
 ;(setq package-list '(ace-jump-mode ac-math anaconda-mode auto-complete  company-anaconda company-irony company-jedi company-quickhelp elpy ess ess-R-data-view flx flx-ido flycheck highlight-symbol ido-hacks ido-vertical-mode indent-guide jedi markdown-mode multiple-cursors neotree polymode popup powerline py-autopep8 smartparens smex yafolding yasnippet))
 ;; list the repositories containing them
-;(setq package-archives '(;("elpa" . "http://tromey.com/elpa/")
+;(setq package-archives '(("elpa" . "http://tromey.com/elpa/")
 ;                         ("gnu" . "http://elpa.gnu.org/packages/")
 ;                         ("melpa" . "http://melpa.org/packages/")
-                         ;("marmalade" . "http://marmalade-repo.org/packages/")
+;                         ("marmalade" . "http://marmalade-repo.org/packages/")
 ;                         ))
 ;; activate all the packages (in particular autoloads)
 (package-initialize)
@@ -48,6 +48,7 @@
 
 ;; arquivo para o org agendasorg-agenda
 (setq org-agenda-files (list "/home/rafatieppo/Dropbox/emacs_org_mode/rafa.org"
+                             "/home/rafatieppo/Dropbox/profissional/projetos_extensao/all_extens_proj_manag.org"
                              "/home/rafatieppo/Dropbox/profissional/projetos_pessoais/all_person_proj_manag.org"
                              "/home/rafatieppo/Dropbox/profissional/projetos_pesquisa/all_resear_proj_manag.org"
                         ))
@@ -126,10 +127,8 @@
 ;(set-default-font "Tex Gyre Adventor-11")
 ;(set-default-font "Anonymous Pro-14.5")
 ;(set-default-font "Menlo-16")
+(set-default-font "IBMPlexMono-18")
 
-(custom-set-faces
- '(default ((t (:family "IBMPlexMono" :foundry "unknown" :slant normal :weight normal :height 170 :width normal)))))
-; '(default ((t (:family "Anonymous Pro" :foundry "unknown" :slant normal :weight normal :height 240 :width normal)))))
 ;;---------------------------------------------------------------------------
 
 ;;---------------------------------------------------------------------------
@@ -467,7 +466,6 @@
 ;(add-to-list 'load-path "/home/rafatieppo/.emacs.d/lisp")
 (load "/home/rafatieppo/.emacs.d/lisp/functions")
 ;(require 'functions)
-
 ;;===========================================================================
 ;;MARKDOWN MODE 
 ;;===========================================================================
@@ -687,6 +685,7 @@
 ;;(require 'odersky-theme)
 ;(require 'seti-theme)
 ;;(require 'soothe-theme)
+;(require 'spacemacs-dark-theme)
 ;;(require 'spolsky-theme)
 ;;(require 'tangotango-theme)
 ;(require 'tron-theme)
@@ -702,7 +701,7 @@
 ;;(color-theme-tomorrow--define-theme day)
 
 (if (display-graphic-p) 
-    (require 'ibm-dark-theme) 
+    (require 'spacemacs-dark-theme) 
   (require 'forest-blue-theme))
 
 ;;===========================================================================
@@ -714,7 +713,5 @@
 ;(set-face-background hl-line-face "#2F2F2F") ;;MONOKAI
 ;;---------------------------------------------------------------------------
 ;;===========================================================================
-
-
 
 
