@@ -9,23 +9,24 @@
 ;;===========================================================================
 ;;-----------------------------------------------------------------------------
   
-(add-to-list 'load-path "/home/rafatieppo/.emacs.d/")
-(load "package")
-(require 'package)
-(package-initialize) 
+;(add-to-list 'load-path "/home/rafatieppo/.emacs.d/")
+;(load "package")
+;(require 'package)
+;(package-initialize) 
 
 ;;===========================================================================
 ;;EMACS auto install packs GREAT - active only in the first session
 ;;===========================================================================
 ;auctex
 ;; list the packages you want
-;(setq package-list '(ace-jump-mode ac-math anaconda-mode auto-complete  company-anaconda company-jedi company-quickhelp elpy ess ess-R-data-view flx flx-ido flycheck highlight-symbol ido-hacks ido-vertical-mode indent-guide jedi markdown-mode multiple-cursors neotree polymode popup powerline py-autopep8 smartparens smex yafolding yasnippet))
+;(setq package-list '(ace-jump-mode ac-math anaconda-mode auto-complete calfw calfw-org calfw-ical company-anaconda company-irony company-jedi company-quickhelp elpy ess ess-R-data-view flx flx-ido flycheck highlight-symbol ido-hacks ido-vertical-mode indent-guide jedi markdown-mode multiple-cursors neotree polymode popup powerline py-autopep8 smartparens smex yafolding yasnippet))
 ;; list the repositories containing them
-;(setq package-archives '(;("elpa" . "http://tromey.com/elpa/")
-                         ;("gnu" . "http://elpa.gnu.org/packages/")
+;(setq package-archives '(("elpa" . "http://tromey.com/elpa/")
+;                         ("gnu" . "http://elpa.gnu.org/packages/")
 ;                         ("melpa" . "http://melpa.org/packages/")
-                         ;("marmalade" . "http://marmalade-repo.org/packages/")
+;                         ("marmalade" . "http://marmalade-repo.org/packages/")
 ;                         ))
+
 ;; activate all the packages (in particular autoloads)
 (package-initialize)
 ;; fetch the list of packages available 
@@ -37,6 +38,7 @@
 ;  (unless (package-installed-p package)
 ;    (package-install package)))
 ;-----------------------------------------------------------------------------
+
 ;;===========================================================================
 ;;ORG MODE
 ;;===========================================================================
@@ -45,10 +47,19 @@
 (define-key global-map "\C-ca" 'org-agenda)
 (setq org-log-done t)
 
-;; arquivo para o org agendasorg-agenda
-(setq org-agenda-files (list "/home/rafatieppo/Dropbox/EMACS_ORG_MODE/RAFA.org"
-                             "/home/rafatieppo/Dropbox/PROFISSIONAL/PROJETOS_PESQUISA/ALLPROJECT_MANAG.org" 
-                             ))
+
+;; files for org agendasorg-agenda
+(setq org-agenda-files (list "/home/rafatieppo/Dropbox/emacs_org_mode/rafa.org"
+                             "/home/rafatieppo/Dropbox/profissional/projetos_extensao/all_extens_proj_manag.org"
+                             "/home/rafatieppo/Dropbox/profissional/projetos_pessoais/all_person_proj_manag.org"
+                             "/home/rafatieppo/Dropbox/profissional/projetos_pesquisa/all_resear_proj_manag.org"
+                        ))
+
+;; packs to print calendar with appointments as GoogleCalendar
+(require 'calfw)
+(require 'calfw-org)
+(setq cfw:org-agenda-schedule-args '(:timestamp))
+;(require 'calfw-ical)
 
 ;;-----------------------------------------------------------------------------
 ;; ORG mode CLASSES and COLORS for TASKS
@@ -68,26 +79,26 @@
 (setq org-capture-templates
   '(    ;; ... other templates
     ("l" "Link" entry (file+headline 
-         "~/Dropbox/EMACS_ORG_MODE/CAPTURE.org" "Link") 
+         "~/Dropbox/emacs_org_mode/capture.org" "Link") 
          "* LINK %^{Description} %^g
          %?
          Added: %U")
     ("j" "Journal Entry"
-         entry (file+datetree "~/Dropbox/EMACS_ORG_MODE/CAPTURE.org")
+         entry (file+datetree "~/Dropbox/emacs_org_mode/capture.org")
          "* %?"
          :empty-lines 1)
     ("p" "Phone" entry (file+headline 
-         "~/Dropbox/EMACS_ORG_MODE/CAPTURE.org" "Phone") 
+         "~/Dropbox/emacs_org_mode/capture.org" "Phone") 
          "* NUMBER %^{Description} %^g
          %?
          Added: %U")
     ("q" "Quote" entry (file+headline 
-         "~/Dropbox/EMACS_ORG_MODE/CAPTURE.org" "Quote") 
+         "~/Dropbox/emacs_org_mode/capture.org" "Quote") 
          "* QUOTE %^{Description} %^g
          %?
          Added: %U")
     ("t" "Ted Talks" entry (file+headline 
-         "~/Dropbox/EMACS_ORG_MODE/CAPTURE.org" "Ted") 
+         "~/Dropbox/emacs_org_mode/capture.org" "Ted") 
          "* TED %^{Description} %^g
          %?
          Added: %U")
@@ -123,15 +134,15 @@
 ;(set-default-font "monofur-13")
 ;(set-default-font "Tex Gyre Adventor-11")
 ;(set-default-font "Anonymous Pro-14.5")
-(set-default-font "Menlo-13")
-;(custom-set-faces
-; '(default ((t (:family "Anonymous Pro" :foundry "unknown" :slant normal :weight normal :height 240 :width normal)))))
+;(set-default-font "Menlo-16")
+(set-default-font "IBMPlexMono-18")
+
 ;;---------------------------------------------------------------------------
 
 ;;---------------------------------------------------------------------------
 ;; Space between lines and between line numbers and text (like margin)
 (setq-default line-spacing 3) 
-(setq-default left-fringe-width  3)
+(setq-default left-fringe-width  15)
 ;(setq-default right-fringe-width  0)
 ;(set-face-attribute 'fringe nil :background "black")
 ;;---------------------------------------------------------------------------
@@ -198,7 +209,7 @@
 
 ;;-----------------------------------------------------------------------------
 ;; stop cursor blinking
-(blink-cursor-mode 0)
+(blink-cursor-mode 1)
 ;;-----------------------------------------------------------------------------
 
 ;;-----------------------------------------------------------------------------
@@ -294,6 +305,13 @@
 (require 'indent-guide)
 (setq indent-guide-recursive t)
 ;;-----------------------------------------------------------------------------
+
+;;-----------------------------------------------------------------------------
+;; HIGHLIGHT-INDENTATION-MODE
+(add-hook 'elpy-mode-hook (lambda () (highlight-indentation-mode -1)))
+
+;;-----------------------------------------------------------------------------
+
 
 ;;===========================================================================
 ;;AUTO COMLETE
@@ -456,7 +474,6 @@
 ;(add-to-list 'load-path "/home/rafatieppo/.emacs.d/lisp")
 (load "/home/rafatieppo/.emacs.d/lisp/functions")
 ;(require 'functions)
-
 ;;===========================================================================
 ;;MARKDOWN MODE 
 ;;===========================================================================
@@ -512,7 +529,7 @@
 ;;===========================================================================
 
 ;; So that RefTeX finds my bibliography
-(setq reftex-default-bibliography '("/home/rafatieppo/Dropbox/BIBTEX/REFERENCES.bib"))
+(setq reftex-default-bibliography '("/home/rafatieppo/Dropbox/bibtex/references.bib"))
 
 ;; How to solve @
 (eval-after-load 'reftex-vars
@@ -550,6 +567,14 @@
           ;; Default indentation is usually 2 spaces, changing to 4.
           (set (make-local-variable 'sgml-basic-offset) 4)))
 ;;-----------------------------------------------------------------------------
+
+;;===========================================================================
+;; CPP CONFIGURATION
+;;===========================================================================
+(add-hook 'c++-mode-hook 'irony-mode)
+(add-hook 'c-mode-hook 'irony-mode)
+(add-hook 'objc-mode-hook 'irony-mode)
+(add-hook 'irony-mode-hook 'irony-cdb-autosetup-compile-options)
 
 ;;===========================================================================
 ;; PYTHON CONFIGURATION
@@ -615,10 +640,11 @@
   (global-set-key [f8] 'neotree-toggle)
 
 ;;===========================================================================
-;; Flycheck
+;; Flymake and Flycheck
 ;;===========================================================================
-;(add-hook 'after-init-hook #'global-flycheck-mode)
-
+;(remove-hook 'flymake-diagnostic-functions 'flymake-elpy)
+(setq elpy-modules (delete 'elpy-module-flymake elpy-modules))
+(add-hook 'after-init-hook #'global-flycheck-mode)
 ;;===========================================================================
 ;; THEMES - SEVERAL SCHEMES
 ;;===========================================================================
@@ -636,6 +662,8 @@
 ;(require 'solarized-dark-theme)
 
 (add-to-list 'load-path "/home/rafatieppo/.emacs.d/themess")
+
+
 ;(require 'afternoon-theme)
 ;(require 'ayu-theme)
 ;(require 'monokai-theme) ;; load first to improve ORG visualization
@@ -653,17 +681,19 @@
 ;;(require 'fogus-theme)
 ;;(require 'gotham)
 ;;(require 'granger-theme)
+;(require 'ibm-dark-theme)
 ;;(require 'hickey-theme)
 ;;(require 'junio-theme)
 ;(require 'material-light-theme)
 ;(require 'material-theme)
 ;;(require 'moe-dark-theme)
 ;(require 'moe-light-theme)
-(require 'molokai-theme)
+;(require 'molokai-theme)
 ;(require 'nimbus-theme)
 ;;(require 'odersky-theme)
-;;(require 'seti-theme)
+;(require 'seti-theme)
 ;;(require 'soothe-theme)
+;(require 'spacemacs-dark-theme)
 ;;(require 'spolsky-theme)
 ;;(require 'tangotango-theme)
 ;(require 'tron-theme)
@@ -678,29 +708,18 @@
 ;;(color-theme-tomorrow--define-theme night)
 ;;(color-theme-tomorrow--define-theme day)
 
+(if (display-graphic-p) 
+    (require 'atom-one-dark-theme) 
+  (require 'forest-blue-theme))
+
 ;;===========================================================================
 ;;Horizontal line
 ;;===========================================================================
-(global-hl-line-mode 1)
+;(global-hl-line-mode 1)
 ;; Underline in current line
 ;(set-face-attribute hl-line-face nil :underline t)
-(set-face-background hl-line-face "#2F2F2F") ;;MONOKAI
+;(set-face-background hl-line-face "#2F2F2F") ;;MONOKAI
 ;;---------------------------------------------------------------------------
 ;;===========================================================================
 
 
-
-(custom-set-variables
- ;; custom-set-variables was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- '(package-selected-packages
-   (quote
-    (ess yafolding smex smartparens py-autopep8 powerline polymode neotree multiple-cursors markdown-mode julia-mode jedi indent-guide ido-vertical-mode ido-hacks highlight-symbol flycheck flx-ido elpy company-quickhelp company-jedi company-anaconda auctex ace-jump-mode ac-math))))
-(custom-set-faces
- ;; custom-set-faces was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- )

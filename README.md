@@ -18,7 +18,6 @@ improved defaults and extended support for the following:
 
 # Supported Emacs versions and requirements
 
-
 Currently I am running **GNU Emacs 26.1 (build 2, x86_64-pc-linux-gnu, GTK+ Version 3.24.5) of 2019-09-22, modified by Debian**.
 
 Before I was running **GNU Emacs 25.2.2 (x86_64-pc-linux-gnu, GTK+ Version 3.22.21) of 2017-09-22, modified by Debian**.
@@ -44,7 +43,7 @@ There are four available files in this repository:
 - VERSION_CODENAME=buster
 - ID=debian
 - HOME_URL="https://www.debian.org/"
-- DE="XFCE"
+- DE="MATE"
 
 >Enjoy Emacs!
 
