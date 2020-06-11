@@ -17,15 +17,15 @@
 ;;===========================================================================
 ;;EMACS auto install packs GREAT - active only in the first session
 ;;===========================================================================
-;auctex
+
 ;; list the packages you want
-;(setq package-list '(ace-jump-mode ac-math anaconda-mode auto-complete calfw calfw-org calfw-ical company-anaconda company-irony company-jedi company-quickhelp elpy ess ess-R-data-view flx flx-ido flycheck highlight-symbol ido-hacks ido-vertical-mode indent-guide jedi markdown-mode multiple-cursors neotree polymode popup powerline py-autopep8 smartparens smex yafolding yasnippet))
+;(setq package-list '(ace-jump-mode ac-math anaconda-mode auto-complete calfw calfw-org calfw-ical company-anaconda company-irony company-jedi company-quickhelp company-tern elpy ess ess-R-data-view flx flx-ido flycheck highlight-symbol ido-hacks ido-vertical-mode indent-guide jedi markdown-mode js2-mode multiple-cursors neotree polymode popup powerline py-autopep8 smartparens smex yafolding yasnippet web-mode))
 ;; list the repositories containing them
-;(setq package-archives '(("elpa" . "http://tromey.com/elpa/")
-;                         ("gnu" . "http://elpa.gnu.org/packages/")
-;                         ("melpa" . "http://melpa.org/packages/")
-;                         ("marmalade" . "http://marmalade-repo.org/packages/")
-;                         ))
+(setq package-archives '(("elpa" . "http://tromey.com/elpa/")
+                         ("gnu" . "http://elpa.gnu.org/packages/")
+                         ("melpa" . "http://melpa.org/packages/")
+                         ("marmalade" . "http://marmalade-repo.org/packages/")
+                         ))
 
 ;; activate all the packages (in particular autoloads)
 (package-initialize)
@@ -328,6 +328,8 @@
 ;(require 'auto-complete-config)
 ;(ac-config-default)
 
+
+
 ;; stop (auto-complete-mode) from being called in python https://stackoverflow.com/questions/24814988/emacs-disable-auto-complete-in-python-mode
 ;(defadvice auto-complete-mode (around disable-auto-complete-for-python)) ;; one extra parentesis
 ;  (unless (eq major-mode 'python-mode) ad-do-it))
@@ -382,6 +384,10 @@
 (require 'smartparens)
 (require 'smartparens-config)
 (smartparens-global-mode 1)
+
+;;; html-mode
+    (sp-with-modes '(html-mode sgml-mode web-mode)
+      (sp-local-pair "<" ">"))
 
 ;;-----------------------------------------------------------------------------
 ;; FOLDING BY INDENTATION ;; git clone https://github.com/zenozeng/yafolding.el.git
@@ -557,6 +563,26 @@
 (add-hook 'LaTeX-mode-hook 'turn-on-reftex)
 (setq reftex-plug-into-AUCTeX t)
 
+
+
+;;===========================================================================
+;; JavaScript
+;;===========================================================================
+;;-----------------------------------------------------------------------------
+; js2-mode.
+(add-to-list 'auto-mode-alist '("\\.js\\'\\|\\.json\\'" . js2-mode))
+
+;; Better imenu
+(add-hook 'js2-mode-hook #'js2-imenu-extras-mode)
+
+(add-to-list 'load-path "/home/rafatieppo/.emacs.d/elpa/company-tern-20200610/")
+(require 'company)
+(require 'company-tern)
+
+(add-to-list 'company-backends 'company-tern)
+(add-hook 'js2-mode-hook (lambda ()
+                           (tern-mode)
+                           (company-mode)))
 ;;===========================================================================
 ;; HTML
 ;;===========================================================================
@@ -567,6 +593,25 @@
           ;; Default indentation is usually 2 spaces, changing to 4.
           (set (make-local-variable 'sgml-basic-offset) 4)))
 ;;-----------------------------------------------------------------------------
+;; web-mode
+
+(require 'web-mode)
+(add-to-list 'auto-mode-alist '("\\.phtml\\'" . web-mode))
+(add-to-list 'auto-mode-alist '("\\.tpl\\.php\\'" . web-mode))
+(add-to-list 'auto-mode-alist '("\\.[agj]sp\\'" . web-mode))
+(add-to-list 'auto-mode-alist '("\\.as[cp]x\\'" . web-mode))
+(add-to-list 'auto-mode-alist '("\\.erb\\'" . web-mode))
+(add-to-list 'auto-mode-alist '("\\.mustache\\'" . web-mode))
+(add-to-list 'auto-mode-alist '("\\.djhtml\\'" . web-mode))
+
+;Using web-mode for editing plain HTML files can be done this way
+(add-to-list 'auto-mode-alist '("\\.html?\\'" . web-mode))
+
+(defun my-web-mode-hook ()
+  "Hooks for Web mode."
+  (setq web-mode-markup-indent-offset 2)
+)
+(add-hook 'web-mode-hook  'my-web-mode-hook)
 
 ;;===========================================================================
 ;; CPP CONFIGURATION
