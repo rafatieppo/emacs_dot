@@ -131,11 +131,15 @@
 
 ;;---------------------------------------------------------------------------
 ;; Tipo e tamanho da fonte do editor.
-;(set-default-font "monofur-13")
-;(set-default-font "Tex Gyre Adventor-11")
 ;(set-default-font "Anonymous Pro-14.5")
+;(set-default-font "Envy Code R-18")
+;(set-default-font "Hack-16")
+;(set-default-font "IBMPlexMono-16")
+;(set-default-font "Monaco-16.5")
+;(set-default-font "monofur-18")
 ;(set-default-font "Menlo-16")
-(set-default-font "IBMPlexMono-18")
+(set-default-font "Monoid-14")
+;(set-default-font "Tex Gyre Adventor-11")
 
 ;;---------------------------------------------------------------------------
 
@@ -596,6 +600,7 @@
 ;; web-mode
 
 (require 'web-mode)
+(add-to-list 'auto-mode-alist '("\\.html\\'" . web-mode))
 (add-to-list 'auto-mode-alist '("\\.phtml\\'" . web-mode))
 (add-to-list 'auto-mode-alist '("\\.tpl\\.php\\'" . web-mode))
 (add-to-list 'auto-mode-alist '("\\.[agj]sp\\'" . web-mode))
@@ -604,12 +609,14 @@
 (add-to-list 'auto-mode-alist '("\\.mustache\\'" . web-mode))
 (add-to-list 'auto-mode-alist '("\\.djhtml\\'" . web-mode))
 
+
 ;Using web-mode for editing plain HTML files can be done this way
-(add-to-list 'auto-mode-alist '("\\.html?\\'" . web-mode))
+;(add-to-list 'auto-mode-alist '("\\.html?\\'" . web-mode))
 
 (defun my-web-mode-hook ()
   "Hooks for Web mode."
   (setq web-mode-markup-indent-offset 2)
+  (setq web-mode-css-indent-offset 2)
 )
 (add-hook 'web-mode-hook  'my-web-mode-hook)
 
@@ -641,9 +648,12 @@
 
 ;;-----------------------------------------------------------------------------
 ;; Autopep8 - enable autopep8 formatting on save
-;(require 'py-autopep8)
+(require 'py-autopep8)
 (add-hook 'elpy-mode-hook 'py-autopep8-enable-on-save)
+;(add-hook 'python-mode-hook 'py-autopep8-enable-on-save)
 ;(add-hook 'anaconda-mode-hook 'py-autopep8-enable-on-save)
+;(setq py-autopep8-options '("--max-line-lengh=100"))
+
 ;;-----------------------------------------------------------------------------
 ;; ALT ENTER to send line
 (defun my-python-line ()
@@ -684,12 +694,14 @@
 (require 'neotree)
   (global-set-key [f8] 'neotree-toggle)
 
+
 ;;===========================================================================
 ;; Flymake and Flycheck
 ;;===========================================================================
 ;(remove-hook 'flymake-diagnostic-functions 'flymake-elpy)
 (setq elpy-modules (delete 'elpy-module-flymake elpy-modules))
 (add-hook 'after-init-hook #'global-flycheck-mode)
+
 ;;===========================================================================
 ;; THEMES - SEVERAL SCHEMES
 ;;===========================================================================
@@ -708,7 +720,6 @@
 
 (add-to-list 'load-path "/home/rafatieppo/.emacs.d/themess")
 
-
 ;(require 'afternoon-theme)
 ;(require 'ayu-theme)
 ;(require 'monokai-theme) ;; load first to improve ORG visualization
@@ -722,7 +733,7 @@
 ;(require 'clues-theme)
 ;(require 'dracula-theme)
 ;;(require 'erosiond-theme)
-;(require 'forest-blue-theme)
+(require 'forest-blue-theme)
 ;;(require 'fogus-theme)
 ;;(require 'gotham)
 ;;(require 'granger-theme)
@@ -746,6 +757,7 @@
 ;;(require 'underwater-theme)
 ;;(require 'wilson-theme)
 ;;(require 'zenburn-theme)
+(require 'zerodark-theme)
 ;(require 'color-theme-tomorrow)
 ;(color-theme-tomorrow--define-theme night-blue)
 ;(color-theme-tomorrow--define-theme night-eighties)
@@ -754,7 +766,7 @@
 ;;(color-theme-tomorrow--define-theme day)
 
 (if (display-graphic-p) 
-    (require 'atom-one-dark-theme) 
+    (require 'zerodark-theme) 
   (require 'forest-blue-theme))
 
 ;;===========================================================================
@@ -766,5 +778,4 @@
 ;(set-face-background hl-line-face "#2F2F2F") ;;MONOKAI
 ;;---------------------------------------------------------------------------
 ;;===========================================================================
-
 
