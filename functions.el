@@ -18,12 +18,12 @@ e.g. Sunday, September 17, 2000."
 "Insere cabeçalho."
 (interactive)
 ;; (insert (comment-dwim 2) (make-string 65 ?=) "\n")
-(insert "###" (make-string 70 ?=) "\n")
-(insert "###" (make-string 40 ? ) "Rafael Tieppo\n")
-(insert "###" (make-string 40 ? ) "rafaelt@unemat.br\n")
-(insert "###" (make-string 40 ? ) "https://rafatieppo.github.io/\n")
-(insert "###" (make-string 40 ? ) (format-time-string "%d-%m-%Y\n"))
-(insert "###" (make-string 70 ?=) "\n")
+(insert "#" (make-string 70 ?=) "\n")
+(insert "#" (make-string 40 ? ) "Rafael Tieppo\n")
+(insert "#" (make-string 40 ? ) "rafaeltieppo@yahoo.com.br\n")
+(insert "#" (make-string 40 ? ) "https://rafatieppo.github.io/\n")
+(insert "#" (make-string 40 ? ) (format-time-string "%Y-%m-%d\n"))
+(insert "#" (make-string 70 ?=) "\n")
 )
 
 ;;-----------------------------------------------------------------------------
