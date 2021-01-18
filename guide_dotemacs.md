@@ -1,4 +1,28 @@
 
+# cpp
+
+install from melpa:
+`irony`
+`company-irony`
+
+`sudo apt-get install clang cmake libclang`
+
+Into `.emacs`
+
+```
+(add-hook 'c++-mode-hook 'irony-mode)
+(add-hook 'c-mode-hook 'irony-mode)
+(add-hook 'objc-mode-hook 'irony-mode)
+(add-hook 'irony-mode-hook 'irony-cdb-autosetup-compile-options)
+```
+
+open emacs `alt x`
+irony-install-server 
+
+
+
+
+
 # Python
 
 ## Auto complete and Company 

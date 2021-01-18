@@ -17,25 +17,26 @@
 ;;===========================================================================
 ;;EMACS auto install packs GREAT - active only in the first session
 ;;===========================================================================
-;auctex
+;company-tern
 ;; list the packages you want
-;(setq package-list '(ace-jump-mode ac-math anaconda-mode auto-complete  company-anaconda company-irony company-jedi company-quickhelp elpy ess ess-R-data-view flx flx-ido flycheck highlight-symbol ido-hacks ido-vertical-mode indent-guide jedi markdown-mode multiple-cursors neotree polymode popup powerline py-autopep8 smartparens smex yafolding yasnippet))
+(setq package-list '(ace-jump-mode ac-math anaconda-mode auto-complete calfw calfw-org calfw-ical company-anaconda company-irony company-jedi company-quickhelp  elpy ess ess-R-data-view flx flx-ido flycheck highlight-symbol ido-hacks ido-vertical-mode indent-guide jedi markdown-mode js2-mode multiple-cursors neotree polymode popup powerline py-autopep8 smartparens smex yafolding yasnippet web-mode))
 ;; list the repositories containing them
-;(setq package-archives '(("elpa" . "http://tromey.com/elpa/")
-;                         ("gnu" . "http://elpa.gnu.org/packages/")
-;                         ("melpa" . "http://melpa.org/packages/")
-;                         ("marmalade" . "http://marmalade-repo.org/packages/")
-;                         ))
+(setq package-archives '(("elpa" . "http://tromey.com/elpa/")
+                         ("gnu" . "http://elpa.gnu.org/packages/")
+                         ("melpa" . "http://melpa.org/packages/")
+                         ("marmalade" . "http://marmalade-repo.org/packages/")
+                         ))
+
 ;; activate all the packages (in particular autoloads)
 (package-initialize)
 ;; fetch the list of packages available 
-;(unless package-archive-contents
-;  (package-refresh-contents))
+(unless package-archive-contents
+  (package-refresh-contents))
 
 ;; install the missing packages
-;(dolist (package package-list)
-;  (unless (package-installed-p package)
-;    (package-install package)))
+(dolist (package package-list)
+  (unless (package-installed-p package)
+    (package-install package)))
 ;-----------------------------------------------------------------------------
 
 ;;===========================================================================
@@ -46,12 +47,19 @@
 (define-key global-map "\C-ca" 'org-agenda)
 (setq org-log-done t)
 
-;; arquivo para o org agendasorg-agenda
+
+;; files for org agendasorg-agenda
 (setq org-agenda-files (list "/home/rafatieppo/Dropbox/emacs_org_mode/rafa.org"
                              "/home/rafatieppo/Dropbox/profissional/projetos_extensao/all_extens_proj_manag.org"
                              "/home/rafatieppo/Dropbox/profissional/projetos_pessoais/all_person_proj_manag.org"
                              "/home/rafatieppo/Dropbox/profissional/projetos_pesquisa/all_resear_proj_manag.org"
                         ))
+
+;; packs to print calendar with appointments as GoogleCalendar
+(require 'calfw)
+(require 'calfw-org)
+(setq cfw:org-agenda-schedule-args '(:timestamp))
+;(require 'calfw-ical)
 
 ;;-----------------------------------------------------------------------------
 ;; ORG mode CLASSES and COLORS for TASKS
@@ -60,8 +68,8 @@
      (setq org-todo-keyword-faces
            '(
              ("TODO" . (:foreground "red" :weight bold))
-             ("RUNN" . (:foreground "yellow" :weight bold))
-             ("WAIT" . (:foreground "orange" :weight bold))
+             ("RUNN" . (:foreground "gold" :weight bold))
+             ("WAIT" . (:foreground "cyan" :weight bold))
              ("DONE" . (:foreground "green" :weight bold))
              ))
 ;;-----------------------------------------------------------------------------
@@ -123,11 +131,15 @@
 
 ;;---------------------------------------------------------------------------
 ;; Tipo e tamanho da fonte do editor.
-;(set-default-font "monofur-13")
-;(set-default-font "Tex Gyre Adventor-11")
 ;(set-default-font "Anonymous Pro-14.5")
+(set-default-font "Envy Code R-18")
+;(set-default-font "Hack-16")
+;(set-default-font "IBMPlexMono-16")
+;(set-default-font "Monaco-16.5")
+;(set-default-font "monofur-20")
 ;(set-default-font "Menlo-16")
-(set-default-font "IBMPlexMono-18")
+;(set-default-font "Monoid-14")
+;(set-default-font "Tex Gyre Adventor-11")
 
 ;;---------------------------------------------------------------------------
 
@@ -161,25 +173,29 @@
 ;;---------------------------------------------------------------------------
 
 ;;-----------------------------------------------------------------------------
-;; Quebra de linhas ao exceder largura do texto (padrão é 72
-;; caracteres).
+;; Quebra de linhas ao exceder largura do texto (padrão é 72 caracteres).
 (setq-default fill-column 72)
 ;;-----------------------------------------------------------------------------
 
 ;;-----------------------------------------------------------------------------
 ;; Não quebrar linhas, útil para tabelas longas
-(setq-default truncate-lines t)
+;(setq-default truncate-lines t)
 ;;-----------------------------------------------------------------------------
 
 ;;-----------------------------------------------------------------------------
-;; Ativa o auto-fill-mode para fazer quebra automática de linhas.
-(setq-default auto-fill-function 'do-auto-fill)
+;; Auto break long lines.
+;(setq-default auto-fill-function 'do-auto-fill)
 ;;-----------------------------------------------------------------------------
+
+;; Wrap long lines
+;(global-visual-line-mode t)
+;(setq-default word-wrap t)
 
 ;;-----------------------------------------------------------------------------
 ;; Modo de linhas de tela (screen lines) e não lógicas (logical lines).
 (visual-line-mode 1)
 ;;-----------------------------------------------------------------------------
+
 
 ;;---------------------------------------------------------------------------
 ;; Desativa o auto salvar e auto backup.
@@ -320,6 +336,8 @@
 ;(require 'auto-complete-config)
 ;(ac-config-default)
 
+
+
 ;; stop (auto-complete-mode) from being called in python https://stackoverflow.com/questions/24814988/emacs-disable-auto-complete-in-python-mode
 ;(defadvice auto-complete-mode (around disable-auto-complete-for-python)) ;; one extra parentesis
 ;  (unless (eq major-mode 'python-mode) ad-do-it))
@@ -374,6 +392,10 @@
 (require 'smartparens)
 (require 'smartparens-config)
 (smartparens-global-mode 1)
+
+;;; html-mode
+    (sp-with-modes '(html-mode sgml-mode web-mode)
+      (sp-local-pair "<" ">"))
 
 ;;-----------------------------------------------------------------------------
 ;; FOLDING BY INDENTATION ;; git clone https://github.com/zenozeng/yafolding.el.git
@@ -549,6 +571,26 @@
 (add-hook 'LaTeX-mode-hook 'turn-on-reftex)
 (setq reftex-plug-into-AUCTeX t)
 
+
+
+;;===========================================================================
+;; JavaScript
+;;===========================================================================
+;;-----------------------------------------------------------------------------
+; js2-mode.
+(add-to-list 'auto-mode-alist '("\\.js\\'\\|\\.json\\'" . js2-mode))
+
+;; Better imenu
+(add-hook 'js2-mode-hook #'js2-imenu-extras-mode)
+
+(add-to-list 'load-path "/home/rafatieppo/.emacs.d/elpa/company-tern-20200610/")
+(require 'company)
+(require 'company-tern)
+
+(add-to-list 'company-backends 'company-tern)
+(add-hook 'js2-mode-hook (lambda ()
+                           (tern-mode)
+                           (company-mode)))
 ;;===========================================================================
 ;; HTML
 ;;===========================================================================
@@ -559,6 +601,28 @@
           ;; Default indentation is usually 2 spaces, changing to 4.
           (set (make-local-variable 'sgml-basic-offset) 4)))
 ;;-----------------------------------------------------------------------------
+;; web-mode
+
+(require 'web-mode)
+(add-to-list 'auto-mode-alist '("\\.html\\'" . web-mode))
+(add-to-list 'auto-mode-alist '("\\.phtml\\'" . web-mode))
+(add-to-list 'auto-mode-alist '("\\.tpl\\.php\\'" . web-mode))
+(add-to-list 'auto-mode-alist '("\\.[agj]sp\\'" . web-mode))
+(add-to-list 'auto-mode-alist '("\\.as[cp]x\\'" . web-mode))
+(add-to-list 'auto-mode-alist '("\\.erb\\'" . web-mode))
+(add-to-list 'auto-mode-alist '("\\.mustache\\'" . web-mode))
+(add-to-list 'auto-mode-alist '("\\.djhtml\\'" . web-mode))
+
+
+;Using web-mode for editing plain HTML files can be done this way
+;(add-to-list 'auto-mode-alist '("\\.html?\\'" . web-mode))
+
+(defun my-web-mode-hook ()
+  "Hooks for Web mode."
+  (setq web-mode-markup-indent-offset 2)
+  (setq web-mode-css-indent-offset 2)
+)
+(add-hook 'web-mode-hook  'my-web-mode-hook)
 
 ;;===========================================================================
 ;; CPP CONFIGURATION
@@ -572,10 +636,15 @@
 ;; PYTHON CONFIGURATION
 ;;===========================================================================
 ;; Set Python3 interpreter
-(setq python-shell-interpreter "/usr/bin/python3")
+;(setq python-shell-interpreter "/usr/bin/python3")
+(setq python-shell-interpreter "/home/rafatieppo/Documents/test_raterio/bin/python")
+
 ;;(setq python-shell-interpreter "/home/rafatieppo/anaconda3/bin/python3")
 
-(setq elpy-rpc-python-command "/usr/bin/python3")
+;(setq elpy-rpc-python-command "/usr/bin/python3")
+(setq elpy-rpc-python-command "/home/rafatieppo/Documents/test_raterio/bin/python")
+
+
 
 (elpy-enable)
 ;;(setf elpy:complete-on-dot t)
@@ -588,9 +657,12 @@
 
 ;;-----------------------------------------------------------------------------
 ;; Autopep8 - enable autopep8 formatting on save
-;(require 'py-autopep8)
+(require 'py-autopep8)
 (add-hook 'elpy-mode-hook 'py-autopep8-enable-on-save)
+;(add-hook 'python-mode-hook 'py-autopep8-enable-on-save)
 ;(add-hook 'anaconda-mode-hook 'py-autopep8-enable-on-save)
+;(setq py-autopep8-options '("--max-line-lengh=100"))
+
 ;;-----------------------------------------------------------------------------
 ;; ALT ENTER to send line
 (defun my-python-line ()
@@ -631,12 +703,14 @@
 (require 'neotree)
   (global-set-key [f8] 'neotree-toggle)
 
+
 ;;===========================================================================
 ;; Flymake and Flycheck
 ;;===========================================================================
 ;(remove-hook 'flymake-diagnostic-functions 'flymake-elpy)
 (setq elpy-modules (delete 'elpy-module-flymake elpy-modules))
 (add-hook 'after-init-hook #'global-flycheck-mode)
+
 ;;===========================================================================
 ;; THEMES - SEVERAL SCHEMES
 ;;===========================================================================
@@ -650,11 +724,10 @@
 ;;-----------------------------------------------------------------------------
 ;; Solarized https://github.com/bbatsov/solarized-emacs
 
-;(add-to-list 'load-path "/home/rafatieppo/.emacs.d/themess/solarized")
-;(require 'solarized-dark-theme)
-
+(add-to-list 'load-path "/home/rafatieppo/.emacs.d/themess/solarized")
+(require 'solarized-dark-theme)
+;(require 'solarized-light-theme)
 (add-to-list 'load-path "/home/rafatieppo/.emacs.d/themess")
-
 
 ;(require 'afternoon-theme)
 ;(require 'ayu-theme)
@@ -679,7 +752,7 @@
 ;(require 'material-light-theme)
 ;(require 'material-theme)
 ;;(require 'moe-dark-theme)
-;(require 'moe-light-theme)
+;;(require 'moe-light-theme)
 ;(require 'molokai-theme)
 ;(require 'nimbus-theme)
 ;;(require 'odersky-theme)
@@ -693,16 +766,17 @@
 ;;(require 'underwater-theme)
 ;;(require 'wilson-theme)
 ;;(require 'zenburn-theme)
+;(require 'zerodark-theme)
 ;(require 'color-theme-tomorrow)
 ;(color-theme-tomorrow--define-theme night-blue)
 ;(color-theme-tomorrow--define-theme night-eighties)
 ;;(color-theme-tomorrow--define-theme night-bright)
 ;;(color-theme-tomorrow--define-theme night)
-;;(color-theme-tomorrow--define-theme day)
+;(color-theme-tomorrow--define-theme day)
 
-(if (display-graphic-p) 
-    (require 'spacemacs-dark-theme) 
-  (require 'forest-blue-theme))
+;(if (display-graphic-p) 
+;    (require 'zerodark-theme) 
+;  (require 'forest-blue-theme))
 
 ;;===========================================================================
 ;;Horizontal line
@@ -714,4 +788,17 @@
 ;;---------------------------------------------------------------------------
 ;;===========================================================================
 
-
+(custom-set-variables
+ ;; custom-set-variables was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ '(package-selected-packages
+   (quote
+    (yafolding web-mode tern smex smartparens py-autopep8 powerline polymode neotree multiple-cursors markdown-mode js2-mode jedi indent-guide ido-vertical-mode ido-hacks highlight-symbol flycheck flx-ido ess-R-data-view elpy dash-functional company-quickhelp company-jedi company-irony company-anaconda calfw-org calfw-ical calfw auctex ace-jump-mode ac-math))))
+(custom-set-faces
+ ;; custom-set-faces was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ )

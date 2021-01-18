@@ -17,9 +17,9 @@
 ;;===========================================================================
 ;;EMACS auto install packs GREAT - active only in the first session
 ;;===========================================================================
-
+;company-tern
 ;; list the packages you want
-;(setq package-list '(ace-jump-mode ac-math anaconda-mode auto-complete calfw calfw-org calfw-ical company-anaconda company-irony company-jedi company-quickhelp company-tern elpy ess ess-R-data-view flx flx-ido flycheck highlight-symbol ido-hacks ido-vertical-mode indent-guide jedi markdown-mode js2-mode multiple-cursors neotree polymode popup powerline py-autopep8 smartparens smex yafolding yasnippet web-mode))
+(setq package-list '(ace-jump-mode ac-math anaconda-mode auto-complete calfw calfw-org calfw-ical company-anaconda company-irony company-jedi company-quickhelp  elpy ess ess-R-data-view flx flx-ido flycheck highlight-symbol ido-hacks ido-vertical-mode indent-guide jedi markdown-mode js2-mode multiple-cursors neotree polymode popup powerline py-autopep8 smartparens smex yafolding yasnippet web-mode))
 ;; list the repositories containing them
 (setq package-archives '(("elpa" . "http://tromey.com/elpa/")
                          ("gnu" . "http://elpa.gnu.org/packages/")
@@ -30,13 +30,13 @@
 ;; activate all the packages (in particular autoloads)
 (package-initialize)
 ;; fetch the list of packages available 
-;(unless package-archive-contents
-;  (package-refresh-contents))
+(unless package-archive-contents
+  (package-refresh-contents))
 
 ;; install the missing packages
-;(dolist (package package-list)
-;  (unless (package-installed-p package)
-;    (package-install package)))
+(dolist (package package-list)
+  (unless (package-installed-p package)
+    (package-install package)))
 ;-----------------------------------------------------------------------------
 
 ;;===========================================================================
@@ -68,8 +68,8 @@
      (setq org-todo-keyword-faces
            '(
              ("TODO" . (:foreground "red" :weight bold))
-             ("RUNN" . (:foreground "yellow" :weight bold))
-             ("WAIT" . (:foreground "orange" :weight bold))
+             ("RUNN" . (:foreground "gold" :weight bold))
+             ("WAIT" . (:foreground "cyan" :weight bold))
              ("DONE" . (:foreground "green" :weight bold))
              ))
 ;;-----------------------------------------------------------------------------
@@ -132,13 +132,13 @@
 ;;---------------------------------------------------------------------------
 ;; Tipo e tamanho da fonte do editor.
 ;(set-default-font "Anonymous Pro-14.5")
-;(set-default-font "Envy Code R-18")
+(set-default-font "Envy Code R-18")
 ;(set-default-font "Hack-16")
 ;(set-default-font "IBMPlexMono-16")
 ;(set-default-font "Monaco-16.5")
-;(set-default-font "monofur-18")
+;(set-default-font "monofur-20")
 ;(set-default-font "Menlo-16")
-(set-default-font "Monoid-14")
+;(set-default-font "Monoid-14")
 ;(set-default-font "Tex Gyre Adventor-11")
 
 ;;---------------------------------------------------------------------------
@@ -173,25 +173,29 @@
 ;;---------------------------------------------------------------------------
 
 ;;-----------------------------------------------------------------------------
-;; Quebra de linhas ao exceder largura do texto (padrão é 72
-;; caracteres).
+;; Quebra de linhas ao exceder largura do texto (padrão é 72 caracteres).
 (setq-default fill-column 72)
 ;;-----------------------------------------------------------------------------
 
 ;;-----------------------------------------------------------------------------
 ;; Não quebrar linhas, útil para tabelas longas
-(setq-default truncate-lines t)
+;(setq-default truncate-lines t)
 ;;-----------------------------------------------------------------------------
 
 ;;-----------------------------------------------------------------------------
-;; Ativa o auto-fill-mode para fazer quebra automática de linhas.
-(setq-default auto-fill-function 'do-auto-fill)
+;; Auto break long lines.
+;(setq-default auto-fill-function 'do-auto-fill)
 ;;-----------------------------------------------------------------------------
+
+;; Wrap long lines
+;(global-visual-line-mode t)
+;(setq-default word-wrap t)
 
 ;;-----------------------------------------------------------------------------
 ;; Modo de linhas de tela (screen lines) e não lógicas (logical lines).
 (visual-line-mode 1)
 ;;-----------------------------------------------------------------------------
+
 
 ;;---------------------------------------------------------------------------
 ;; Desativa o auto salvar e auto backup.
@@ -632,10 +636,15 @@
 ;; PYTHON CONFIGURATION
 ;;===========================================================================
 ;; Set Python3 interpreter
-(setq python-shell-interpreter "/usr/bin/python3")
+;(setq python-shell-interpreter "/usr/bin/python3")
+(setq python-shell-interpreter "/home/rafatieppo/Documents/test_raterio/bin/python")
+
 ;;(setq python-shell-interpreter "/home/rafatieppo/anaconda3/bin/python3")
 
-(setq elpy-rpc-python-command "/usr/bin/python3")
+;(setq elpy-rpc-python-command "/usr/bin/python3")
+(setq elpy-rpc-python-command "/home/rafatieppo/Documents/test_raterio/bin/python")
+
+
 
 (elpy-enable)
 ;;(setf elpy:complete-on-dot t)
@@ -715,9 +724,9 @@
 ;;-----------------------------------------------------------------------------
 ;; Solarized https://github.com/bbatsov/solarized-emacs
 
-;(add-to-list 'load-path "/home/rafatieppo/.emacs.d/themess/solarized")
-;(require 'solarized-dark-theme)
-
+(add-to-list 'load-path "/home/rafatieppo/.emacs.d/themess/solarized")
+(require 'solarized-dark-theme)
+;(require 'solarized-light-theme)
 (add-to-list 'load-path "/home/rafatieppo/.emacs.d/themess")
 
 ;(require 'afternoon-theme)
@@ -733,7 +742,7 @@
 ;(require 'clues-theme)
 ;(require 'dracula-theme)
 ;;(require 'erosiond-theme)
-(require 'forest-blue-theme)
+;(require 'forest-blue-theme)
 ;;(require 'fogus-theme)
 ;;(require 'gotham)
 ;;(require 'granger-theme)
@@ -743,7 +752,7 @@
 ;(require 'material-light-theme)
 ;(require 'material-theme)
 ;;(require 'moe-dark-theme)
-;(require 'moe-light-theme)
+;;(require 'moe-light-theme)
 ;(require 'molokai-theme)
 ;(require 'nimbus-theme)
 ;;(require 'odersky-theme)
@@ -757,17 +766,17 @@
 ;;(require 'underwater-theme)
 ;;(require 'wilson-theme)
 ;;(require 'zenburn-theme)
-(require 'zerodark-theme)
+;(require 'zerodark-theme)
 ;(require 'color-theme-tomorrow)
 ;(color-theme-tomorrow--define-theme night-blue)
 ;(color-theme-tomorrow--define-theme night-eighties)
 ;;(color-theme-tomorrow--define-theme night-bright)
 ;;(color-theme-tomorrow--define-theme night)
-;;(color-theme-tomorrow--define-theme day)
+;(color-theme-tomorrow--define-theme day)
 
-(if (display-graphic-p) 
-    (require 'zerodark-theme) 
-  (require 'forest-blue-theme))
+;(if (display-graphic-p) 
+;    (require 'zerodark-theme) 
+;  (require 'forest-blue-theme))
 
 ;;===========================================================================
 ;;Horizontal line
@@ -779,3 +788,17 @@
 ;;---------------------------------------------------------------------------
 ;;===========================================================================
 
+(custom-set-variables
+ ;; custom-set-variables was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ '(package-selected-packages
+   (quote
+    (yafolding web-mode tern smex smartparens py-autopep8 powerline polymode neotree multiple-cursors markdown-mode js2-mode jedi indent-guide ido-vertical-mode ido-hacks highlight-symbol flycheck flx-ido ess-R-data-view elpy dash-functional company-quickhelp company-jedi company-irony company-anaconda calfw-org calfw-ical calfw auctex ace-jump-mode ac-math))))
+(custom-set-faces
+ ;; custom-set-faces was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ )
