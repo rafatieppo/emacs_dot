@@ -20,7 +20,9 @@ improved defaults and extended support for the following:
 
 # Supported Emacs versions and requirements
 
-Currently I am running **GNU Emacs 26.1 (build 2, x86_64-pc-linux-gnu, GTK+ Version 3.24.5) of 2019-09-22, modified by Debian**.
+Currently I am running **GNU Emacs 26.3 (build 2, x86_64-pc-linux-gnu, GTK+ Version 3.24.5) of 2021-03-02, compiled on own machine**
+
+Before I was running **GNU Emacs 26.1 (build 2, x86_64-pc-linux-gnu, GTK+ Version 3.24.5) of 2019-09-22, modified by Debian**.
 
 Before I was running **GNU Emacs 25.2.2 (x86_64-pc-linux-gnu, GTK+ Version 3.22.21) of 2017-09-22, modified by Debian**.
 
