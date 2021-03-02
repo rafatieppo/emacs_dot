@@ -26,13 +26,15 @@ Before I used `Emacs 24.1`, `GNU Emacs 25.1.1 x86_64-unknown-linux-gnu, GTK+ Ver
 
 **Note**: I try `Emacs 27.0.50` from repository `ppa:ubuntu-elisp`, `sudo apt-get install emacs-snapshot`. 
 
-There are four available files in this repository:
+Files in this repository:
 
 - `24EMACS_DOT.el`: My init file for emacs 24 (it is old)
 - `25EMACS_DOT.el`: My init file for emacs 25 (it is old)
 - `26EMACS_DOT.el`: My init file for emacs 26 (Currently)
 - `27EMACS_DOT.el`: My init file for emacs 27 (Just for test)
 - `functions.el`: My functions for emacs.
+- `install_packages`: A lisp functions to install packages
+
 
 ## Currently operational system
 

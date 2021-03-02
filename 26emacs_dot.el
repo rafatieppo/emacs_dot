@@ -1,43 +1,36 @@
-;;=============================================================================
+;; .emacs --- init file for config emacs
+
+;; Copyright (C) 2021 Rafael Tieppo
+
+;; Author: Rafael Cesar Tieppo>
+;; URL: http://github.com/rafatieppo/
+;; Version: 1.0
+;; Keywords: packages installation
+;; Package-Requires:
+
+;; This file is free software; you can redistribute it and/or modify
+;; it under the terms of the GNU General Public License as published by
+;; the Free Software Foundation; either version 3, or (at your option)
+;; any later version.
+
+;; This file is distributed in the hope that it will be useful,
+;; but WITHOUT ANY WARRANTY; without even the implied warranty of
+;; MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+;; GNU General Public License for more details.
+
+;; You should have received a copy of the GNU General Public License
+;; along with this program.  If not, see <http://www.gnu.org/licenses/>.
+
+;;; Commentary:
 ;; init.el file for EMACS (26) by Rafael Tieppo.
-;; Most of all from this content was from internet. Feel free to copy and share.
+;; Most of all from this content was from internet.
+;; Feel free to copy and share.
 ;; Any question, please, you can open a issue in this repo
 ;;=============================================================================
 
-;;===========================================================================
-;;TO INSTALL FROM MELPA
-;;===========================================================================
-;;-----------------------------------------------------------------------------
-  
-;(add-to-list 'load-path "/home/rafatieppo/.emacs.d/")
-;(load "package")
-;(require 'package)
-;(package-initialize) 
+;;; Code:
 
-;;===========================================================================
-;;EMACS auto install packs GREAT - active only in the first session
-;;===========================================================================
-
-;; list the packages you want
-;(setq package-list '(ace-jump-mode ac-math anaconda-mode auto-complete calfw calfw-org calfw-ical company-anaconda company-irony company-jedi company-quickhelp company-tern elpy ess ess-R-data-view flx flx-ido flycheck highlight-symbol ido-hacks ido-vertical-mode indent-guide jedi markdown-mode js2-mode multiple-cursors neotree polymode popup powerline py-autopep8 smartparens smex yafolding yasnippet web-mode))
-;; list the repositories containing them
-(setq package-archives '(("elpa" . "http://tromey.com/elpa/")
-                         ("gnu" . "http://elpa.gnu.org/packages/")
-                         ("melpa" . "http://melpa.org/packages/")
-                         ("marmalade" . "http://marmalade-repo.org/packages/")
-                         ))
-
-;; activate all the packages (in particular autoloads)
 (package-initialize)
-;; fetch the list of packages available 
-;(unless package-archive-contents
-;  (package-refresh-contents))
-
-;; install the missing packages
-;(dolist (package package-list)
-;  (unless (package-installed-p package)
-;    (package-install package)))
-;-----------------------------------------------------------------------------
 
 ;;===========================================================================
 ;;ORG MODE
@@ -236,7 +229,7 @@
 ;;-----------------------------------------------------------------------------
 
 ;;---------------------------------------------------------------------------
-;;How to have emacs highlight text selections?	
+;;How to have emacs highlight text selections
 ;;	(transient-mark-mode 1) ; highlight text selection
 (delete-selection-mode 1) ; delete seleted text when typing
 ;;-----------------------------------------------------------------------------
@@ -627,10 +620,18 @@
 ;;===========================================================================
 ;; CPP CONFIGURATION
 ;;===========================================================================
+;; install apt-get install libclang-dev apt-get install cmake
+
+;(add-hook 'after-init-hook 'global-company-mode)
 (add-hook 'c++-mode-hook 'irony-mode)
 (add-hook 'c-mode-hook 'irony-mode)
 (add-hook 'objc-mode-hook 'irony-mode)
 (add-hook 'irony-mode-hook 'irony-cdb-autosetup-compile-options)
+
+;;To have autocompletion when you are including headers:
+
+;(add-to-list 'company-backends 'company-irony-c-headers)
+
 
 ;;===========================================================================
 ;; PYTHON CONFIGURATION
@@ -649,6 +650,7 @@
             (delq 'ac-source-dictionary ac-sources)
             (delq 'ac-source-abbrev ac-sources)
             (delq 'ac-source-words-in-same-mode-buffers ac-sources)))
+
 
 ;;-----------------------------------------------------------------------------
 ;; Autopep8 - enable autopep8 formatting on save
@@ -770,8 +772,8 @@
 ;;(color-theme-tomorrow--define-theme day)
 
 (if (display-graphic-p) 
-    (require 'afternoon-theme) 
-  (require 'forest-blue-theme))
+    (require 'forest-blue-theme) 
+  (require 'tron-theme))
 
 ;;===========================================================================
 ;;Horizontal line

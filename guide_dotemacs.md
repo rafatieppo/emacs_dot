@@ -1,3 +1,8 @@
+--- 
+title: Guide to install and configure EMACS packs 
+author: Rafael Tieppo 
+date: 2021 
+--- 
 
 # cpp
 
@@ -20,23 +25,21 @@ open emacs `alt x`
 irony-install-server 
 
 
-
-
-
 # Python
 
 ## Auto complete and Company 
 
 Historic
 
+- 2020
+
 Anaconda
 
-- 20190218
+- 2019-02-18
+
 ;; ANACONDA
 (add-hook 'python-mode-hook 'anaconda-mode)
 (add-hook 'python-mode-hook 'anaconda-eldoc-mode)
-
-
 
 
 It was the best. If emacs prints a big df, elpy-mode get slow. Thus I changed to Anaconda 
@@ -86,7 +89,6 @@ about it was the best way to not be lost, as follows:
                 (delq 'ac-source-abbrev ac-sources)
                 (delq 'ac-source-words-in-same-mode-buffers ac-sources)))
 ```
-
 
 - 20190121
     - i moved to `auto-complete` and `elpy`.
