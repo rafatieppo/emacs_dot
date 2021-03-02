@@ -1,3 +1,5 @@
+<img src="https://www.gnu.org/software/emacs/images/emacs.png" align="right" display="block">
+
 # EMACS_DOT
 
 My Emacs config.
