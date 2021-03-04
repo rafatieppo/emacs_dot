@@ -182,8 +182,8 @@
 ;;-----------------------------------------------------------------------------
 
 ;; Wrap long lines
-;(global-visual-line-mode t)
-;(setq-default word-wrap t)
+(global-visual-line-mode t)
+(setq-default word-wrap t)
 
 ;;-----------------------------------------------------------------------------
 ;; Modo de linhas de tela (screen lines) e não lógicas (logical lines).
@@ -272,7 +272,7 @@
 ;(setq ido-everywhere t)
 (setq ido-enable-flex-matching t
       ido-use-virtual-buffers t)
-(setq ido-file-extensions-order '(".md" ".R" ".Rmd" ".csv" ".txt" ".org" ".emacs" ".xml" ".el" ".ini" ".cfg" ".cnf"))
+(setq ido-file-extensions-order '(".md" ".R" ".Rmd" ".csv" ".txt" ".org" ".emacs" ".xml" ".el" ".ini" ".cfg" ".cnf" ".py"))
 ;;---------------------------------------------------------------------------
 
 ;;---------------------------------------------------------------------------
@@ -328,8 +328,6 @@
 ;(require 'auto-complete)
 ;(require 'auto-complete-config)
 ;(ac-config-default)
-
-
 
 ;; stop (auto-complete-mode) from being called in python https://stackoverflow.com/questions/24814988/emacs-disable-auto-complete-in-python-mode
 ;(defadvice auto-complete-mode (around disable-auto-complete-for-python)) ;; one extra parentesis
@@ -564,26 +562,24 @@
 (add-hook 'LaTeX-mode-hook 'turn-on-reftex)
 (setq reftex-plug-into-AUCTeX t)
 
-
-
 ;;===========================================================================
 ;; JavaScript
 ;;===========================================================================
 ;;-----------------------------------------------------------------------------
 ; js2-mode.
-(add-to-list 'auto-mode-alist '("\\.js\\'\\|\\.json\\'" . js2-mode))
+;(add-to-list 'auto-mode-alist '("\\.js\\'\\|\\.json\\'" . js2-mode))
 
 ;; Better imenu
-(add-hook 'js2-mode-hook #'js2-imenu-extras-mode)
+;(add-hook 'js2-mode-hook #'js2-imenu-extras-mode)
 
-(add-to-list 'load-path "/home/rafatieppo/.emacs.d/elpa/company-tern-20200610/")
-(require 'company)
-(require 'company-tern)
+;(add-to-list 'load-path "/home/rafatieppo/.emacs.d/elpa/company-tern-20200610/")
+;(require 'company)
+;(require 'company-tern)
 
-(add-to-list 'company-backends 'company-tern)
-(add-hook 'js2-mode-hook (lambda ()
-                           (tern-mode)
-                           (company-mode)))
+;(add-to-list 'company-backends 'company-tern)
+;(add-hook 'js2-mode-hook (lambda ()
+;                           (tern-mode)
+;                           (company-mode)))
 ;;===========================================================================
 ;; HTML
 ;;===========================================================================
@@ -636,20 +632,25 @@
 ;;===========================================================================
 ;; PYTHON CONFIGURATION
 ;;===========================================================================
+
+(elpy-enable)
+
 ;; Set Python3 interpreter
 (setq python-shell-interpreter "/usr/bin/python3")
+;(setq python-shell-interpreter "/home/rafatieppo/Documents/test_raterio/bin/python3")
 ;;(setq python-shell-interpreter "/home/rafatieppo/anaconda3/bin/python3")
 
 (setq elpy-rpc-python-command "/usr/bin/python3")
+;(setq elpy-rpc-python-command "/home/rafatieppo/Documents/test_raterio/bin/python3")
 
 (elpy-enable)
 ;;(setf elpy:complete-on-dot t)
 ;;(company-quickhelp-mode 1) ;; faz aparecer quickhelp
-(add-hook 'elpy-mode-hook
-          (lambda ()
-            (delq 'ac-source-dictionary ac-sources)
-            (delq 'ac-source-abbrev ac-sources)
-            (delq 'ac-source-words-in-same-mode-buffers ac-sources)))
+;(add-hook 'elpy-mode-hook
+;          (lambda ()
+;            (delq 'ac-source-dictionary ac-sources)
+;            (delq 'ac-source-abbrev ac-sources)
+;            (delq 'ac-source-words-in-same-mode-buffers ac-sources)))
 
 
 ;;-----------------------------------------------------------------------------
@@ -704,7 +705,7 @@
 ;;===========================================================================
 ;; Flymake and Flycheck
 ;;===========================================================================
-;(remove-hook 'flymake-diagnostic-functions 'flymake-elpy)
+(remove-hook 'flymake-diagnostic-functions 'flymake-elpy)
 (setq elpy-modules (delete 'elpy-module-flymake elpy-modules))
 (add-hook 'after-init-hook #'global-flycheck-mode)
 
@@ -785,3 +786,17 @@
 ;;---------------------------------------------------------------------------
 ;;===========================================================================
 
+(custom-set-variables
+ ;; custom-set-variables was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ '(package-selected-packages
+   (quote
+    (company yasnippet-snippets elpy yafolding web-mode tern smex smartparens py-autopep8 powerline polymode neotree multiple-cursors markdown-mode magit js2-mode jedi indent-guide ido-vertical-mode ido-hacks highlight-symbol flycheck flx-ido ess-R-data-view dash-functional concurrent company-quickhelp company-jedi company-irony-c-headers company-irony company-c-headers company-anaconda calfw-org calfw-ical calfw auctex ace-jump-mode ac-math))))
+(custom-set-faces
+ ;; custom-set-faces was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ )
