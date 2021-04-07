@@ -31,20 +31,21 @@
 (require 'package)
 (package-initialize)
 
-;; (add-to-list 'package-archives
-;;             '("melpa-stable" . "https://stable.melpa.org/packages/") t)
+;; best
+;(add-to-list 'package-archives
+;             '("melpa-stable" . "https://stable.melpa.org/packages/") t)
 
 ;(add-to-list 'package-archives
 ;             '("melpa" . "http://melpa.milkbox.net/packages/") t)
 
-(add-to-list 'package-archives
-             '("elpa" . "http://tromey.com/elpa/") t)
+;(add-to-list 'package-archives
+;             '("elpa" . "http://tromey.com/elpa/") t)
 
 ;(add-to-list 'package-archives
 ;             '("gnu" . "http://elpa.gnu.org/packages/") t)
 
-;(add-to-list 'package-archives
-;             '("melpa" . "https://melpa.org/packages/") t)
+(add-to-list 'package-archives
+            '("melpa" . "https://melpa.org/packages/") t)
 
 ;(add-to-list 'package-archives
 ;             '("marmalade" . "http://marmalade-repo.org/packages/") t)
@@ -73,15 +74,19 @@
 (package-install 'company-quickhelp)
 ;(package-install 'company-tern)
 (package-install 'company-c-headers)
-(package-install 'company-irony-c-headers)
-(package-install 'elpy)
-(package-install 'ess)
-(package-install 'ess-R-data-view)
+;(package-install 'company-clang)
+(package-install 'company-irony-c-headers) 
+(package-install 'elpy) ;;install via apt - check shell scrit
+;(package-install 'ess)
+;(package-install 'ess-R-data-view)
 (package-install 'flx)
 (package-install 'flx-ido)
 (package-install 'flycheck)
+(package-install 'flymake)
+(package-install 'helm)
 (package-install 'highlight-symbol)
-(package-install 'ido-hacks)
+;(package-install 'ido)
+;(package-install 'ido-hacks)
 (package-install 'ido-vertical-mode)
 (package-install 'indent-guide)
 (package-install 'jedi)
@@ -90,13 +95,13 @@
 (package-install 'js2-mode)
 (package-install 'multiple-cursors)
 (package-install 'neotree)
-(package-install 'polymode)
+(package-install 'polymode) 
 (package-install 'popup)
 (package-install 'powerline)
 (package-install 'py-autopep8)
 (package-install 'smartparens)
 (package-install 'smex)
-(package-install 'yafolding)
+(package-install 'yafolding) 
 (package-install 'yasnippet)
 (package-install 'web-mode)
 
