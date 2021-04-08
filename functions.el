@@ -198,6 +198,44 @@ e.g. Sunday, September 17, 2000."
         (setq start (+ 86400 start))))))
 
 ;;===========================================================================
+;; PYTHON
+;;===========================================================================
+
+;; ALT ENTER to send line
+(defun my-python-line ()
+ (interactive)
+  (save-excursion
+  (setq the_script_buffer (format (buffer-name)))
+  (end-of-line)
+  (kill-region (point) (progn (back-to-indentation) (point)))
+  ;(setq the_py_buffer (format "*Python[%s]*" (buffer-file-name)))
+  (setq the_py_buffer "*Python*")
+  (switch-to-buffer-other-window  the_py_buffer)
+  (goto-char (buffer-end 1))
+  (yank)
+  (comint-send-input)
+  (switch-to-buffer-other-window the_script_buffer)
+  (yank))
+  (beginning-of-line) ;; or (end-of-line)
+  (next-line)
+)
+(global-set-key (kbd "M-RET") 'my-python-line) ; Enter/Return key
+;;-----------------------------------------------------------------------------
+;; ALT / to send region
+(defun python-shell-send-region-or-line nil
+  "Sends from python-mode buffer to a python shell, intelligently."
+  (interactive)
+  (cond ((region-active-p)
+     (setq deactivate-mark t)
+     (python-shell-send-region (region-beginning) (region-end))
+     (python-nav-forward-statement)
+ ) (t (elpy-shell-send-current-statement))))
+;elpy-shell-send-region
+;https://emacs.stackexchange.com/questions/27674/make-elpy-shell-send-more-intelligent
+(global-set-key (kbd "M-/") 'python-shell-send-region-or-line) ; alt + /
+
+
+;;===========================================================================
 ;; TECLAS DE ATALHO
 ;;===========================================================================
 ;;----------------------------------------------------------------------------- 

@@ -25,11 +25,9 @@
 ;; init.el file for EMACS (26) by Rafael Tieppo.
 ;; Most of all from this content was from internet.
 ;; Feel free to copy and share.
-;; Any question, please, you can open a issue in this repo
 ;;=============================================================================
 
-;;; Code:
-
+;; Code:
 (package-initialize)
 
 ;;===========================================================================
@@ -39,7 +37,6 @@
 (define-key global-map "\C-cl" 'org-store-link)
 (define-key global-map "\C-ca" 'org-agenda)
 (setq org-log-done t)
-
 
 ;; files for org agendasorg-agenda
 (setq org-agenda-files (list "/home/rafatieppo/Dropbox/emacs_org_mode/rafa.org"
@@ -54,7 +51,6 @@
 (setq cfw:org-agenda-schedule-args '(:timestamp))
 ;(require 'calfw-ical)
 
-;;-----------------------------------------------------------------------------
 ;; ORG mode CLASSES and COLORS for TASKS
 (setq org-todo-keywords
        '((sequence "TODO(t)" "RUNN(w@/!)" "WAIT(w@/!)" "|" "DONE(d!)" "CANCELED(c@)")))
@@ -65,9 +61,8 @@
              ("WAIT" . (:foreground "orange" :weight bold))
              ("DONE" . (:foreground "green" :weight bold))
              ))
-;;-----------------------------------------------------------------------------
-;; ORG CAPTURE
-;; I use C-c c to start capture mode
+
+;; ORG CAPTURE I use C-c c to start capture mode
 (global-set-key (kbd "C-c c") 'org-capture)
 (setq org-capture-templates
   '(    ;; ... other templates
@@ -98,157 +93,104 @@
         ;; ... other templates
     ))
 
-;;----------------------------------------------------------------------
-;; POWERLINES
-;;----------------------------------------------------------------------
-;;https://github.com/milkypostman/powerline/
-(require 'powerline)
-(powerline-default-theme)
-;;----------------------------------------------------------------------
-
 ;;===========================================================================
 ;;STANDARD SETTINGS
 ;;===========================================================================
-;;---------------------------------------------------------------------------
-; There is no welcome windows ;; http://blog.droidzone.in/2012/05/22/remove-startup-split-screen-in-emacs/
+
+;; Neotree A emacs tree plugin like NERD tree for Vim.
+(require 'neotree)
+  (global-set-key [f8] 'neotree-toggle)
+
+;; POWERLINES https://github.com/milkypostman/powerline/
+(require 'powerline)
+(powerline-default-theme)
+
+;; No welcome windows ;; http://blog.droidzone.in/2012/05/22/remove-startup-split-screen-in-emacs/
 (setq inhibit-startup-screen t)
 (add-hook 'emacs-startup-hook 'delete-other-windows)[/code]
-;;---------------------------------------------------------------------------
 
-;;---------------------------------------------------------------------------
-;New buffer horizontal or vertical
-;https://www.emacswiki.org/emacs/HorizontalSplitting
+;; Vertical or horizontal buffer
 ;(setq split-width-threshold 9999)
 (setq split-width-threshold 0)
-;;---------------------------------------------------------------------------
 
-;;---------------------------------------------------------------------------
-;; Tipo e tamanho da fonte do editor.
-;(set-default-font "Anonymous Pro-14.5")
-(set-default-font "Envy Code R-18")
-;(set-default-font "Hack-16")
-;(set-default-font "IBMPlexMono-16")
-;(set-default-font "Monaco-16.5")
-;(set-default-font "monofur-18")
-;(set-default-font "Menlo-16")
-;(set-default-font "Monoid-14")
-;(set-default-font "Tex Gyre Adventor-11")
+;; Font and  size
+;(set-frame-font "Anonymous Pro-14.5")
+(set-frame-font "Envy Code R-18")
+;(set-frame-font "Envy Code R-18")
+;(set-frame-font "Hack-16")
+;(set-frame-font "IBMPlexMono-16")
+;(set-frame-font "Monaco-16.5")
+;(set-frame-font "monofur-18")
+;(set-frame-font "Menlo-16")
+;(set-frame-font "Monoid-14")
+;(set-frame-font "Tex Gyre Adventor-11")
 
-;;---------------------------------------------------------------------------
-
-;;---------------------------------------------------------------------------
 ;; Space between lines and between line numbers and text (like margin)
 (setq-default line-spacing 3) 
 (setq-default left-fringe-width  15)
 ;(setq-default right-fringe-width  0)
 ;(set-face-attribute 'fringe nil :background "black")
-;;---------------------------------------------------------------------------
 
-;;-----------------------------------------------------------------------------
 ;; Provide Highlight code in SRC
 (setq org-src-fontify-natively t)
-;;-----------------------------------------------------------------------------
 
-;;---------------------------------------------------------------------------
-;; numeração das linhas na margem esquerda
+;; line numbers
 (global-linum-mode 1)
-;;---------------------------------------------------------------------------
 
-;;-----------------------------------------------------------------------------
-;; Mostra posição do cursor em relação a margem esquerda.
+;; cursor position from left margin
 (setq column-number-mode t)
-;;-----------------------------------------------------------------------------
 
-;;---------------------------------------------------------------------------
 ;; Show file name in title bar
-;; http://www.thetechrepo.com/main-articles/549
 (setq frame-title-format "%b - Emacs")
-;;---------------------------------------------------------------------------
 
-;;-----------------------------------------------------------------------------
-;; Quebra de linhas ao exceder largura do texto (padrão é 72
-;; caracteres).
+;; Break lines standard is  72
 (setq-default fill-column 72)
-;;-----------------------------------------------------------------------------
 
-;;-----------------------------------------------------------------------------
-;; Não quebrar linhas, útil para tabelas longas
+;; Does not truncate lines
 ;(setq-default truncate-lines t)
-;;-----------------------------------------------------------------------------
 
-;;-----------------------------------------------------------------------------
 ;; Auto break long lines.
 ;(setq-default auto-fill-function 'do-auto-fill)
-;;-----------------------------------------------------------------------------
 
 ;; Wrap long lines
 (global-visual-line-mode t)
 (setq-default word-wrap t)
 
-;;-----------------------------------------------------------------------------
-;; Modo de linhas de tela (screen lines) e não lógicas (logical lines).
+;; Screen lines and not logical lines)
 (visual-line-mode 1)
-;;-----------------------------------------------------------------------------
 
-;;---------------------------------------------------------------------------
-;; Desativa o auto salvar e auto backup.
+;; Turn off auto save auto backup.
 (setq auto-save-default nil) ;; Para o #autosave#.
 (setq make-backup-files nil) ;; Para o backup~.
-;;---------------------------------------------------------------------------
-
-;;-----------------------------------------------------------------------------
-;; Usa espaços ao ínves de tabs para indentar.
-;; http://xenon.stanford.edu/~manku/dotemacs.html
+ 
+;; Spaces instead tabs
 (setq-default indent-tabs-mode nil)
-;;-----------------------------------------------------------------------------
 
-;;---------------------------------------------------------------------------
-;; inicia Emacs com ctrl-{zxcv} habilitado para desf/cut/copy/paste
+;; cua mode
 ;(cua-mode t)
 (cua-selection-mode t)
-;;-----------------------------------------------------------------------------
 
-;;-----------------------------------------------------------------------------
 ;; stop cursor blinking
 (blink-cursor-mode 1)
-;;-----------------------------------------------------------------------------
 
-;;-----------------------------------------------------------------------------
-;; removes menu bar
+;; removes menu and tool bar
 (menu-bar-mode -1)
-;;-----------------------------------------------------------------------------
-
-;;-----------------------------------------------------------------------------
-;; removes menu bar
 (tool-bar-mode -1)
-;;-----------------------------------------------------------------------------
 
-;;-----------------------------------------------------------------------------
 ;; Highlight matching pairs.
 (show-paren-mode 1)
-;;-----------------------------------------------------------------------------
 
-;;---------------------------------------------------------------------------
 ;;How to have emacs highlight text selections
 ;;	(transient-mark-mode 1) ; highlight text selection
 (delete-selection-mode 1) ; delete seleted text when typing
-;;-----------------------------------------------------------------------------
-
-;;---------------------------------------------------------------------------
-;; Speedbar embed
-;(require 'sr-speedbar)
-;;-----------------------------------------------------------------------------
 
 ;;===========================================================================
 ;; SPECIAL PROGRAMMING TOOLS
 ;;===========================================================================
 
-;;-----------------------------------------------------------------------------
 ;; multiple-cursors.el https://github.com/magnars/multiple-cursors.el
 (require 'multiple-cursors)
-;;-----------------------------------------------------------------------------
 
-;;-----------------------------------------------------------------------------
 ;; ace-jump-mode.el https://github.com/winterTTr/ace-jump-mode
 (autoload
   'ace-jump-mode
@@ -264,144 +206,88 @@
 (eval-after-load "ace-jump-mode"
   '(ace-jump-mode-enable-mark-sync))
 (define-key global-map (kbd "C-x SPC") 'ace-jump-mode)
-;;-----------------------------------------------------------------------------
 
-;;---------------------------------------------------------------------------
 ;; Ido Search FILE
 (ido-mode t)
 ;(setq ido-everywhere t)
 (setq ido-enable-flex-matching t
       ido-use-virtual-buffers t)
 (setq ido-file-extensions-order '(".md" ".R" ".Rmd" ".csv" ".txt" ".org" ".emacs" ".xml" ".el" ".ini" ".cfg" ".cnf" ".py"))
-;;---------------------------------------------------------------------------
 
-;;---------------------------------------------------------------------------
-;; Improving Ido Search FILE http://sachachua.com/blog/2014/03/emacs-basics-call-commands-name-m-x-tips-better-completion-using-ido-helm/
-(require 'smex)
+;; replace Ido Search FILE by helm
 (require 'ido-vertical-mode)
-(require 'ido-hacks)
-(require 'flx)
-(require 'flx-ido)
-
 (ido-mode 1)
-(require 'ido-hacks nil t)
-(if (commandp 'ido-vertical-mode) 
-    (progn
-      (ido-vertical-mode 1)
-      (setq ido-vertical-define-keys 'C-n-C-p-up-down-left-right)))
-(if (commandp 'smex)
-    (global-set-key (kbd "M-x") 'smex))
-(if (commandp 'flx-ido-mode)
-    (flx-ido-mode 1))
-;;-----------------------------------------------------------------------------
+(ido-vertical-mode 1)
+(setq ido-vertical-define-keys 'C-n-C-p-up-down-left-right)
 
-;;-----------------------------------------------------------------------------
-;; FUNCTION HIGHLIGHTS LISP
+;; helm
+(require 'helm-config)
+(require 'helm)
+
+(define-key helm-map (kbd "<tab>") 'helm-execute-persistent-action)
+(define-key helm-map (kbd "C-i") 'helm-execute-persistent-action)
+(define-key helm-map (kbd "C-z") 'helm-select-action)
+
+(when (executable-find "curl")
+  (setq helm-google-suggest-use-curl-p t))
+
+(when (executable-find "ack-grep")
+  (setq helm-grep-default-command
+        "ack-grep -Hn --no-group --no-color %e %p %f"
+        helm-grep-default-recurse-command
+        "ack-grep -H --no-group --no-color %e %p %f"))
+
+(setq helm-split-window-in-side-p           t
+      helm-move-to-line-cycle-in-source     t
+      helm-ff-search-library-in-sexp        t
+      helm-scroll-amount                    8
+      helm-ff-file-name-history-use-recentf t
+      helm-M-x-fuzzy-match                  t
+      helm-buffers-fuzzy-matching           t
+      helm-recentf-fuzzy-match              t
+      helm-locate-fuzzy-match               t
+      helm-apropos-fuzzy-match              t
+      helm-lisp-fuzzy-completion            t
+      helm-semantic-fuzzy-match             t
+      helm-imenu-fuzzy-match                t)
+
+(helm-mode 1)
+(helm-autoresize-mode t)
+
+(global-set-key (kbd "C-c h")   'helm-command-prefix)
+(global-unset-key (kbd "C-x c"))
+(global-set-key (kbd "M-x")     'helm-M-x)
+(global-set-key (kbd "M-y")     'helm-show-kill-ring)
+(global-set-key (kbd "C-x b")   'helm-mini)
+(global-set-key (kbd "C-x C-f") 'helm-find-files)
+(global-set-key (kbd "C-c h o") 'helm-occur)
+(global-set-key (kbd "C-h SPC") 'helm-all-mark-rings)
+
+(add-to-list 'helm-sources-using-default-as-input
+             'helm-source-man-pages)
+
+;; function highlights lisp
 (require 'highlight-symbol)
-;;-----------------------------------------------------------------------------
 
-;;-----------------------------------------------------------------------------
-;; INDENT GUIDE
-;; https://raw.githubusercontent.com/zk-phi/indent-guide/master/indent-guide.el
+;; indent GUIDE https://raw.githubusercontent.com/zk-phi/indent-guide/master/indent-guide.el
 (require 'indent-guide)
 (setq indent-guide-recursive t)
-;;-----------------------------------------------------------------------------
 
-;;-----------------------------------------------------------------------------
-;; HIGHLIGHT-INDENTATION-MODE
+;; highlight-indentation-mode
 (add-hook 'elpy-mode-hook (lambda () (highlight-indentation-mode -1)))
 
-;;-----------------------------------------------------------------------------
-
-
-;;===========================================================================
-;;AUTO COMLETE
-;;===========================================================================
-(require 'yasnippet)
-(yas-global-mode 1)
-
-;;-----------------------------------------------------------------------------
-;; AUTO COMPLETE FUNCTION
-;;aciona AUTO-COMPLETE
-;;-----------------------------------------------------------------------------
-;; https://www.emacswiki.org/emacs/AutoCompleteSources
-;(require 'auto-complete)
-;(require 'auto-complete-config)
-;(ac-config-default)
-
-;; stop (auto-complete-mode) from being called in python https://stackoverflow.com/questions/24814988/emacs-disable-auto-complete-in-python-mode
-;(defadvice auto-complete-mode (around disable-auto-complete-for-python)) ;; one extra parentesis
-;  (unless (eq major-mode 'python-mode) ad-do-it))
-
-;(ad-activate 'auto-complete-mode)
-;; macro .el, not necessary
-;; auto-complete for latex 
-;;(require 'auto-complete-auctex)
-
-(require 'ac-math) 
-(add-to-list 'ac-modes 'latex-mode)   ; make auto-complete aware of `latex-mode`
-
- (defun ac-LaTeX-mode-setup () ; add ac-sources to default ac-sources
-   (setq ac-sources
-         (append '(ac-source-math-unicode ac-source-math-latex ac-source-latex-commands)
-                 ac-sources))
-   )
-(add-hook 'LaTeX-mode-hook 'ac-LaTeX-mode-setup)
-;(global-auto-complete-mode t)
- 
-(setq ac-math-unicode-in-math-p t)
-(ac-flyspell-workaround) ;; to make flyspell works with auto-complete
-
-;; to use biber instead bibtex
-;; https://tex.stackexchange.com/questions/154751/biblatex-with-biber-configuring-my-editor-to-avoid-undefined-citations/154753#154753
-(setq TeX-parse-self t)
-
-;;----------------------------------------------------------------------
-;; To activate ESS auto-complete for R.
-;;----------------------------------------------------------------------
-; (setq ess-use-auto-complete 'script-only)
-
-;;----------------------------------------------------------------------
-;; CHANGE 'ac-complete FROM ENTER to TAB.
-;;----------------------------------------------------------------------
-;(define-key ac-completing-map "\r" nil)
-;(define-key ac-completing-map "\t" 'ac-complete)
-
-;;----------------------------------------------------------------------
-;; auto complete markdown
-;; http://wiki.dreamrunner.org/public_html/Emacs/markdown.html
-;;----------------------------------------------------------------------
-;(add-hook 'markdown-mode-hook
-;          '(lambda ()
-;             (auto-complete-mode t)
-;             (local-unset-key [tab])
-;             (setq-local yas-fallback-behavior '(apply auto-complete))))
-
-;;----------------------------------------------------------------------
-;; Smart Parenthesis https://github.com/Fuco1/smartparens
-;;----------------------------------------------------------------------
+;; smart Parenthesis https://github.com/Fuco1/smartparens
 (require 'smartparens)
 (require 'smartparens-config)
 (smartparens-global-mode 1)
 
-;;; html-mode
-    (sp-with-modes '(html-mode sgml-mode web-mode)
-      (sp-local-pair "<" ">"))
-
-;;-----------------------------------------------------------------------------
-;; FOLDING BY INDENTATION ;; git clone https://github.com/zenozeng/yafolding.el.git
-;;-----------------------------------------------------------------------------
-
+;; folding by indentation ;; git clone https://github.com/zenozeng/yafolding.el.git
 (require 'yafolding)
 (define-key yafolding-mode-map (kbd "C-c {") 'yafolding-toggle-all)
 (define-key yafolding-mode-map (kbd "C-c }") 'yafolding-hide-parent-element)
 (define-key yafolding-mode-map (kbd "C-c ]") 'yafolding-toggle-element)
 
-;;-----------------------------------------------------------------------------
-
-;;-----------------------------------------------------------------------------
-;; ADD HIGHLIGHT FOR CERTAIN KEYWORDS
-;;-----------------------------------------------------------------------------
+;; add highlight for certain keywords
 (make-face 'special-words) 
 (set-face-attribute 'special-words nil :foreground "White" :background "Firebrick") 
 (dolist
@@ -423,27 +309,79 @@
      ("\\<\\(BUG\\|WARNING\\|DANGER\\|FIXME\\)" 
       0 'special-words t)))
   ) 
-;;-----------------------------------------------------------------------------
- 
-;;===========================================================================
-;; SETTING TO WORK WITH ESS and R
-;;===========================================================================
-;;---------------------------------------------------------------------------
-;; IF YOU GET ERROR TO LOAD ESS: The immediate fix is to delete <user-emacs-directory>/elpa/archives/melpa/archive-contents; it will be rebuilt on the next package-initialize.
-;; faz com que apareceça os argumentos das funções do R no minibuffer
-;(require 'ess-site)
-;(setq-default ess-dialect "R")
-;(require 'ess-eldoc)
 
-;(setq-default ess-dialect "r")
+;;===========================================================================
+;;AUTO COMLETE
+;;===========================================================================
+
+(require 'yasnippet)
+(yas-global-mode 1)
+
+(require 'ac-math) 
+(add-to-list 'ac-modes 'latex-mode)   ; make auto-complete aware of `latex-mode`
+
+; add ac-sources to default ac-sources
+(defun ac-LaTeX-mode-setup ()
+  (setq ac-sources
+        (append '(ac-source-math-unicode ac-source-math-latex ac-source-latex-commands)
+                ac-sources))
+  )
+(add-hook 'LaTeX-mode-hook 'ac-LaTeX-mode-setup)
+
+;; to make flyspell works with auto-complete
+(setq ac-math-unicode-in-math-p t)
+(ac-flyspell-workaround) 
+
+;;===========================================================================
+;; HTML
+;;===========================================================================
+
+;; html-mode
+(sp-with-modes '(html-mode sgml-mode web-mode)
+  (sp-local-pair "<" ">"))
+
+;;===========================================================================
+;; R ESS
+;;===========================================================================
+
+;; setting to work with ess and r
+(require 'ess-site)
 ;(require 'ess-eldoc)
-;;-----------------------------------------------------------------------------
-;; If you want all help buffers to go into one frame do:
+(setq-default ess-dialect "R")
+(setq-default inferior-R-args "--no-restore-history --no-save ")
+
+(require 'ess-view)
+; (setq ess-view--spreadsheet-program "gnumeric")
+
+(defadvice ess-eval-buffer (before really-eval-buffer compile activate)
+  "Prevent call ess-eval-buffer by accident, frequently by
+   hitting C-c C-b instead of C-c C-n."
+  (if (yes-or-no-p
+       (format "Are you sure you want to evaluate the %s buffer?"
+               buffer-file-name))
+      (message "ess-eval-buffer started.")
+    (error "ess-eval-buffer canceled!")))
+
+(add-hook
+ 'ess-mode-hook
+ '(lambda()
+    (ess-toggle-underscore nil)
+    (define-key ess-mode-map [?\M--]
+      'ess-cycle-assign) ;; `Alt + -'  to cycle `<- | <<- | = ...'.
+    (auto-complete-mode 1)
+    (company-mode 1)                               ;; (company-mode -1)
+    (define-key ess-mode-map [f5] 'company-R-args) ;; F5 do show ARGS.
+    (setq ess-indent-with-fancy-comments nil) ;; No indent levels.
+    (setq-local comment-add 0)                ;; Single # as default.
+    (setq ess-smart-operators t)              ;; Smart comma.
+    (setq comint-scroll-to-bottom-on-input t)
+    (setq comint-scroll-to-bottom-on-output t)
+    (setq comint-move-point-for-output t)))
+
+;; if you want all help buffers to go into one frame do:
 (setq ess-help-own-frame 'one)
 
-;;-----------------------------------------------------------------------------
-;; ESS - HIGHLIGHTS ON PROGRAMING CODES
-;;-----------------------------------------------------------------------------
+;; ess - highlights on programing codes
  (setq ess-R-font-lock-keywords
          '((ess-R-fl-keyword:modifiers . t) ; default
            (ess-R-fl-keyword:fun-defs . t) ; default
@@ -474,19 +412,10 @@
            (ess-R-fl-keyword:F&T . t)))
 
 ;;===========================================================================
-;;FUNCOES functions
+;; MARKDOWN MODE 
 ;;===========================================================================
-;(add-to-list 'load-path "/home/rafatieppo/.emacs.d/lisp")
-(load "/home/rafatieppo/.emacs.d/lisp/functions")
-;(require 'functions)
-;;===========================================================================
-;;MARKDOWN MODE 
-;;===========================================================================
-;;-----------------------------------------------------------------------------
-;; ORG MOMDE MINOR mode markdown
-;; http://stackoverflow.com/questions/14275122/editing-markdown-pipe-tables-in-emacs
+;; org momde minor mode markdown http://stackoverflow.com/questions/14275122/editing-markdown-pipe-tables-in-emacs
 (require 'org-table)
-
 (defun cleanup-org-tables ()
   (save-excursion
     (goto-char (point-min))
@@ -497,27 +426,18 @@
 (add-hook 'markdown-mode-hook
           (lambda()
             (add-hook 'after-save-hook 'cleanup-org-tables  nil 'make-it-local)))
-;;-----------------------------------------------------------------------------
 
-;;-----------------------------------------------------------------------------
-;; If using markdown-mode yasnippets’s TAB completion doesn’t work, it’s just because TAB key is bind to markdown-cycle function
-;; http://wiki.dreamrunner.org/public_html/Emacs/markdown.html
-
-;;-----------------------------------------------------------------------------
+;; if using markdown-mode yasnippets’s TAB completion doesn’t work, it’s just because TAB key is bind to markdown-cycle function http://wiki.dreamrunner.org/public_html/Emacs/markdown.html
 (add-hook 'markdown-mode-hook
           '(lambda ()
              (company-mode t)
              (local-unset-key [tab])
              (setq-local yas-fallback-behavior '(apply company-mode))))
-;;-----------------------------------------------------------------------------
-;; MARKDOWN enable MATH ;http://jblevins.org/projects/markdown-mode/
+
+;; markdown enable MATH ;http://jblevins.org/projects/markdown-mode/
 (setq markdown-enable-math t)
 
-;;===========================================================================
-;; MARKDOWN EXTENSIONS.
-;; (IT MUST BE BEFORE LATEX EXTENSIONS.)
-;;===========================================================================
-
+;; markdown extensions. (IT MUST BE BEFORE LATEX EXTENSIONS.)
 (autoload 'markdown-mode "markdown-mode"
   "Major mode for editing Markdown files" t)
 (add-to-list 'auto-mode-alist '("\\.markdown\\'" . markdown-mode))
@@ -528,10 +448,12 @@
 (add-hook 'markdown-mode-hook 'turn-on-orgstruct++)
 
 ;;===========================================================================
-;; REFTEX CITATION PANDOC
-;; http://www.unknownerror.org/opensource/jgm/pandoc/q/stackoverflow/13607156/autocomplete-pandoc-style-citations-from-a-bibtex-file-in-emacs
-;; http://tex.stackexchange.com/a/31992/5701
+;; REFTEX CITATION
 ;;===========================================================================
+;; reftex citation pandoc http://www.unknownerror.org/opensource/jgm/pandoc/q/stackoverflow/13607156/autocomplete-pandoc-style-citations-from-a-bibtex-file-in-emacs http://tex.stackexchange.com/a/31992/5701
+
+;; to use biber instead bibtex 
+(setq TeX-parse-self t)
 
 ;; So that RefTeX finds my bibliography
 (setq reftex-default-bibliography '("/home/rafatieppo/Dropbox/bibtex/references.bib"))
@@ -545,27 +467,26 @@
                                 (?\C-t . "\\citet{%l\}")
                                 (?\C-p . "\\citep{%l\}")
                                 ))))
-;; I changed the code, before "[@%l]" cite between brackets
-;;-----------------------------------------------------------------------------
 
 ;;===========================================================================
 ;; LATEX
 ;;===========================================================================
-
-;;-----------------------------------------------------------------------------
 (add-hook 'LaTeX-mode-hook 'LaTeX-math-mode)
-;;-----------------------------------------------------------------------------
 
-;;-----------------------------------------------------------------------------
-;; Suporte do refTex para navega http://piotrkazmierczak.com/2010/05/13/emacs-as-the-ultimate-latex-editor/
-;; Para ativar: C-c =  it means CTRL + c + = 
+;; Naveg http://piotrkazmierczak.com/2010/05/13/emacs-as-the-ultimate-latex-editor/ C-c = 
 (add-hook 'LaTeX-mode-hook 'turn-on-reftex)
 (setq reftex-plug-into-AUCTeX t)
 
 ;;===========================================================================
+;;FUNCOES functions
+;;===========================================================================
+;(add-to-list 'load-path "/home/rafatieppo/.emacs.d/lisp")
+(load "/home/rafatieppo/.emacs.d/lisp/functions")
+;(require 'functions)
+
+;;===========================================================================
 ;; JavaScript
 ;;===========================================================================
-;;-----------------------------------------------------------------------------
 ; js2-mode.
 ;(add-to-list 'auto-mode-alist '("\\.js\\'\\|\\.json\\'" . js2-mode))
 
@@ -583,15 +504,14 @@
 ;;===========================================================================
 ;; HTML
 ;;===========================================================================
-;;-----------------------------------------------------------------------------
+
 ;; https://www.emacswiki.org/emacs/IndentingHtml
     (add-hook 'html-mode-hook
         (lambda ()
           ;; Default indentation is usually 2 spaces, changing to 4.
           (set (make-local-variable 'sgml-basic-offset) 4)))
-;;-----------------------------------------------------------------------------
-;; web-mode
 
+;; web-mode
 (require 'web-mode)
 (add-to-list 'auto-mode-alist '("\\.html\\'" . web-mode))
 (add-to-list 'auto-mode-alist '("\\.phtml\\'" . web-mode))
@@ -603,7 +523,7 @@
 (add-to-list 'auto-mode-alist '("\\.djhtml\\'" . web-mode))
 
 
-;Using web-mode for editing plain HTML files can be done this way
+;using web-mode for editing plain HTML files can be done this way
 ;(add-to-list 'auto-mode-alist '("\\.html?\\'" . web-mode))
 
 (defun my-web-mode-hook ()
@@ -617,7 +537,6 @@
 ;; CPP CONFIGURATION
 ;;===========================================================================
 ;; install apt-get install libclang-dev apt-get install cmake
-
 ;(add-hook 'after-init-hook 'global-company-mode)
 (add-hook 'c++-mode-hook 'irony-mode)
 (add-hook 'c-mode-hook 'irony-mode)
@@ -625,14 +544,11 @@
 (add-hook 'irony-mode-hook 'irony-cdb-autosetup-compile-options)
 
 ;;To have autocompletion when you are including headers:
-
 ;(add-to-list 'company-backends 'company-irony-c-headers)
-
 
 ;;===========================================================================
 ;; PYTHON CONFIGURATION
 ;;===========================================================================
-
 (elpy-enable)
 
 ;; Set Python3 interpreter
@@ -643,7 +559,6 @@
 (setq elpy-rpc-python-command "/usr/bin/python3")
 ;(setq elpy-rpc-python-command "/home/rafatieppo/Documents/test_raterio/bin/python3")
 
-(elpy-enable)
 ;;(setf elpy:complete-on-dot t)
 ;;(company-quickhelp-mode 1) ;; faz aparecer quickhelp
 ;(add-hook 'elpy-mode-hook
@@ -652,55 +567,12 @@
 ;            (delq 'ac-source-abbrev ac-sources)
 ;            (delq 'ac-source-words-in-same-mode-buffers ac-sources)))
 
-
-;;-----------------------------------------------------------------------------
 ;; Autopep8 - enable autopep8 formatting on save
 (require 'py-autopep8)
 (add-hook 'elpy-mode-hook 'py-autopep8-enable-on-save)
 ;(add-hook 'python-mode-hook 'py-autopep8-enable-on-save)
 ;(add-hook 'anaconda-mode-hook 'py-autopep8-enable-on-save)
 ;(setq py-autopep8-options '("--max-line-lengh=100"))
-
-;;-----------------------------------------------------------------------------
-;; ALT ENTER to send line
-(defun my-python-line ()
- (interactive)
-  (save-excursion
-  (setq the_script_buffer (format (buffer-name)))
-  (end-of-line)
-  (kill-region (point) (progn (back-to-indentation) (point)))
-  ;(setq the_py_buffer (format "*Python[%s]*" (buffer-file-name)))
-  (setq the_py_buffer "*Python*")
-  (switch-to-buffer-other-window  the_py_buffer)
-  (goto-char (buffer-end 1))
-  (yank)
-  (comint-send-input)
-  (switch-to-buffer-other-window the_script_buffer)
-  (yank))
-  (beginning-of-line) ;; or (end-of-line)
-  (next-line)
-)
-(global-set-key (kbd "M-RET") 'my-python-line) ; Enter/Return key
-;;-----------------------------------------------------------------------------
-;; ALT / to send region
-(defun python-shell-send-region-or-line nil
-  "Sends from python-mode buffer to a python shell, intelligently."
-  (interactive)
-  (cond ((region-active-p)
-     (setq deactivate-mark t)
-     (python-shell-send-region (region-beginning) (region-end))
-     (python-nav-forward-statement)
- ) (t (elpy-shell-send-current-statement))))
-;elpy-shell-send-region
-;https://emacs.stackexchange.com/questions/27674/make-elpy-shell-send-more-intelligent
-(global-set-key (kbd "M-/") 'python-shell-send-region-or-line) ; alt + /
-
-;;===========================================================================
-;;Neotree A emacs tree plugin like NERD tree for Vim.
-;;===========================================================================
-(require 'neotree)
-  (global-set-key [f8] 'neotree-toggle)
-
 
 ;;===========================================================================
 ;; Flymake and Flycheck
@@ -721,12 +593,10 @@
 
 ;;-----------------------------------------------------------------------------
 ;; Solarized https://github.com/bbatsov/solarized-emacs
-
 ;(add-to-list 'load-path "/home/rafatieppo/.emacs.d/themess/solarized")
 ;(require 'solarized-dark-theme)
 
 (add-to-list 'load-path "/home/rafatieppo/.emacs.d/themess")
-
 ;(require 'afternoon-theme)
 ;(require 'ayu-theme)
 ;(require 'monokai-theme) ;; load first to improve ORG visualization
@@ -782,21 +652,5 @@
 ;(global-hl-line-mode 1)
 ;; Underline in current line
 ;(set-face-attribute hl-line-face nil :underline t)
-;(set-face-background hl-line-face "#2F2F2F") ;;MONOKAI
-;;---------------------------------------------------------------------------
-;;===========================================================================
+;(set-face-background hl-line-face "#2F2F2F")
 
-(custom-set-variables
- ;; custom-set-variables was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- '(package-selected-packages
-   (quote
-    (company yasnippet-snippets elpy yafolding web-mode tern smex smartparens py-autopep8 powerline polymode neotree multiple-cursors markdown-mode magit js2-mode jedi indent-guide ido-vertical-mode ido-hacks highlight-symbol flycheck flx-ido ess-R-data-view dash-functional concurrent company-quickhelp company-jedi company-irony-c-headers company-irony company-c-headers company-anaconda calfw-org calfw-ical calfw auctex ace-jump-mode ac-math))))
-(custom-set-faces
- ;; custom-set-faces was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- )
