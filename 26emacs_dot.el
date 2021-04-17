@@ -597,6 +597,7 @@
 ;(require 'solarized-dark-theme)
 
 (add-to-list 'load-path "/home/rafatieppo/.emacs.d/themess")
+(add-to-list 'load-path "/home/rafatieppo/.emacs.d/themess")
 ;(require 'afternoon-theme)
 ;(require 'ayu-theme)
 ;(require 'monokai-theme) ;; load first to improve ORG visualization
@@ -645,7 +646,6 @@
 ;;(color-theme-tomorrow--define-theme night-bright)
 ;;(color-theme-tomorrow--define-theme night)
 ;;(color-theme-tomorrow--define-theme day)
-
 
 (if (display-graphic-p) 
     (require 'forest-blue-theme) 
