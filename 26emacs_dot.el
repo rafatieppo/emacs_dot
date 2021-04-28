@@ -288,36 +288,27 @@
 (define-key yafolding-mode-map (kbd "C-c ]") 'yafolding-toggle-element)
 
 ;; add highlight for certain keywords
-
-;; http://lists.gnu.org/archive/html/emacs-orgmode/2010-09/txtb5ChQJCDny.txt
-;; http://emacs.1067599.n5.nabble.com/Adding-keywords-for-font-lock-experts-td95645.html
-(make-face 'bad-words)
-(set-face-attribute 'bad-words nil
-                    :foreground "White"
-                    :background "Firebrick")
-(make-face 'good-words)
-(set-face-attribute 'good-words nil
-                    :foreground "LightSeaGreen"
-                    :background "White")
-
+(make-face 'special-words) 
+(set-face-attribute 'special-words nil :foreground "White" :background "Firebrick") 
 (dolist
-    (mode '(fundamental-mode emacs-lisp-mode lisp-mode org-mode
-            shell-mode sh-mode ess-mode polymode-mode python-mode
-            markdown-mode latex-mode TeX-mode))
-  (setq font-lock-keywords-case-fold-search t)
+    (mode '(fundamental-mode
+            gnus-article-mode
+            org-mode
+            shell-mode
+            sh-mode
+            muse-mode
+            ess-mode
+            polymode-mode
+            python-mode
+            markdown-mode
+            TeX-mode)) 
   (font-lock-add-keywords
-   mode
-   '(("\\<\\(IMPORTANT\\|ATTENTION\\|NOTE\\|OBS\\|TODO\\|BAD\\|STOP\\)\\>"
-      0 'font-lock-warning-face t)
-     ("\\<\\(COMMENT\\|IMPROVE\\|REVIEW\\|TIP\\|REMEMBER\\|QUESTION\\|EXPLANATION\\|INTERESTING\\|HYPHOTESIS\\|CONCEPT\\)\\>"
-      0 'font-lock-constant-face t)
-     ("\\<\\(BUG\\|WARNING\\|DANGER\\|FIXME\\|ERROR\\)\\>"
-      0 'bad-words t)
-     ("@[[:alnum:]_.]+\\>" ;; @walmes, @param, @return
-      0 'font-lock-function-name-face t)
-     ("\\<\\(DONE\\|GOOD\\|WALMES\\|SOLVED\\|AMAZING\\|COOL\\|NICE\\|BRILLIANT\\)\\>"
-      0 'good-words t))
-   ))
+   mode 
+   '(("\\<\\(COMMENT\\|DONE\\|TODO\\|STOP\\|IMPORTANT\\|NOTE\\|OBS\\|ATTENTION\\|REVIEW\\)" 
+      0 'font-lock-warning-face t) 
+     ("\\<\\(BUG\\|WARNING\\|DANGER\\|FIXME\\)" 
+      0 'special-words t)))
+  ) 
 
 ;;===========================================================================
 ;;AUTO COMLETE
@@ -340,6 +331,14 @@
 ;; to make flyspell works with auto-complete
 (setq ac-math-unicode-in-math-p t)
 (ac-flyspell-workaround) 
+
+;;===========================================================================
+;; HTML
+;;===========================================================================
+
+;; html-mode
+(sp-with-modes '(html-mode sgml-mode web-mode)
+  (sp-local-pair "<" ">"))
 
 ;;===========================================================================
 ;; R ESS
@@ -506,15 +505,11 @@
 ;; HTML
 ;;===========================================================================
 
-;; html-mode
-(sp-with-modes '(html-mode sgml-mode web-mode)
-  (sp-local-pair "<" ">"))
-
 ;; https://www.emacswiki.org/emacs/IndentingHtml
-(add-hook 'html-mode-hook
-          (lambda ()
-            ;; Default indentation is usually 2 spaces, changing to 4.
-            (set (make-local-variable 'sgml-basic-offset) 4)))
+    (add-hook 'html-mode-hook
+        (lambda ()
+          ;; Default indentation is usually 2 spaces, changing to 4.
+          (set (make-local-variable 'sgml-basic-offset) 4)))
 
 ;; web-mode
 (require 'web-mode)
@@ -557,11 +552,11 @@
 (elpy-enable)
 
 ;; Set Python3 interpreter
-(setq python-shell-interpreter "/usr/bin/python3")
+;(setq python-shell-interpreter "/usr/bin/python3") ;; I am using pyvenv for now
 ;(setq python-shell-interpreter "/home/rafatieppo/Documents/test_raterio/bin/python3")
 ;;(setq python-shell-interpreter "/home/rafatieppo/anaconda3/bin/python3")
 
-(setq elpy-rpc-python-command "/usr/bin/python3")
+;(setq elpy-rpc-python-command "/usr/bin/python3")
 ;(setq elpy-rpc-python-command "/home/rafatieppo/Documents/test_raterio/bin/python3")
 
 ;;(setf elpy:complete-on-dot t)
@@ -663,3 +658,4 @@
 ;; Underline in current line
 ;(set-face-attribute hl-line-face nil :underline t)
 ;(set-face-background hl-line-face "#2F2F2F")
+

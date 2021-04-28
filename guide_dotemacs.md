@@ -27,6 +27,13 @@ irony-install-server
 
 # Python
 
+## rpc virtualenv pyvenv
+
+- 2021-04-27: não instalar os pacotes extras no HOME para evitar conflitos. A solução é criar um diretorio com um ambiente virtual (virtualenv). Esta pasta será criada com o próprio emacs e ficará no caminho: `/home/rafatieppo/.virtualenvs/myownenv`. Uma vez que é criada com `pyvenv-create`, rode `run-python`, carregue com `pyvenv-activate` e atualize com `pyvenv-restart-python`. A instalação dos pacotes é realizada no referido ambiente virtual via terminal e com o script `pip3 install -r python3_require_packs.txt`. Para ativar o ambiente virtual `source myownenv/bin/activate` . No arquivo `.emacs` o *python rpc* e *python source* não será definido. gdal osgeo: como o osgeo é instalado com o gdal (via apt), usar dentro do ambiente virtual: `pip3 install GDAL==$(gdal-config --version) --global-option=build_ext --global-option="-I/usr/include/gdal" `
+
+
+
+
 ## Auto complete and Company 
 
 Historic
