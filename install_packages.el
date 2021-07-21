@@ -99,10 +99,13 @@
 (package-install 'popup)
 (package-install 'powerline)
 (package-install 'py-autopep8)
+(package-install 'lsp-python-ms)
+(package-install 'rainbow-delimiters)
 (package-install 'smartparens)
 (package-install 'smex)
 (package-install 'yafolding)
 (package-install 'yasnippet)
+(package-install 'use-package)
 (package-install 'web-mode)
 
 (provide 'install_package)

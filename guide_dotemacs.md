@@ -32,6 +32,52 @@ irony-install-server
 - 2021-04-27: não instalar os pacotes extras no HOME para evitar conflitos. A solução é criar um diretorio com um ambiente virtual (virtualenv). Esta pasta será criada com o próprio emacs e ficará no caminho: `/home/rafatieppo/.virtualenvs/myownenv`. Uma vez que é criada com `pyvenv-create`, rode `run-python`, carregue com `pyvenv-activate` e atualize com `pyvenv-restart-python`. A instalação dos pacotes é realizada no referido ambiente virtual via terminal e com o script `pip3 install -r python3_require_packs.txt`. Para ativar o ambiente virtual `source myownenv/bin/activate` . No arquivo `.emacs` o *python rpc* e *python source* não será definido. gdal osgeo: como o osgeo é instalado com o gdal (via apt), usar dentro do ambiente virtual: `pip3 install GDAL==$(gdal-config --version) --global-option=build_ext --global-option="-I/usr/include/gdal" `
 
 
+## rpc elpy 2021-10
+
+Fiz uma revisão geral do `.emacs`. Agora também está dispível o `use-package`.
+O python está com uma configuração `lsp-python-ms` para formatação. No ubuntu está funcionando com o pytho3 e ambientes virtuais.
+
+Elpy uses the Python interpreter setup from the Emacs python package. This section briefly summarizes some
+common setups; add the one you need to your .emacs file. Note that the code below (and Elpy in general) require at
+least Emacs 24.4.
+
+Use the Python standard interpreter (default):
+
+```
+(setq python-shell-interpreter "python3"
+python-shell-interpreter-args "-i")
+```
+
+Use Jupyter console (recommended for interactive Python):
+```
+(setq python-shell-interpreter "jupyter"
+python-shell-interpreter-args "console --simple-prompt"
+python-shell-prompt-detect-failure-warning nil)
+(add-to-list 'python-shell-completion-native-disabled-interpreters
+"jupyter")
+```
+
+Use IPython:
+```
+(setq python-shell-interpreter "ipython"
+python-shell-interpreter-args "-i --simple-prompt")
+```
+
+Tentativa de usar o jedi com python3 ubuntu 
+
+(elpy-enable)
+(require 'pyvenv)
+(pyvenv-mode 1)
+(require 'jedi)
+(add-hook 'python-mode-hook 'jedi:setup) ;; load auto-complete and pop up
+(jedi-mode 1)
+(setf jedi:complete-on-dot t)
+
+(defun comp-py-mode-hook ()
+  (company-mode -1))
+(add-hook 'python-mode-hook 'comp-py-mode-hook)
+(add-hook 'elpy-mode-hook 'comp-py-mode-hook)
+
 
 
 ## Auto complete and Company 
