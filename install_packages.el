@@ -32,8 +32,8 @@
 (package-initialize)
 
 ;; best
-;(add-to-list 'package-archives
-;             '("melpa-stable" . "https://stable.melpa.org/packages/") t)
+(add-to-list 'package-archives
+             '("melpa-stable" . "https://stable.melpa.org/packages/") t)
 
 ;(add-to-list 'package-archives
 ;             '("melpa" . "http://melpa.milkbox.net/packages/") t)
@@ -44,8 +44,8 @@
 ;(add-to-list 'package-archives
 ;             '("gnu" . "http://elpa.gnu.org/packages/") t)
 
-(add-to-list 'package-archives
-            '("melpa" . "https://melpa.org/packages/") t)
+;(add-to-list 'package-archives
+;            '("melpa" . "https://melpa.org/packages/") t)
 
 ;(add-to-list 'package-archives
 ;             '("marmalade" . "http://marmalade-repo.org/packages/") t)
@@ -77,7 +77,7 @@
 ;(package-install 'company-clang)
 (package-install 'company-irony-c-headers)
 ;(package-install 'elpy) ;;install via apt - check shell scrit
-(package-install 'ess-view)
+;(package-install 'ess-view)
 (package-install 'ess-R-data-view)
 (package-install 'flx)
 (package-install 'flx-ido)
@@ -92,6 +92,8 @@
 (package-install 'jedi)
 (package-install 'markdown-mode)
 (package-install 'magit)
+(package-install 'org-bullets)
+(package-install 'org-tree-slide)
 (package-install 'js2-mode)
 (package-install 'multiple-cursors)
 (package-install 'neotree)

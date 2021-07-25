@@ -147,6 +147,29 @@
                              "/home/rafatieppo/Dropbox/profissional/projetos_pesquisa/all_resear_proj_manag.org"
                         ))
 
+;; bullets instead *
+(use-package org-bullets
+  :after org
+  :hook (org-mode . org-bullets-mode)
+  :custom
+  (org-bullets-bullet-list '("◉" "○" "●" "○" "●" "○" "●")))
+
+;; arrow instead ...
+(setq org-ellipsis " ⤵") ;;" ▾"
+
+;; babel
+(org-babel-do-load-languages
+  'org-babel-load-languages
+  '((emacs-lisp . t)
+    (python . t)
+    (shell . t)
+    (R . t)
+))
+
+;; org-tree presentation org-tree-slide-mode! Navigate slides with C-< and C->
+(use-package org-tree-slide
+  :custom
+  (org-image-actual-width nil))
 
 ;; packs to print calendar with appointments as GoogleCalendar
 (require 'calfw)
@@ -315,6 +338,10 @@
       0 'special-words t)))
   ) 
 
+(use-package flycheck
+  :defer t
+  :hook (lsp-mode . flycheck-mode))
+  
 ;;===========================================================================
 ;;AUTO COMLETE
 ;;===========================================================================
@@ -347,7 +374,7 @@
 (setq-default ess-dialect "R")
 (setq-default inferior-R-args "--no-restore-history --no-save ")
 
-(require 'ess-view)
+;(require 'ess-view)
 ; (setq ess-view--spreadsheet-program "gnumeric")
 
 (defadvice ess-eval-buffer (before really-eval-buffer compile activate)
@@ -667,7 +694,7 @@
 ;;(color-theme-tomorrow--define-theme day)
 
 (if (display-graphic-p) 
-    (require 'ibm-dark-theme) 
+    (require 'dracula-theme) 
   (require 'tron-theme))
 
 ;;===========================================================================
