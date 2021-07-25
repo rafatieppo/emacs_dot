@@ -63,9 +63,9 @@
 ;; Font and  size
 ;(set-frame-font "Anonymous Pro-14.5")
 ;(set-frame-font "Envy Code R-12")
-;(set-frame-font "Envy Code R-18")
+(set-frame-font "Envy Code R-17")
 ;(set-frame-font "Hack-16")
-(set-frame-font "IBMPlexMono-12")
+;(set-frame-font "IBMPlexMono-12")
 ;(set-frame-font "Monaco-16.5")
 ;(set-frame-font "monofur-18")
 ;(set-frame-font "Menlo-16")
@@ -343,14 +343,14 @@
   :hook (lsp-mode . flycheck-mode))
   
 ;;===========================================================================
-;;AUTO COMLETE
-;;===========================================================================
+;;AUTO COMLETE AND YASNIPPET
+;;=========================================================================== 
 
 (require 'yasnippet)
 (yas-global-mode 1)
 
-(require 'ac-math) 
-(add-to-list 'ac-modes 'latex-mode)   ; make auto-complete aware of `latex-mode`
+;(require 'ac-math) 
+;(add-to-list 'ac-modes 'latex-mode)   ; make auto-complete aware of `latex-mode`
 
 ; add ac-sources to default ac-sources
 (defun ac-LaTeX-mode-setup ()
@@ -361,8 +361,8 @@
 (add-hook 'LaTeX-mode-hook 'ac-LaTeX-mode-setup)
 
 ;; to make flyspell works with auto-complete
-(setq ac-math-unicode-in-math-p t)
-(ac-flyspell-workaround) 
+;(setq ac-math-unicode-in-math-p t)
+;(ac-flyspell-workaround) 
 
 ;;===========================================================================
 ;; R ESS
@@ -694,7 +694,7 @@
 ;;(color-theme-tomorrow--define-theme day)
 
 (if (display-graphic-p) 
-    (require 'dracula-theme) 
+    (require 'forest-blue-theme) 
   (require 'tron-theme))
 
 ;;===========================================================================
