@@ -63,9 +63,9 @@
 ;; Font and  size
 ;(set-frame-font "Anonymous Pro-14.5")
 ;(set-frame-font "Envy Code R-12")
-(set-frame-font "Envy Code R-17")
+;(set-frame-font "Envy Code R-17")
 ;(set-frame-font "Hack-16")
-;(set-frame-font "IBMPlexMono-12")
+(set-frame-font "IBMPlexMono-17")
 ;(set-frame-font "Monaco-16.5")
 ;(set-frame-font "monofur-18")
 ;(set-frame-font "Menlo-16")
@@ -580,20 +580,27 @@
 ;; PYTHON CONFIGURATION
 ;;===========================================================================
 ;; https://emacs-lsp.github.io/lsp-python-ms/
-(elpy-enable)
-(use-package lsp-python-ms
-  :ensure t
-  :init (setq lsp-python-ms-auto-install-server t)
-  :hook (elpy-mode . (lambda ()
-                          (require 'lsp-python-ms)
-                          (lsp-deferred)))
-  :custom
-  ;; NOTE: Set these if Python 3 is called "python3" on your system!
-  (python-shell-interpreter "python3"
-    python-shell-interpreter-args "-i")
-  ;; (dap-python-executable "python3")
-  )  
 
+(use-package lsp-jedi
+  :ensure t
+  :config
+  (with-eval-after-load "lsp-mode"
+    (add-to-list 'lsp-disabled-clients 'pyls)
+    (add-to-list 'lsp-enabled-clients 'jedi)))
+
+;(elpy-enable)
+;(use-package lsp-python-ms
+;  :ensure t
+;  :init (setq lsp-python-ms-auto-install-server t)
+;  :hook (elpy-mode . (lambda ()
+;                          (require 'lsp-python-ms)
+;                          (lsp-deferred)))
+;  :custom
+;  ;; NOTE: Set these if Python 3 is called "python3" on your system!
+;  (python-shell-interpreter "python3"
+;    python-shell-interpreter-args "-i")
+;  ;; (dap-python-executable "python3")
+;  )  
 ;;===========================================================================
 ;; company
 (use-package pyvenv
@@ -694,7 +701,7 @@
 ;;(color-theme-tomorrow--define-theme day)
 
 (if (display-graphic-p) 
-    (require 'forest-blue-theme) 
+    (require 'ibm-dark-theme) 
   (require 'tron-theme))
 
 ;;===========================================================================
@@ -704,13 +711,4 @@
 ;; Underline in current line
 ;(set-face-attribute hl-line-face nil :underline t)
 ;(set-face-background hl-line-face "#2F2F2F")
-
-
-
-
-
-
-
-
-
 
