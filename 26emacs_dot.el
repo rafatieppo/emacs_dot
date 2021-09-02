@@ -338,9 +338,14 @@
       0 'special-words t)))
   ) 
 
+;(use-package flycheck
+;  :defer t
+;  :hook (lsp-mode . flycheck-mode))
+ 
 (use-package flycheck
-  :defer t
-  :hook (lsp-mode . flycheck-mode))
+  :ensure t
+  :init (global-flycheck-mode t))
+ 
   
 ;;===========================================================================
 ;;AUTO COMLETE AND YASNIPPET
@@ -581,26 +586,28 @@
 ;;===========================================================================
 ;; https://emacs-lsp.github.io/lsp-python-ms/
 
-(use-package lsp-jedi
-  :ensure t
-  :config
-  (with-eval-after-load "lsp-mode"
-    (add-to-list 'lsp-disabled-clients 'pyls)
-    (add-to-list 'lsp-enabled-clients 'jedi)))
-
 ;(elpy-enable)
-;(use-package lsp-python-ms
+;(use-package lsp-jedi
 ;  :ensure t
-;  :init (setq lsp-python-ms-auto-install-server t)
-;  :hook (elpy-mode . (lambda ()
-;                          (require 'lsp-python-ms)
-;                          (lsp-deferred)))
-;  :custom
-;  ;; NOTE: Set these if Python 3 is called "python3" on your system!
-;  (python-shell-interpreter "python3"
-;    python-shell-interpreter-args "-i")
-;  ;; (dap-python-executable "python3")
-;  )  
+;  :config
+;  (with-eval-after-load "lsp-mode"
+;    (add-to-list 'lsp-disabled-clients 'pyls)
+;   (add-to-list 'lsp-enabled-clients 'jedi)))
+
+(elpy-enable)
+(use-package lsp-python-ms
+  :ensure t
+  :init (setq lsp-python-ms-auto-install-server t)
+  :hook (elpy-mode . (lambda ()
+                          (require 'lsp-python-ms)
+                          (lsp-deferred)))
+  :custom
+  ;; NOTE: Set these if Python 3 is called "python3" on your system!
+  (python-shell-interpreter "python3"
+    python-shell-interpreter-args "-i")
+  ;; (dap-python-executable "python3")
+  )  
+  
 ;;===========================================================================
 ;; company
 (use-package pyvenv
@@ -701,7 +708,7 @@
 ;;(color-theme-tomorrow--define-theme day)
 
 (if (display-graphic-p) 
-    (require 'ibm-dark-theme) 
+    (require 'granger-theme) 
   (require 'tron-theme))
 
 ;;===========================================================================
@@ -712,3 +719,17 @@
 ;(set-face-attribute hl-line-face nil :underline t)
 ;(set-face-background hl-line-face "#2F2F2F")
 
+(custom-set-variables
+ ;; custom-set-variables was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ '(package-selected-packages
+   (quote
+    (lsp-jedi yafolding web-mode use-package smex smartparens rainbow-delimiters py-autopep8 powerline polymode org-tree-slide org-bullets neotree multiple-cursors magit lsp-python-ms js2-mode jedi indent-guide ido-vertical-mode ido-hacks highlight-symbol helm flycheck flx-ido ess-view ess-R-data-view elpy company-quickhelp company-jedi company-irony-c-headers company-irony company-c-headers calfw-org calfw-ical calfw auctex anaconda-mode ace-jump-mode ac-math))))
+(custom-set-faces
+ ;; custom-set-faces was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ )
