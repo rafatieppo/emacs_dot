@@ -440,6 +440,20 @@
 ;;           (ess-fl-keyword:= . t)
            (ess-R-fl-keyword:F&T . t)))
 
+
+;;===========================================================================
+;; POLYMODE 
+;;===========================================================================
+(use-package poly-markdown
+             :ensure t)
+(use-package poly-R
+             :ensure t)
+(use-package poly-python
+             :ensure t)
+
+;; (autoload 'poly-markdown-mode "poly-markdown-mode"
+(add-to-list 'auto-mode-alist '("\\.md" . poly-markdown-mode))
+
 ;;===========================================================================
 ;; MARKDOWN MODE 
 ;;===========================================================================

@@ -98,6 +98,8 @@
 (package-install 'multiple-cursors)
 (package-install 'neotree)
 (package-install 'polymode)
+(package-install 'poly-markdown)
+(package-install 'poly-R)
 (package-install 'popup)
 (package-install 'powerline)
 (package-install 'py-autopep8)
@@ -116,5 +118,5 @@
 ;; NOTE: after install `jedi` and `jedy-core`, run `M-x
 ;; jedi:install-server` in a new GNU Emacs session to enable proper auto
 ;; completation for Python scripts.
-;; irony-install-server for c and cpp
+;; irony-install-server for c and cpp `sudo apt install llvm-X clang-X libclang-X-dev`
 
