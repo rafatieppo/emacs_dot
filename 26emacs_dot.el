@@ -720,7 +720,7 @@
 ;;(color-theme-tomorrow--define-theme day)
 
 (if (display-graphic-p) 
-    (require 'granger-theme) 
+    (require 'ibm-dark-theme) 
   (require 'tron-theme))
 
 ;;===========================================================================
