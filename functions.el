@@ -1,14 +1,16 @@
-;;-----------------------------------------------------------------------------
+
+;;; Commetary:
+;;; Code:
+
 ;; Insert date
 ;;-----------------------------------------------------------------------------
 ;; Funções inserir o dia e a hora no buffer.
 ;; http://stackoverflow.com/questions/251908/how-can-i-insert-current-date-and-time-into-a-file-using-emacs
 (defun today ()
-"Insert string for today's date nicely formatted in American style,
-e.g. Sunday, September 17, 2000."
+"Insert string for today's date nicely formatted in American style, e.g. Sunday, September 17, 2000."
 (interactive) ; permit invocation in minibuffer
 ;; (insert (format-time-string "%A, %e de %B , %Y"))
-(insert (format-time-string "%e/%m/%Y"))
+(insert (format-time-string "%Y/%m/%d"))
 )
 
 ;;-----------------------------------------------------------------------------
@@ -72,15 +74,15 @@ e.g. Sunday, September 17, 2000."
 ;; Função para duplicar linhas
 ;;-----------------------------------------------------------------------------
 ;; http://stackoverflow.com/questions/88399/how-do-i-duplicate-a-whole-line-in-emacs
-;; Define função para duplicar linhas.
 (defun duplicate-line ()
-(interactive)
-(move-beginning-of-line 1)
-(kill-line)
-(yank)
-(newline)
-(yank)
-)
+  "Duplicate line ..."
+  (interactive)
+  (move-beginning-of-line 1)
+  (kill-line)
+  (yank)
+  (newline)
+  (yank)
+  )
 
 ;;-----------------------------------------------------------------------------
 ;; Move lines. ;; http://www.emacswiki.org/emacs/MoveLine
@@ -154,7 +156,7 @@ e.g. Sunday, September 17, 2000."
 ;; ORG MONTH REPORT
 
 (defun my/org-review-month (start-date)
-  "Review the month's clocked tasks and time."
+  "Review the months clocked tasks and time from START-DATE ..."
   (interactive (list (org-read-date)))
   ;; Set to the beginning of the month
   (setq start-date (concat (substring start-date 0 8) "01"))
@@ -169,7 +171,7 @@ e.g. Sunday, September 17, 2000."
 ;; http://sachachua.com/blog/2007/12/clocking-time-with-emacs-org/
 
 (defun org-dblock-write:rangereport (params)
-  "Display day-by-day time reports."
+  "Display day-by-day time reports PARAMS ..."
   (let* ((ts (plist-get params :tstart))
          (te (plist-get params :tend))
          (start (time-to-seconds
@@ -203,6 +205,7 @@ e.g. Sunday, September 17, 2000."
 
 ;; ALT ENTER to send line
 (defun my-python-line ()
+  "Sends only one line from python mode buffer to a python shell ..."
  (interactive)
   (save-excursion
   (setq the_script_buffer (format (buffer-name)))
@@ -223,7 +226,7 @@ e.g. Sunday, September 17, 2000."
 ;;-----------------------------------------------------------------------------
 ;; ALT / to send region
 (defun python-shell-send-region-or-line nil
-  "Sends from python-mode buffer to a python shell, intelligently."
+  "Sends a region from python mode buffer to a python shell, intelligently ..."
   (interactive)
   (cond ((region-active-p)
      (setq deactivate-mark t)
@@ -233,12 +236,22 @@ e.g. Sunday, September 17, 2000."
 ;elpy-shell-send-region
 ;https://emacs.stackexchange.com/questions/27674/make-elpy-shell-send-more-intelligent
 (global-set-key (kbd "M-/") 'python-shell-send-region-or-line) ; alt + /
-
-
+;;-----------------------------------------------------------------------------
+;; ALT p to send paragraph
+(defun python-shell-send-parag-step ()
+  "Sends the current paragraph to the python REPL and go to the next one ..."
+  (interactive)
+  (cond (
+         (mark-paragraph)
+         (python-shell-send-region (region-beginning) (region-end))
+         (deactivate-mark)
+         (python-nav-forward-statement)
+         ) (t (elpy-shell-send-current-statement))))
+(global-set-key (kbd "M-p") 'python-shell-send-parag-step) ; alt + p
 ;;===========================================================================
 ;; TECLAS DE ATALHO
 ;;===========================================================================
-;;----------------------------------------------------------------------------- 
+;;-----------------------------------------------------------------------------
 ;; Define C-TAB para mudar o cursor de janelas (buffers ativos).
 (global-set-key [(control tab)] 'other-window)
 ;;-----------------------------------------------------------------------------
@@ -290,6 +303,7 @@ e.g. Sunday, September 17, 2000."
 ;;-----------------------------------------------------------------------------
 ;; (un)Comment line oir region
 (global-set-key (kbd "M-;") 'comment-line-or-region)
+
 
 
 
