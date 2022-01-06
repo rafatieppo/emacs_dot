@@ -2,54 +2,51 @@
 ;;; Commetary:
 ;;; Code:
 
-;; Insert date
-;;-----------------------------------------------------------------------------
-;; Funções inserir o dia e a hora no buffer.
-;; http://stackoverflow.com/questions/251908/how-can-i-insert-current-date-and-time-into-a-file-using-emacs
+;;;------------------------------------------------------------
+;;; Insert date
+;;; Funções inserir o dia e a hora no buffer.
+;;; http://stackoverflow.com/questions/251908/how-can-i-insert-current-date-and-time-into-a-file-using-emacs
 (defun today ()
-"Insert string for today's date nicely formatted in American style, e.g. Sunday, September 17, 2000."
-(interactive) ; permit invocation in minibuffer
-;; (insert (format-time-string "%A, %e de %B , %Y"))
-(insert (format-time-string "%Y/%m/%d"))
-)
+  "Insert string for today's date nicely formatted in American style, e.g. Sunday, September 17, 2000."
+  (interactive) ; permit invocation in minibuffer
+  ;; (insert (format-time-string "%A, %e de %B , %Y"))
+  (insert (format-time-string "%Y/%m/%d"))
+  )
 
-;;-----------------------------------------------------------------------------
+;;;------------------------------------------------------------
 ;; Insert headerS
-;;-----------------------------------------------------------------------------
 (defun header ()
-"Insere cabeçalho."
-(interactive)
-;; (insert (comment-dwim 2) (make-string 65 ?=) "\n")
-(insert "#" (make-string 70 ?=) "\n")
-(insert "#" (make-string 40 ? ) "Rafael Tieppo\n")
-(insert "#" (make-string 40 ? ) "rafaeltieppo@yahoo.com.br\n")
-(insert "#" (make-string 40 ? ) "https://rafatieppo.github.io/\n")
-(insert "#" (make-string 40 ? ) (format-time-string "%Y-%m-%d\n"))
-(insert "#" (make-string 70 ?=) "\n")
-)
+  "Insere cabeçalho."
+  (interactive)
+  ;; (insert (comment-dwim 2) (make-string 65 ?=) "\n")
+  (insert "#" (make-string 70 ?=) "\n")
+  (insert "#" (make-string 40 ? ) "Rafael Tieppo\n")
+  (insert "#" (make-string 40 ? ) "rafaeltieppo@yahoo.com.br\n")
+  (insert "#" (make-string 40 ? ) "https://rafatieppo.github.io/\n")
+  (insert "#" (make-string 40 ? ) (format-time-string "%Y-%m-%d\n"))
+  (insert "#" (make-string 70 ?=) "\n")
+  )
 
-;;-----------------------------------------------------------------------------
+;;;------------------------------------------------------------
 (defun header_md ()
-"Insere cabecalho markdown-mode"
-(interactive)
-(insert (make-string 0 ? ) "--- \n")
-(insert (make-string 0 ? ) "title: TITLE \n")
-(insert (make-string 0 ? ) "author: Rafael Tieppo \n")
-(insert (make-string 0 ? ) "date: Maio, 201 \n")
-(insert (make-string 0 ? ) "--- \n")
-)
+  "Insere cabecalho markdown-mode"
+  (interactive)
+  (insert (make-string 0 ? ) "--- \n")
+  (insert (make-string 0 ? ) "title: TITLE \n")
+  (insert (make-string 0 ? ) "author: Rafael Tieppo \n")
+  (insert (make-string 0 ? ) "date: Maio, 201 \n")
+  (insert (make-string 0 ? ) "--- \n")
+  )
 
-;;-----------------------------------------------------------------------------
+;;;------------------------------------------------------------
 (defun figure_md ()
-"Insere cabecalho markdown-mode"
-(interactive)
-(insert (make-string 0 ? ) "![cap](PICS/file.png){width=16cm height=9cm #fig:figbal} \n")
-)
+  "Insere cabecalho markdown-mode"
+  (interactive)
+  (insert (make-string 0 ? ) "![cap](PICS/file.png){width=16cm height=9cm #fig:figbal} \n")
+  )
 
-;;-----------------------------------------------------------------------------
-;; Insert a new (empty) chunk to R markdown.
-;; Changed to ```{r}```, before was ```R\n\n```
-;;-----------------------------------------------------------------------------
+;;;------------------------------------------------------------
+;;; Insert a new (empty) chunk to R markdown. Changed to ```{r}```, before was ```R\n\n```
 (defun insert-chunk ()
   "Insert chunk environment Rmd sessions."
   (interactive)
@@ -58,9 +55,8 @@
   )
 (global-set-key (kbd "C-c i") 'insert-chunk)
 
-;;-----------------------------------------------------------------------------
-;; Insert a new (empty) FULL chunk to R markdown.
-;;-----------------------------------------------------------------------------
+;;;------------------------------------------------------------
+;;; Insert a new (empty) FULL chunk to R markdown.
 (defun insert-chunk-full ()
   "Insert chunk environment Rmd sessions."
   (interactive)
@@ -68,12 +64,10 @@
   (forward-line -1)
   )
 (global-set-key (kbd "C-c r") 'insert-chunk-full)
-;;-----------------------------------------------------------------------------
 
-;;-----------------------------------------------------------------------------
-;; Função para duplicar linhas
-;;-----------------------------------------------------------------------------
-;; http://stackoverflow.com/questions/88399/how-do-i-duplicate-a-whole-line-in-emacs
+;;;------------------------------------------------------------
+;;; Função para duplicar linhas
+;;; http://stackoverflow.com/questions/88399/how-do-i-duplicate-a-whole-line-in-emacs
 (defun duplicate-line ()
   "Duplicate line ..."
   (interactive)
@@ -83,10 +77,11 @@
   (newline)
   (yank)
   )
+;;; Define atalho para duplicar linhas.
+(global-set-key (kbd "\C-c d") 'duplicate-line)
 
-;;-----------------------------------------------------------------------------
-;; Move lines. ;; http://www.emacswiki.org/emacs/MoveLine
-;;-----------------------------------------------------------------------------
+;;;------------------------------------------------------------
+;;; Move lines. ;; http://www.emacswiki.org/emacs/MoveLine
 (defun move-line (n)
   "Move the current line up or down by N lines."
   (interactive "p")
@@ -98,22 +93,22 @@
     (insert line-text)
     ;; restore point to original column in moved line
     (forward-line -1)
-    (forward-char col)))
-
+    (forward-char col))
+  )
 (defun move-line-up (n)
   "Move the current line up by N lines."
   (interactive "p")
-  (move-line (if (null n) -1 (- n))))
-
+  (move-line (if (null n) -1 (- n)))
+  )
 (defun move-line-down (n)
   "Move the current line down by N lines."
   (interactive "p")
-(move-line (if (null n) 1 n)))
-
+  (move-line (if (null n) 1 n))
+  )
 (global-set-key (kbd "M-<up>") 'move-line-up)
 (global-set-key (kbd "M-<down>") 'move-line-down)
-;;-----------------------------------------------------------------------------
 
+;;;------------------------------------------------------------
 (defun comment-line-or-region ()
   "Comment or uncomment current line, or current text selection."
   (interactive)
@@ -128,33 +123,33 @@
      )
     )
   )
+;; (un)Comment line oir region
+(global-set-key (kbd "M-;") 'comment-line-or-region)
 
-;;---------------------------------------------------------------------------
-;; Salva lista de aquivos recentes. Abrir lista com C-x f
-;; https://github.com/magnars/.emacs.d/blob/master/sane-defaults.el
-;;-----------------------------------------------------------------------------
+;;;------------------------------------------------------------
+;;; Salva lista de aquivos recentes. Abrir lista com C-x f
+;;; https://github.com/magnars/.emacs.d/blob/master/sane-defaults.el
 (recentf-mode 1)
 (setq recentf-max-saved-items 25) ;; 20 é muito pouco.
 ;; Salva histórico de comandos do minibuffer.
 (savehist-mode 1)
 (setq history-length 500)
 
-;;---------------------------------------------------------------------------
-;; fill-paragraph. Takes a multi-line paragraph and makes ;;; it into a single line of text.
-;; https://josephhall.org/nqb2/index.php/unfill
-;;-----------------------------------------------------------------------------
+;;;------------------------------------------------------------
+;;; fill-paragraph. Takes a multi-line paragraph and makes ;;; it into a single line of text.
+;;; https://josephhall.org/nqb2/index.php/unfill
 (defun unfill-paragraph ()
   (interactive)
   (let ((fill-column (point-max)))
-    (fill-paragraph nil)))
-;;-----------------------------------------------------------------------------
+    (fill-paragraph nil))
+  )
 
-;;---------------------------------------------------------------------------
-;; ORG-MODE
-;;---------------------------------------------------------------------------
-;;-----------------------------------------------------------------------------
-;; ORG MONTH REPORT
+;;;------------------------------------------------------------
+;;; ORG-MODE
+;;;------------------------------------------------------------
 
+;;;------------------------------------------------------------
+;;; ORG MONTH REPORT
 (defun my/org-review-month (start-date)
   "Review the months clocked tasks and time from START-DATE ..."
   (interactive (list (org-read-date)))
@@ -164,11 +159,12 @@
         (org-agenda-start-with-log-mode t)
         (org-agenda-start-with-clockreport-mode t)
         (org-agenda-clockreport-parameter-plist '(:link t :maxlevel 3)))
-    (org-agenda-list nil start-date 'month)))
+    (org-agenda-list nil start-date 'month))
+  )
   
-;;-----------------------------------------------------------------------------
-;; ORG REPORTING TIME BY DAY
-;; http://sachachua.com/blog/2007/12/clocking-time-with-emacs-org/
+;;;------------------------------------------------------------
+;;; ORG REPORTING TIME BY DAY
+;;; http://sachachua.com/blog/2007/12/clocking-time-with-emacs-org/
 
 (defun org-dblock-write:rangereport (params)
   "Display day-by-day time reports PARAMS ..."
@@ -199,43 +195,69 @@
                               (seconds-to-time end))))
         (setq start (+ 86400 start))))))
 
-;;===========================================================================
-;; PYTHON
-;;===========================================================================
+;;;------------------------------------------------------------
+;;; PYTHON
+;;;------------------------------------------------------------
 
-;; ALT ENTER to send line
+;;;------------------------------------------------------------
+;;; ALT ENTER to send line
 (defun my-python-line ()
   "Sends only one line from python mode buffer to a python shell ..."
- (interactive)
+  (interactive)
   (save-excursion
-  (setq the_script_buffer (format (buffer-name)))
-  (end-of-line)
-  (kill-region (point) (progn (back-to-indentation) (point)))
-  ;(setq the_py_buffer (format "*Python[%s]*" (buffer-file-name)))
-  (setq the_py_buffer "*Python*")
-  (switch-to-buffer-other-window  the_py_buffer)
-  (goto-char (buffer-end 1))
-  (yank)
-  (comint-send-input)
-  (switch-to-buffer-other-window the_script_buffer)
-  (yank))
+    (setq the_script_buffer (format (buffer-name)))
+    (end-of-line)
+    (kill-region (point) (progn (back-to-indentation) (point)))
+    ;(setq the_py_buffer (format "*Python[%s]*" (buffer-file-name)))
+    (setq the_py_buffer "*Python*")
+    (switch-to-buffer-other-window  the_py_buffer)
+    (goto-char (buffer-end 1))
+    (yank)
+    (comint-send-input)
+    (switch-to-buffer-other-window the_script_buffer)
+    (yank)
+    )
   (beginning-of-line) ;; or (end-of-line)
   (next-line)
-)
+  )
 (global-set-key (kbd "M-RET") 'my-python-line) ; Enter/Return key
-;;-----------------------------------------------------------------------------
-;; ALT / to send region
+
+;;;-----------------------------------------------------------------------------
+;;; send paragraph to eval in terminal
+(defun python-my-python-parag ()
+  "Sends a paragraph from python mode buffer to a python shell ..."
+  (interactive)
+  (save-excursion
+    (setq the_script_buffer (format (buffer-name)))
+    (backward-paragraph) ;    (end-of-line)
+    (kill-region (point) (progn (forward-paragraph) (point)))
+    (setq the_py_buffer (format "*Python[%s]*" (buffer-file-name)))
+    (setq the_py_buffer "*Python*")
+    (switch-to-buffer-other-window  the_py_buffer)
+    (goto-char (buffer-end 1))
+    (yank)
+    (comint-send-input)
+    (switch-to-buffer-other-window the_script_buffer)
+    (yank)
+    )
+  (beginning-of-line) ;; or (end-of-line)
+  (next-line)
+  )
+
+(global-set-key (kbd "M-\\") 'python-my-python-parag)
+
+;;;------------------------------------------------------------
+;;; ALT / to send region https://emacs.stackexchange.com/questions/27674/make-elpy-shell-send-more-intelligent
 (defun python-shell-send-region-or-line nil
   "Sends a region from python mode buffer to a python shell, intelligently ..."
   (interactive)
   (cond ((region-active-p)
-     (setq deactivate-mark t)
-     (python-shell-send-region (region-beginning) (region-end))
-     (python-nav-forward-statement)
- ) (t (elpy-shell-send-current-statement))))
-;elpy-shell-send-region
-;https://emacs.stackexchange.com/questions/27674/make-elpy-shell-send-more-intelligent
+         (setq deactivate-mark t)
+         (python-shell-send-region (region-beginning) (region-end))
+         (python-nav-forward-statement)
+         ) (t (elpy-shell-send-current-statement))))
 (global-set-key (kbd "M-/") 'python-shell-send-region-or-line) ; alt + /
+
 ;;-----------------------------------------------------------------------------
 ;; ALT p to send paragraph
 (defun python-shell-send-parag-step ()
@@ -248,19 +270,23 @@
          (python-nav-forward-statement)
          ) (t (elpy-shell-send-current-statement))))
 (global-set-key (kbd "M-p") 'python-shell-send-parag-step) ; alt + p
-;;===========================================================================
-;; TECLAS DE ATALHO
-;;===========================================================================
-;;-----------------------------------------------------------------------------
-;; Define C-TAB para mudar o cursor de janelas (buffers ativos).
+
+;;;------------------------------------------------------------
+;;; TECLAS DE ATALHO
+;;;------------------------------------------------------------
+
+;;;------------------------------------------------------------
+;;; Define C-TAB para mudar o cursor de janelas (buffers ativos).
 (global-set-key [(control tab)] 'other-window)
-;;-----------------------------------------------------------------------------
-;; enable iswitchb mode: C-x b now shows a list of buffers
-;; ref: http://emacs-fu.blogspot.com.br/2009/02/switching-buffers.html
-;; Define C-page down e C-page up para mover entre buffers.
+
+;;;------------------------------------------------------------
+;;; enable iswitchb mode: C-x b now shows a list of buffers
+;;; ref: http://emacs-fu.blogspot.com.br/2009/02/switching-buffers.html
+;;; Define C-page down e C-page up para mover entre buffers.
 (global-set-key (kbd "C-<next>") 'next-buffer)
 (global-set-key (kbd "C-<prior>") 'previous-buffer)
-;;-----------------------------------------------------------------------------
+
+
 ;; Define C-F4 para fechar um buffer.
 (define-key global-map [(control f4)] 'kill-buffer)
 ;;-----------------------------------------------------------------------------
@@ -294,16 +320,7 @@
 (global-set-key [(shift f3)] 'highlight-symbol-prev)
 (global-set-key [(meta f3)] 'highlight-symbol-query-replace)
 ;;-----------------------------------------------------------------------------
-;; Define atalho para duplicar linhas.
-(global-set-key (kbd "\C-c d") 'duplicate-line)
-;;-----------------------------------------------------------------------------
-;; Move lines.
-(global-set-key (kbd "M-<") 'move-line-up)
-(global-set-key (kbd "M->") 'move-line-down)
-;;-----------------------------------------------------------------------------
-;; (un)Comment line oir region
-(global-set-key (kbd "M-;") 'comment-line-or-region)
 
-
-
+;;;(provide 'functions)
+;;; functions.el ends here
 
