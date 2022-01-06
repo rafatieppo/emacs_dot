@@ -163,8 +163,7 @@
   )
   
 ;;;------------------------------------------------------------
-;;; ORG REPORTING TIME BY DAY
-;;; http://sachachua.com/blog/2007/12/clocking-time-with-emacs-org/
+;;; ORG REPORTING TIME BY DAY http://sachachua.com/blog/2007/12/clocking-time-with-emacs-org/
 
 (defun org-dblock-write:rangereport (params)
   "Display day-by-day time reports PARAMS ..."
