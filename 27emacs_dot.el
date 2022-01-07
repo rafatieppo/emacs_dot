@@ -521,13 +521,6 @@
 (setq reftex-plug-into-AUCTeX t)
 
 ;;===========================================================================
-;;FUNCOES functions
-;;===========================================================================
-;(add-to-list 'load-path "/home/rafatieppo/.emacs.d/lisp")
-(load "/home/rafatieppo/.emacs.d/lisp/functions")
-;(require 'functions)
-
-;;===========================================================================
 ;; HTML
 ;;===========================================================================
 ;; html-mode
@@ -612,13 +605,6 @@
     python-shell-interpreter-args "-i")
   ;; (dap-python-executable "python3")
   )  
-
-(use-package lsp-jedi
-  :ensure t
-  :config
-  (with-eval-after-load "lsp-mode"
-    (add-to-list 'lsp-disabled-clients 'pyls)
-    (add-to-list 'lsp-enabled-clients 'jedi)))
   
 ;;===========================================================================
 ;; pyvenv
@@ -666,6 +652,13 @@
 (use-package magit
   :custom
   (magit-display-buffer-function #'magit-display-buffer-same-window-except-diff-v1))
+
+;;===========================================================================
+;;FUNCOES functions
+;;===========================================================================
+;(add-to-list 'load-path "/home/rafatieppo/.emacs.d/lisp")
+(load "/home/rafatieppo/.emacs.d/lisp/functions")
+;(require 'functions)
 
 ;;===========================================================================
 ;; THEMES - SEVERAL SCHEMES
@@ -754,12 +747,6 @@
  '(custom-enabled-themes '(ibm-dark))
  '(custom-safe-themes
    '("24168c7e083ca0bbc87c68d3139ef39f072488703dcdd82343b8cab71c0f62a7" default))
- '(package-selected-packages
-   '(lsp-jedi yafolding web-mode use-package smex smartparens rainbow-delimiters py-autopep8 powerline poly-R org-tree-slide org-bullets neotree multiple-cursors magit lsp-python-ms js2-mode jedi indent-guide ido-vertical-mode ido-hacks highlight-symbol helm flycheck flx-ido ess-R-data-view elpy company-quickhelp company-jedi company-irony-c-headers company-irony company-c-headers calfw-org calfw-ical calfw auctex anaconda-mode ace-jump-mode ac-math)))
+)
 
-(custom-set-faces
- ;; custom-set-faces was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- )
+
