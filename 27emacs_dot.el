@@ -591,20 +591,16 @@
 ;;===========================================================================
 ;; PYTHON CONFIGURATION
 ;;===========================================================================
-;; https://emacs-lsp.github.io/lsp-python-ms/
+;; https://emacs-lsp.github.io/lsp-mode/
+;; https://emacs-lsp.github.io/lsp-mode/page/installation/
+;; https://emacs-lsp.github.io/lsp-mode/page/languages/
+;; https://emacs-lsp.github.io/lsp-mode/page/lsp-pylsp/
+;; https://www.mattduck.com/lsp-python-getting-started.html
+;; i am using pyls
 
-(use-package lsp-python-ms
-  :ensure t
-  :init (setq lsp-python-ms-auto-install-server t)
-  :hook (python-mode . (lambda ()   ;; elpy-mode
-                          (require 'lsp-python-ms)
-                          (lsp-deferred)))
-  :custom
-  ;; NOTE: Set these if Python 3 is called "python3" on your system!
-  (python-shell-interpreter "python3"
-    python-shell-interpreter-args "-i")
-  ;; (dap-python-executable "python3")
-  )  
+(use-package lsp-mode
+  :hook
+  ((python-mode . lsp)))
   
 ;;===========================================================================
 ;; pyvenv
@@ -612,24 +608,39 @@
   :config
   (pyvenv-mode 1))
 
+
+;(use-package company
+;  :after lsp-mode
+;  :hook (lsp-mode . company-mode)
+;  :bind (:map company-active-map
+;         ("<tab>" . company-complete-selection))
+;        (:map lsp-mode-map
+;         ("<tab>" . company-indent-or-complete-common))
+;  :custom
+;  (company-minimum-prefix-length 1)
+;  (company-idle-delay 0.0))
+
+;(use-package company-box
+;  :hook (company-mode . company-box-mode))
+
 ;; company
-(use-package company
-  ;;:ensure t
-  ;;:init (global-company-mode)
-  :after lsp-python-ms
-  :hook (lsp-python-ms . company-mode)
-  :bind (:map company-active-map
-         ("<tab>" . company-complete-selection))
-        (:map lsp-mode-map
-         ("<tab>" . company-indent-or-complete-common))
-  :custom
-  (company-minimum-prefix-length 1)
-  (company-idle-delay 0.0)
-    )
+;(use-package company
+;  ;;:ensure t
+;  ;;:init (global-company-mode)
+;  :after lsp-python-ms
+;  :hook (lsp-python-ms . company-mode)
+;  :bind (:map company-active-map
+;         ("<tab>" . company-complete-selection))
+;        (:map lsp-mode-map
+;         ("<tab>" . company-indent-or-complete-common))
+;  :custom
+;  (company-minimum-prefix-length 1)
+;  (company-idle-delay 0.0)
+;    )
 
 ;; Standard Jedi.el setting
-(add-hook 'python-mode-hook 'jedi:setup)
-(setq jedi:complete-on-dot t)
+;; (add-hook 'python-mode-hook 'jedi:setup)
+;; (setq jedi:complete-on-dot t)
 
 ;;===========================================================================
 ;; autopep8
@@ -747,6 +758,13 @@
  '(custom-enabled-themes '(ibm-dark))
  '(custom-safe-themes
    '("24168c7e083ca0bbc87c68d3139ef39f072488703dcdd82343b8cab71c0f62a7" default))
-)
+ '(package-selected-packages
+   '(python-mode yafolding web-mode use-package smex smartparens rainbow-delimiters py-autopep8 powerline poly-R org-tree-slide org-bullets neotree multiple-cursors magit lsp-python-ms js2-mode jedi indent-guide ido-vertical-mode ido-hacks highlight-symbol helm flycheck flx-ido ess-R-data-view elpy company-quickhelp company-jedi company-irony-c-headers company-irony company-c-headers calfw-org calfw-ical calfw auctex anaconda-mode ace-jump-mode ac-math)))
 
 
+(custom-set-faces
+ ;; custom-set-faces was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ )
