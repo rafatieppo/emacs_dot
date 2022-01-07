@@ -32,8 +32,8 @@
 (package-initialize)
 
 ;; best
-(add-to-list 'package-archives
-             '("melpa-stable" . "https://stable.melpa.org/packages/") t)
+;(add-to-list 'package-archives
+;             '("melpa-stable" . "https://stable.melpa.org/packages/") t)
 
 ;(add-to-list 'package-archives
 ;             '("melpa" . "http://melpa.milkbox.net/packages/") t)
@@ -44,8 +44,8 @@
 ;(add-to-list 'package-archives
 ;             '("gnu" . "http://elpa.gnu.org/packages/") t)
 
-;(add-to-list 'package-archives
-;            '("melpa" . "https://melpa.org/packages/") t)
+(add-to-list 'package-archives
+            '("melpa" . "https://melpa.org/packages/") t)
 
 ;(add-to-list 'package-archives
 ;             '("marmalade" . "http://marmalade-repo.org/packages/") t)
@@ -63,7 +63,8 @@
 
 (package-install 'ace-jump-mode)
 (package-install 'ac-math)
-(package-install 'anaconda-mode)
+(package-install 'all-the-icons)
+;(package-install 'anaconda-mode)
 (package-install 'auctex)
 (package-install 'auto-complete)
 (package-install 'calfw)
@@ -76,7 +77,8 @@
 (package-install 'company-c-headers)
 ;(package-install 'company-clang)
 (package-install 'company-irony-c-headers)
-(package-install 'elpy) ;;install via apt - check shell scrit
+;(package-install 'doom-modeline)
+;(package-install 'elpy) ;;install via apt - check shell scrit
 ;(package-install 'ess-view)
 (package-install 'ess-R-data-view)
 (package-install 'flx)
@@ -86,8 +88,8 @@
 (package-install 'helm)
 (package-install 'highlight-symbol)
 ;(package-install 'ido)
-(package-install 'ido-hacks)
-(package-install 'ido-vertical-mode)
+;(package-install 'ido-hacks)
+;(package-install 'ido-vertical-mode)
 (package-install 'indent-guide)
 (package-install 'jedi)
 (package-install 'markdown-mode)
@@ -107,7 +109,7 @@
 ;;(package-install 'lsp-python-ms)
 (package-install 'rainbow-delimiters)
 (package-install 'smartparens)
-(package-install 'smex)
+;(package-install 'smex)
 (package-install 'yafolding)
 (package-install 'yasnippet)
 (package-install 'use-package)

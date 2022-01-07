@@ -27,20 +27,30 @@
 ;; Feel free to copy and share.
 ;;=============================================================================
 ;;; Code:
+
+(eval-and-compile
+  (customize-set-variable
+   'package-archives '(("org" . "https://orgmode.org/elpa/")
+                       ("melpa" . "https://melpa.org/packages/")
+                       ("gnu" . "https://elpa.gnu.org/packages/")))
+  (package-initialize)
+  (unless (package-installed-p 'use-package)
+    (package-refresh-contents)
+    (package-install 'use-package)))
+
 (require 'package)
 
-(package-initialize)
-(unless package-archive-contents
-  (package-refresh-contents))
+;(package-initialize)
+;(unless package-archive-contents
+;  (package-refresh-contents))
  
 ;;;(add-to-list 'load-path "/home/rafatieppo/.emacs.d/elpa")
-(require 'use-package)
-(setq use-package-always-ensure t)
-
+;(require 'use-package)
+;(setq use-package-always-ensure t)
 
 (setq byte-compile-warnings '(cl-functions))
 
-;;===========================================================================
+
 ;;STANDARD SETTINGS
 ;;===========================================================================
 ;; Neotree A emacs tree plugin like NERD tree for Vim.
@@ -133,8 +143,6 @@
 ;;	(transient-mark-mode 1) ; highlight text selection
 (delete-selection-mode 1) ; delete seleted text when typing
 
-
-;;===========================================================================
 ;;ORG MODE
 ;;===========================================================================
 (require 'org)
@@ -221,7 +229,6 @@
         ;; ... other templates
     ))
 
-;;===========================================================================
 ;; SPECIAL PROGRAMMING TOOLS
 ;;===========================================================================
 ;; multiple-cursors.el https://github.com/magnars/multiple-cursors.el
@@ -348,8 +355,6 @@
   :ensure t
   :init (global-flycheck-mode t))
  
-  
-;;===========================================================================
 ;;AUTO COMLETE AND YASNIPPET
 ;;=========================================================================== 
 
@@ -371,7 +376,6 @@
 ;(setq ac-math-unicode-in-math-p t)
 ;(ac-flyspell-workaround) 
 
-;;===========================================================================
 ;; R ESS
 ;;===========================================================================
 
@@ -443,7 +447,6 @@
            (ess-R-fl-keyword:F&T . t)))
 
 
-;;===========================================================================
 ;; POLYMODE 
 ;;===========================================================================
 (use-package poly-markdown
@@ -454,7 +457,6 @@
 ;; (autoload 'poly-markdown-mode "poly-markdown-mode"
 (add-to-list 'auto-mode-alist '("\\.md" . poly-markdown-mode))
 
-;;===========================================================================
 ;; MARKDOWN MODE 
 ;;===========================================================================
 ;; org momde minor mode markdown http://stackoverflow.com/questions/14275122/editing-markdown-pipe-tables-in-emacs
@@ -490,7 +492,6 @@
 (add-hook 'markdown-mode-hook 'turn-on-orgstruct)
 (add-hook 'markdown-mode-hook 'turn-on-orgstruct++)
 
-;;===========================================================================
 ;; REFTEX CITATION
 ;;===========================================================================
 ;; reftex citation pandoc http://www.unknownerror.org/opensource/jgm/pandoc/q/stackoverflow/13607156/autocomplete-pandoc-style-citations-from-a-bibtex-file-in-emacs http://tex.stackexchange.com/a/31992/5701
@@ -511,7 +512,6 @@
                                 (?\C-p . "\\citep{%l\}")
                                 ))))
 
-;;===========================================================================
 ;; LATEX
 ;;===========================================================================
 (add-hook 'LaTeX-mode-hook 'LaTeX-math-mode)
@@ -520,7 +520,6 @@
 (add-hook 'LaTeX-mode-hook 'turn-on-reftex)
 (setq reftex-plug-into-AUCTeX t)
 
-;;===========================================================================
 ;; HTML
 ;;===========================================================================
 ;; html-mode
@@ -554,7 +553,6 @@
 )
 (add-hook 'web-mode-hook  'my-web-mode-hook)
 
-;;===========================================================================
 ;; JavaScript
 ;;===========================================================================
 ; js2-mode.
@@ -575,7 +573,6 @@
 ;                           (tern-mode)
 ;                           (company-mode)))
 
-;;===========================================================================
 ;; C CONFIGURATION
 ;;===========================================================================
 ;; install apt-get install libclang-dev apt-get install cmake
@@ -588,7 +585,6 @@
 ;;To have autocompletion when you are including headers:
 ;(add-to-list 'company-backends 'company-irony-c-headers)
 
-;;===========================================================================
 ;; PYTHON CONFIGURATION
 ;;===========================================================================
 ;; https://emacs-lsp.github.io/lsp-mode/
@@ -596,20 +592,17 @@
 ;; https://emacs-lsp.github.io/lsp-mode/page/languages/
 ;; https://emacs-lsp.github.io/lsp-mode/page/lsp-pylsp/
 ;; https://www.mattduck.com/lsp-python-getting-started.html
-;; i am using pyls
 
+;; i am using pyls
 (use-package lsp-mode
   :hook
   ((python-mode . lsp)))
  
-;;===========================================================================
 ;; pyvenv
 (use-package pyvenv
   :config
   (pyvenv-mode 1))
 
-
-;;===========================================================================
 ;; projectile is necessary to handle .git in folder, otherwise lsp wil not start
 (use-package projectile
   :diminish projectile-mode
@@ -623,41 +616,10 @@
     (setq projectile-project-search-path '("~/Projects/Code")))
   (setq projectile-switch-project-action #'projectile-dired))
 
-;(use-package company
-;  :after lsp-mode
-;  :hook (lsp-mode . company-mode)
-;  :bind (:map company-active-map
-;         ("<tab>" . company-complete-selection))
-;        (:map lsp-mode-map
-;         ("<tab>" . company-indent-or-complete-common))
-;  :custom
-;  (company-minimum-prefix-length 1)
-;  (company-idle-delay 0.0))
-
-;(use-package company-box
-;  :hook (company-mode . company-box-mode))
-
-;; company
-;(use-package company
-;  ;;:ensure t
-;  ;;:init (global-company-mode)
-;  :after lsp-python-ms
-;  :hook (lsp-python-ms . company-mode)
-;  :bind (:map company-active-map
-;         ("<tab>" . company-complete-selection))
-;        (:map lsp-mode-map
-;         ("<tab>" . company-indent-or-complete-common))
-;  :custom
-;  (company-minimum-prefix-length 1)
-;  (company-idle-delay 0.0)
-;    )
-
 ;; Standard Jedi.el setting
 ;; (add-hook 'python-mode-hook 'jedi:setup)
 ;; (setq jedi:complete-on-dot t)
 
-;;===========================================================================
-;; autopep8
 ;; Autopep8 - enable autopep8 formatting on save
 (require 'py-autopep8)
 ;(add-hook 'elpy-mode-hook 'py-autopep8-enable-on-save)
@@ -665,7 +627,6 @@
 ;(add-hook 'anaconda-mode-hook 'py-autopep8-enable-on-save)
 ;(setq py-autopep8-options '("--max-line-lengh=100"))
 
-;;===========================================================================
 ;; Flymake and Flycheck
 ;;===========================================================================
 (add-hook 'after-init-hook #'global-flycheck-mode)
@@ -685,12 +646,12 @@
 (load "/home/rafatieppo/.emacs.d/lisp/functions")
 ;(require 'functions)
 
-;;===========================================================================
+
 ;; THEMES - SEVERAL SCHEMES
 ;;===========================================================================
 ;; Solarized
 ;(add-to-list 'load-path "/home/rafatieppo/.emacs.d/themess/solarized/")
-'(require 'solarized-dark-theme)
+;(require 'solarized-dark-theme)
 ;(require 'solarized-definitions)
 ;(require 'solarized-theme)
 ;(require 'color-theme-solarized)
@@ -700,7 +661,6 @@
 ;(add-to-list 'load-path "/home/rafatieppo/.emacs.d/themess/solarized")
 ;(require 'solarized-dark-theme)
 
-;(add-to-list 'load-path "/home/rafatieppo/.emacs.d/themess")
 (add-to-list 'load-path "/home/rafatieppo/.emacs.d/themess")
 ;(add-to-list 'custom-theme-load-path "/home/rafatieppo/.emacs.d/themess")
 ;(require 'afternoon-theme)
@@ -772,13 +732,5 @@
  '(custom-enabled-themes '(ibm-dark))
  '(custom-safe-themes
    '("24168c7e083ca0bbc87c68d3139ef39f072488703dcdd82343b8cab71c0f62a7" default))
- '(package-selected-packages
-   '(python-mode yafolding web-mode use-package smex smartparens rainbow-delimiters py-autopep8 powerline poly-R org-tree-slide org-bullets neotree multiple-cursors magit lsp-python-ms js2-mode jedi indent-guide ido-vertical-mode ido-hacks highlight-symbol helm flycheck flx-ido ess-R-data-view elpy company-quickhelp company-jedi company-irony-c-headers company-irony company-c-headers calfw-org calfw-ical calfw auctex anaconda-mode ace-jump-mode ac-math)))
-
-
-(custom-set-faces
- ;; custom-set-faces was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
  )
+
