@@ -4,30 +4,39 @@ author: Rafael Tieppo
 date: 2021 
 --- 
 
-# cpp
+The file `.emacs` was replaced for `init.el` into `.emacs.d`.
+
+* cpp
 
 install from melpa:
+
 `irony`
 `company-irony`
 
-`sudo apt-get install clang cmake libclang`
+#+begin_src shell
+apt-get install clang cmake libclang
+#+end_src
 
-Into `.emacs`
+Into `init.el`
 
-```
+#+begin_src 
 (add-hook 'c++-mode-hook 'irony-mode)
 (add-hook 'c-mode-hook 'irony-mode)
 (add-hook 'objc-mode-hook 'irony-mode)
 (add-hook 'irony-mode-hook 'irony-cdb-autosetup-compile-options)
-```
+#+end_src
 
 open emacs `alt x`
 irony-install-server 
 
+* Python
 
-# Python
+** rpc virtualenv pyvenv
 
-## rpc virtualenv pyvenv
+- 2022-01-07: 
+  - usar o pyvenv para ambientes.
+  - usar `pyls` como servidor, a configuracao é mais simples e o company já está pré configurado.
+  - é necessário usar o `projectile` para acinar o `lsp`, pois o `.git` ou qualquer outro arquivo ou para com `.` no início demanda o projectile para iniciar o root do projeto. 
 
 - 2021-04-27: não instalar os pacotes extras no HOME para evitar conflitos. A solução é criar um diretorio com um ambiente virtual (virtualenv). Esta pasta será criada com o próprio emacs e ficará no caminho: `/home/rafatieppo/.virtualenvs/myownenv`. Uma vez que é criada com `pyvenv-create`, rode `run-python`, carregue com `pyvenv-activate` e atualize com `pyvenv-restart-python`. A instalação dos pacotes é realizada no referido ambiente virtual via terminal e com o script `pip3 install -r python3_require_packs.txt`. Para ativar o ambiente virtual `source myownenv/bin/activate` . No arquivo `.emacs` o *python rpc* e *python source* não será definido. gdal osgeo: como o osgeo é instalado com o gdal (via apt), usar dentro do ambiente virtual: `pip3 install GDAL==$(gdal-config --version) --global-option=build_ext --global-option="-I/usr/include/gdal" `
 
@@ -260,3 +269,11 @@ https://www.youtube.com/watch?v=cSm3doCNyko&t=1s
 ;(add-hook 'anaconda-mode-hook 'py-autopep8-enable-on-save)
 ;(add-hook 'python-mode-hook 'py-autopep8-enable-on-save)
 (add-hook 'elpy-mode-hook 'py-autopep8-enable-on-save)
+
+
+#+begin_src emacs-lisp
+(+ 2 4)
+#+end_src
+
+#+RESULTS:
+: 6
