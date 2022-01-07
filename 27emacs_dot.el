@@ -614,7 +614,7 @@
 (use-package projectile
   :diminish projectile-mode
   :config (projectile-mode)
-  :custom ((projectile-completion-system 'ivy))
+  :custom ((projectile-completion-system 'helm)) ; or ivy
   :bind-keymap
   ("C-c p" . projectile-command-map)
   :init
