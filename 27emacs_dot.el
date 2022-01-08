@@ -74,14 +74,16 @@
 
 ;; Font and  size
 ;(set-frame-font "Anonymous Pro-14.5")
-;(set-frame-font "Envy Code R-12")
 ;(set-frame-font "Envy Code R-17")
+(set-frame-font "Fira Code-17")
 ;(set-frame-font "Hack-16")
-(set-frame-font "IBMPlexMono-17")
+;(set-frame-font "IBMPlexMono-17")
+;(set-frame-font "JetBrains Mono-17")
 ;(set-frame-font "Monaco-16.5")
-;(set-frame-font "monofur-18")
+;(set-frame-font "monofur-19")
 ;(set-frame-font "Menlo-16")
 ;(set-frame-font "Monoid-14")
+;(set-frame-font "Source Code Pro-17")
 ;(set-frame-font "Tex Gyre Adventor-11")
 
 ;; Space between lines and between line numbers and text (like margin)
@@ -162,7 +164,7 @@
   :after org
   :hook (org-mode . org-bullets-mode)
   :custom
-  (org-bullets-bullet-list '("◉" "○" "●" "○" "●" "○" "●")))
+  (org-bullets-bullet-list '("●" "◉" "○" "✿" "✸" "☯" "☢")))
 
 ;; arrow instead ...
 (setq org-ellipsis " ⤵") ;;" ▾"
@@ -676,7 +678,7 @@
 ;(require 'clues-theme)
 ;(require 'dracula-theme)
 ;;(require 'erosiond-theme)
-;(require 'forest-blue-theme)
+(require 'forest-blue-theme)
 ;;(require 'fogus-theme)
 ;;(require 'gotham-theme)
 ;;(require 'granger-theme)
@@ -724,13 +726,23 @@
 ;(set-face-attribute hl-line-face nil :underline t)
 ;(set-face-background hl-line-face "#2F2F2F")
 
+
+
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '(custom-enabled-themes '(ibm-dark))
+ '(custom-enabled-themes '(forest-blue))
  '(custom-safe-themes
-   '("24168c7e083ca0bbc87c68d3139ef39f072488703dcdd82343b8cab71c0f62a7" default))
+   '("6950cff91f52578d46e0c3c0b68d329a72157cca1e2380e2e8e7557b8257eb6d" default))
+ '(package-archives
+   '(("org" . "https://orgmode.org/elpa/")
+     ("melpa" . "https://melpa.org/packages/")
+     ("gnu" . "https://elpa.gnu.org/packages/"))))
+(custom-set-faces
+ ;; custom-set-faces was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
  )
-
