@@ -733,9 +733,9 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '(custom-enabled-themes '(forest-blue))
+ '(custom-enabled-themes '(ibm-dark))
  '(custom-safe-themes
-   '("6950cff91f52578d46e0c3c0b68d329a72157cca1e2380e2e8e7557b8257eb6d" default))
+   '("43ee7172f7ad20c70da9c42061e7f1e4e69eb9605fd0ed58900c7ad5c5fdfa94" "c4e4cc796a06de99f3aed2977b4ae6b0eb7c8ae3d917ec4f6018c2649a296902" default))
  '(package-archives
    '(("org" . "https://orgmode.org/elpa/")
      ("melpa" . "https://melpa.org/packages/")
