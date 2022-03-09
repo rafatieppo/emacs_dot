@@ -148,6 +148,20 @@
 ;;; ORG-MODE
 ;;;------------------------------------------------------------
 
+
+;;;------------------------------------------------------------
+(defun schedule-duration-minutes (schedule-stamp)
+  "Return schedule duration in hours from a schedule stamp"
+  (interactive)
+  (setq sa (replace-regexp-in-string "\\`<+\\|>" "" schedule-stamp))
+  (setq sb (split-string sa " " ))
+  (/
+   (- (org-duration-to-minutes (nth 1 (split-string (nth 2 sb) "-" )))
+      (org-duration-to-minutes (nth 0 (split-string (nth 2 sb)  "-" ))))
+   60))
+
+
+
 ;;;------------------------------------------------------------
 ;;; ORG MONTH REPORT
 (defun my/org-review-month (start-date)
@@ -163,7 +177,8 @@
   )
   
 ;;;------------------------------------------------------------
-;;; ORG REPORTING TIME BY DAY http://sachachua.com/blog/2007/12/clocking-time-with-emacs-org/
+;;; ORG REPORTING TIME BY DAY
+;;; http://sachachua.com/blog/2007/12/clocking-time-with-emacs-org/
 
 (defun org-dblock-write:rangereport (params)
   "Display day-by-day time reports PARAMS ..."
@@ -320,6 +335,6 @@
 (global-set-key [(meta f3)] 'highlight-symbol-query-replace)
 ;;-----------------------------------------------------------------------------
 
+
 ;;;(provide 'functions)
 ;;; functions.el ends here
-
