@@ -164,7 +164,7 @@
   :after org
   :hook (org-mode . org-bullets-mode)
   :custom
-  (org-bullets-bullet-list '("●" "◉" "○" "✿" "✸" "☯" "☢")))
+  (org-bullets-bullet-list '("✿" "◉" "●" "○" "✸" "☯" "☢"))) ;; Small ► • ★ ▸
 
 ;; arrow instead ...
 (setq org-ellipsis " ⤵") ;;" ▾"
