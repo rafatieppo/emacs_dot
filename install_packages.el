@@ -81,6 +81,7 @@
 ;(package-install 'elpy) ;;install via apt - check shell scrit
 ;(package-install 'ess-view)
 (package-install 'ess-R-data-view)
+(package-install 'evil)
 (package-install 'flx)
 (package-install 'flx-ido)
 (package-install 'flycheck)
