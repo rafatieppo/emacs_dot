@@ -145,6 +145,10 @@
 ;;	(transient-mark-mode 1) ; highlight text selection
 (delete-selection-mode 1) ; delete seleted text when typing
 
+
+(require 'evil)
+(evil-mode 1)
+
 ;;ORG MODE
 ;;===========================================================================
 (require 'org)
@@ -739,7 +743,9 @@
  '(package-archives
    '(("org" . "https://orgmode.org/elpa/")
      ("melpa" . "https://melpa.org/packages/")
-     ("gnu" . "https://elpa.gnu.org/packages/"))))
+     ("gnu" . "https://elpa.gnu.org/packages/")))
+ '(package-selected-packages
+   '(evil yafolding web-mode use-package smex smartparens shrink-path rainbow-delimiters py-autopep8 projectile powerline poly-R org-tree-slide org-bullets neotree multiple-cursors magit lsp-mode js2-mode jedi indent-guide ido-vertical-mode ido-hacks highlight-symbol helm flycheck flx-ido ess-R-data-view elpy company-quickhelp company-jedi company-irony-c-headers company-irony company-c-headers calfw-org calfw-ical calfw auctex anaconda-mode all-the-icons ace-jump-mode ac-math)))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
