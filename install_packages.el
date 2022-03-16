@@ -92,6 +92,7 @@
 ;(package-install 'ido-hacks)
 ;(package-install 'ido-vertical-mode)
 (package-install 'indent-guide)
+(package-install 'lsp-mode)
 (package-install 'jedi)
 (package-install 'markdown-mode)
 (package-install 'magit)
