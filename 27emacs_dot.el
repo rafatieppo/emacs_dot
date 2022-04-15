@@ -60,9 +60,9 @@
              :config (setq neo-autorefresh nil))
 
 ;; Powerlines https://github.com/milkypostman/powerline/
-(use-package powerline
-             :ensure t
-             :config (powerline-default-theme))
+;(use-package powerline
+;             :ensure t
+;             :config (powerline-default-theme))
 
 ;; No welcome windows ;; http://blog.droidzone.in/2012/05/22/remove-startup-split-screen-in-emacs/
 (setq inhibit-startup-screen t)
@@ -357,10 +357,11 @@
 ;  :defer t
 ;  :hook (lsp-mode . flycheck-mode))
  
-(use-package flycheck
-  :ensure t
-  :init (global-flycheck-mode t))
- 
+;(use-package flycheck
+;  :ensure t
+;  :init (global-flycheck-mode t))
+
+
 ;;AUTO COMLETE AND YASNIPPET
 ;;=========================================================================== 
 
@@ -452,6 +453,9 @@
 ;;           (ess-fl-keyword:= . t)
            (ess-R-fl-keyword:F&T . t)))
 
+;; To activate ESS auto-complete for R.
+(setq ess-use-auto-complete 'script-only)
+
 
 ;; POLYMODE 
 ;;===========================================================================
@@ -495,8 +499,8 @@
 (add-to-list 'auto-mode-alist '("\\.md\\'" . markdown-mode))
 
 ;; Org-struct minor mode active in markdown mode.
-(add-hook 'markdown-mode-hook 'turn-on-orgstruct)
-(add-hook 'markdown-mode-hook 'turn-on-orgstruct++)
+;(add-hook 'markdown-mode-hook 'turn-on-orgstruct)
+;(add-hook 'markdown-mode-hook 'turn-on-orgstruct++)
 
 ;; REFTEX CITATION
 ;;===========================================================================
@@ -633,10 +637,6 @@
 ;(add-hook 'anaconda-mode-hook 'py-autopep8-enable-on-save)
 ;(setq py-autopep8-options '("--max-line-lengh=100"))
 
-;; Flymake and Flycheck
-;;===========================================================================
-(add-hook 'after-init-hook #'global-flycheck-mode)
-
 
 ;;===========================================================================
 ;; MAGIT
@@ -656,7 +656,7 @@
 ;; THEMES - SEVERAL SCHEMES
 ;;===========================================================================
 ;; Solarized
-;(add-to-list 'load-path "/home/rafatieppo/.emacs.d/themess/solarized/")
+(add-to-list 'load-path "/home/rafatieppo/.emacs.d/themess/solarized/")
 ;(require 'solarized-dark-theme)
 ;(require 'solarized-definitions)
 ;(require 'solarized-theme)
@@ -686,7 +686,7 @@
 ;;(require 'fogus-theme)
 ;;(require 'gotham-theme)
 ;;(require 'granger-theme)
-(require 'ibm-dark-theme)
+;(require 'ibm-dark-theme)
 ;(require 'hydrangea-theme)
 ;;(require 'hickey-theme)
 ;;(require 'junio-theme)
@@ -709,7 +709,7 @@
 ;;(require 'wilmersdorf-theme)
 ;;(require 'wilson-theme)
 ;;(require 'zenburn-theme)
-;(require 'zerodark-theme)
+(require 'zerodark-theme)
 ;(require 'zonokai-blue-theme)
 ;(require 'color-theme-tomorrow)
 ;(color-theme-tomorrow--define-theme night-blue)
@@ -731,21 +731,18 @@
 ;(set-face-background hl-line-face "#2F2F2F")
 
 
-
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '(custom-enabled-themes '(ibm-dark))
+ '(custom-enabled-themes '(zerodark))
  '(custom-safe-themes
-   '("43ee7172f7ad20c70da9c42061e7f1e4e69eb9605fd0ed58900c7ad5c5fdfa94" "c4e4cc796a06de99f3aed2977b4ae6b0eb7c8ae3d917ec4f6018c2649a296902" default))
+   '("43ee7172f7ad20c70da9c42061e7f1e4e69eb9605fd0ed58900c7ad5c5fdfa94" "846ef3695c42d50347884515f98cc359a7a61b82a8d0c168df0f688cf54bf089" default))
  '(package-archives
    '(("org" . "https://orgmode.org/elpa/")
      ("melpa" . "https://melpa.org/packages/")
-     ("gnu" . "https://elpa.gnu.org/packages/")))
- '(package-selected-packages
-   '(evil yafolding web-mode use-package smex smartparens shrink-path rainbow-delimiters py-autopep8 projectile powerline poly-R org-tree-slide org-bullets neotree multiple-cursors magit lsp-mode js2-mode jedi indent-guide ido-vertical-mode ido-hacks highlight-symbol helm flycheck flx-ido ess-R-data-view elpy company-quickhelp company-jedi company-irony-c-headers company-irony company-c-headers calfw-org calfw-ical calfw auctex anaconda-mode all-the-icons ace-jump-mode ac-math)))
+     ("gnu" . "https://elpa.gnu.org/packages/"))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
