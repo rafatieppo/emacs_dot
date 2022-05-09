@@ -410,7 +410,7 @@
     (ess-toggle-underscore nil)
     (define-key ess-mode-map [?\M--]
       'ess-cycle-assign) ;; `Alt + -'  to cycle `<- | <<- | = ...'.
-    (auto-complete-mode 1)
+    (auto-complete-mode -1)
     (company-mode 1)                               ;; (company-mode -1)
     (define-key ess-mode-map [f5] 'company-R-args) ;; F5 do show ARGS.
     (setq ess-indent-with-fancy-comments nil) ;; No indent levels.
