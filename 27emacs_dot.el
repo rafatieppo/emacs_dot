@@ -385,7 +385,6 @@
 
 ;; R ESS
 ;;===========================================================================
-
 ;; setting to work with ess and r
 (require 'ess-site)
 ;(require 'ess-eldoc)
@@ -419,6 +418,13 @@
     (setq comint-scroll-to-bottom-on-input t)
     (setq comint-scroll-to-bottom-on-output t)
     (setq comint-move-point-for-output t)))
+
+;; tecla SHIFT + ENTER
+(eval-after-load "ess-mode"
+ '(progn
+   ;;(define-key ess-mode-map [(control return)] nil)
+   (define-key ess-mode-map [(shift return)] 'ess-eval-region-or-line-and-step))
+)
 
 ;; if you want all help buffers to go into one frame do:
 (setq ess-help-own-frame 'one)
