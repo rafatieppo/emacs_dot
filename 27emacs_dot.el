@@ -202,6 +202,7 @@
              ("RUNN" . (:foreground "yellow" :weight bold))
              ("WAIT" . (:foreground "orange" :weight bold))
              ("DONE" . (:foreground "green" :weight bold))
+             ("CANCELED" . (:foreground "gray" :weight bold))             
              ))
 
 ;; ORG CAPTURE I use C-c c to start capture mode
