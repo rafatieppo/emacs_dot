@@ -463,6 +463,8 @@
 ;; To activate ESS auto-complete for R.
 (setq ess-use-auto-complete 'script-only)
 
+;; cancel centering comments in R ESS
+(setf (cdr (assoc 'ess-indent-with-fancy-comments ess-own-style-list)) nil)
 
 ;; POLYMODE 
 ;;===========================================================================
@@ -745,14 +747,9 @@
  ;; If there is more than one, they won't work right.
  '(custom-enabled-themes '(zerodark))
  '(custom-safe-themes
-   '("43ee7172f7ad20c70da9c42061e7f1e4e69eb9605fd0ed58900c7ad5c5fdfa94" "846ef3695c42d50347884515f98cc359a7a61b82a8d0c168df0f688cf54bf089" default))
+   '("2e05569868dc11a52b08926b4c1a27da77580daa9321773d92822f7a639956ce" "43ee7172f7ad20c70da9c42061e7f1e4e69eb9605fd0ed58900c7ad5c5fdfa94" "846ef3695c42d50347884515f98cc359a7a61b82a8d0c168df0f688cf54bf089" default))
  '(package-archives
    '(("org" . "https://orgmode.org/elpa/")
      ("melpa" . "https://melpa.org/packages/")
      ("gnu" . "https://elpa.gnu.org/packages/"))))
-(custom-set-faces
- ;; custom-set-faces was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- )
+
