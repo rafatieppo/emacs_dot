@@ -256,6 +256,7 @@
     )
   (beginning-of-line) ;; or (end-of-line)
   (next-line)
+  (forward-paragraph)
   )
 
 (global-set-key (kbd "M-\\") 'python-my-python-parag)
