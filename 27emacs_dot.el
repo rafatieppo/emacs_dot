@@ -542,7 +542,7 @@
 ;; HTML
 ;;===========================================================================
 ;; html-mode
-(sp-with-modes '(html-mode sgml-mode web-mode)
+(sp-with-modes '(html-mode sgml-mode -mode)
   (sp-local-pair "<" ">"))
 
 ;; https://www.emacswiki.org/emacs/IndentingHtml
