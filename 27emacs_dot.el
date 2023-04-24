@@ -44,7 +44,7 @@
 ;(unless package-archive-contents
 ;  (package-refresh-contents))
  
-;;;(add-to-list 'load-path "/home/rafatieppo/.emacs.d/elpa")
+;(add-to-list 'load-path "/home/rafatieppo/.emacs.d/elpa")
 ;(require 'use-package)
 ;(setq use-package-always-ensure t)
 
@@ -542,7 +542,7 @@
 ;; HTML
 ;;===========================================================================
 ;; html-mode
-(sp-with-modes '(html-mode sgml-mode -mode)
+(sp-with-modes '(html-mode sgml-mode web-mode)
   (sp-local-pair "<" ">"))
 
 ;; https://www.emacswiki.org/emacs/IndentingHtml
@@ -606,17 +606,19 @@
 
 ;; PYTHON CONFIGURATION
 ;;===========================================================================
-;; https://emacs-lsp.github.io/lsp-mode/
-;; https://emacs-lsp.github.io/lsp-mode/page/installation/
-;; https://emacs-lsp.github.io/lsp-mode/page/languages/
+;; https://emacs-lsp.github.io/lsp-pyright/
 ;; https://emacs-lsp.github.io/lsp-mode/page/lsp-pylsp/
 ;; https://www.mattduck.com/lsp-python-getting-started.html
 
-;; i am using pyls
-(use-package lsp-mode
-  :hook
-  ((python-mode . lsp)))
- 
+;; i am using lsp-pyright
+(use-package lsp-pyright
+  :ensure t
+  :hook (python-mode . (lambda ()
+                          (require 'lsp-pyright)
+                          (lsp))))  ; or lsp-deferred 
+(use-package lsp-ui
+  :commands lsp-ui-mode)
+  
 ;; pyvenv
 (use-package pyvenv
   :config
@@ -751,5 +753,13 @@
  '(package-archives
    '(("org" . "https://orgmode.org/elpa/")
      ("melpa" . "https://melpa.org/packages/")
-     ("gnu" . "https://elpa.gnu.org/packages/"))))
+     ("gnu" . "https://elpa.gnu.org/packages/")))
+ '(package-selected-packages
+   '(lsp-ui lsp-pyright yasnippet yafolding web-mode use-package smartparens rainbow-delimiters py-autopep8 projectile powerline poly-R org-tree-slide org-bullets neotree multiple-cursors magit lsp-mode js2-mode jedi indent-guide highlight-symbol helm flycheck flx-ido evil ess-R-data-view company-quickhelp company-jedi company-irony-c-headers company-irony company-c-headers calfw-org calfw-ical calfw auctex all-the-icons ace-jump-mode ac-math)))
 
+(custom-set-faces
+ ;; custom-set-faces was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ )
