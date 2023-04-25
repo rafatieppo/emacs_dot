@@ -93,6 +93,7 @@
 ;(package-install 'ido-vertical-mode)
 (package-install 'indent-guide)
 (package-install 'lsp-mode)
+(package-install 'lsp-ui)
 ;(package-install 'jedi)
 (package-install 'markdown-mode)
 (package-install 'magit)
