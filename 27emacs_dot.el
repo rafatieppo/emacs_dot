@@ -369,6 +369,15 @@
 (require 'yasnippet)
 (yas-global-mode 1)
 
+
+(defun yasnippet-snippets--fixed-indent ()
+  "Set `yas-indent-line' to `fixed'."
+  (set (make-local-variable 'yas-indent-line) 'fixed))
+
+(defun yasnippet-snippets--no-indent ()
+  "Set `yas-indent-line' to nil."
+  (set (make-local-variable 'yas-indent-line) nil))
+
 ;(require 'ac-math) 
 ;(add-to-list 'ac-modes 'latex-mode)   ; make auto-complete aware of `latex-mode`
 
