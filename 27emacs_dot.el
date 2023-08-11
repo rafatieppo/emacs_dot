@@ -188,10 +188,10 @@
   (org-image-actual-width nil))
 
 ;; packs to print calendar with appointments as GoogleCalendar
-(require 'calfw)
-(require 'calfw-org)
-(setq cfw:org-agenda-schedule-args '(:timestamp))
-(require 'calfw-ical)
+; (require 'calfw)
+; (require 'calfw-org)
+; (setq cfw:org-agenda-schedule-args '(:timestamp))
+; (require 'calfw-ical)
 
 ;; ORG mode CLASSES and COLORS for TASKS
 (setq org-todo-keywords
@@ -342,7 +342,7 @@
             sh-mode
             muse-mode
             ess-mode
-            polymode-mode
+            ;polymode-mode
             python-mode
             markdown-mode
             TeX-mode)) 
@@ -477,13 +477,13 @@
 
 ;; POLYMODE 
 ;;===========================================================================
-(use-package poly-markdown
-             :ensure t)
-(use-package poly-R
-             :ensure t)
+; (use-package poly-markdown
+;              :ensure t)
+; (use-package poly-R
+;              :ensure t)
 
 ;; (autoload 'poly-markdown-mode "poly-markdown-mode"
-(add-to-list 'auto-mode-alist '("\\.md" . poly-markdown-mode))
+; (add-to-list 'auto-mode-alist '("\\.md" . poly-markdown-mode))
 
 ;; MARKDOWN MODE 
 ;;===========================================================================
@@ -584,13 +584,13 @@
 ;; JavaScript
 ;;===========================================================================
 ; js2-mode.
-(require 'js2-mode)
-(add-to-list 'auto-mode-alist '("\\.js\\'" . js2-mode))
+;(require 'js2-mode)
+;(add-to-list 'auto-mode-alist '("\\.js\\'" . js2-mode))
 
 ;(add-to-list 'auto-mode-alist '("\\.js\\'\\|\\.json\\'" . js2-mode))
 
 ;; Better imenu
-(add-hook 'js2-mode-hook #'js2-imenu-extras-mode)
+;(add-hook 'js2-mode-hook #'js2-imenu-extras-mode)
 
 ;(add-to-list 'load-path "/home/rafatieppo/.emacs.d/elpa/company-tern-20200610/")
 ;(require 'company)
@@ -605,10 +605,10 @@
 ;;===========================================================================
 ;; install apt-get install libclang-dev apt-get install cmake
 ;(add-hook 'after-init-hook 'global-company-mode)
-(add-hook 'c++-mode-hook 'irony-mode)
-(add-hook 'c-mode-hook 'irony-mode)
-(add-hook 'objc-mode-hook 'irony-mode)
-(add-hook 'irony-mode-hook 'irony-cdb-autosetup-compile-options)
+; (add-hook 'c++-mode-hook 'irony-mode)
+; (add-hook 'c-mode-hook 'irony-mode)
+; (add-hook 'objc-mode-hook 'irony-mode)
+; (add-hook 'irony-mode-hook 'irony-cdb-autosetup-compile-options)
 
 ;;To have autocompletion when you are including headers:
 ;(add-to-list 'company-backends 'company-irony-c-headers)
@@ -624,22 +624,22 @@
   :ensure t
   :hook (python-mode . (lambda ()
                           (require 'lsp-pyright)
-                          (lsp))))  ; or lsp-deferred 
+                          (lsp))))  ;lsp or lsp-deferred 
 
-;(use-package lsp-ui
-;  :commands lsp-ui-mode)
+(use-package lsp-ui
+  :commands lsp-ui-mode)
 
 
 (use-package lsp-ui
-  :config (setq lsp-ui-sideline-show-hover t
-                lsp-ui-sideline-delay 0.5
-                lsp-ui-doc-delay 5
+  :config (setq lsp-ui-sideline-show-hover nil ;; t nil
+;                lsp-ui-sideline-delay 0.5
+;                lsp-ui-doc-delay 5
                 lsp-ui-sideline-ignore-duplicates t
-                lsp-ui-doc-position 'bottom
-                lsp-ui-doc-alignment 'frame
+;                lsp-ui-doc-position 'bottom
+;                lsp-ui-doc-alignment 'frame
                 lsp-ui-doc-header nil
-                lsp-ui-doc-include-signature t
-                lsp-ui-doc-use-childframe t))
+                lsp-ui-doc-include-signature nil
+                lsp-ui-doc-use-childframe t)) 
 
 ;; pyvenv
 (use-package pyvenv
@@ -715,7 +715,7 @@
 ;(require 'clues-theme)
 ;(require 'dracula-theme)
 ;;(require 'erosiond-theme)
-(require 'forest-blue-theme)
+;(require 'forest-blue-theme)
 ;;(require 'fogus-theme)
 ;;(require 'gotham-theme)
 ;;(require 'granger-theme)
