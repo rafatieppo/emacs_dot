@@ -239,7 +239,7 @@
 ;; SPECIAL PROGRAMMING TOOLS
 ;;===========================================================================
 ;; multiple-cursors.el https://github.com/magnars/multiple-cursors.el
-(require 'multiple-cursors)
+;(require 'multiple-cursors)
 
 ;;===========================================================================
 ;; raibow delimeters
@@ -321,9 +321,9 @@
 (add-hook 'elpy-mode-hook (lambda () (highlight-indentation-mode -1)))
 
 ;; smart Parenthesis https://github.com/Fuco1/smartparens
-(require 'smartparens)
+;(require 'smartparens)
 ;(require 'smartparens-config)
-(smartparens-global-mode 1)
+;(smartparens-global-mode 1)
 
 ;; folding by indentation ;; git clone https://github.com/zenozeng/yafolding.el.git
 (require 'yafolding)
@@ -396,84 +396,10 @@
 ;; R ESS
 ;;===========================================================================
 ;; setting to work with ess and r
-(require 'ess-site)
-;(require 'ess-eldoc)
-(setq-default ess-dialect "R")
-(setq-default inferior-R-args "--no-restore-history --no-save ")
 
-;(require 'ess-view)
-; (setq ess-view--spreadsheet-program "gnumeric")
 
-(defadvice ess-eval-buffer (before really-eval-buffer compile activate)
-  "Prevent call ess-eval-buffer by accident, frequently by
-   hitting C-c C-b instead of C-c C-n."
-  (if (yes-or-no-p
-       (format "Are you sure you want to evaluate the %s buffer?"
-               buffer-file-name))
-      (message "ess-eval-buffer started.")
-    (error "ess-eval-buffer canceled!")))
 
-(add-hook
- 'ess-mode-hook
- '(lambda()
-    (ess-toggle-underscore nil)
-    (define-key ess-mode-map [?\M--]
-      'ess-cycle-assign) ;; `Alt + -'  to cycle `<- | <<- | = ...'.
-    (auto-complete-mode -1)
-    (company-mode 1)                               ;; (company-mode -1)
-    (define-key ess-mode-map [f5] 'company-R-args) ;; F5 do show ARGS.
-    (setq ess-indent-with-fancy-comments nil) ;; No indent levels.
-    (setq-local comment-add 0)                ;; Single # as default.
-    (setq ess-smart-operators t)              ;; Smart comma.
-    (setq comint-scroll-to-bottom-on-input t)
-    (setq comint-scroll-to-bottom-on-output t)
-    (setq comint-move-point-for-output t)))
 
-;; tecla SHIFT + ENTER
-(eval-after-load "ess-mode"
- '(progn
-   ;;(define-key ess-mode-map [(control return)] nil)
-   (define-key ess-mode-map [(shift return)] 'ess-eval-region-or-line-and-step))
-)
-
-;; if you want all help buffers to go into one frame do:
-(setq ess-help-own-frame 'one)
-
-;; ess - highlights on programing codes
- (setq ess-R-font-lock-keywords
-         '((ess-R-fl-keyword:modifiers . t) ; default
-           (ess-R-fl-keyword:fun-defs . t) ; default
-           (ess-R-fl-keyword:keywords . t) ; default
-           (ess-R-fl-keyword:assign-ops . t) ; default
-           (ess-R-fl-keyword:constants . t) ; default
-           (ess-fl-keyword:fun-calls . t)
-           (ess-fl-keyword:numbers . t)  ;;se ativar fica muita colorido
-           (ess-fl-keyword:operators . nil)
-           (ess-fl-keyword:delimiters . t) ;;se ativar fica muita colorido
-           (ess-fl-keyword:= . nil) ;;se ativar fica muita colorido
-           (ess-R-fl-keyword:F&T . t)))
-
-   (setq inferior-R-font-lock-keywords
-         '((ess-S-fl-keyword:prompt . t) ; default
-           (ess-R-fl-keyword:messages . t) ; default
-           (ess-R-fl-keyword:modifiers . nil) ; default
-           (ess-R-fl-keyword:fun-defs . nil) ; default
-           (ess-R-fl-keyword:keywords . t) ; default
-           (ess-R-fl-keyword:assign-ops . nil) ; default
-           (ess-R-fl-keyword:constants . t) ; default
-           (ess-fl-keyword:matrix-labels . t) ; default
-           (ess-fl-keyword:fun-calls . t)
-;;           (ess-fl-keyword:numbers . nil)
-;;           (ess-fl-keyword:operators . nil)
-;;           (ess-fl-keyword:delimiters . nil)
-;;           (ess-fl-keyword:= . t)
-           (ess-R-fl-keyword:F&T . t)))
-
-;; To activate ESS auto-complete for R.
-(setq ess-use-auto-complete 'script-only)
-
-;; cancel centering comments in R ESS
-(setf (cdr (assoc 'ess-indent-with-fancy-comments ess-own-style-list)) nil)
 
 ;; POLYMODE 
 ;;===========================================================================
@@ -551,8 +477,8 @@
 ;; HTML
 ;;===========================================================================
 ;; html-mode
-(sp-with-modes '(html-mode sgml-mode web-mode)
-  (sp-local-pair "<" ">"))
+;(sp-with-modes '(html-mode sgml-mode web-mode)
+;  (sp-local-pair "<" ">"))
 
 ;; https://www.emacswiki.org/emacs/IndentingHtml
     (add-hook 'html-mode-hook
@@ -626,20 +552,20 @@
                           (require 'lsp-pyright)
                           (lsp))))  ;lsp or lsp-deferred 
 
-(use-package lsp-ui
-  :commands lsp-ui-mode)
+;(use-package lsp-ui
+;  :commands lsp-ui-mode)
 
 
-(use-package lsp-ui
-  :config (setq lsp-ui-sideline-show-hover nil ;; t nil
+;;(use-package lsp-ui
+;;  :config (setq lsp-ui-sideline-show-hover nil ;; t nil
 ;                lsp-ui-sideline-delay 0.5
 ;                lsp-ui-doc-delay 5
-                lsp-ui-sideline-ignore-duplicates t
+;;                lsp-ui-sideline-ignore-duplicates t
 ;                lsp-ui-doc-position 'bottom
 ;                lsp-ui-doc-alignment 'frame
-                lsp-ui-doc-header nil
-                lsp-ui-doc-include-signature nil
-                lsp-ui-doc-use-childframe t)) 
+;;                lsp-ui-doc-header nil
+;;                lsp-ui-doc-include-signature nil
+;;                lsp-ui-doc-use-childframe t)) 
 
 ;; pyvenv
 ;(use-package pyvenv
@@ -664,9 +590,9 @@
 ;; (setq jedi:complete-on-dot t)
 
 ;; Autopep8 - enable autopep8 formatting on save
-(require 'py-autopep8)
+;(require 'py-autopep8)
 ;(add-hook 'elpy-mode-hook 'py-autopep8-enable-on-save)
-(add-hook 'python-mode-hook 'py-autopep8-enable-on-save)
+;(add-hook 'python-mode-hook 'py-autopep8-enable-on-save)
 ;(add-hook 'anaconda-mode-hook 'py-autopep8-enable-on-save)
 ;(setq py-autopep8-options '("--max-line-lengh=100"))
 
@@ -772,12 +698,8 @@
  '(custom-enabled-themes '(zerodark))
  '(custom-safe-themes
    '("2e05569868dc11a52b08926b4c1a27da77580daa9321773d92822f7a639956ce" "43ee7172f7ad20c70da9c42061e7f1e4e69eb9605fd0ed58900c7ad5c5fdfa94" "846ef3695c42d50347884515f98cc359a7a61b82a8d0c168df0f688cf54bf089" default))
- '(package-archives
-   '(("org" . "https://orgmode.org/elpa/")
-     ("melpa" . "https://melpa.org/packages/")
-     ("gnu" . "https://elpa.gnu.org/packages/")))
  '(package-selected-packages
-   '(lsp-ui lsp-pyright yasnippet yafolding web-mode use-package smartparens rainbow-delimiters py-autopep8 projectile powerline poly-R org-tree-slide org-bullets neotree multiple-cursors magit lsp-mode js2-mode jedi indent-guide highlight-symbol helm flycheck flx-ido evil ess-R-data-view company-quickhelp company-jedi company-irony-c-headers company-irony company-c-headers calfw-org calfw-ical calfw auctex all-the-icons ace-jump-mode ac-math)))
+   '(lsp-pyright yasnippet yafolding web-mode use-package rainbow-delimiters py-autopep8 projectile org-tree-slide org-bullets neotree magit lsp-ui indent-guide highlight-symbol helm evil ess auto-complete auctex all-the-icons ace-jump-mode)))
 
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
