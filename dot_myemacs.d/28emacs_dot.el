@@ -75,7 +75,7 @@
 ;; Font and  size
 ;(set-frame-font "Anonymous Pro-14.5")
 ;(set-frame-font "Envy Code R-17")
-;(set-frame-font "Fira Code-17")
+(set-frame-font "Fira Code-15")
 ;(set-frame-font "Hack-16")
 ;(set-frame-font "IBMPlexMono-17")
 ;(set-frame-font "JetBrains Mono-17")
@@ -322,8 +322,8 @@
 
 ;; smart Parenthesis https://github.com/Fuco1/smartparens
 ;(require 'smartparens)
-;(require 'smartparens-config)
-;(smartparens-global-mode 1)
+(require 'smartparens-config)
+(smartparens-global-mode 1)
 
 ;; folding by indentation ;; git clone https://github.com/zenozeng/yafolding.el.git
 (require 'yafolding)
