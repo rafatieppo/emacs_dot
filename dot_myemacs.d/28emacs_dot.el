@@ -396,9 +396,56 @@
 ;; R ESS
 ;;===========================================================================
 ;; setting to work with ess and r
+(require 'ess-site)
+;(require 'ess-eldoc)
+(setq-default ess-dialect "R")
+(setq-default inferior-R-args "--no-restore-history --no-save ")
 
+;; tecla SHIFT + ENTER
+(eval-after-load "ess-mode"
+ '(progn
+   ;;(define-key ess-mode-map [(control return)] nil)
+   (define-key ess-mode-map [(shift return)] 'ess-eval-region-or-line-and-step))
+)
 
+;; To activate ESS auto-complete for R.
+(setq ess-use-auto-complete 'script-only)
 
+;; cancel centering comments in R ESS
+(setf (cdr (assoc 'ess-indent-with-fancy-comments ess-own-style-list)) nil)
+
+;; if you want all help buffers to go into one frame do:
+(setq ess-help-own-frame 'one)
+
+;; ess - highlights on programing codes
+ (setq ess-R-font-lock-keywords
+         '((ess-R-fl-keyword:modifiers . t) ; default
+           (ess-R-fl-keyword:fun-defs . t) ; default
+           (ess-R-fl-keyword:keywords . t) ; default
+           (ess-R-fl-keyword:assign-ops . t) ; default
+           (ess-R-fl-keyword:constants . t) ; default
+           (ess-fl-keyword:fun-calls . t)
+           (ess-fl-keyword:numbers . t)  ;;se ativar fica muita colorido
+           (ess-fl-keyword:operators . nil)
+           (ess-fl-keyword:delimiters . t) ;;se ativar fica muita colorido
+           (ess-fl-keyword:= . nil) ;;se ativar fica muita colorido
+           (ess-R-fl-keyword:F&T . t)))
+
+   (setq inferior-R-font-lock-keywords
+         '((ess-S-fl-keyword:prompt . t) ; default
+           (ess-R-fl-keyword:messages . t) ; default
+           (ess-R-fl-keyword:modifiers . nil) ; default
+           (ess-R-fl-keyword:fun-defs . nil) ; default
+           (ess-R-fl-keyword:keywords . t) ; default
+           (ess-R-fl-keyword:assign-ops . nil) ; default
+           (ess-R-fl-keyword:constants . t) ; default
+           (ess-fl-keyword:matrix-labels . t) ; default
+           (ess-fl-keyword:fun-calls . t)
+;;           (ess-fl-keyword:numbers . nil)
+;;           (ess-fl-keyword:operators . nil)
+;;           (ess-fl-keyword:delimiters . nil)
+;;           (ess-fl-keyword:= . t)
+           (ess-R-fl-keyword:F&T . t)))
 
 
 ;; POLYMODE 
@@ -427,11 +474,11 @@
             (add-hook 'after-save-hook 'cleanup-org-tables  nil 'make-it-local)))
 
 ;; if using markdown-mode yasnippets’s TAB completion doesn’t work, it’s just because TAB key is bind to markdown-cycle function http://wiki.dreamrunner.org/public_html/Emacs/markdown.html
-(add-hook 'markdown-mode-hook
-          '(lambda ()
-             (company-mode t)
-             (local-unset-key [tab])
-             (setq-local yas-fallback-behavior '(apply company-mode))))
+;(add-hook 'markdown-mode-hook
+;          '(lambda ()
+;             (company-mode t)
+;             (local-unset-key [tab])
+;             (setq-local yas-fallback-behavior '(apply company-mode))))
 
 ;; markdown enable MATH ;http://jblevins.org/projects/markdown-mode/
 (setq markdown-enable-math t)
@@ -699,7 +746,7 @@
  '(custom-safe-themes
    '("2e05569868dc11a52b08926b4c1a27da77580daa9321773d92822f7a639956ce" "43ee7172f7ad20c70da9c42061e7f1e4e69eb9605fd0ed58900c7ad5c5fdfa94" "846ef3695c42d50347884515f98cc359a7a61b82a8d0c168df0f688cf54bf089" default))
  '(package-selected-packages
-   '(lsp-pyright yasnippet yafolding web-mode use-package rainbow-delimiters py-autopep8 projectile org-tree-slide org-bullets neotree magit lsp-ui indent-guide highlight-symbol helm evil ess auto-complete auctex all-the-icons ace-jump-mode)))
+   '(company lsp-pyright yasnippet yafolding web-mode use-package rainbow-delimiters py-autopep8 projectile org-tree-slide org-bullets neotree magit lsp-ui indent-guide highlight-symbol helm evil ess auto-complete auctex all-the-icons ace-jump-mode)))
 
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
