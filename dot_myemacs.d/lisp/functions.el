@@ -326,8 +326,7 @@
 (global-set-key (kbd "C->") 'mc/mark-next-like-this)
 (global-set-key (kbd "C-<") 'mc/mark-previous-like-this)
 (global-set-key (kbd "C-; C-<") 'mc/mark-all-like-this)
-;; you can select the key you prefer to
-(define-key global-map (kbd "C-c SPC") 'ace-jump-mode)
+
 ;;-----------------------------------------------------------------------------
 ;; FUNCTION HIGHLIGHTS LISP
 (global-set-key [(control f3)] 'highlight-symbol-at-point)
