@@ -342,9 +342,9 @@
       0 'special-words t)))
   ) 
 
-;(use-package flycheck
-;  :defer t
-;  :hook (lsp-mode . flycheck-mode))
+(use-package flycheck
+  :defer t
+  :hook (lsp-mode . flycheck-mode))
  
 ;(use-package flycheck
 ;  :ensure t
@@ -576,21 +576,44 @@
 
 ;; PYTHON CONFIGURATION
 ;;===========================================================================
-;; https://emacs-lsp.github.io/lsp-pyright/
-;; https://emacs-lsp.github.io/lsp-mode/page/lsp-pylsp/
-;; https://www.mattduck.com/lsp-python-getting-started.html
+;; https://emacs-lsp.github.io/lsp-pyright/ ;; https://emacs-lsp.github.io/lsp-mode/page/lsp-pylsp/ ;; https://www.mattduck.com/lsp-python-getting-started.html
 
-;; i am using lsp-pyright
-(use-package lsp-pyright
-  :ensure t
-  :hook (python-mode . (lambda ()
-                          (require 'lsp-pyright)
-                          (lsp))))  ;lsp or lsp-deferred 
+; --------------------------------------------------------------------
+;; FOR lsp-pyright
+;(use-package lsp-pyright
+;  :ensure t
+;  :hook (python-mode . (lambda ()
+;                          (require 'lsp-pyright)
+;                          (lsp))))  ;lsp or lsp-deferred 
+
+; --------------------------------------------------------------------
+;; FOR lsp-mode       https://emacs-lsp.github.io/lsp-mode/page/installation/
+(use-package lsp-mode
+  :init
+  ;; set prefix for lsp-command-keymap (few alternatives - "C-l", "C-c l")
+  (setq lsp-keymap-prefix "C-c l")
+  :hook (;; replace XXX-mode with concrete major-mode(e. g. python-mode)
+         (python-mode . lsp)
+         ;; if you want which-key integration
+         ;(lsp-mode . lsp-enable-which-key-integration)
+         )
+  :commands lsp)
+
+;; if you are helm user
+(use-package helm-lsp :commands helm-lsp-workspace-symbol)
 
 ;(use-package lsp-ui
 ;  :commands lsp-ui-mode)
 
+;; optionally if you want to use debugger
+; (use-package dap-mode)
+;; (use-package dap-LANGUAGE) to load the dap adapter for your language
 
+;; optional if you want which-key integration
+;(use-package which-key
+;    :config
+;    (which-key-mode))
+    
 ;;(use-package lsp-ui
 ;;  :config (setq lsp-ui-sideline-show-hover nil ;; t nil
 ;                lsp-ui-sideline-delay 0.5
@@ -625,6 +648,11 @@
 ;; (setq jedi:complete-on-dot t)
 
 ;; Autopep8 - enable autopep8 formatting on save
+(use-package py-autopep8
+  :config
+  (setq py-autopep8-options '("--max-line-length=100" "--aggressive"))
+  :hook ((python-mode) . py-autopep8-mode))
+
 ;(require 'py-autopep8)
 ;(add-hook 'elpy-mode-hook 'py-autopep8-enable-on-save)
 ;(add-hook 'python-mode-hook 'py-autopep8-enable-on-save)
