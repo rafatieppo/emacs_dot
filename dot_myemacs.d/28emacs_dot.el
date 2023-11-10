@@ -342,13 +342,13 @@
       0 'special-words t)))
   ) 
 
-(use-package flycheck
-  :defer t
-  :hook (lsp-mode . flycheck-mode))
- 
 ;(use-package flycheck
-;  :ensure t
-;  :init (global-flycheck-mode t))
+;  :defer t
+;  :hook (lsp-mode . flycheck-mode))
+ 
+(use-package flycheck
+  :ensure t
+  :init (global-flycheck-mode t))
 
 
 ;;AUTO COMLETE AND YASNIPPET
