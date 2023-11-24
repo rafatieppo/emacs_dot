@@ -346,9 +346,9 @@
 ;  :defer t
 ;  :hook (lsp-mode . flycheck-mode))
  
-(use-package flycheck
-  :ensure t
-  :init (global-flycheck-mode t))
+;(use-package flycheck
+;  :ensure t
+;  :init (global-flycheck-mode t))
 
 
 ;;AUTO COMLETE AND YASNIPPET
@@ -599,6 +599,9 @@
          )
   :commands lsp)
 
+;; to stop messages in minibuffer
+(setq lsp-headerline-breadcrumb-enable nil)
+
 ;; if you are helm user
 (use-package helm-lsp :commands helm-lsp-workspace-symbol)
 
@@ -762,7 +765,7 @@
  '(custom-safe-themes
    '("2e05569868dc11a52b08926b4c1a27da77580daa9321773d92822f7a639956ce" "43ee7172f7ad20c70da9c42061e7f1e4e69eb9605fd0ed58900c7ad5c5fdfa94" "846ef3695c42d50347884515f98cc359a7a61b82a8d0c168df0f688cf54bf089" default))
  '(package-selected-packages
-   '(avy company lsp-pyright yasnippet yafolding web-mode use-package rainbow-delimiters py-autopep8 projectile org-tree-slide org-bullets neotree magit lsp-ui indent-guide highlight-symbol helm evil ess auto-complete auctex all-the-icons)))
+   '(lsp-mode avy company lsp-pyright yasnippet yafolding web-mode use-package rainbow-delimiters py-autopep8 projectile org-tree-slide org-bullets neotree magit lsp-ui indent-guide highlight-symbol helm evil ess auto-complete auctex all-the-icons)))
 
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
