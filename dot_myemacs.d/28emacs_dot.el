@@ -40,16 +40,6 @@
 
 (require 'package)
 
-;(package-initialize)
-;(unless package-archive-contents
-;  (package-refresh-contents))
- 
-;(add-to-list 'load-path "/home/rafatieppo/.emacs.d/elpa")
-;(require 'use-package)
-;(setq use-package-always-ensure t)
-
-;(setq byte-compile-warnings '(cl-functions))
-
 
 ;;STANDARD SETTINGS
 ;;===========================================================================
@@ -179,8 +169,7 @@
   '((emacs-lisp . t)
     (python . t)
     (shell . t)
-    (R . t)
-))
+    (R . t)))
 
 ;; org-tree presentation org-tree-slide-mode! Navigate slides with C-< and C->
 (use-package org-tree-slide
@@ -248,14 +237,12 @@
   
 ;;===========================================================================
 ;; ace-jump-mode.el https://github.com/winterTTr/ace-jump-mode
-
 (global-set-key (kbd "C-c SPC") 'avy-goto-char)
 
 ;;===========================================================================
 ;; helm
 ;(require 'helm-config)
 (require 'helm)
-
 (define-key helm-map (kbd "<tab>") 'helm-execute-persistent-action)
 (define-key helm-map (kbd "C-i") 'helm-execute-persistent-action)
 (define-key helm-map (kbd "C-z") 'helm-select-action)
@@ -357,7 +344,6 @@
 (require 'yasnippet)
 (yas-global-mode 1)
 
-
 (defun yasnippet-snippets--fixed-indent ()
   "Set `yas-indent-line' to `fixed'."
   (set (make-local-variable 'yas-indent-line) 'fixed))
@@ -365,9 +351,6 @@
 (defun yasnippet-snippets--no-indent ()
   "Set `yas-indent-line' to nil."
   (set (make-local-variable 'yas-indent-line) nil))
-
-;(require 'ac-math) 
-;(add-to-list 'ac-modes 'latex-mode)   ; make auto-complete aware of `latex-mode`
 
 ; add ac-sources to default ac-sources
 (defun ac-LaTeX-mode-setup ()
@@ -377,10 +360,6 @@
   )
 (add-hook 'LaTeX-mode-hook 'ac-LaTeX-mode-setup)
 
-;; to make flyspell works with auto-complete
-;(setq ac-math-unicode-in-math-p t)
-;(ac-flyspell-workaround) 
-
 ;; R ESS
 ;;===========================================================================
 ;; setting to work with ess and r
@@ -389,7 +368,7 @@
 (setq-default ess-dialect "R")
 (setq-default inferior-R-args "--no-restore-history --no-save ")
 
-;; tecla SHIFT + ENTER
+;; key SHIFT + ENTER
 (eval-after-load "ess-mode"
  '(progn
    ;;(define-key ess-mode-map [(control return)] nil)
@@ -435,17 +414,6 @@
 ;;           (ess-fl-keyword:= . t)
            (ess-R-fl-keyword:F&T . t)))
 
-
-;; POLYMODE 
-;;===========================================================================
-; (use-package poly-markdown
-;              :ensure t)
-; (use-package poly-R
-;              :ensure t)
-
-;; (autoload 'poly-markdown-mode "poly-markdown-mode"
-; (add-to-list 'auto-mode-alist '("\\.md" . poly-markdown-mode))
-
 ;; MARKDOWN MODE 
 ;;===========================================================================
 ;; org momde minor mode markdown http://stackoverflow.com/questions/14275122/editing-markdown-pipe-tables-in-emacs
@@ -460,13 +428,6 @@
 (add-hook 'markdown-mode-hook
           (lambda()
             (add-hook 'after-save-hook 'cleanup-org-tables  nil 'make-it-local)))
-
-;; if using markdown-mode yasnippets’s TAB completion doesn’t work, it’s just because TAB key is bind to markdown-cycle function http://wiki.dreamrunner.org/public_html/Emacs/markdown.html
-;(add-hook 'markdown-mode-hook
-;          '(lambda ()
-;             (company-mode t)
-;             (local-unset-key [tab])
-;             (setq-local yas-fallback-behavior '(apply company-mode))))
 
 ;; markdown enable MATH ;http://jblevins.org/projects/markdown-mode/
 (setq markdown-enable-math t)
@@ -541,26 +502,6 @@
   (setq web-mode-css-indent-offset 2)
 )
 (add-hook 'web-mode-hook  'my-web-mode-hook)
-
-;; JavaScript
-;;===========================================================================
-; js2-mode.
-;(require 'js2-mode)
-;(add-to-list 'auto-mode-alist '("\\.js\\'" . js2-mode))
-
-;(add-to-list 'auto-mode-alist '("\\.js\\'\\|\\.json\\'" . js2-mode))
-
-;; Better imenu
-;(add-hook 'js2-mode-hook #'js2-imenu-extras-mode)
-
-;(add-to-list 'load-path "/home/rafatieppo/.emacs.d/elpa/company-tern-20200610/")
-;(require 'company)
-;(require 'company-tern)
-
-;(add-to-list 'company-backends 'company-tern)
-;(add-hook 'js2-mode-hook (lambda ()
-;                           (tern-mode)
-;                           (company-mode)))
 
 ;; C CONFIGURATION
 ;;===========================================================================
@@ -645,10 +586,6 @@
   (when (file-directory-p "~/Projects/Code")
     (setq projectile-project-search-path '("~/Projects/Code")))
   (setq projectile-switch-project-action #'projectile-dired))
-
-;; Standard Jedi.el setting
-;; (add-hook 'python-mode-hook 'jedi:setup)
-;; (setq jedi:complete-on-dot t)
 
 ;; Autopep8 - enable autopep8 formatting on save
 (use-package py-autopep8
