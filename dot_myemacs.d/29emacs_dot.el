@@ -1,6 +1,6 @@
-;; .emacs --- init file for config emacs
+;; init.el --- init file for config emacs
 
-;; Copyright (C) 2021 Rafael Tieppo
+;; Copyright (C) 2023 Rafael Tieppo
 
 ;; Author: Rafael Cesar Tieppo>
 ;; URL: http://github.com/rafatieppo/
@@ -22,7 +22,7 @@
 ;; along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 ;;; Commentary:
-;; init.el file for EMACS (26) by Rafael Tieppo.
+;; init.el file for EMACS (29) by Rafael Tieppo.
 ;; Most of all from this content was from internet.
 ;; Feel free to copy and share.
 ;;=============================================================================
@@ -366,54 +366,24 @@
 ;; setting to work with ess and r
 (require 'ess-site)
 ;(require 'ess-eldoc)
-(setq-default ess-dialect "R")
-(setq-default inferior-R-args "--no-restore-history --no-save ")
+;(setq-default ess-dialect "R")
+;(setq-default inferior-R-args "--no-restore-history --no-save ")
 
 ;; key SHIFT + ENTER
-(eval-after-load "ess-mode"
- '(progn
-   ;;(define-key ess-mode-map [(control return)] nil)
-   (define-key ess-mode-map [(shift return)] 'ess-eval-region-or-line-and-step))
-)
+;(eval-after-load "ess-mode"
+; '(progn
+;   ;;(define-key ess-mode-map [(control return)] nil)
+;   (define-key ess-mode-map [(shift return)] 'ess-eval-region-or-line-and-step))
+;)
 
 ;; To activate ESS auto-complete for R.
-(setq ess-use-auto-complete 'script-only)
+;(setq ess-use-auto-complete 'script-only)
 
 ;; cancel centering comments in R ESS
-(setf (cdr (assoc 'ess-indent-with-fancy-comments ess-own-style-list)) nil)
+;(setf (cdr (assoc 'ess-indent-with-fancy-comments ess-own-style-list)) nil)
 
 ;; if you want all help buffers to go into one frame do:
-(setq ess-help-own-frame 'one)
-
-;; ess - highlights on programing codes
- (setq ess-R-font-lock-keywords
-         '((ess-R-fl-keyword:modifiers . t) ; default
-           (ess-R-fl-keyword:fun-defs . t) ; default
-           (ess-R-fl-keyword:keywords . t) ; default
-           (ess-R-fl-keyword:assign-ops . t) ; default
-           (ess-R-fl-keyword:constants . t) ; default
-           (ess-fl-keyword:fun-calls . t)
-           (ess-fl-keyword:numbers . t)  ;;se ativar fica muita colorido
-           (ess-fl-keyword:operators . nil)
-           (ess-fl-keyword:delimiters . t) ;;se ativar fica muita colorido
-           (ess-fl-keyword:= . nil) ;;se ativar fica muita colorido
-           (ess-R-fl-keyword:F&T . t)))
-
-   (setq inferior-R-font-lock-keywords
-         '((ess-S-fl-keyword:prompt . t) ; default
-           (ess-R-fl-keyword:messages . t) ; default
-           (ess-R-fl-keyword:modifiers . nil) ; default
-           (ess-R-fl-keyword:fun-defs . nil) ; default
-           (ess-R-fl-keyword:keywords . t) ; default
-           (ess-R-fl-keyword:assign-ops . nil) ; default
-           (ess-R-fl-keyword:constants . t) ; default
-           (ess-fl-keyword:matrix-labels . t) ; default
-           (ess-fl-keyword:fun-calls . t)
-;;           (ess-fl-keyword:numbers . nil)
-;;           (ess-fl-keyword:operators . nil)
-;;           (ess-fl-keyword:delimiters . nil)
-;;           (ess-fl-keyword:= . t)
-           (ess-R-fl-keyword:F&T . t)))
+;(setq ess-help-own-frame 'one)
 
 ;; MARKDOWN MODE 
 ;;===========================================================================
@@ -484,25 +454,26 @@
           (set (make-local-variable 'sgml-basic-offset) 4)))
 
 ;; web-mode
-(require 'web-mode)
-(add-to-list 'auto-mode-alist '("\\.html\\'" . web-mode))
-(add-to-list 'auto-mode-alist '("\\.phtml\\'" . web-mode))
-(add-to-list 'auto-mode-alist '("\\.tpl\\.php\\'" . web-mode))
-(add-to-list 'auto-mode-alist '("\\.[agj]sp\\'" . web-mode))
-(add-to-list 'auto-mode-alist '("\\.as[cp]x\\'" . web-mode))
-(add-to-list 'auto-mode-alist '("\\.erb\\'" . web-mode))
-(add-to-list 'auto-mode-alist '("\\.mustache\\'" . web-mode))
-(add-to-list 'auto-mode-alist '("\\.djhtml\\'" . web-mode))
+(setq css-indent-offset tab-width)
+(use-package web-mode
+  :init
+  (setq web-mode-attr-indent-offset tab-width)
+  (setq web-mode-code-indent-offset tab-width)
+  (setq web-mode-css-indent-offset tab-width)
+  (setq web-mode-markup-indent-offset tab-width)
+  (setq web-mode-sql-indent-offset tab-width))
 
-;using web-mode for editing plain HTML files can be done this way
-;(add-to-list 'auto-mode-alist '("\\.html?\\'" . web-mode))
+;; BASH
+;;===========================================================================
+(setq sh-basic-offset 2
+      sh-indentation 2)
 
-(defun my-web-mode-hook ()
-  "Hooks for Web mode."
-  (setq web-mode-markup-indent-offset 2)
-  (setq web-mode-css-indent-offset 2)
-)
-(add-hook 'web-mode-hook  'my-web-mode-hook)
+;; snippets, please
+(add-hook 'sh-mode-hook 'yas-minor-mode)
+
+;; on the fly syntax checking
+(add-hook 'sh-mode-hook 'flycheck-mode)
+
 
 ;; C CONFIGURATION
 ;;===========================================================================
@@ -518,9 +489,14 @@
 
 ;; PYTHON CONFIGURATION
 ;;===========================================================================
-;; https://emacs-lsp.github.io/lsp-pyright/ ;; https://emacs-lsp.github.io/lsp-mode/page/lsp-pylsp/ ;; https://www.mattduck.com/lsp-python-getting-started.html
+;;https://gitlab.com/skybert/my-little-friends/-/blob/master/emacs/.emacs
+(use-package eglot
+  :ensure t
+  :hook
+  ((python-mode . eglot-ensure))
+)
 
-; --------------------------------------------------------------------
+;; https://emacs-lsp.github.io/lsp-pyright/ ;; https://emacs-lsp.github.io/lsp-mode/page/lsp-pylsp/ ;; https://www.mattduck.com/lsp-python-getting-started.html
 ;; FOR lsp-pyright
 ;(use-package lsp-pyright
 ;  :ensure t
@@ -530,19 +506,19 @@
 
 ; --------------------------------------------------------------------
 ;; FOR lsp-mode       https://emacs-lsp.github.io/lsp-mode/page/installation/
-(use-package lsp-mode
-  :init
-  ;; set prefix for lsp-command-keymap (few alternatives - "C-l", "C-c l")
-  (setq lsp-keymap-prefix "C-c l")
-  :hook (;; replace XXX-mode with concrete major-mode(e. g. python-mode)
-         (python-mode . lsp)
-         ;; if you want which-key integration
-         ;(lsp-mode . lsp-enable-which-key-integration)
-         )
-  :commands lsp)
+;(use-package lsp-mode
+;  :init
+;  ;; set prefix for lsp-command-keymap (few alternatives - "C-l", "C-c l")
+;  (setq lsp-keymap-prefix "C-c l")
+;  :hook (;; replace XXX-mode with concrete major-mode(e. g. python-mode)
+;         (python-mode . lsp)
+;         ;; if you want which-key integration
+;         ;(lsp-mode . lsp-enable-which-key-integration)
+;         )
+;  :commands lsp)
 
 ;; to stop messages in minibuffer
-(setq lsp-headerline-breadcrumb-enable nil)
+;(setq lsp-headerline-breadcrumb-enable nil)
 
 ;; if you are helm user
 (use-package helm-lsp :commands helm-lsp-workspace-symbol)
@@ -703,7 +679,7 @@
  '(custom-safe-themes
    '("2e05569868dc11a52b08926b4c1a27da77580daa9321773d92822f7a639956ce" "43ee7172f7ad20c70da9c42061e7f1e4e69eb9605fd0ed58900c7ad5c5fdfa94" "846ef3695c42d50347884515f98cc359a7a61b82a8d0c168df0f688cf54bf089" default))
  '(package-selected-packages
-   '(lsp-mode avy company lsp-pyright yasnippet yafolding web-mode use-package rainbow-delimiters py-autopep8 projectile org-tree-slide org-bullets neotree magit lsp-ui indent-guide highlight-symbol helm evil ess auto-complete auctex all-the-icons)))
+   '(eglot lsp-mode avy company lsp-pyright yasnippet yafolding web-mode use-package rainbow-delimiters py-autopep8 projectile org-tree-slide org-bullets neotree magit lsp-ui indent-guide highlight-symbol helm evil ess auto-complete auctex all-the-icons)))
 
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
