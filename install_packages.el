@@ -71,6 +71,8 @@
 ;(package-install 'calfw-org)
 ;(package-install 'calfw-ical)
 ;(package-install 'company-irony)
+(package-install 'company-mode)
+(package-install 'company-auctex)
 ;(package-install 'company-jedi)
 ;(package-install 'company-quickhelp)
 ;(package-install 'company-tern)

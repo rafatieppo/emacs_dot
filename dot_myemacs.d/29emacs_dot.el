@@ -40,7 +40,6 @@
 
 (require 'package)
 
-
 ;;STANDARD SETTINGS
 ;;===========================================================================
 ;; Neotree A emacs tree plugin like NERD tree for Vim.
@@ -135,7 +134,6 @@
 ;;How to have emacs highlight text selections
 ;;	(transient-mark-mode 1) ; highlight text selection
 (delete-selection-mode 1) ; delete seleted text when typing
-
 
 (require 'evil)
 (evil-mode 1)
@@ -341,7 +339,6 @@
 
 ;;AUTO COMLETE AND YASNIPPET
 ;;=========================================================================== 
-
 (require 'yasnippet)
 (yas-global-mode 1)
 
@@ -370,11 +367,10 @@
 ;(setq-default inferior-R-args "--no-restore-history --no-save ")
 
 ;; key SHIFT + ENTER
-;(eval-after-load "ess-mode"
-; '(progn
-;   ;;(define-key ess-mode-map [(control return)] nil)
-;   (define-key ess-mode-map [(shift return)] 'ess-eval-region-or-line-and-step))
-;)
+(eval-after-load "ess-mode"
+ '(progn
+   ;;(define-key ess-mode-map [(control return)] nil)
+   (define-key ess-mode-map [(shift return)] 'ess-eval-region-or-line-and-step)))
 
 ;; To activate ESS auto-complete for R.
 ;(setq ess-use-auto-complete 'script-only)
@@ -436,7 +432,7 @@
 ;; LATEX
 ;;===========================================================================
 (add-hook 'LaTeX-mode-hook 'LaTeX-math-mode)
-
+(require 'company-auctex)
 ;; Naveg http://piotrkazmierczak.com/2010/05/13/emacs-as-the-ultimate-latex-editor/ C-c = 
 (add-hook 'LaTeX-mode-hook 'turn-on-reftex)
 (setq reftex-plug-into-AUCTeX t)
@@ -467,13 +463,10 @@
 ;;===========================================================================
 (setq sh-basic-offset 2
       sh-indentation 2)
-
 ;; snippets, please
 (add-hook 'sh-mode-hook 'yas-minor-mode)
-
 ;; on the fly syntax checking
 (add-hook 'sh-mode-hook 'flycheck-mode)
-
 
 ;; C CONFIGURATION
 ;;===========================================================================
@@ -551,6 +544,18 @@
 ;  :config
 ;  (pyvenv-mode 1))
 
+;; Autopep8 - enable autopep8 formatting on save
+(use-package py-autopep8
+  :config
+  (setq py-autopep8-options '("--max-line-length=100" "--aggressive"))
+  :hook ((python-mode) . py-autopep8-mode))
+
+;(require 'py-autopep8)
+;(add-hook 'elpy-mode-hook 'py-autopep8-enable-on-save)
+;(add-hook 'python-mode-hook 'py-autopep8-enable-on-save)
+;(add-hook 'anaconda-mode-hook 'py-autopep8-enable-on-save)
+;(setq py-autopep8-options '("--max-line-lengh=100"))
+
 ;; projectile is necessary to handle .git in folder, otherwise lsp wil not start
 (use-package projectile
   :diminish projectile-mode
@@ -564,25 +569,11 @@
     (setq projectile-project-search-path '("~/Projects/Code")))
   (setq projectile-switch-project-action #'projectile-dired))
 
-;; Autopep8 - enable autopep8 formatting on save
-(use-package py-autopep8
-  :config
-  (setq py-autopep8-options '("--max-line-length=100" "--aggressive"))
-  :hook ((python-mode) . py-autopep8-mode))
-
-;(require 'py-autopep8)
-;(add-hook 'elpy-mode-hook 'py-autopep8-enable-on-save)
-;(add-hook 'python-mode-hook 'py-autopep8-enable-on-save)
-;(add-hook 'anaconda-mode-hook 'py-autopep8-enable-on-save)
-;(setq py-autopep8-options '("--max-line-lengh=100"))
-
-
 ;;===========================================================================
 ;; MAGIT
 ;;===========================================================================
 (use-package magit
-  :custom
-  (magit-display-buffer-function #'magit-display-buffer-same-window-except-diff-v1))
+  :ensure t)
 
 ;;===========================================================================
 ;;FUNCOES functions
@@ -591,19 +582,14 @@
 (load "/home/rafatieppo/.emacs.d/lisp/functions")
 ;(require 'functions)
 
-
 ;; THEMES - SEVERAL SCHEMES
 ;;===========================================================================
 ;; Solarized
-(add-to-list 'load-path "/home/rafatieppo/.emacs.d/themess/solarized/")
+;(add-to-list 'load-path "/home/rafatieppo/.emacs.d/themess/solarized/")
 ;(require 'solarized-dark-theme)
 ;(require 'solarized-definitions)
 ;(require 'solarized-theme)
 ;(require 'color-theme-solarized)
-
-;;-----------------------------------------------------------------------------
-;; Solarized https://github.com/bbatsov/solarized-emacs
-;(add-to-list 'load-path "/home/rafatieppo/.emacs.d/themess/solarized")
 ;(require 'solarized-dark-theme)
 
 (add-to-list 'load-path "/home/rafatieppo/.emacs.d/themess")
@@ -679,11 +665,4 @@
  '(custom-safe-themes
    '("2e05569868dc11a52b08926b4c1a27da77580daa9321773d92822f7a639956ce" "43ee7172f7ad20c70da9c42061e7f1e4e69eb9605fd0ed58900c7ad5c5fdfa94" "846ef3695c42d50347884515f98cc359a7a61b82a8d0c168df0f688cf54bf089" default))
  '(package-selected-packages
-   '(eglot lsp-mode avy company lsp-pyright yasnippet yafolding web-mode use-package rainbow-delimiters py-autopep8 projectile org-tree-slide org-bullets neotree magit lsp-ui indent-guide highlight-symbol helm evil ess auto-complete auctex all-the-icons)))
-
-(custom-set-faces
- ;; custom-set-faces was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- )
+   '(company-auctex eglot lsp-mode avy company lsp-pyright yasnippet yafolding web-mode use-package rainbow-delimiters py-autopep8 projectile org-tree-slide org-bullets neotree magit lsp-ui indent-guide highlight-symbol helm evil ess auto-complete auctex all-the-icons)))
