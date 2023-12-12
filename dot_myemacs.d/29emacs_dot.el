@@ -140,18 +140,19 @@
 ;(evil-mode 1)
 
 (use-package evil
-   :ensure t
-   :config
-   (evil-mode)
-   (evil-set-undo-system 'undo-redo)
-   )
+  :ensure t
+  :init
+  (setq evil-want-integration t) ;; This is optional since it's already set to t by default.
+  (setq evil-want-keybinding nil)
+  :config
+  (evil-mode 1)
+  (evil-set-undo-system 'undo-redo))
 
 (use-package evil-collection
-    :ensure t
-    :after evil
-    :init
-    (evil-collection-init)
-    )
+  :ensure t
+  :after evil
+  :init
+  (evil-collection-init))
 
 ;;ORG MODE
 ;;===========================================================================
@@ -246,7 +247,6 @@
 
 ;;===========================================================================
 ;; raibow delimeters
-
 (use-package rainbow-delimiters
   :hook (prog-mode . rainbow-delimiters-mode))
 (use-package rainbow-mode
@@ -310,7 +310,7 @@
 (setq indent-guide-recursive t)
 
 ;; highlight-indentation-mode
-(add-hook 'elpy-mode-hook (lambda () (highlight-indentation-mode -1)))
+;(add-hook 'elpy-mode-hook (lambda () (highlight-indentation-mode -1)))
 
 ;; smart Parenthesis https://github.com/Fuco1/smartparens
 ;(require 'smartparens)
@@ -372,8 +372,7 @@
 (defun ac-LaTeX-mode-setup ()
   (setq ac-sources
         (append '(ac-source-math-unicode ac-source-math-latex ac-source-latex-commands)
-                ac-sources))
-  )
+                ac-sources)))
 (add-hook 'LaTeX-mode-hook 'ac-LaTeX-mode-setup)
 
 ;; R ESS
