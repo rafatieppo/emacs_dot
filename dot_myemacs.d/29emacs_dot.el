@@ -135,8 +135,23 @@
 ;;	(transient-mark-mode 1) ; highlight text selection
 (delete-selection-mode 1) ; delete seleted text when typing
 
-(require 'evil)
-(evil-mode 1)
+;; evil-mode
+;(require 'evil)
+;(evil-mode 1)
+
+(use-package evil
+   :ensure t
+   :config
+   (evil-mode)
+   (evil-set-undo-system 'undo-redo)
+   )
+
+(use-package evil-collection
+    :ensure t
+    :after evil
+    :init
+    (evil-collection-init)
+    )
 
 ;;ORG MODE
 ;;===========================================================================
@@ -231,8 +246,11 @@
 
 ;;===========================================================================
 ;; raibow delimeters
+
 (use-package rainbow-delimiters
   :hook (prog-mode . rainbow-delimiters-mode))
+(use-package rainbow-mode
+   :ensure t)
   
 ;;===========================================================================
 ;; ace-jump-mode.el https://github.com/winterTTr/ace-jump-mode
@@ -664,5 +682,12 @@
  '(custom-enabled-themes '(zerodark))
  '(custom-safe-themes
    '("2e05569868dc11a52b08926b4c1a27da77580daa9321773d92822f7a639956ce" "43ee7172f7ad20c70da9c42061e7f1e4e69eb9605fd0ed58900c7ad5c5fdfa94" "846ef3695c42d50347884515f98cc359a7a61b82a8d0c168df0f688cf54bf089" default))
+ '(helm-minibuffer-history-key "M-p")
  '(package-selected-packages
    '(company-auctex eglot lsp-mode avy company lsp-pyright yasnippet yafolding web-mode use-package rainbow-delimiters py-autopep8 projectile org-tree-slide org-bullets neotree magit lsp-ui indent-guide highlight-symbol helm evil ess auto-complete auctex all-the-icons)))
+(custom-set-faces
+ ;; custom-set-faces was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ )
