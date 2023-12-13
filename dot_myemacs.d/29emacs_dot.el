@@ -162,10 +162,11 @@
 (setq org-log-done t)
 
 ;; files for org agendasorg-agenda
-(setq org-agenda-files (list "/home/rafatieppo/Dropbox/emacs_org_mode/rafa.org"
-			     "/home/rafatieppo/Dropbox/emacs_org_mode/all_extens_proj_manag.org"
-			     "/home/rafatieppo/Dropbox/emacs_org_mode/all_person_proj_manag.org"
-			     "/home/rafatieppo/Dropbox/emacs_org_mode/all_resear_proj_manag.org"
+(setq org-agenda-files (list "/home/rafatieppo/Dropbox/emacs_org_mode/rafa_tieppo.org"
+			     "/home/rafatieppo/Dropbox/emacs_org_mode/proj_extens.org"
+			     "/home/rafatieppo/Dropbox/emacs_org_mode/proj_person.org"
+			     "/home/rafatieppo/Dropbox/emacs_org_mode/proj_resear.org"
+			     "/home/rafatieppo/Dropbox/emacs_org_mode/proj_teachi.org"
                         ))
 
 ;; bullets instead *
@@ -173,7 +174,7 @@
   :after org
   :hook (org-mode . org-bullets-mode)
   :custom
-  (org-bullets-bullet-list '("✿" "◉" "●" "○" "✸" "☯" "☢"))) ;; Small ► • ★ ▸
+  (org-bullets-bullet-list '("✿" "✸" "◉" "●" "○" "☯" "☢"))) ;; Small ► • ★ ▸
 
 ;; arrow instead ...
 (setq org-ellipsis " ⤵") ;;" ▾"
