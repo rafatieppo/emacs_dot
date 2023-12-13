@@ -505,7 +505,7 @@
   :ensure t
   :hook
   ((python-mode . eglot-ensure))
-)
+  )
 
 ;; https://emacs-lsp.github.io/lsp-pyright/ ;; https://emacs-lsp.github.io/lsp-mode/page/lsp-pylsp/ ;; https://www.mattduck.com/lsp-python-getting-started.html
 ;; FOR lsp-pyright
@@ -561,18 +561,6 @@
 ;(use-package pyvenv
 ;  :config
 ;  (pyvenv-mode 1))
-
-;; Autopep8 - enable autopep8 formatting on save
-(use-package py-autopep8
-  :config
-  (setq py-autopep8-options '("--max-line-length=100" "--aggressive"))
-  :hook ((python-mode) . py-autopep8-mode))
-
-;(require 'py-autopep8)
-;(add-hook 'elpy-mode-hook 'py-autopep8-enable-on-save)
-;(add-hook 'python-mode-hook 'py-autopep8-enable-on-save)
-;(add-hook 'anaconda-mode-hook 'py-autopep8-enable-on-save)
-;(setq py-autopep8-options '("--max-line-lengh=100"))
 
 ;; projectile is necessary to handle .git in folder, otherwise lsp wil not start
 (use-package projectile
