@@ -163,9 +163,9 @@
 
 ;; files for org agendasorg-agenda
 (setq org-agenda-files (list "/home/rafatieppo/Dropbox/emacs_org_mode/rafa.org"
-                             "/home/rafatieppo/Dropbox/profissional/projetos_extensao/all_extens_proj_manag.org"
-                             "/home/rafatieppo/Dropbox/profissional/projetos_pessoais/all_person_proj_manag.org"
-                             "/home/rafatieppo/Dropbox/profissional/projetos_pesquisa/all_resear_proj_manag.org"
+			     "/home/rafatieppo/Dropbox/emacs_org_mode/all_extens_proj_manag.org"
+			     "/home/rafatieppo/Dropbox/emacs_org_mode/all_person_proj_manag.org"
+			     "/home/rafatieppo/Dropbox/emacs_org_mode/all_resear_proj_manag.org"
                         ))
 
 ;; bullets instead *
@@ -199,15 +199,15 @@
 
 ;; ORG mode CLASSES and COLORS for TASKS
 (setq org-todo-keywords
-       '((sequence "TODO(t)" "RUNN(w@/!)" "WAIT(w@/!)" "|" "DONE(d!)" "CANCELED(c@)")))
-     (setq org-todo-keyword-faces
-           '(
-             ("TODO" . (:foreground "red" :weight bold))
-             ("RUNN" . (:foreground "yellow" :weight bold))
-             ("WAIT" . (:foreground "orange" :weight bold))
-             ("DONE" . (:foreground "green" :weight bold))
-             ("CANCELED" . (:foreground "gray" :weight bold))             
-             ))
+      '((sequence "BACKLOG(w@/!)" "THISWEEK(w@/!)" "TODAY(t)" "|" "DONE(d!)" "CANCELED(c@)")))
+(setq org-todo-keyword-faces
+      '(
+        ("BACKLOG" . (:foreground "orange" :weight bold))
+        ("TODAY" . (:foreground "red" :weight bold))
+        ("THISWEEK" . (:foreground "yellow" :weight bold))
+        ("DONE" . (:foreground "green" :weight bold))
+        ("CANCELED" . (:foreground "gray" :weight bold))
+        ))
 
 ;; ORG CAPTURE I use C-c c to start capture mode
 (global-set-key (kbd "C-c c") 'org-capture)
