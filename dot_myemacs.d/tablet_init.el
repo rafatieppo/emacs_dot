@@ -1,4 +1,4 @@
-;; .emacs --- init file for config emacs
+;; .emacs --- TABLET init file for config emacs
 
 ;; Copyright (C) 2021 Rafael Tieppo
 
@@ -39,17 +39,6 @@
     (package-install 'use-package)))
 
 (require 'package)
-
-;(package-initialize)
-;(unless package-archive-contents
-;  (package-refresh-contents))
- 
-;(add-to-list 'load-path "/home/rafatieppo/.emacs.d/elpa")
-;(require 'use-package)
-;(setq use-package-always-ensure t)
-
-;(setq byte-compile-warnings '(cl-functions))
-
 
 ;;STANDARD SETTINGS
 ;;===========================================================================
@@ -96,6 +85,7 @@
 (setq org-src-fontify-natively t)
 
 ;; line numbers
+(global-display-line-numbers-mode 1)
 ;(global-linum-mode 1)
 
 ;; cursor position from left margin
@@ -145,9 +135,24 @@
 ;;	(transient-mark-mode 1) ; highlight text selection
 (delete-selection-mode 1) ; delete seleted text when typing
 
+;; evil-mode
+;;(require 'evil)
+;;(evil-mode 1)
 
-(require 'evil)
-(evil-mode 1)
+(use-package evil
+  :ensure t
+  :init
+  (setq evil-want-integration t) ;; This is optional since it's already set to t by default.
+  (setq evil-want-keybinding nil)
+  :config
+  (evil-mode 1)
+  (evil-set-undo-system 'undo-redo))
+
+(use-package evil-collection
+  :ensure t
+  :after evil
+  :init
+  (evil-collection-init))
 
 ;;ORG MODE
 ;;===========================================================================
@@ -157,10 +162,11 @@
 (setq org-log-done t)
 
 ;; files for org agendasorg-agenda
-(setq org-agenda-files (list "/data/data/com.termux/files/home/storage/emacs_org/rafa.org"
-;                             "/home/rafatieppo/Dropbox/profissional/projetos_extensao/all_extens_proj_manag.org"
-;                             "/home/rafatieppo/Dropbox/profissional/projetos_pessoais/all_person_proj_manag.org"
-;                             "/home/rafatieppo/Dropbox/profissional/projetos_pesquisa/all_resear_proj_manag.org"
+(setq org-agenda-files (list "/data/data/com.termux/files/home/storage/emacs_org/rafa_tieppo.org"
+			     "/data/data/com.termux/files/home/storage/emacs_org/proj_extens.org"
+			     "/data/data/com.termux/files/home/storage/emacs_org/proj_person.org"
+			     "/data/data/com.termux/files/home/storage/emacs_org/proj_resear.org"
+			     "/data/data/com.termux/files/home/storage/emacs_org/proj_teachi.org"
                         ))
 
 ;; bullets instead *
@@ -168,7 +174,7 @@
   :after org
   :hook (org-mode . org-bullets-mode)
   :custom
-  (org-bullets-bullet-list '("✿" "◉" "●" "○" "✸" "☯" "☢"))) ;; Small ► • ★ ▸
+  (org-bullets-bullet-list '("✿" "✸" "◉" "●" "○" "☯" "☢"))) ;; Small ► • ★ ▸
 
 ;; arrow instead ...
 (setq org-ellipsis " ⤵") ;;" ▾"
@@ -179,8 +185,7 @@
   '((emacs-lisp . t)
     (python . t)
     (shell . t)
-    (R . t)
-))
+    (R . t)))
 
 ;; org-tree presentation org-tree-slide-mode! Navigate slides with C-< and C->
 (use-package org-tree-slide
@@ -245,29 +250,17 @@
 ;; raibow delimeters
 (use-package rainbow-delimiters
   :hook (prog-mode . rainbow-delimiters-mode))
+ (use-package rainbow-mode
+   :ensure t)
   
 ;;===========================================================================
 ;; ace-jump-mode.el https://github.com/winterTTr/ace-jump-mode
-;(autoload
-;  'ace-jump-mode
-;  "ace-jump-mode"
-;  "Emacs quick move minor mode"
-;  t)
-;; enable a more powerful jump back function from ace jump mode
-;(autoload
-;  'ace-jump-mode-pop-mark
-;  "ace-jump-mode"
-;  "Ace jump back:-)"
-;  t)
-;(eval-after-load "ace-jump-mode"
-;  '(ace-jump-mode-enable-mark-sync))
-;(define-key global-map (kbd "C-x SPC") 'ace-jump-mode)
+(global-set-key (kbd "C-c SPC") 'avy-goto-char)
 
 ;;===========================================================================
 ;; helm
 ;(require 'helm-config)
 (require 'helm)
-
 (define-key helm-map (kbd "<tab>") 'helm-execute-persistent-action)
 (define-key helm-map (kbd "C-i") 'helm-execute-persistent-action)
 (define-key helm-map (kbd "C-z") 'helm-select-action)
@@ -318,7 +311,7 @@
 (setq indent-guide-recursive t)
 
 ;; highlight-indentation-mode
-(add-hook 'elpy-mode-hook (lambda () (highlight-indentation-mode -1)))
+;(add-hook 'elpy-mode-hook (lambda () (highlight-indentation-mode -1)))
 
 ;; smart Parenthesis https://github.com/Fuco1/smartparens
 ;(require 'smartparens)
@@ -365,10 +358,8 @@
 
 ;;AUTO COMLETE AND YASNIPPET
 ;;=========================================================================== 
-
 (require 'yasnippet)
 (yas-global-mode 1)
-
 
 (defun yasnippet-snippets--fixed-indent ()
   "Set `yas-indent-line' to `fixed'."
@@ -378,20 +369,12 @@
   "Set `yas-indent-line' to nil."
   (set (make-local-variable 'yas-indent-line) nil))
 
-;(require 'ac-math) 
-;(add-to-list 'ac-modes 'latex-mode)   ; make auto-complete aware of `latex-mode`
-
 ; add ac-sources to default ac-sources
 (defun ac-LaTeX-mode-setup ()
   (setq ac-sources
         (append '(ac-source-math-unicode ac-source-math-latex ac-source-latex-commands)
-                ac-sources))
-  )
+                ac-sources))  )
 (add-hook 'LaTeX-mode-hook 'ac-LaTeX-mode-setup)
-
-;; to make flyspell works with auto-complete
-;(setq ac-math-unicode-in-math-p t)
-;(ac-flyspell-workaround) 
 
 ;; R ESS
 ;;===========================================================================
@@ -405,8 +388,7 @@
 ;(eval-after-load "ess-mode"
 ; '(progn
 ;   ;;(define-key ess-mode-map [(control return)] nil)
-;   (define-key ess-mode-map [(shift return)] 'ess-eval-region-or-line-and-step))
-;)
+;   (define-key ess-mode-map [(shift return)] 'ess-eval-region-or-line-and-step)))
 
 ;; To activate ESS auto-complete for R.
 ;(setq ess-use-auto-complete 'script-only)
@@ -416,47 +398,6 @@
 
 ;; if you want all help buffers to go into one frame do:
 ;(setq ess-help-own-frame 'one)
-
-;; ess - highlights on programing codes
-; (setq ess-R-font-lock-keywords
-;         '((ess-R-fl-keyword:modifiers . t) ; default
-;           (ess-R-fl-keyword:fun-defs . t) ; default
-;           (ess-R-fl-keyword:keywords . t) ; default
-;           (ess-R-fl-keyword:assign-ops . t) ; default
-;           (ess-R-fl-keyword:constants . t) ; default
-;           (ess-fl-keyword:fun-calls . t)
-;           (ess-fl-keyword:numbers . t)  ;;se ativar fica muita colorido
-;           (ess-fl-keyword:operators . nil)
-;           (ess-fl-keyword:delimiters . t) ;;se ativar fica muita colorido
-;           (ess-fl-keyword:= . nil) ;;se ativar fica muita colorido
-;           (ess-R-fl-keyword:F&T . t)))
-
-;   (setq inferior-R-font-lock-keywords
-;         '((ess-S-fl-keyword:prompt . t) ; default
- ;          (ess-R-fl-keyword:messages . t) ; default
-;           (ess-R-fl-keyword:modifiers . nil) ; default
-;           (ess-R-fl-keyword:fun-defs . nil) ; default
-;           (ess-R-fl-keyword:keywords . t) ; default
-;           (ess-R-fl-keyword:assign-ops . nil) ; default
-;           (ess-R-fl-keyword:constants . t) ; default
-;           (ess-fl-keyword:matrix-labels . t) ; default
-;           (ess-fl-keyword:fun-calls . t)
-;;;           (ess-fl-keyword:numbers . nil)
-;;;           (ess-fl-keyword:operators . nil)
-;;           (ess-fl-keyword:delimiters . nil)
-;;           (ess-fl-keyword:= . t)
-;           (ess-R-fl-keyword:F&T . t)))
-
-
-;; POLYMODE 
-;;===========================================================================
-; (use-package poly-markdown
-;              :ensure t)
-; (use-package poly-R
-;              :ensure t)
-
-;; (autoload 'poly-markdown-mode "poly-markdown-mode"
-; (add-to-list 'auto-mode-alist '("\\.md" . poly-markdown-mode))
 
 ;; MARKDOWN MODE 
 ;;===========================================================================
@@ -472,13 +413,6 @@
 (add-hook 'markdown-mode-hook
           (lambda()
             (add-hook 'after-save-hook 'cleanup-org-tables  nil 'make-it-local)))
-
-;; if using markdown-mode yasnippets’s TAB completion doesn’t work, it’s just because TAB key is bind to markdown-cycle function http://wiki.dreamrunner.org/public_html/Emacs/markdown.html
-;(add-hook 'markdown-mode-hook
-;          '(lambda ()
-;             (company-mode t)
-;             (local-unset-key [tab])
-;             (setq-local yas-fallback-behavior '(apply company-mode))))
 
 ;; markdown enable MATH ;http://jblevins.org/projects/markdown-mode/
 (setq markdown-enable-math t)
@@ -515,11 +449,11 @@
 
 ;; LATEX
 ;;===========================================================================
-;(add-hook 'LaTeX-mode-hook 'LaTeX-math-mode)
-
+(add-hook 'LaTeX-mode-hook 'LaTeX-math-mode)
+(require 'company-auctex)
 ;; Naveg http://piotrkazmierczak.com/2010/05/13/emacs-as-the-ultimate-latex-editor/ C-c = 
-;(add-hook 'LaTeX-mode-hook 'turn-on-reftex)
-;(setq reftex-plug-into-AUCTeX t)
+(add-hook 'LaTeX-mode-hook 'turn-on-reftex)
+(setq reftex-plug-into-AUCTeX t)
 
 ;; HTML
 ;;===========================================================================
@@ -534,45 +468,23 @@
           (set (make-local-variable 'sgml-basic-offset) 4)))
 
 ;; web-mode
-(require 'web-mode)
-(add-to-list 'auto-mode-alist '("\\.html\\'" . web-mode))
-(add-to-list 'auto-mode-alist '("\\.phtml\\'" . web-mode))
-(add-to-list 'auto-mode-alist '("\\.tpl\\.php\\'" . web-mode))
-(add-to-list 'auto-mode-alist '("\\.[agj]sp\\'" . web-mode))
-(add-to-list 'auto-mode-alist '("\\.as[cp]x\\'" . web-mode))
-(add-to-list 'auto-mode-alist '("\\.erb\\'" . web-mode))
-(add-to-list 'auto-mode-alist '("\\.mustache\\'" . web-mode))
-(add-to-list 'auto-mode-alist '("\\.djhtml\\'" . web-mode))
+(setq css-indent-offset tab-width)
+(use-package web-mode
+  :init
+  (setq web-mode-attr-indent-offset tab-width)
+  (setq web-mode-code-indent-offset tab-width)
+  (setq web-mode-css-indent-offset tab-width)
+  (setq web-mode-markup-indent-offset tab-width)
+  (setq web-mode-sql-indent-offset tab-width))
 
-;using web-mode for editing plain HTML files can be done this way
-;(add-to-list 'auto-mode-alist '("\\.html?\\'" . web-mode))
-
-(defun my-web-mode-hook ()
-  "Hooks for Web mode."
-  (setq web-mode-markup-indent-offset 2)
-  (setq web-mode-css-indent-offset 2)
-)
-(add-hook 'web-mode-hook  'my-web-mode-hook)
-
-;; JavaScript
+;; BASH
 ;;===========================================================================
-; js2-mode.
-;(require 'js2-mode)
-;(add-to-list 'auto-mode-alist '("\\.js\\'" . js2-mode))
-
-;(add-to-list 'auto-mode-alist '("\\.js\\'\\|\\.json\\'" . js2-mode))
-
-;; Better imenu
-;(add-hook 'js2-mode-hook #'js2-imenu-extras-mode)
-
-;(add-to-list 'load-path "/home/rafatieppo/.emacs.d/elpa/company-tern-20200610/")
-;(require 'company)
-;(require 'company-tern)
-
-;(add-to-list 'company-backends 'company-tern)
-;(add-hook 'js2-mode-hook (lambda ()
-;                           (tern-mode)
-;                           (company-mode)))
+(setq sh-basic-offset 2
+      sh-indentation 2)
+;; snippets, please
+(add-hook 'sh-mode-hook 'yas-minor-mode)
+;; on the fly syntax checking
+(add-hook 'sh-mode-hook 'flycheck-mode)
 
 ;; C CONFIGURATION
 ;;===========================================================================
@@ -588,21 +500,52 @@
 
 ;; PYTHON CONFIGURATION
 ;;===========================================================================
-;; https://emacs-lsp.github.io/lsp-pyright/
-;; https://emacs-lsp.github.io/lsp-mode/page/lsp-pylsp/
-;; https://www.mattduck.com/lsp-python-getting-started.html
-
-;; i am using lsp-pyright
-(use-package lsp-pyright
+;;https://gitlab.com/skybert/my-little-friends/-/blob/master/emacs/.emacs
+(use-package eglot
   :ensure t
-  :hook (python-mode . (lambda ()
-                          (require 'lsp-pyright)
-                          (lsp))))  ;lsp or lsp-deferred 
+  :hook
+  ((python-mode . eglot-ensure))
+  )
+
+;; https://emacs-lsp.github.io/lsp-pyright/ ;; https://emacs-lsp.github.io/lsp-mode/page/lsp-pylsp/ ;; https://www.mattduck.com/lsp-python-getting-started.html
+;; FOR lsp-pyright
+;(use-package lsp-pyright
+;  :ensure t
+;  :hook (python-mode . (lambda ()
+;                          (require 'lsp-pyright)
+;                          (lsp))))  ;lsp or lsp-deferred 
+
+; --------------------------------------------------------------------
+;; FOR lsp-mode       https://emacs-lsp.github.io/lsp-mode/page/installation/
+;(use-package lsp-mode
+;  :init
+;  ;; set prefix for lsp-command-keymap (few alternatives - "C-l", "C-c l")
+;  (setq lsp-keymap-prefix "C-c l")
+;  :hook (;; replace XXX-mode with concrete major-mode(e. g. python-mode)
+;         (python-mode . lsp)
+;         ;; if you want which-key integration
+;         ;(lsp-mode . lsp-enable-which-key-integration)
+;         )
+;  :commands lsp)
+
+;; to stop messages in minibuffer
+;(setq lsp-headerline-breadcrumb-enable nil)
+
+;; if you are helm user
+(use-package helm-lsp :commands helm-lsp-workspace-symbol)
 
 ;(use-package lsp-ui
 ;  :commands lsp-ui-mode)
 
+;; optionally if you want to use debugger
+; (use-package dap-mode)
+;; (use-package dap-LANGUAGE) to load the dap adapter for your language
 
+;; optional if you want which-key integration
+;(use-package which-key
+;    :config
+;    (which-key-mode))
+    
 ;;(use-package lsp-ui
 ;;  :config (setq lsp-ui-sideline-show-hover nil ;; t nil
 ;                lsp-ui-sideline-delay 0.5
@@ -632,24 +575,11 @@
     (setq projectile-project-search-path '("~/Projects/Code")))
   (setq projectile-switch-project-action #'projectile-dired))
 
-;; Standard Jedi.el setting
-;; (add-hook 'python-mode-hook 'jedi:setup)
-;; (setq jedi:complete-on-dot t)
-
-;; Autopep8 - enable autopep8 formatting on save
-;(require 'py-autopep8)
-;(add-hook 'elpy-mode-hook 'py-autopep8-enable-on-save)
-;(add-hook 'python-mode-hook 'py-autopep8-enable-on-save)
-;(add-hook 'anaconda-mode-hook 'py-autopep8-enable-on-save)
-;(setq py-autopep8-options '("--max-line-lengh=100"))
-
-
 ;;===========================================================================
 ;; MAGIT
 ;;===========================================================================
 (use-package magit
-  :custom
-  (magit-display-buffer-function #'magit-display-buffer-same-window-except-diff-v1))
+  :ensure t)
 
 ;;===========================================================================
 ;;FUNCOES functions
@@ -657,7 +587,6 @@
 ;(add-to-list 'load-path "/home/rafatieppo/.emacs.d/lisp")
 (load "/data/data/com.termux/files/home/.emacs.d/lisp/functions")
 ;(require 'functions)
-
 
 ;; THEMES - SEVERAL SCHEMES
 ;;===========================================================================
@@ -688,7 +617,7 @@
 ;(require 'clues-theme)
 ;(require 'dracula-theme)
 ;;(require 'erosiond-theme)
-(require 'forest-blue-theme)
+;(require 'forest-blue-theme)
 ;;(require 'fogus-theme)
 ;;(require 'gotham-theme)
 ;;(require 'granger-theme)
@@ -715,7 +644,7 @@
 ;;(require 'wilmersdorf-theme)
 ;;(require 'wilson-theme)
 ;;(require 'zenburn-theme)
-;;(require 'zerodark-theme)
+(require 'zerodark-theme)
 ;(require 'zonokai-blue-theme)
 ;(require 'color-theme-tomorrow)
 ;(color-theme-tomorrow--define-theme night-blue)
