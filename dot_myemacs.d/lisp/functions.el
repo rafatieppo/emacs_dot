@@ -46,6 +46,42 @@
   )
 
 ;;;------------------------------------------------------------
+(defun header_org_beamer()
+  "Insert header for export beamer-pdf"
+  (interactive)
+  (insert (make-string 0 ? ) "#+title: Estatística\n")
+  (insert (make-string 0 ? ) "#+subtitle: Análise exploratória\n")
+  (insert (make-string 0 ? ) "#+date: 2023-12-23\n")
+  (insert (make-string 0 ? ) "#+author: Rafael Tieppo\n")
+  (insert (make-string 0 ? ) "#+email: rafatieppo@rt-avl52\n")
+  (insert (make-string 0 ? ) "#+OPTIONS: H:3\n")
+  (insert (make-string 0 ? ) "#+BEAMER_EXPORT: \\usepackage{minted}\n")
+  (insert (make-string 0 ? ) "#+BEAMER_EXPORT: \\usemintedstyle{monokai}\n")
+  (insert (make-string 0 ? ) "#+BEAMER_THEME: metropolis\n")
+  (insert (make-string 0 ? ) "#+BEAMER_HEADER: \\logo{\\includegraphics[height=.4cm]{/home/rafatieppo/Dropbox/logo/logo_ppgasp.png}\\vspace{-0.8cm}\\hspace{0.5cm}}\n")
+  (insert (make-string 0 ? ) "#+BEAMER_HEADER: \\useoutertheme[subsection=true]{smoothbars} %smoothbars tree\n")
+  (insert (make-string 0 ? ) "#+BEAMER_HEADER: \\definecolor{UBCblue}{rgb}{0.04706, 0.13725, 0.26667} % UBC Blue  (primary)\n")
+  (insert (make-string 0 ? ) "#+BEAMER_HEADER: \\definecolor{RTblue}{rgb}{0.25, 0.22 , 0.38} % UBC Blue 0.04706, 0.13725, 0.26667 (primary)\n")
+  (insert (make-string 0 ? ) "#+BEAMER_HEADER: \\setbeamercolor{title in head/foot}{bg=,fg=black}\n")
+  (insert (make-string 0 ? ) "#+BEAMER_HEADER: \\setbeamercolor{section in head/foot}{bg=gray!25,fg=black} %bg=UBCblue,fg=white\n")
+  (insert (make-string 0 ? ) "#+BEAMER_HEADER: \\setbeamercolor{subsection in head/foot}{bg=RTblue,fg=orange} %bg=UBCblue,fg=white %gray!10\n")
+  (insert (make-string 0 ? ) "#+BEAMER_HEADER: \\setbeamercolor{subsubsection in head/foot}{bg=,fg=white}\n")
+  (insert (make-string 0 ? ) "#+BEAMER_HEADER: \\setbeamercolor{frametitle}{bg=gray!5,fg=black}\n")
+  (insert (make-string 0 ? ) "#+BEAMER_HEADER: \\setbeamercolor{block title}{bg=UBCgrey,fg=white}\n")
+  (insert (make-string 0 ? ) "#+BEAMER_HEADER: \\setbeamercolor{block body}{bg=gray!10}\n")
+  (insert (make-string 0 ? ) "#+BEAMER_HEADER: \\setbeamertemplate{blocks}[rounded][shadow=true]\n")
+  (insert (make-string 0 ? ) "#+BEAMER_HEADER: \\setbeamercolor{itemize item}{fg=orange}\n")
+  (insert (make-string 0 ? ) "#+BEAMER_HEADER: \\setbeamercolor{itemize subitem}{fg=cyan}\n")
+  (insert (make-string 0 ? ) "#+BEAMER_HEADER: \\setbeamercolor{itemize subsubitem}{fg=cyan}\n")
+  (insert (make-string 0 ? ) "#+BEAMER_HEADER: \\setbeamertemplate{itemize item}[circle]\n")
+  (insert (make-string 0 ? ) "#+BEAMER_HEADER: \\setbeamertemplate{itemize subitem}[triangle]\n")
+  (insert (make-string 0 ? ) "#+BEAMER_HEADER: \\setbeamertemplate{itemize subsubitem}[triangle]\n")
+  (insert (make-string 0 ? ) "#+BEAMER_HEADER: \\setbeamertemplate{itemize subsubitem}[triangle]\n")
+  (insert (make-string 0 ? ) "#+BIBLIOGRAPHY: /home/rafatieppo/Dropbox/bibtex/references.bib\n")
+  (insert (make-string 0 ? ) "#+CITE_EXPORT: csl /home/rafatieppo/Dropbox/csl/abnt-ipea.csl\n")
+  )
+
+;;;------------------------------------------------------------
 ;;; Insert a new (empty) chunk to R markdown. Changed to ```{r}```, before was ```R\n\n```
 (defun insert-chunk ()
   "Insert chunk environment Rmd sessions."
