@@ -82,6 +82,20 @@
   )
 
 ;;;------------------------------------------------------------
+(defun header_org_latex()
+  "Insert header dor export Latex export"
+  (interactive)
+  (insert (make-string 0 ? ) "#+title: Estatística\n")
+    (insert (make-string 0 ? ) "#+subtitle: Análise exploratória\n")
+    (insert (make-string 0 ? ) "#+date: 2023-12-23\n")
+    (insert (make-string 0 ? ) "#+author: Rafael Tieppo\n")
+    (insert (make-string 0 ? ) "#+email: rafatieppo@rt-avl52\n")
+    (insert (make-string 0 ? ) "#+OPTIONS: H:3\n")
+    (insert (make-string 0 ? ) "#+SETUPFILE: /home/rafatieppo/Dropbox/sty/org_standard.org\n")
+    (insert (make-string 0 ? ) "#+BIBLIOGRAPHY: /home/rafatieppo/Dropbox/bibtex/references.bib\n")
+    (insert (make-string 0 ? ) "#+CITE_EXPORT: csl /home/rafatieppo/Dropbox/csl/abnt-ipea.csl\n")
+    )
+;;;------------------------------------------------------------
 ;;; Insert a new (empty) chunk to R markdown. Changed to ```{r}```, before was ```R\n\n```
 (defun insert-chunk ()
   "Insert chunk environment Rmd sessions."
