@@ -338,7 +338,8 @@
             ;polymode-mode
             python-mode
             markdown-mode
-            TeX-mode)) 
+            TeX-mode
+            latex-mode)) 
   (font-lock-add-keywords
    mode 
    '(("\\<\\(COMMENT\\|DONE\\|TODO\\|STOP\\|IMPORTANT\\|NOTE\\|OBS\\|ATTENTION\\|REVIEW\\)" 
