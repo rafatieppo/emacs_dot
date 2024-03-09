@@ -65,7 +65,7 @@
 (insert (make-string 0 ? ) "#+BEAMER_HEADER: \\useoutertheme[subsection=true]{tree} %smoothbars tree\n")
 (insert (make-string 0 ? ) "#+BEAMER_HEADER: \\definecolor{UBCblue}{rgb}{0.04706, 0.13725, 0.26667} % UBC Blue  (primary)\n")
 (insert (make-string 0 ? ) "#+BEAMER_HEADER: \\definecolor{RTblue}{rgb}{0.25, 0.22 , 0.38} % UBC Blue 0.04706, 0.13725, 0.26667 (primary)\n")
-(insert (make-string 0 ? ) "#+BEAMER_HEADER: \\setbeamercolor{title in head/foot}{bg=,fg=black}\n")
+(insert (make-string 0 ? ) "#+BEAMER_HEADER: \\setbeamercolor{title in head/foot}{bg=,fg=RTblue}\n")
 (insert (make-string 0 ? ) "#+BEAMER_HEADER: \\setbeamercolor{section in head/foot}{bg=,fg=black} %bg=UBCblue,fg=white\n")
 (insert (make-string 0 ? ) "#+BEAMER_HEADER: \\setbeamercolor{subsection in head/foot}{bg=RTblue,fg=white} %bg=UBCblue,fg=white %gray!10\n")
 (insert (make-string 0 ? ) "#+BEAMER_HEADER: \\setbeamercolor{subsubsection in head/foot}{bg=,fg=red}\n")
