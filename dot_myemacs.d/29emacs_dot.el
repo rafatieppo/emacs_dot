@@ -64,7 +64,8 @@
 ;; Font and  size
 ;(set-frame-font "Anonymous Pro-14.5")
 ;(set-frame-font "Envy Code R-17")
-(set-frame-font "Fira Code-15")
+;(set-frame-font "Fira Code-15")
+(set-frame-font "Fira Code 28" nil t) ;; new
 ;(set-frame-font "Hack-16")
 ;(set-frame-font "IBMPlexMono-17")
 ;(set-frame-font "JetBrains Mono-17")
