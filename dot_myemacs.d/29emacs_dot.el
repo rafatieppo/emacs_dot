@@ -64,8 +64,7 @@
 ;; Font and  size
 ;(set-frame-font "Anonymous Pro-14.5")
 ;(set-frame-font "Envy Code R-17")
-;(set-frame-font "Fira Code-15")
-(set-frame-font "Fira Code 28" nil t) ;; neww
+(set-frame-font "Fira Code-15")
 ;(set-frame-font "Hack-16")
 ;(set-frame-font "IBMPlexMono-17")
 ;(set-frame-font "JetBrains Mono-17")
@@ -519,7 +518,44 @@
 ;                          (require 'lsp-pyright)
 ;                          (lsp))))  ;lsp or lsp-deferred 
 
-; --------------------------------------------------------------------
+;; PHP CONFIGURATION
+;;===========================================================================
+
+(use-package lsp-mode
+ :config
+ (setq lsp-prefer-flymake nil)
+ :hook (php-mode . lsp)
+ :commands lsp)
+
+;; install https://phpactor.readthedocs.io/en/master/usage/standalone.html
+;; config https://phpactor.readthedocs.io/en/master/lsp/emacs.html
+;; Add lsp or lsp-deferred function call to functions for your php-mode customization
+
+;; Add lsp or lsp-deferred function call to functions for your php-mode customization
+(defun init-php-mode ()
+  (eglot-ensure))
+
+(with-eval-after-load 'php-mode
+  ;; If phpactor command is not installed as global, remove next ;; and write the full path
+  (custom-set-variables '(lsp-phpactor-path "/home/rafatieppo/.local/share/phpactor.phar"))  
+  (add-hook 'php-mode-hook #'init-php-mode))
+
+
+;(defun init-php-mode ()
+;  (lsp-deferred))
+
+;(with-eval-after-load 'php-mode
+;  ;; If phpactor command is not installed as global, write the full path
+;  (custom-set-variables '(lsp-phpactor-path "/home/rafatieppo/.local/share/phpactor.phar"))
+;  (add-hook 'php-mode-hook #'init-php-mode))
+
+(add-to-list 'auto-mode-alist '("\\.phtml\\'" . web-mode))
+(add-to-list 'auto-mode-alist '("\\.tpl\\.php\\'" . web-mode))
+(add-to-list 'auto-mode-alist '("\\.html\\.twig\\'" . web-mode))
+(add-to-list 'auto-mode-alist '("\\.html?\\'" . web-mode))
+
+;; lsp-mode CONFIGURATION
+;;===========================================================================
 ;; FOR lsp-mode       https://emacs-lsp.github.io/lsp-mode/page/installation/
 ;(use-package lsp-mode
 ;  :init
@@ -676,7 +712,7 @@
    '("2e05569868dc11a52b08926b4c1a27da77580daa9321773d92822f7a639956ce" "43ee7172f7ad20c70da9c42061e7f1e4e69eb9605fd0ed58900c7ad5c5fdfa94" "846ef3695c42d50347884515f98cc359a7a61b82a8d0c168df0f688cf54bf089" default))
  '(helm-minibuffer-history-key "M-p")
  '(package-selected-packages
-   '(citeproc company-auctex eglot lsp-mode avy company lsp-pyright yasnippet yafolding web-mode use-package rainbow-delimiters py-autopep8 projectile org-tree-slide org-bullets neotree magit lsp-ui indent-guide highlight-symbol helm evil ess auto-complete auctex all-the-icons)))
+   '(php-mode citeproc company-auctex eglot lsp-mode avy company lsp-pyright yasnippet yafolding web-mode use-package rainbow-delimiters py-autopep8 projectile org-tree-slide org-bullets neotree magit lsp-ui indent-guide highlight-symbol helm evil ess auto-complete auctex all-the-icons)))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
