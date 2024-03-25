@@ -68,6 +68,7 @@
 ;(set-frame-font "Hack-16")
 ;(set-frame-font "IBMPlexMono-17")
 ;(set-frame-font "JetBrains Mono-17")
+;(set-frame-font "JetBrains Mono 16" nil t) ;; new code to set font
 ;(set-frame-font "Monaco-16.5")
 ;(set-frame-font "monofur-19")
 ;(set-frame-font "Menlo-16")
