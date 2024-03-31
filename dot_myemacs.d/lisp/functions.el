@@ -59,6 +59,8 @@
 (insert (make-string 0 ? ) "#+OPTIONS: H:3\n")
 (insert (make-string 0 ? ) "#+BEAMER_EXPORT: \\usepackage{minted}\n")
 (insert (make-string 0 ? ) "#+BEAMER_EXPORT: \\usemintedstyle{monokai}\n")
+(insert (make-string 0 ? ) "#+BEAMER_HEADER: \\usepackage[utf8]{inputenc}\n")
+(insert (make-string 0 ? ) "#+BEAMER_HEADER: \\usepackage[brazil]{babel}\n")
 (insert (make-string 0 ? ) "#+BEAMER_THEME: metropolis\n")
 (insert (make-string 0 ? ) "#+BEAMER_HEADER: \\defbeamertemplate*{footline}{mytheme} {\\begin{beamercolorbox}[wd=.5\\paperwidth,ht=0.5ex,dp=0.025ex,leftskip=.1cm,rightskip=.3cm]{title in head/foot} \\makebox[2em][l]{{\\usebeamerfont{title in head/foot}\\textcolor{black}{\\insertframenumber}}} \\end{beamercolorbox}   \\begin{beamercolorbox}[wd=.2\\paperwidth,ht=0.5ex,dp=1.125ex,leftskip=.6cm,rightskip=.3cm]{date in head/foot} \\usebeamerfont{}\\textcolor{black}{Rafael Tieppo} \\end{beamercolorbox}}\n")
 (insert (make-string 0 ? ) "#+BEAMER_HEADER: \\logo{\\includegraphics[height=.4cm]{/home/rafatieppo/Dropbox/logo/logo_ppgasp.png}\\vspace{-0.5cm}\\hspace{0.5cm}}\n")
