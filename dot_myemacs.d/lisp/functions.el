@@ -87,9 +87,10 @@
 (insert (make-string 0 ? ) "#+BEAMER_HEADER: \\setbeamertemplate{itemize subitem}[triangle]\n")
 (insert (make-string 0 ? ) "#+BEAMER_HEADER: \\setbeamertemplate{itemize subsubitem}[triangle]\n")
 (insert (make-string 0 ? ) "#+BEAMER_HEADER: \\setbeamertemplate{itemize subsubitem}[triangle]\n")
+(insert (make-string 0 ? ) "#+BEAMER_HEADER: \\usepackage{caption}\n")
+(insert (make-string 0 ? ) "#+BEAMER_HEADER: \\captionsetup{font=scriptsize,labelfont=footnotesize}\n")
 (insert (make-string 0 ? ) "#+BIBLIOGRAPHY: /home/rafatieppo/Dropbox/bibtex/references.bib\n")
 (insert (make-string 0 ? ) "#+CITE_EXPORT: csl /home/rafatieppo/Dropbox/csl/abnt-ipea.csl\n")
-
   )
 
 
