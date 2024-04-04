@@ -68,7 +68,6 @@
 ;(set-frame-font "Hack-16")
 ;(set-frame-font "IBMPlexMono-17")
 ;(set-frame-font "JetBrains Mono-17")
-;(set-frame-font "JetBrains Mono 16" nil t) ;; new code to set font
 ;(set-frame-font "Monaco-16.5")
 ;(set-frame-font "monofur-19")
 ;(set-frame-font "Menlo-16")
@@ -169,6 +168,14 @@
 			     "/home/rafatieppo/Dropbox/emacs_org_mode/proj_resear.org"
 			     "/home/rafatieppo/Dropbox/emacs_org_mode/proj_teachi.org"
                         ))
+
+;; for org mode to export block source minted
+(setq org-latex-pdf-process (list "pdflatex -shell-escape %f"))
+(add-to-list 'org-latex-packages-alist '("" "minted" nil))
+(setq org-latex-src-block-backend 'minted)
+
+;; to make able alphabetical list in org mode
+(setq org-list-allow-alphabetical t)
 
 ;; bullets instead *
 (use-package org-bullets
