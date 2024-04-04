@@ -65,6 +65,7 @@
 ;(set-frame-font "Anonymous Pro-14.5")
 ;(set-frame-font "Envy Code R-17")
 (set-frame-font "Fira Code-15")
+;(set-frame-font "JetBrains Mono 16" nil t) ;; new code to set font
 ;(set-frame-font "Hack-16")
 ;(set-frame-font "IBMPlexMono-17")
 ;(set-frame-font "JetBrains Mono-17")
