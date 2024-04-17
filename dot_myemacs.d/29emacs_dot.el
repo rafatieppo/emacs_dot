@@ -171,7 +171,12 @@
                         ))
 
 ;; for org mode to export block source minted
-(setq org-latex-pdf-process (list "pdflatex -shell-escape %f"))
+; (setq org-latex-pdf-process (list "pdflatex -shell-escape %f")) it was generating erro on \ref{tbl:tb01} or [[tbl:tb01]] 
+; http://joonro.github.io/blog/posts/org-mode-outputdir-minted-latex-export/
+(setq org-latex-pdf-process
+      '("pdflatex -shell-escape -interaction nonstopmode -output-directory %o %f"
+        "pdflatex -shell-escape -interaction nonstopmode -output-directory %o %f"
+        "pdflatex -shell-escape -interaction nonstopmode -output-directory %o %f"))
 (add-to-list 'org-latex-packages-alist '("" "minted" nil))
 (setq org-latex-src-block-backend 'minted)
 
