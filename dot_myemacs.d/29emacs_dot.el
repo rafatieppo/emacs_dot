@@ -169,6 +169,8 @@
 			     "/home/rafatieppo/Dropbox/emacs_org_mode/proj_resear.org"
 			     "/home/rafatieppo/Dropbox/emacs_org_mode/proj_teachi.org"
                         ))
+;; to use \ref{} commands, because org-mode generates auto labels for figs and table 
+(setq org-latex-prefer-user-labels t)
 
 ;; for org mode to export block source minted
 ; (setq org-latex-pdf-process (list "pdflatex -shell-escape %f")) it was generating erro on \ref{tbl:tb01} or [[tbl:tb01]] 
