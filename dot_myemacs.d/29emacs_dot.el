@@ -64,11 +64,11 @@
 ;; Font and  size
 ;(set-frame-font "Anonymous Pro-14.5")
 ;(set-frame-font "Envy Code R-17")
-(set-frame-font "Fira Code-15")
+;(set-frame-font "Fira Code-15")
 ;(set-frame-font "JetBrains Mono 16" nil t) ;; new code to set font
 ;(set-frame-font "Hack-16")
 ;(set-frame-font "IBMPlexMono-17")
-;(set-frame-font "JetBrains Mono-17")
+(set-frame-font "JetBrains Mono-15" nil t)
 ;(set-frame-font "Monaco-16.5")
 ;(set-frame-font "monofur-19")
 ;(set-frame-font "Menlo-16")
@@ -169,6 +169,7 @@
 			     "/home/rafatieppo/Dropbox/emacs_org_mode/proj_resear.org"
 			     "/home/rafatieppo/Dropbox/emacs_org_mode/proj_teachi.org"
                         ))
+                                
 ;; to use \ref{} commands, because org-mode generates auto labels for figs and table 
 (setq org-latex-prefer-user-labels t)
 
@@ -716,22 +717,20 @@
 ;; Underline in current line
 ;(set-face-attribute hl-line-face nil :underline t)
 ;(set-face-background hl-line-face "#2F2F2F")
-
-
+    
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '(custom-enabled-themes '(zerodark))
+ (if (display-graphic-p)
+    '(custom-enabled-themes '(zerodark))
+   '(custom-enabled-themes '(nimbus))
+ )
  '(custom-safe-themes
    '("2e05569868dc11a52b08926b4c1a27da77580daa9321773d92822f7a639956ce" "43ee7172f7ad20c70da9c42061e7f1e4e69eb9605fd0ed58900c7ad5c5fdfa94" "846ef3695c42d50347884515f98cc359a7a61b82a8d0c168df0f688cf54bf089" default))
  '(helm-minibuffer-history-key "M-p")
- '(package-selected-packages
-   '(php-mode citeproc company-auctex eglot lsp-mode avy company lsp-pyright yasnippet yafolding web-mode use-package rainbow-delimiters py-autopep8 projectile org-tree-slide org-bullets neotree magit lsp-ui indent-guide highlight-symbol helm evil ess auto-complete auctex all-the-icons)))
-(custom-set-faces
- ;; custom-set-faces was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- )
+)
+
+
+    
