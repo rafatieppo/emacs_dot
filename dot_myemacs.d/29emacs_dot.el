@@ -724,11 +724,12 @@
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  (if (display-graphic-p)
-    '(custom-enabled-themes '(zerodark))
+   '(custom-enabled-themes '(zerodark))
    '(custom-enabled-themes '(nimbus))
- )
- '(custom-safe-themes
+   )
+   '(custom-safe-themes
    '("2e05569868dc11a52b08926b4c1a27da77580daa9321773d92822f7a639956ce" "43ee7172f7ad20c70da9c42061e7f1e4e69eb9605fd0ed58900c7ad5c5fdfa94" "846ef3695c42d50347884515f98cc359a7a61b82a8d0c168df0f688cf54bf089" default))
+
  '(helm-minibuffer-history-key "M-p")
 )
 
