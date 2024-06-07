@@ -65,13 +65,15 @@
 ;(set-frame-font "Anonymous Pro-14.5")
 ;(set-frame-font "Envy Code R-17")
 ;(set-frame-font "Fira Code-15")
+;(set-frame-font "Fira Code-15" nil t)
 ;(set-frame-font "JetBrains Mono 16" nil t) ;; new code to set font
 ;(set-frame-font "Hack-16")
-;(set-frame-font "IBMPlexMono-17")
+;(set-frame-font "IBMPlexMono-15")
 (set-frame-font "JetBrains Mono-15" nil t)
 ;(set-frame-font "Monaco-16.5")
 ;(set-frame-font "monofur-19")
 ;(set-frame-font "Menlo-16")
+;(set-frame-font "Menlo-15" nil t)
 ;(set-frame-font "Monoid-14")
 ;(set-frame-font "Source Code Pro-17")
 ;(set-frame-font "Tex Gyre Adventor-11")
@@ -169,7 +171,12 @@
 			     "/home/rafatieppo/Dropbox/emacs_org_mode/proj_resear.org"
 			     "/home/rafatieppo/Dropbox/emacs_org_mode/proj_teachi.org"
                         ))
-                                
+                                                                
+   
+;(setq org-agenda-custom-commands
+;   (quote (("Z" "tasks for Seth" tags "+ENTERPRISE=\"usedados\"" nil))))
+
+
 ;; to use \ref{} commands, because org-mode generates auto labels for figs and table 
 (setq org-latex-prefer-user-labels t)
 
@@ -217,12 +224,12 @@
 
 ;; ORG mode CLASSES and COLORS for TASKS
 (setq org-todo-keywords
-      '((sequence "BACKLOG(w@/!)" "THISWEEK(w@/!)" "TODAY(t)" "|" "DONE(d!)" "CANCELED(c@)")))
+      '((sequence "BACKLOG(w@/!)" "ON_WEEK(w@/!)" "TODAYYY(t)" "|" "DONE(d!)" "CANCELED(c@)")))
 (setq org-todo-keyword-faces
       '(
         ("BACKLOG" . (:foreground "orange" :weight bold))
-        ("TODAY" . (:foreground "red" :weight bold))
-        ("THISWEEK" . (:foreground "yellow" :weight bold))
+        ("TODAYYY" . (:foreground "red" :weight bold))
+        ("ON_WEEK" . (:foreground "yellow" :weight bold))
         ("DONE" . (:foreground "green" :weight bold))
         ("CANCELED" . (:foreground "gray" :weight bold))
         ))
@@ -698,6 +705,7 @@
 ;;(require 'wilson-theme)
 ;;(require 'zenburn-theme)
 (require 'zerodark-theme)
+;(require 'timu-rouge-theme)
 ;(require 'zonokai-blue-theme)
 ;(require 'color-theme-tomorrow)
 ;(color-theme-tomorrow--define-theme night-blue)
@@ -723,15 +731,8 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- (if (display-graphic-p)
-   '(custom-enabled-themes '(zerodark))
-   '(custom-enabled-themes '(nimbus))
-   )
-   '(custom-safe-themes
-   '("2e05569868dc11a52b08926b4c1a27da77580daa9321773d92822f7a639956ce" "43ee7172f7ad20c70da9c42061e7f1e4e69eb9605fd0ed58900c7ad5c5fdfa94" "846ef3695c42d50347884515f98cc359a7a61b82a8d0c168df0f688cf54bf089" default))
+ '(custom-enabled-themes '(zerodark))
+ '(custom-safe-themes
+   '("356b7dc07192e3fdc0b131d80b48b3a5d7a8be291561abbbc601072d601b2f23" default))
+ '(helm-minibuffer-history-key "M-p"))
 
- '(helm-minibuffer-history-key "M-p")
-)
-
-
-    
