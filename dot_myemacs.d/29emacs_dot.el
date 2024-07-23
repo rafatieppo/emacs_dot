@@ -167,6 +167,7 @@
 ;; files for org agendasorg-agenda
 (setq org-agenda-files (list "/home/rafatieppo/Dropbox/emacs_org_mode/rafa_tieppo.org"
 			     "/home/rafatieppo/Dropbox/emacs_org_mode/proj_extens.org"
+			     "/home/rafatieppo/Dropbox/emacs_org_mode/proj_manage.org"			     
 			     "/home/rafatieppo/Dropbox/emacs_org_mode/proj_person.org"
 			     "/home/rafatieppo/Dropbox/emacs_org_mode/proj_resear.org"
 			     "/home/rafatieppo/Dropbox/emacs_org_mode/proj_teachi.org"
