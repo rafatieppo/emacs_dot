@@ -174,8 +174,16 @@
                         ))
                                                                 
    
-;(setq org-agenda-custom-commands
-;   (quote (("Z" "tasks for Seth" tags "+ENTERPRISE=\"usedados\"" nil))))
+(setq org-agenda-custom-commands
+      '(("Z" "Tasks by tags"
+         ((tags-todo "teaching")
+                (tags-todo "extension")
+                (tags-todo "ppgasp")
+                (tags-todo "research")
+                (tags-todo "teaching")
+                (tags "usedados")
+                ;(tags "-{.*}")
+                ))))
 
 
 ;; to use \ref{} commands, because org-mode generates auto labels for figs and table 
