@@ -175,13 +175,13 @@
                                                                 
    
 (setq org-agenda-custom-commands
-      '(("Z" "Tasks by tags"
+      '(("Z" "tags-todo -DONE"
          (
-          (tags-todo "extension")
-          (tags-todo "ppgasp")
-          (tags-todo "research")
-          (tags-todo "teaching")
-          (tags "usedados")
+          (tags-todo "extension/-DONE")
+          (tags-todo "ppgasp/-DONE")
+          (tags-todo "research/-DONE")
+          (tags-todo "teaching/-DONE")
+          (tags "usedados/-DONE")
           ;(tags "-{.*}")
           ))))
 
