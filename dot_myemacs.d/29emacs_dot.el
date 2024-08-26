@@ -181,7 +181,7 @@
           (tags-todo "ppgasp/-DONE")
           (tags-todo "research/-DONE")
           (tags-todo "teaching/-DONE")
-          (tags "usedados/-DONE")
+          (tags-todo "usedados/-DONE")
           ;(tags "-{.*}")
           ))))
 
