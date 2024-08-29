@@ -173,10 +173,27 @@
 ;; files for org agendasorg-agenda
 (setq org-agenda-files (list "/data/data/com.termux/files/home/storage/emacs_org/rafa_tieppo.org"
                              "/data/data/com.termux/files/home/storage/emacs_org/proj_extens.org"
+                             "/data/data/com.termux/files/home/storage/emacs_org/proj_manage.org"			     
                              "/data/data/com.termux/files/home/storage/emacs_org/proj_person.org"
                              "/data/data/com.termux/files/home/storage/emacs_org/proj_resear.org"
                              "/data/data/com.termux/files/home/storage/emacs_org/proj_teachi.org"
  ))
+
+   
+(setq org-agenda-custom-commands
+      '(("Z" "tags-todo -DONE"
+         (
+          (tags-todo "extension/-DONE")
+          (tags-todo "ppgasp/-DONE")
+          (tags-todo "research/-DONE")
+          (tags-todo "teaching/-DONE")
+          (tags-todo "usedados/-DONE")
+          ;(tags "-{.*}")
+          ))))
+
+;; to make able alphabetical list in org mode
+(setq org-list-allow-alphabetical t)
+
 
 ;; bullets instead *
 (use-package org-bullets
@@ -209,18 +226,16 @@
 ; (require 'calfw-ical)
 
 ;; ORG mode CLASSES and COLORS for TASKS
-
 (setq org-todo-keywords
-      '((sequence "BACKLOG(w@/!)" "THISWEEK(w@/!)" "TODAY(t)" "|" "DONE(d!)" "CANCELED(c@)")))
+      '((sequence "BACKLOG(w@/!)" "ON_WEEK(w@/!)" "TODAYYY(t)" "|" "DONE(d!)" "CANCELED(c@)")))
 (setq org-todo-keyword-faces
       '(
         ("BACKLOG" . (:foreground "orange" :weight bold))
-        ("TODAY" . (:foreground "red" :weight bold))
-        ("THISWEEK" . (:foreground "yellow" :weight bold))
+        ("TODAYYY" . (:foreground "red" :weight bold))
+        ("ON_WEEK" . (:foreground "yellow" :weight bold))
         ("DONE" . (:foreground "green" :weight bold))
         ("CANCELED" . (:foreground "gray" :weight bold))
         ))
-
 
 ;; ORG CAPTURE I use C-c c to start capture mode
 (global-set-key (kbd "C-c c") 'org-capture)
@@ -262,29 +277,17 @@
 ;; raibow delimeters
 (use-package rainbow-delimiters
   :hook (prog-mode . rainbow-delimiters-mode))
+(use-package rainbow-mode
+   :ensure t)
 
 ;;===========================================================================
 ;; ace-jump-mode.el https://github.com/winterTTr/ace-jump-mode
-;(autoload
-;  'ace-jump-mode
-;  "ace-jump-mode"
-;  "Emacs quick move minor mode"
-;  t)
-;; enable a more powerful jump back function from ace jump mode
-;(autoload
-;  'ace-jump-mode-pop-mark
-;  "ace-jump-mode"
-;  "Ace jump back:-)"
-;  t)
-;(eval-after-load "ace-jump-mode"
-;  '(ace-jump-mode-enable-mark-sync))
-;(define-key global-map (kbd "C-x SPC") 'ace-jump-mode)
+(global-set-key (kbd "C-c SPC") 'avy-goto-char)
 
 ;;===========================================================================
 ;; helm
 ;(require 'helm-config)
 (require 'helm)
-
 (define-key helm-map (kbd "<tab>") 'helm-execute-persistent-action)
 (define-key helm-map (kbd "C-i") 'helm-execute-persistent-action)
 (define-key helm-map (kbd "C-z") 'helm-select-action)
@@ -335,7 +338,7 @@
 (setq indent-guide-recursive t)
 
 ;; highlight-indentation-mode
-(add-hook 'elpy-mode-hook (lambda () (highlight-indentation-mode -1)))
+;(add-hook 'elpy-mode-hook (lambda () (highlight-indentation-mode -1)))
 
 ;; smart Parenthesis https://github.com/Fuco1/smartparens
 ;(require 'smartparens)
@@ -384,19 +387,15 @@
 ;;===========================================================================
 
 ;(require 'yasnippet)
-;(yas-global-mode 1)
+(yas-global-mode 1)
 
+(defun yasnippet-snippets--fixed-indent ()
+  "Set `yas-indent-line' to `fixed'."
+  (set (make-local-variable 'yas-indent-line) 'fixed))
 
-;(defun yasnippet-snippets--fixed-indent ()
-;  "Set `yas-indent-line' to `fixed'."
-;  (set (make-local-variable 'yas-indent-line) 'fixed))
-
-;(defun yasnippet-snippets--no-indent ()
-;  "Set `yas-indent-line' to nil."
-;  (set (make-local-variable 'yas-indent-line) nil))
-
-;(require 'ac-math)
-;(add-to-list 'ac-modes 'latex-mode)   ; make auto-complete aware of `latex-mode`
+(defun yasnippet-snippets--no-indent ()
+  "Set `yas-indent-line' to nil."
+  (set (make-local-variable 'yas-indent-line) nil))
 
 ; add ac-sources to default ac-sources
 (defun ac-LaTeX-mode-setup ()
@@ -434,47 +433,6 @@
 ;; if you want all help buffers to go into one frame do:
 ;(setq ess-help-own-frame 'one)
 
-;; ess - highlights on programing codes
-; (setq ess-R-font-lock-keywords
-;         '((ess-R-fl-keyword:modifiers . t) ; default
-;           (ess-R-fl-keyword:fun-defs . t) ; default
-;           (ess-R-fl-keyword:keywords . t) ; default
-;           (ess-R-fl-keyword:assign-ops . t) ; default
-;           (ess-R-fl-keyword:constants . t) ; default
-;           (ess-fl-keyword:fun-calls . t)
-;           (ess-fl-keyword:numbers . t)  ;;se ativar fica muita colorido
-;           (ess-fl-keyword:operators . nil)
-;           (ess-fl-keyword:delimiters . t) ;;se ativar fica muita colorido
-;           (ess-fl-keyword:= . nil) ;;se ativar fica muita colorido
-;           (ess-R-fl-keyword:F&T . t)))
-
-;   (setq inferior-R-font-lock-keywords
-;         '((ess-S-fl-keyword:prompt . t) ; default
- ;          (ess-R-fl-keyword:messages . t) ; default
-;           (ess-R-fl-keyword:modifiers . nil) ; default
-;           (ess-R-fl-keyword:fun-defs . nil) ; default
-;           (ess-R-fl-keyword:keywords . t) ; default
-;           (ess-R-fl-keyword:assign-ops . nil) ; default
-;           (ess-R-fl-keyword:constants . t) ; default
-;           (ess-fl-keyword:matrix-labels . t) ; default
-;           (ess-fl-keyword:fun-calls . t)
-;;;           (ess-fl-keyword:numbers . nil)
-;;;           (ess-fl-keyword:operators . nil)
-;;           (ess-fl-keyword:delimiters . nil)
-;;           (ess-fl-keyword:= . t)
-;           (ess-R-fl-keyword:F&T . t)))
-
-
-;; POLYMODE
-;;===========================================================================
-; (use-package poly-markdown
-;              :ensure t)
-; (use-package poly-R
-;              :ensure t)
-
-;; (autoload 'poly-markdown-mode "poly-markdown-mode"
-; (add-to-list 'auto-mode-alist '("\\.md" . poly-markdown-mode))
-
 ;; MARKDOWN MODE
 ;;===========================================================================
 ;; org momde minor mode markdown http://stackoverflow.com/questions/14275122/editing-markdown-pipe-tables-in-emacs
@@ -489,13 +447,6 @@
 (add-hook 'markdown-mode-hook
           (lambda()
             (add-hook 'after-save-hook 'cleanup-org-tables  nil 'make-it-local)))
-
-;; if using markdown-mode yasnippets’s TAB completion doesn’t work, it’s just because TAB key is bind to markdown-cycle function http://wiki.dreamrunner.org/public_html/Emacs/markdown.html
-;(add-hook 'markdown-mode-hook
-;          '(lambda ()
-;             (company-mode t)
-;             (local-unset-key [tab])
-;             (setq-local yas-fallback-behavior '(apply company-mode))))
 
 ;; markdown enable MATH ;http://jblevins.org/projects/markdown-mode/
 (setq markdown-enable-math t)
@@ -518,7 +469,8 @@
 (setq TeX-parse-self t)
 
 ;; So that RefTeX finds my bibliography
-(setq reftex-default-bibliography '("/home/rafatieppo/Dropbox/bibtex/references.bib"))
+
+(setq reftex-default-bibliography '("/data/data/com.termux/files/home/storage/bibtex/references.bib"))
 
 ;; How to solve @
 (eval-after-load 'reftex-vars
@@ -529,6 +481,8 @@
                                 (?\C-t . "\\citet{%l\}")
                                 (?\C-p . "\\citep{%l\}")
                                 ))))
+
+(require 'citeproc)
 
 ;; LATEX
 ;;===========================================================================
@@ -551,45 +505,23 @@
           (set (make-local-variable 'sgml-basic-offset) 4)))
 
 ;; web-mode
-(require 'web-mode)
-(add-to-list 'auto-mode-alist '("\\.html\\'" . web-mode))
-(add-to-list 'auto-mode-alist '("\\.phtml\\'" . web-mode))
-(add-to-list 'auto-mode-alist '("\\.tpl\\.php\\'" . web-mode))
-(add-to-list 'auto-mode-alist '("\\.[agj]sp\\'" . web-mode))
-(add-to-list 'auto-mode-alist '("\\.as[cp]x\\'" . web-mode))
-(add-to-list 'auto-mode-alist '("\\.erb\\'" . web-mode))
-(add-to-list 'auto-mode-alist '("\\.mustache\\'" . web-mode))
-(add-to-list 'auto-mode-alist '("\\.djhtml\\'" . web-mode))
+(setq css-indent-offset tab-width)
+(use-package web-mode
+  :init
+  (setq web-mode-attr-indent-offset tab-width)
+  (setq web-mode-code-indent-offset tab-width)
+  (setq web-mode-css-indent-offset tab-width)
+  (setq web-mode-markup-indent-offset tab-width)
+  (setq web-mode-sql-indent-offset tab-width))
 
-;using web-mode for editing plain HTML files can be done this way
-;(add-to-list 'auto-mode-alist '("\\.html?\\'" . web-mode))
-
-(defun my-web-mode-hook ()
-  "Hooks for Web mode."
-  (setq web-mode-markup-indent-offset 2)
-  (setq web-mode-css-indent-offset 2)
-)
-(add-hook 'web-mode-hook  'my-web-mode-hook)
-
-;; JavaScript
+;; BASH
 ;;===========================================================================
-; js2-mode.
-;(require 'js2-mode)
-;(add-to-list 'auto-mode-alist '("\\.js\\'" . js2-mode))
-
-;(add-to-list 'auto-mode-alist '("\\.js\\'\\|\\.json\\'" . js2-mode))
-
-;; Better imenu
-;(add-hook 'js2-mode-hook #'js2-imenu-extras-mode)
-
-;(add-to-list 'load-path "/home/rafatieppo/.emacs.d/elpa/company-tern-20200610/")
-;(require 'company)
-;(require 'company-tern)
-
-;(add-to-list 'company-backends 'company-tern)
-;(add-hook 'js2-mode-hook (lambda ()
-;                           (tern-mode)
-;                           (company-mode)))
+(setq sh-basic-offset 2
+      sh-indentation 2)
+;; snippets, please
+(add-hook 'sh-mode-hook 'yas-minor-mode)
+;; on the fly syntax checking
+(add-hook 'sh-mode-hook 'flycheck-mode)
 
 ;; C CONFIGURATION
 ;;===========================================================================
@@ -608,33 +540,25 @@
 ;; https://emacs-lsp.github.io/lsp-pyright/
 ;; https://emacs-lsp.github.io/lsp-mode/page/lsp-pylsp/
 ;; https://www.mattduck.com/lsp-python-getting-started.html
+;;https://gitlab.com/skybert/my-little-friends/-/blob/master/emacs/.emacs
+(use-package eglot
+  :ensure t
+  :hook
+  ((python-mode . eglot-ensure))
+  )
+
 
 ;; i am using lsp-pyright
-(use-package lsp-pyright
-  :ensure t
-  :hook (python-mode . (lambda ()
-                          (require 'lsp-pyright)
-                          (lsp))))  ;lsp or lsp-deferred
-
-;(use-package lsp-ui
-;  :commands lsp-ui-mode)
+;(use-package lsp-pyright
+;  :ensure t
+;  :hook (python-mode . (lambda ()
+;                          (require 'lsp-pyright)
+;                          (lsp))))  ;lsp or lsp-deferred
 
 
-;;(use-package lsp-ui
-;;  :config (setq lsp-ui-sideline-show-hover nil ;; t nil
-;                lsp-ui-sideline-delay 0.5
-;                lsp-ui-doc-delay 5
-;;                lsp-ui-sideline-ignore-duplicates t
-;                lsp-ui-doc-position 'bottom
-;                lsp-ui-doc-alignment 'frame
-;;                lsp-ui-doc-header nil
-;;                lsp-ui-doc-include-signature nil
-;;                lsp-ui-doc-use-childframe t))
-
-;; pyvenv
-;(use-package pyvenv
-;  :config
-;  (pyvenv-mode 1))
+;; lsp-mode CONFIGURATION
+;; if you are helm user
+(use-package helm-lsp :commands helm-lsp-workspace-symbol)
 
 ;; projectile is necessary to handle .git in folder, otherwise lsp wil not start
 (use-package projectile
@@ -648,17 +572,6 @@
   (when (file-directory-p "~/Projects/Code")
     (setq projectile-project-search-path '("~/Projects/Code")))
   (setq projectile-switch-project-action #'projectile-dired))
-
-;; Standard Jedi.el setting
-;; (add-hook 'python-mode-hook 'jedi:setup)
-;; (setq jedi:complete-on-dot t)
-
-;; Autopep8 - enable autopep8 formatting on save
-;(require 'py-autopep8)
-;(add-hook 'elpy-mode-hook 'py-autopep8-enable-on-save)
-;(add-hook 'python-mode-hook 'py-autopep8-enable-on-save)
-;(add-hook 'anaconda-mode-hook 'py-autopep8-enable-on-save)
-;(setq py-autopep8-options '("--max-line-lengh=100"))
 
 
 ;;===========================================================================
