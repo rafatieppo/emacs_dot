@@ -275,10 +275,10 @@
 
 ;;===========================================================================
 ;; raibow delimeters
-(use-package rainbow-delimiters
-  :hook (prog-mode . rainbow-delimiters-mode))
-(use-package rainbow-mode
-   :ensure t)
+;(use-package rainbow-delimiters
+;  :hook (prog-mode . rainbow-delimiters-mode))
+;(use-package rainbow-mode
+;   :ensure t)
 
 ;;===========================================================================
 ;; ace-jump-mode.el https://github.com/winterTTr/ace-jump-mode
@@ -611,7 +611,7 @@
 ;;(require 'Amelie-theme)
 ;;(require 'ample-zen-theme)
 ;;(require 'assemblage-theme)
-(require 'atom-one-dark-theme)
+;(require 'atom-one-dark-theme)
 ;;(require 'blackboard-theme)
 ;;(require 'deep-thought-theme)
 ;;(require 'challenger-deep-theme.el)
@@ -626,7 +626,7 @@
 ;(require 'hydrangea-theme)
 ;;(require 'hickey-theme)
 ;;(require 'junio-theme)
-;(require 'timu-macos)
+(require 'timu-macos-theme)
 ;(require 'material-light-theme)
 ;(require 'material-theme)
 ;;(require 'moe-dark-theme)
@@ -671,11 +671,9 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '(custom-enabled-themes '(atom-one-dark))
  '(custom-safe-themes
-   '("9397f3ba34bdae8fec1183fc0b8aaf09599fab40af69ba58e167e3d2242327c0" default))
- '(package-selected-packages
-   '(evil-collection yasnippet yafolding web-mode timu-macos-theme smartparens rainbow-delimiters projectile org-tree-slide org-bullets neotree multiple-cursors magit lsp-pyright indent-guide highlight-symbol helm evil auto-complete auctex all-the-icons)))
+   '("e3dedbd038f79ecaf01e0dbb947bb6eeec8374f322e7b4a2a224c9d9e1490c52" default))
+ '(helm-minibuffer-history-key "M-p"))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
