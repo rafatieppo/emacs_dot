@@ -157,7 +157,7 @@
   :init
   (evil-collection-init))
 
-;;ORG MODE
+;; ORG-MODE
 ;;===========================================================================
 (require 'org)
 (define-key global-map "\C-cl" 'org-store-link)
@@ -173,7 +173,6 @@
 			     "/home/rafatieppo/Dropbox/emacs_org_mode/proj_teachi.org"
                         ))
                                                                 
-   
 (setq org-agenda-custom-commands
       '(("Z" "tags-todo -DONE"
          (
@@ -184,7 +183,6 @@
           (tags-todo "usedados/-DONE")
           ;(tags "-{.*}")
           ))))
-
 
 ;; to use \ref{} commands, because org-mode generates auto labels for figs and table 
 (setq org-latex-prefer-user-labels t)
@@ -273,6 +271,27 @@
          Added: %U")
         ;; ... other templates
     ))
+
+
+; org-roam
+(use-package org-roam
+  :ensure t
+  :custom
+  (org-roam-directory (file-truename "/home/rafatieppo/Documents/courses/org-roam"))
+  :bind (("C-c n l" . org-roam-buffer-toggle)
+         ("C-c n f" . org-roam-node-find)
+         ("C-c n g" . org-roam-graph)
+         ("C-c n i" . org-roam-node-insert)
+         ("C-c n c" . org-roam-capture)
+         ;; Dailies
+         ("C-c n j" . org-roam-dailies-capture-today))
+  :config
+  ;; If you're using a vertical completion framework, you might want a more informative completion interface
+  (setq org-roam-node-display-template (concat "${title:*} " (propertize "${tags:10}" 'face 'org-tag)))
+  (org-roam-db-autosync-mode)
+  ;; If using org-roam-protocol
+  (require 'org-roam-protocol)
+  )
 
 ;; SPECIAL PROGRAMMING TOOLS
 ;;===========================================================================
@@ -740,8 +759,16 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '(custom-enabled-themes '(zerodark))
+ '(custom-enabled-themes '(doom-city-lights))
  '(custom-safe-themes
-   '("356b7dc07192e3fdc0b131d80b48b3a5d7a8be291561abbbc601072d601b2f23" default))
- '(helm-minibuffer-history-key "M-p"))
+   '("2e05569868dc11a52b08926b4c1a27da77580daa9321773d92822f7a639956ce" "2721b06afaf1769ef63f942bf3e977f208f517b187f2526f0e57c1bd4a000350" "356b7dc07192e3fdc0b131d80b48b3a5d7a8be291561abbbc601072d601b2f23" default))
+ '(helm-minibuffer-history-key "M-p")
+ '(package-selected-packages
+   '(esqlite sqlite3 yafolding web-mode smartparens rainbow-mode rainbow-delimiters py-autopep8 projectile php-mode org-tree-slide org-bullets neotree multiple-cursors magit lsp-ui lsp-pyright julia-mode indent-guide highlight-symbol highlight-indent-guides helm evil-leader evil-collection ess eglot company-auctex citeproc avy auto-complete all-the-icons ace-jump-mode)))
 
+(custom-set-faces
+ ;; custom-set-faces was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ )
