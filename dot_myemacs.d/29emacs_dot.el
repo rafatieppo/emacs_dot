@@ -177,6 +177,7 @@
       '(("Z" "tags-todo -DONE"
          (
           (tags-todo "extension/-DONE")
+          (tags-todo "personal/-DONE")
           (tags-todo "ppgasp/-DONE")
           (tags-todo "research/-DONE")
           (tags-todo "teaching/-DONE")
@@ -216,6 +217,7 @@
   '((emacs-lisp . t)
     (python . t)
     (shell . t)
+    (sqlite . t)
     (R . t)))
 
 ;; org-tree presentation org-tree-slide-mode! Navigate slides with C-< and C->
