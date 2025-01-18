@@ -212,6 +212,8 @@
 (setq org-ellipsis " ⤵") ;;" ▾"
 
 ;; babel
+
+(setq org-babel-python-command "python3")
 (org-babel-do-load-languages
   'org-babel-load-languages
   '((emacs-lisp . t)
