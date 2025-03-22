@@ -183,10 +183,12 @@
 (setq org-agenda-custom-commands
       '(("Z" "tags-todo -DONE"
          (
-          (tags-todo "extension/-DONE")
-          (tags-todo "ppgasp/-DONE")
-          (tags-todo "research/-DONE")
-          (tags-todo "teaching/-DONE")
+          (tags-todo "personal/-DONE")
+          (tags-todo "u_cetegeo/-DONE")                    
+          (tags-todo "u_extension/-DONE")          
+          (tags-todo "u_ppgasp/-DONE")
+          (tags-todo "u_research/-DONE")
+          (tags-todo "u_teaching/-DONE")
           (tags-todo "usedados/-DONE")
           ;(tags "-{.*}")
           ))))
