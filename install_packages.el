@@ -67,6 +67,7 @@
 ;(package-install 'anaconda-mode)
 (package-install 'auctex)
 (package-install 'auto-complete)
+(package-install 'autothemer)
 (package-install 'avy)
 ;(package-install 'calfw)
 ;(package-install 'calfw-org)
