@@ -122,7 +122,7 @@
   (insert "```{r, echo = TRUE, results = 'markup', eval = TRUE}\n\n```")
   (forward-line -1)
   )
-(global-set-key (kbd "C-c r") 'insert-chunk-full)
+;;(global-set-key (kbd "C-c r") 'insert-chunk-full)
 
 ;;;------------------------------------------------------------
 (defun comment-line-or-region ()
@@ -164,7 +164,7 @@
   (yank)
   )
 ;; Define atalho para duplicar linhas.
-(global-set-key (kbd "\C-c d") 'duplicate-line)
+;;(global-set-key (kbd "\C-c d") 'duplicate-line)
 
 ;;------------------------------------------------------------
 ;; Move lines. ;; http://www.emacswiki.org/emacs/MoveLine
