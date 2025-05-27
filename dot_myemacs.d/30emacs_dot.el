@@ -1,10 +1,9 @@
 ;; init.el --- init file for config emacs
 
-;; Copyright (C) 2023 Rafael Tieppo
+;; Copyright (C) 2025 Rafael Tieppo
 
 ;; Author: Rafael Cesar Tieppo>
 ;; URL: http://github.com/rafatieppo/
-;; Version: 1.0
 ;; Keywords: packages installation
 ;; Package-Requires:
 
@@ -40,18 +39,9 @@
                          ("elpa" . "https://elpa.gnu.org/packages/")))
 (package-initialize)
 
+;;----------------------------------------------------------------------
 ;;STANDARD SETTINGS
-;;===========================================================================
-;; Neotree A emacs tree plugin like NERD tree for Vim.
-(use-package neotree
-             :ensure t
-             :bind (([f8] . neotree-toggle))
-             :config (setq neo-autorefresh nil))
-
-;; Powerlines https://github.com/milkypostman/powerline/
-;(use-package powerline
-;             :ensure t
-;             :config (powerline-default-theme))
+;;----------------------------------------------------------------------
 
 ;; No welcome windows ;; http://blog.droidzone.in/2012/05/22/remove-startup-split-screen-in-emacs/
 (setq inhibit-startup-screen t)
@@ -138,6 +128,8 @@
 ;;(transient-mark-mode 1) ; highlight text selection
 (delete-selection-mode 1) ; delete selected text when typing
 
+;;----------------------------------------------------------------------
+;; Evil 
 (use-package evil
   :ensure t
   :init
@@ -153,6 +145,8 @@
   :init
   (evil-collection-init))
 
+;;----------------------------------------------------------------------
+;; ivy
 (use-package ivy 
   :ensure t
   :config
@@ -161,8 +155,33 @@
 (setopt ivy-use-virtual-buffers t)
 (setopt ivy-count-format "(%d/%d) ")
 
+;;----------------------------------------------------------------------
+;; Neotree A emacs tree plugin like NERD tree for Vim.
+(use-package neotree
+             :ensure t
+             :bind (([f8] . neotree-toggle))
+             :config (setq neo-autorefresh nil))
+
+;;----------------------------------------------------------------------
+;; Treemacs and icons.
+(use-package treemacs
+  :ensure t
+  :config
+  (setq treemacs-is-never-other-window nil))
+
+(use-package treemacs-nerd-icons
+  :ensure t
+  :config
+  (treemacs-load-theme "nerd-icons"))
+
+(use-package nerd-icons-dired
+  :ensure t
+  :hook
+  (dired-mode . nerd-icons-dired-mode))
+
+;;----------------------------------------------------------------------
 ;; ORG-MODE
-;;===========================================================================
+;;----------------------------------------------------------------------
 (require 'org)
 (define-key global-map "\C-cl" 'org-store-link)
 (define-key global-map "\C-ca" 'org-agenda)
@@ -276,8 +295,10 @@
         ;; ... other templates
     ))
 
+;;----------------------------------------------------------------------
 ;; MARKDOWN MODE 
-;;===========================================================================
+;;----------------------------------------------------------------------
+
 (use-package markdown-mode
   :ensure t
   :mode ("README\\.md\\'" . gfm-mode)
@@ -307,52 +328,23 @@
 (add-to-list 'auto-mode-alist '("\\.markdown\\'" . markdown-mode))
 (add-to-list 'auto-mode-alist '("\\.md\\'" . markdown-mode))
 
-;; Assegure que o use-package está instalado e inicializado primeiro (ver seção 1)
-(use-package company
-  :ensure t ; Garante que o company-mode seja instalado se não estiver
-  :defer t  ; Otimização: carrega o company-mode quando for realmente necessário
-
-  ;; Configurações que podem ser aplicadas antes ou durante o carregamento
-  :init
-  (setq company-idle-delay 0.1
-        company-minimum-prefix-length 2
-        company-selection-wrap-around t
-        company-tooltip-limit 10)
-
-  ;; Backends padrão. Ajuste conforme suas necessidades!
-  ;; Se você usa LSP-mode/Eglot, eles geralmente se integram automaticamente.
-  :custom
-  (company-backends '(company-dabbrev-code company-files company-keywords))
-
-  ;; Hooks para ativar globalmente ou em modos específicos
-  :hook
-  ;; (after-init . global-company-mode) ; Ativar globalmente após a inicialização
-  ;; OU
-  (prog-mode . company-mode) ; Ativar em todos os modos de programação
-
-  ;; Bindings de teclado (opcional, company já tem defaults úteis)
-  :bind
-  ;;("C-<tab>" . company-complete) ; Dispara a completude manualmente
-  ;; Adicione outros bindings se quiser
-  )
-
+;;----------------------------------------------------------------------
 ;; SPECIAL PROGRAMMING TOOLS
-;;===========================================================================
+;;----------------------------------------------------------------------
+
+;;----------------------------------------------------------------------
 ;; multiple-cursors.el https://github.com/magnars/multiple-cursors.el
 (use-package multiple-cursors
   :ensure t
   )
 (require 'multiple-cursors)
 
+;;----------------------------------------------------------------------
 ;; indent GUIDE https://raw.githubusercontent.com/zk-phi/indent-guide/master/indent-guide.el
 ;;(require 'indent-guide)
 ;;(setq indent-guide-recursive t)
 
-;; smart Parenthesis https://github.com/Fuco1/smartparens
-;(require 'smartparens)
-;;(require 'smartparens-config)
-;;(smartparens-global-mode 1)
-
+;;----------------------------------------------------------------------
 (use-package smartparens
   :ensure t ;; install the package
   :hook (prog-mode text-mode markdown-mode python-mode ess-mode org-mode latex-mode) ;; add `smartparens-mode` to these hooks
@@ -362,16 +354,15 @@
   (smartparens-global-mode 1)
   )
 
+;;----------------------------------------------------------------------
 ;; folding by indentation ;; git clone https://github.com/zenozeng/yafolding.el.git
-
 (use-package yafolding 
-  :ensure t ;; install the package)
-  :config
-  (define-key yafolding-mode-map (kbd "C-c {") 'yafolding-toggle-all)
-  (define-key yafolding-mode-map (kbd "C-c }") 'yafolding-hide-parent-element)
-  (define-key yafolding-mode-map (kbd "C-c ]") 'yafolding-toggle-element)
-  )
+  :ensure t ;; install the package
+  :bind
+  (("C-{" . yafolding-hide-parent-element)
+     ("C-}" . yafolding-toggle-element)))
 
+;;----------------------------------------------------------------------
 ;; add highlight for certain keywords
 (make-face 'special-words) 
 (set-face-attribute 'special-words nil :foreground "White" :background "Firebrick") 
@@ -404,11 +395,39 @@
 ;  :ensure t
 ;  :init (global-flycheck-mode t))
 
-
+;;----------------------------------------------------------------------
 ;;AUTO COMPLETE AND YASNIPPET
-;;=========================================================================== 
-;; (require 'yasnippet)
-;; (yas-global-mode 1)
+;;----------------------------------------------------------------------
+
+;;----------------------------------------------------------------------
+;; company-mode
+;; Assegure que o use-package está instalado e inicializado primeiro (ver seção 1)
+(use-package company
+  :ensure t ; Garante que o company-mode seja instalado se não estiver
+  :defer t  ; Otimização: carrega o company-mode quando for realmente necessário
+  ;; Configurações que podem ser aplicadas antes ou durante o carregamento
+  :init
+  (setq company-idle-delay 0.1
+        company-minimum-prefix-length 2
+        company-selection-wrap-around t
+        company-tooltip-limit 10)
+  ;; Backends padrão. Ajuste conforme suas necessidades!
+  ;; Se você usa LSP-mode/Eglot, eles geralmente se integram automaticamente.
+  :custom
+  (company-backends '(company-dabbrev-code company-files company-keywords))
+  ;; Hooks para ativar globalmente ou em modos específicos
+  :hook
+  ;; (after-init . global-company-mode) ; Ativar globalmente após a inicialização
+  ;; OU
+  (prog-mode . company-mode) ; Ativar em todos os modos de programação
+  ;; Bindings de teclado (opcional, company já tem defaults úteis)
+  :bind
+  ;;("C-<tab>" . company-complete) ; Dispara a completude manualmente
+  ;; Adicione outros bindings se quiser
+  )
+
+;;----------------------------------------------------------------------
+;; yasnippet
 (use-package yasnippet 
   :ensure t
   :config
@@ -423,15 +442,19 @@
   "Set `yas-indent-line' to nil."
   (set (make-local-variable 'yas-indent-line) nil))
 
-; add ac-sources to default ac-sources
+;;----------------------------------------------------------------------
+;; add ac-sources to default ac-sources
 (defun ac-LaTeX-mode-setup ()
   (setq ac-sources
         (append '(ac-source-math-unicode ac-source-math-latex ac-source-latex-commands)
                 ac-sources)))
 (add-hook 'LaTeX-mode-hook 'ac-LaTeX-mode-setup)
 
+
+;;----------------------------------------------------------------------
 ;; R ESS
-;;===========================================================================
+;;----------------------------------------------------------------------
+
 ;; setting to work with ess and r
 (use-package ess 
   :ensure t
@@ -461,10 +484,11 @@
 ;; if you want all help buffers to go into one frame do:
 ;(setq ess-help-own-frame 'one)
 
+;;----------------------------------------------------------------------
 ;; REFTEX CITATION
-;;===========================================================================
-;; reftex citation pandoc http://www.unknownerror.org/opensource/jgm/pandoc/q/stackoverflow/13607156/autocomplete-pandoc-style-citations-from-a-bibtex-file-in-emacs http://tex.stackexchange.com/a/31992/5701
+;;----------------------------------------------------------------------
 
+;; reftex citation pandoc http://www.unknownerror.org/opensource/jgm/pandoc/q/stackoverflow/13607156/autocomplete-pandoc-style-citations-from-a-bibtex-file-in-emacs http://tex.stackexchange.com/a/31992/5701
 ;; to use biber instead bibtex 
 (setq TeX-parse-self t)
 
@@ -486,16 +510,24 @@
                                 ))))
 (require 'citeproc)
 
+
+;;----------------------------------------------------------------------
+;; programming
+;;----------------------------------------------------------------------
+
 ;; LATEX
-;;===========================================================================
+;;----------------------------------------------------------------------
+
 (add-hook 'LaTeX-mode-hook 'LaTeX-math-mode)
 ;(require 'company-auctex)
 ;; Naveg http://piotrkazmierczak.com/2010/05/13/emacs-as-the-ultimate-latex-editor/ C-c = 
 (add-hook 'LaTeX-mode-hook 'turn-on-reftex)
 (setq reftex-plug-into-AUCTeX t)
 
+
 ;; HTML
-;;===========================================================================
+;;----------------------------------------------------------------------
+
 ;; https://www.emacswiki.org/emacs/IndentingHtml
     (add-hook 'html-mode-hook
         (lambda ()
@@ -514,7 +546,8 @@
   (setq web-mode-sql-indent-offset tab-width))
 
 ;; BASH
-;;===========================================================================
+;;----------------------------------------------------------------------
+
 (setq sh-basic-offset 2
       sh-indentation 2)
 ;; snippets, please
@@ -522,8 +555,10 @@
 ;; on the fly syntax checking
 (add-hook 'sh-mode-hook 'flycheck-mode)
 
+
 ;; PYTHON CONFIGURATION
-;;===========================================================================
+;;----------------------------------------------------------------------
+
 ;;https://gitlab.com/skybert/my-little-friends/-/blob/master/emacs/.emacs
 (use-package eglot
   :ensure t
@@ -540,7 +575,7 @@
 ;                          (lsp))))  ;lsp or lsp-deferred 
 
 ;; PHP CONFIGURATION
-;;===========================================================================
+;;----------------------------------------------------------------------
 (use-package lsp-mode
  :ensure t
  :config
@@ -570,7 +605,8 @@
 (add-to-list 'auto-mode-alist '("\\.html?\\'" . web-mode))
 
 ;; lsp-mode CONFIGURATION
-;;===========================================================================
+;;----------------------------------------------------------------------
+
 ;; to stop messages in minibuffer
 ;(setq lsp-headerline-breadcrumb-enable nil)
 
@@ -606,6 +642,7 @@
 ;  (pyvenv-mode 1))
 
 ;; projectile is necessary to handle .git in folder, otherwise lsp wil not start
+;;----------------------------------------------------------------------
 (use-package projectile
   :diminish projectile-mode
   :config (projectile-mode)
@@ -618,29 +655,23 @@
     (setq projectile-project-search-path '("~/Projects/Code")))
   (setq projectile-switch-project-action #'projectile-dired))
 
-;;===========================================================================
+
 ;; MAGIT
-;;===========================================================================
+;;----------------------------------------------------------------------
+
 (use-package magit
   :ensure t)
 
-;;===========================================================================
+;;----------------------------------------------------------------------
 ;;FUNCOES functions
-;;===========================================================================
+;;----------------------------------------------------------------------
 ;(add-to-list 'load-path "/home/rafatieppo/.emacs.d/lisp")
 (load "/home/rafatieppo/.emacs.d/lisp/functions")
 ;(require 'functions)
 
+;;----------------------------------------------------------------------
 ;; THEMES - SEVERAL SCHEMES
-;;===========================================================================
-;; Solarized
-;(add-to-list 'load-path "/home/rafatieppo/.emacs.d/themess/solarized/")
-;(require 'solarized-dark-theme)
-;(require 'solarized-definitions)
-;(require 'solarized-theme)
-;(require 'color-theme-solarized)
-;(require 'solarized-dark-theme)
-
+;;----------------------------------------------------------------------
 (add-to-list 'load-path "/home/rafatieppo/.emacs.d/themess")
 ;(add-to-list 'custom-theme-load-path "/home/rafatieppo/.emacs.d/themess")
 ;(require 'afternoon-theme)
