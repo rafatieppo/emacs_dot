@@ -27,12 +27,13 @@
 ;; Feel free to copy and share.
 ;;=============================================================================
 ;;; Code:
-
 (eval-and-compile
   (customize-set-variable
-   'package-archives '(("org" . "https://orgmode.org/elpa/")
-                       ("melpa" . "https://melpa.org/packages/")
-                       ("gnu" . "https://elpa.gnu.org/packages/")))
+   'package-archives '(
+   ("org" . "https://orgmode.org/elpa/")
+   ("melpa" . "https://melpa.org/packages/")
+   ("gnu" . "https://elpa.gnu.org/packages/")
+   ))
   (package-initialize)
   (unless (package-installed-p 'use-package)
     (package-refresh-contents)
@@ -68,7 +69,7 @@
 ;(set-frame-font "Fira Code-15" nil t)
 ;(set-frame-font "JetBrains Mono 16" nil t) ;; new code to set font
 ;(set-frame-font "Hack-16")
-(set-frame-font "IBMPlexMono-15")
+(set-frame-font "IBMPlexMono-15" nil t)
 ;(set-frame-font "JetBrains Mono-15" nil t)
 ;(set-frame-font "Monaco-16.5")
 ;(set-frame-font "monofur-19")
@@ -135,12 +136,8 @@
 (show-paren-mode 1)
 
 ;;How to have emacs highlight text selections
-;;	(transient-mark-mode 1) ; highlight text selection
-(delete-selection-mode 1) ; delete seleted text when typing
-
-;; evil-mode
-;(require 'evil)
-;(evil-mode 1)
+;;(transient-mark-mode 1) ; highlight text selection
+(delete-selection-mode 1) ; delete selected text when typing
 
 (use-package evil
   :ensure t
@@ -157,166 +154,6 @@
   :init
   (evil-collection-init))
 
-;; ORG-MODE
-;;===========================================================================
-(require 'org)
-(define-key global-map "\C-cl" 'org-store-link)
-(define-key global-map "\C-ca" 'org-agenda)
-(setq org-log-done t)
-
-;; files for org agendasorg-agenda
-(setq org-agenda-files (list "/home/rafatieppo/Dropbox/emacs_org_mode/rafa_tieppo.org"
-			     "/home/rafatieppo/Dropbox/emacs_org_mode/proj_extens.org"
-			     "/home/rafatieppo/Dropbox/emacs_org_mode/proj_manage.org"			     
-			     "/home/rafatieppo/Dropbox/emacs_org_mode/proj_person.org"
-			     "/home/rafatieppo/Dropbox/emacs_org_mode/proj_resear.org"
-			     "/home/rafatieppo/Dropbox/emacs_org_mode/proj_teachi.org"
-                        ))
-                                                                
-(setq org-agenda-custom-commands
-      '(("Z" "tags-todo -DONE"
-         (
-          (tags-todo "personal/-DONE")
-          (tags-todo "u_cetegeo/-DONE")                    
-          (tags-todo "u_extension/-DONE")          
-          (tags-todo "u_overall/-DONE")                    
-          (tags-todo "u_ppgasp/-DONE")
-          (tags-todo "u_research/-DONE")
-          (tags-todo "u_teaching/-DONE")
-          (tags-todo "usedados/-DONE")
-          ;(tags "-{.*}")
-          ))))
-
-;; to use \ref{} commands, because org-mode generates auto labels for figs and table 
-(setq org-latex-prefer-user-labels t)
-
-;; for org mode to export block source minted
-; (setq org-latex-pdf-process (list "pdflatex -shell-escape %f")) it was generating erro on \ref{tbl:tb01} or [[tbl:tb01]] 
-; http://joonro.github.io/blog/posts/org-mode-outputdir-minted-latex-export/
-(setq org-latex-pdf-process
-      '("pdflatex -shell-escape -interaction nonstopmode -output-directory %o %f"
-        "pdflatex -shell-escape -interaction nonstopmode -output-directory %o %f"
-        "pdflatex -shell-escape -interaction nonstopmode -output-directory %o %f"))
-(add-to-list 'org-latex-packages-alist '("" "minted" nil))
-(setq org-latex-src-block-backend 'minted)
-
-;; to make able alphabetical list in org mode
-(setq org-list-allow-alphabetical t)
-
-;; bullets instead *
-(use-package org-bullets
-  :after org
-  :hook (org-mode . org-bullets-mode)
-  :custom
-  (org-bullets-bullet-list '("✿" "✸" "◉" "●" "○" "☯" "☢"))) ;; Small ► • ★ ▸
-
-;; arrow instead ...
-(setq org-ellipsis " ⤵") ;;" ▾"
-
-;; babel
-
-(setq org-babel-python-command "python3")
-(org-babel-do-load-languages
-  'org-babel-load-languages
-  '((emacs-lisp . t)
-    (python . t)
-    (shell . t)
-    (sqlite . t)
-    (R . t)))
-
-;; org-tree presentation org-tree-slide-mode! Navigate slides with C-< and C->
-(use-package org-tree-slide
-  :custom
-  (org-image-actual-width nil))
-
-;; packs to print calendar with appointments as GoogleCalendar
-; (require 'calfw)
-; (require 'calfw-org)
-; (setq cfw:org-agenda-schedule-args '(:timestamp))
-; (require 'calfw-ical)
-
-;; ORG mode CLASSES and COLORS for TASKS
-(setq org-todo-keywords
-      '((sequence "BACKLOG(w@/!)" "ON_WEEK(w@/!)" "TODAYYY(t)" "|" "DONE(d!)" "CANCELED(c@)")))
-(setq org-todo-keyword-faces
-      '(
-        ("BACKLOG" . (:foreground "orange" :weight bold))
-        ("TODAYYY" . (:foreground "red" :weight bold))
-        ("ON_WEEK" . (:foreground "yellow" :weight bold))
-        ("DONE" . (:foreground "green" :weight bold))
-        ("CANCELED" . (:foreground "gray" :weight bold))
-        ))
-
-;; ORG CAPTURE I use C-c c to start capture mode
-(global-set-key (kbd "C-c c") 'org-capture)
-(setq org-capture-templates
-  '(    ;; ... other templates
-    ("l" "Link" entry (file+headline 
-         "~/Dropbox/emacs_org_mode/capture.org" "Link") 
-         "* LINK %^{Description} %^g
-         %?
-         Added: %U")
-    ("j" "Journal Entry"
-         entry (file+datetree "~/Dropbox/emacs_org_mode/capture.org")
-         "* %?"
-         :empty-lines 1)
-    ("p" "Phone" entry (file+headline 
-         "~/Dropbox/emacs_org_mode/capture.org" "Phone") 
-         "* NUMBER %^{Description} %^g
-         %?
-         Added: %U")
-    ("q" "Quote" entry (file+headline 
-         "~/Dropbox/emacs_org_mode/capture.org" "Quote") 
-         "* QUOTE %^{Description} %^g
-         %?
-         Added: %U")
-    ("t" "Ted Talks" entry (file+headline 
-         "~/Dropbox/emacs_org_mode/capture.org" "Ted") 
-         "* TED %^{Description} %^g
-         %?
-         Added: %U")
-        ;; ... other templates
-    ))
-
-
-; org-roam
-(use-package org-roam
-  :ensure t
-  :custom
-  (org-roam-directory (file-truename "/home/rafatieppo/Documents/courses/org-roam"))
-  :bind (("C-c n l" . org-roam-buffer-toggle)
-         ("C-c n f" . org-roam-node-find)
-         ("C-c n g" . org-roam-graph)
-         ("C-c n i" . org-roam-node-insert)
-         ("C-c n c" . org-roam-capture)
-         ;; Dailies
-         ("C-c n j" . org-roam-dailies-capture-today))
-  :config
-  ;; If you're using a vertical completion framework, you might want a more informative completion interface
-  (setq org-roam-node-display-template (concat "${title:*} " (propertize "${tags:10}" 'face 'org-tag)))
-  (org-roam-db-autosync-mode)
-  ;; If using org-roam-protocol
-  (require 'org-roam-protocol)
-  )
-
-;; SPECIAL PROGRAMMING TOOLS
-;;===========================================================================
-;; multiple-cursors.el https://github.com/magnars/multiple-cursors.el
-;(require 'multiple-cursors)
-
-;;===========================================================================
-;; raibow delimeters
-(use-package rainbow-delimiters
-  :hook (prog-mode . rainbow-delimiters-mode))
-(use-package rainbow-mode
-   :ensure t)
-  
-;;===========================================================================
-;; ace-jump-mode.el https://github.com/winterTTr/ace-jump-mode
-(global-set-key (kbd "C-c SPC") 'avy-goto-char)
-
-;;===========================================================================
-;; helm
 ;(require 'helm-config)
 (require 'helm)
 (define-key helm-map (kbd "<tab>") 'helm-execute-persistent-action)
@@ -361,15 +198,127 @@
 (add-to-list 'helm-sources-using-default-as-input
              'helm-source-man-pages)
 
-;; function highlights lisp
-(require 'highlight-symbol)
+;; ORG-MODE
+;;===========================================================================
+(require 'org)
+(define-key global-map "\C-cl" 'org-store-link)
+(define-key global-map "\C-ca" 'org-agenda)
+(setq org-log-done t)
+
+;; files for org agendasorg-agenda
+(setq org-agenda-files (list "/home/rafatieppo/Dropbox/emacs_org_mode/rafa_tieppo.org"
+			     "/home/rafatieppo/Dropbox/emacs_org_mode/proj_extens.org"
+			     "/home/rafatieppo/Dropbox/emacs_org_mode/proj_manage.org"			     
+			     "/home/rafatieppo/Dropbox/emacs_org_mode/proj_person.org"
+			     "/home/rafatieppo/Dropbox/emacs_org_mode/proj_resear.org"
+			     "/home/rafatieppo/Dropbox/emacs_org_mode/proj_teachi.org"
+                        ))
+                                                                
+(setq org-agenda-custom-commands
+      '(("Z" "tags-todo -DONE"
+         (
+          (tags-todo "personal/-DONE")
+          (tags-todo "u_cetegeo/-DONE")                    
+          (tags-todo "u_extension/-DONE")          
+          (tags-todo "u_ppgasp/-DONE")
+          (tags-todo "u_research/-DONE")
+          (tags-todo "u_teaching/-DONE")
+          (tags-todo "usedados/-DONE")
+          ;(tags "-{.*}")
+          ))))
+
+;; to use \ref{} commands, because org-mode generates auto labels for figs and table 
+(setq org-latex-prefer-user-labels t)
+
+;; for org mode to export block source minted
+; (setq org-latex-pdf-process (list "pdflatex -shell-escape %f")) it was generating erro on \ref{tbl:tb01} or [[tbl:tb01]] 
+; http://joonro.github.io/blog/posts/org-mode-outputdir-minted-latex-export/
+(setq org-latex-pdf-process
+      '("pdflatex -shell-escape -interaction nonstopmode -output-directory %o %f"
+        "pdflatex -shell-escape -interaction nonstopmode -output-directory %o %f"
+        "pdflatex -shell-escape -interaction nonstopmode -output-directory %o %f"))
+(add-to-list 'org-latex-packages-alist '("" "minted" nil))
+(setq org-latex-src-block-backend 'minted)
+
+;; to make able alphabetical list in org mode
+(setq org-list-allow-alphabetical t)
+
+;; bullets instead *
+(use-package org-bullets
+  :after org
+  :hook (org-mode . org-bullets-mode)
+  :custom
+  (org-bullets-bullet-list '("✿" "✸" "◉" "●" "○" "☯" "☢"))) ;; Small ► • ★ ▸
+
+;; arrow instead ...
+(setq org-ellipsis " ⤵") ;;" ▾"
+
+;; babel
+(setq org-babel-python-command "python3")
+(org-babel-do-load-languages
+  'org-babel-load-languages
+  '((emacs-lisp . t)
+    (python . t)
+    (shell . t)
+    (sqlite . t)
+    (R . t)))
+
+;; org-tree presentation org-tree-slide-mode! Navigate slides with C-< and C->
+(use-package org-tree-slide
+  :custom
+  (org-image-actual-width nil))
+
+;; ORG mode CLASSES and COLORS for TASKS
+(setq org-todo-keywords
+      '((sequence "BACKLOG(w@/!)" "ON_WEEK(w@/!)" "TODAYYY(t)" "|" "DONE(d!)" "CANCELED(c@)")))
+(setq org-todo-keyword-faces
+      '(
+        ("BACKLOG" . (:foreground "orange" :weight bold))
+        ("TODAYYY" . (:foreground "red" :weight bold))
+        ("ON_WEEK" . (:foreground "yellow" :weight bold))
+        ("DONE" . (:foreground "green" :weight bold))
+        ("CANCELED" . (:foreground "gray" :weight bold))
+        ))
+
+;; ORG CAPTURE I use C-c c to start capture mode
+(global-set-key (kbd "C-c c") 'org-capture)
+(setq org-capture-templates
+  '(    ;; ... other templates
+    ("l" "Link" entry (file+headline 
+         "~/Dropbox/emacs_org_mode/capture.org" "Link") 
+         "* LINK %^{Description} %^g
+         %?
+         Added: %U")
+    ("j" "Journal Entry"
+         entry (file+datetree "~/Dropbox/emacs_org_mode/capture.org")
+         "* %?"
+         :empty-lines 1)
+    ("p" "Phone" entry (file+headline 
+         "~/Dropbox/emacs_org_mode/capture.org" "Phone") 
+         "* NUMBER %^{Description} %^g
+         %?
+         Added: %U")
+    ("q" "Quote" entry (file+headline 
+         "~/Dropbox/emacs_org_mode/capture.org" "Quote") 
+         "* QUOTE %^{Description} %^g
+         %?
+         Added: %U")
+    ("t" "Ted Talks" entry (file+headline 
+         "~/Dropbox/emacs_org_mode/capture.org" "Ted") 
+         "* TED %^{Description} %^g
+         %?
+         Added: %U")
+        ;; ... other templates
+    ))
+
+;; SPECIAL PROGRAMMING TOOLS
+;;===========================================================================
+;; multiple-cursors.el https://github.com/magnars/multiple-cursors.el
+;(require 'multiple-cursors)
 
 ;; indent GUIDE https://raw.githubusercontent.com/zk-phi/indent-guide/master/indent-guide.el
-(require 'indent-guide)
-(setq indent-guide-recursive t)
-
-;; highlight-indentation-mode
-;(add-hook 'elpy-mode-hook (lambda () (highlight-indentation-mode -1)))
+;;(require 'indent-guide)
+;;(setq indent-guide-recursive t)
 
 ;; smart Parenthesis https://github.com/Fuco1/smartparens
 ;(require 'smartparens)
@@ -458,9 +407,6 @@
 
 (setq ess-offset-arguments 'prev-line)
 
-;; To activate ESS auto-complete for R.
-;(setq ess-use-auto-complete 'script-only)
-
 ;; cancel centering comments in R ESS
 ;(setf (cdr (assoc 'ess-indent-with-fancy-comments ess-own-style-list)) nil)
 
@@ -520,17 +466,13 @@
 ;; LATEX
 ;;===========================================================================
 (add-hook 'LaTeX-mode-hook 'LaTeX-math-mode)
-(require 'company-auctex)
+;(require 'company-auctex)
 ;; Naveg http://piotrkazmierczak.com/2010/05/13/emacs-as-the-ultimate-latex-editor/ C-c = 
 (add-hook 'LaTeX-mode-hook 'turn-on-reftex)
 (setq reftex-plug-into-AUCTeX t)
 
 ;; HTML
 ;;===========================================================================
-;; html-mode
-;(sp-with-modes '(html-mode sgml-mode web-mode)
-;  (sp-local-pair "<" ">"))
-
 ;; https://www.emacswiki.org/emacs/IndentingHtml
     (add-hook 'html-mode-hook
         (lambda ()
@@ -556,18 +498,6 @@
 ;; on the fly syntax checking
 (add-hook 'sh-mode-hook 'flycheck-mode)
 
-;; C CONFIGURATION
-;;===========================================================================
-;; install apt-get install libclang-dev apt-get install cmake
-;(add-hook 'after-init-hook 'global-company-mode)
-; (add-hook 'c++-mode-hook 'irony-mode)
-; (add-hook 'c-mode-hook 'irony-mode)
-; (add-hook 'objc-mode-hook 'irony-mode)
-; (add-hook 'irony-mode-hook 'irony-cdb-autosetup-compile-options)
-
-;;To have autocompletion when you are including headers:
-;(add-to-list 'company-backends 'company-irony-c-headers)
-
 ;; PYTHON CONFIGURATION
 ;;===========================================================================
 ;;https://gitlab.com/skybert/my-little-friends/-/blob/master/emacs/.emacs
@@ -587,7 +517,6 @@
 
 ;; PHP CONFIGURATION
 ;;===========================================================================
-
 (use-package lsp-mode
  :config
  (setq lsp-prefer-flymake nil)
@@ -607,14 +536,8 @@
   (custom-set-variables '(lsp-phpactor-path "/home/rafatieppo/.local/share/phpactor.phar"))  
   (add-hook 'php-mode-hook #'init-php-mode))
 
-
 ;(defun init-php-mode ()
 ;  (lsp-deferred))
-
-;(with-eval-after-load 'php-mode
-;  ;; If phpactor command is not installed as global, write the full path
-;  (custom-set-variables '(lsp-phpactor-path "/home/rafatieppo/.local/share/phpactor.phar"))
-;  (add-hook 'php-mode-hook #'init-php-mode))
 
 (add-to-list 'auto-mode-alist '("\\.phtml\\'" . web-mode))
 (add-to-list 'auto-mode-alist '("\\.tpl\\.php\\'" . web-mode))
@@ -623,18 +546,6 @@
 
 ;; lsp-mode CONFIGURATION
 ;;===========================================================================
-;; FOR lsp-mode       https://emacs-lsp.github.io/lsp-mode/page/installation/
-;(use-package lsp-mode
-;  :init
-;  ;; set prefix for lsp-command-keymap (few alternatives - "C-l", "C-c l")
-;  (setq lsp-keymap-prefix "C-c l")
-;  :hook (;; replace XXX-mode with concrete major-mode(e. g. python-mode)
-;         (python-mode . lsp)
-;         ;; if you want which-key integration
-;         ;(lsp-mode . lsp-enable-which-key-integration)
-;         )
-;  :commands lsp)
-
 ;; to stop messages in minibuffer
 ;(setq lsp-headerline-breadcrumb-enable nil)
 
@@ -769,7 +680,7 @@
 ;; Underline in current line
 ;(set-face-attribute hl-line-face nil :underline t)
 ;(set-face-background hl-line-face "#2F2F2F")
-    
+  
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
@@ -777,23 +688,11 @@
  ;; If there is more than one, they won't work right.
  '(custom-enabled-themes '(doom-moonlight))
  '(custom-safe-themes
-   '("8d3ef5ff6273f2a552152c7febc40eabca26bae05bd12bc85062e2dc224cde9a"
-     "34cf3305b35e3a8132a0b1bdf2c67623bc2cb05b125f8d7d26bd51fd16d547ec"
-     "2e05569868dc11a52b08926b4c1a27da77580daa9321773d92822f7a639956ce"
-     "2721b06afaf1769ef63f942bf3e977f208f517b187f2526f0e57c1bd4a000350"
-     "356b7dc07192e3fdc0b131d80b48b3a5d7a8be291561abbbc601072d601b2f23"
+   '("846ef3695c42d50347884515f98cc359a7a61b82a8d0c168df0f688cf54bf089"
+     "8d3ef5ff6273f2a552152c7febc40eabca26bae05bd12bc85062e2dc224cde9a"
      default))
  '(helm-minibuffer-history-key "M-p")
- '(package-selected-packages
-   '(0blayout ace-jump-mode all-the-icons auto-complete autothemer avy
-              citeproc company-auctex eglot esqlite ess evil-collection
-              evil-leader helm highlight-indent-guides highlight-symbol
-              indent-guide julia-mode lsp-pyright lsp-ui magit
-              multiple-cursors neotree org-bullets org-roam
-              org-tree-slide php-mode projectile py-autopep8
-              rainbow-delimiters rainbow-mode smartparens sqlite3
-              web-mode yafolding)))
-
+ '(package-selected-packages nil))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
