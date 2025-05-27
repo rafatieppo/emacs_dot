@@ -307,6 +307,35 @@
 (add-to-list 'auto-mode-alist '("\\.markdown\\'" . markdown-mode))
 (add-to-list 'auto-mode-alist '("\\.md\\'" . markdown-mode))
 
+;; Assegure que o use-package está instalado e inicializado primeiro (ver seção 1)
+(use-package company
+  :ensure t ; Garante que o company-mode seja instalado se não estiver
+  :defer t  ; Otimização: carrega o company-mode quando for realmente necessário
+
+  ;; Configurações que podem ser aplicadas antes ou durante o carregamento
+  :init
+  (setq company-idle-delay 0.1
+        company-minimum-prefix-length 2
+        company-selection-wrap-around t
+        company-tooltip-limit 10)
+
+  ;; Backends padrão. Ajuste conforme suas necessidades!
+  ;; Se você usa LSP-mode/Eglot, eles geralmente se integram automaticamente.
+  :custom
+  (company-backends '(company-dabbrev-code company-files company-keywords))
+
+  ;; Hooks para ativar globalmente ou em modos específicos
+  :hook
+  ;; (after-init . global-company-mode) ; Ativar globalmente após a inicialização
+  ;; OU
+  (prog-mode . company-mode) ; Ativar em todos os modos de programação
+
+  ;; Bindings de teclado (opcional, company já tem defaults úteis)
+  :bind
+  ;;("C-<tab>" . company-complete) ; Dispara a completude manualmente
+  ;; Adicione outros bindings se quiser
+  )
+
 ;; SPECIAL PROGRAMMING TOOLS
 ;;===========================================================================
 ;; multiple-cursors.el https://github.com/magnars/multiple-cursors.el
