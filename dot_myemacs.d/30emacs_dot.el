@@ -27,19 +27,18 @@
 ;; Feel free to copy and share.
 ;;=============================================================================
 ;;; Code:
-(eval-and-compile
-  (customize-set-variable
-   'package-archives '(
-   ("org" . "https://orgmode.org/elpa/")
-   ("melpa" . "https://melpa.org/packages/")
-   ("gnu" . "https://elpa.gnu.org/packages/")
-   ))
-  (package-initialize)
-  (unless (package-installed-p 'use-package)
-    (package-refresh-contents)
-    (package-install 'use-package)))
 
-(require 'package)
+;; First, ensure use-package is installed (from ELPA or MELPA)
+(unless (package-installed-p 'use-package)
+  (package-refresh-contents)
+  (package-install 'use-package))
+
+;; This line is crucial for use-package to work correctly
+(eval-when-compile (require 'use-package))
+;; Set up package archives again, just in case use-package is installed first
+(setq package-archives '(("melpa" . "https://melpa.org/packages/")
+                         ("elpa" . "https://elpa.gnu.org/packages/")))
+(package-initialize)
 
 ;;STANDARD SETTINGS
 ;;===========================================================================
@@ -154,49 +153,13 @@
   :init
   (evil-collection-init))
 
-;(require 'helm-config)
-(require 'helm)
-(define-key helm-map (kbd "<tab>") 'helm-execute-persistent-action)
-(define-key helm-map (kbd "C-i") 'helm-execute-persistent-action)
-(define-key helm-map (kbd "C-z") 'helm-select-action)
-
-(when (executable-find "curl")
-  (setq helm-google-suggest-use-curl-p t))
-
-(when (executable-find "ack-grep")
-  (setq helm-grep-default-command
-        "ack-grep -Hn --no-group --no-color %e %p %f"
-        helm-grep-default-recurse-command
-        "ack-grep -H --no-group --no-color %e %p %f"))
-
-(setq helm-split-window-in-side-p           t
-      helm-move-to-line-cycle-in-source     t
-      helm-ff-search-library-in-sexp        t
-      helm-scroll-amount                    8
-      helm-ff-file-name-history-use-recentf t
-      helm-M-x-fuzzy-match                  t
-      helm-buffers-fuzzy-matching           t
-      helm-recentf-fuzzy-match              t
-      helm-locate-fuzzy-match               t
-      helm-apropos-fuzzy-match              t
-      helm-lisp-fuzzy-completion            t
-      helm-semantic-fuzzy-match             t
-      helm-imenu-fuzzy-match                t)
-
-(helm-mode 1)
-(helm-autoresize-mode t)
-
-(global-set-key (kbd "C-c h")   'helm-command-prefix)
-(global-unset-key (kbd "C-x c"))
-(global-set-key (kbd "M-x")     'helm-M-x)
-(global-set-key (kbd "M-y")     'helm-show-kill-ring)
-(global-set-key (kbd "C-x b")   'helm-mini)
-(global-set-key (kbd "C-x C-f") 'helm-find-files)
-(global-set-key (kbd "C-c h o") 'helm-occur)
-(global-set-key (kbd "C-h SPC") 'helm-all-mark-rings)
-
-(add-to-list 'helm-sources-using-default-as-input
-             'helm-source-man-pages)
+(use-package ivy 
+  :ensure t
+  :config
+  (ivy-mode 1)
+  )
+(setopt ivy-use-virtual-buffers t)
+(setopt ivy-count-format "(%d/%d) ")
 
 ;; ORG-MODE
 ;;===========================================================================
@@ -245,6 +208,7 @@
 
 ;; bullets instead *
 (use-package org-bullets
+  :ensure t
   :after org
   :hook (org-mode . org-bullets-mode)
   :custom
@@ -265,6 +229,7 @@
 
 ;; org-tree presentation org-tree-slide-mode! Navigate slides with C-< and C->
 (use-package org-tree-slide
+  :ensure t
   :custom
   (org-image-actual-width nil))
 
@@ -311,10 +276,44 @@
         ;; ... other templates
     ))
 
+;; MARKDOWN MODE 
+;;===========================================================================
+(use-package markdown-mode
+  :ensure t
+  :mode ("README\\.md\\'" . gfm-mode)
+  :init (setq markdown-command "multimarkdown")
+  :bind (:map markdown-mode-map
+              ("C-c C-e" . markdown-do)))
+
+;; org momde minor mode markdown http://stackoverflow.com/questions/14275122/editing-markdown-pipe-tables-in-emacs
+(require 'org-table)
+(defun cleanup-org-tables ()
+  (save-excursion
+    (goto-char (point-min))
+    (while (search-forward "-+-" nil t) (replace-match "-|-"))
+    ))
+
+(add-hook 'markdown-mode-hook 'orgtbl-mode)
+(add-hook 'markdown-mode-hook
+          (lambda()
+            (add-hook 'after-save-hook 'cleanup-org-tables  nil 'make-it-local)))
+
+;; markdown enable MATH ;http://jblevins.org/projects/markdown-mode/
+(setq markdown-enable-math t)
+
+;; markdown extensions. (IT MUST BE BEFORE LATEX EXTENSIONS.)
+(autoload 'markdown-mode "markdown-mode"
+  "Major mode for editing Markdown files" t)
+(add-to-list 'auto-mode-alist '("\\.markdown\\'" . markdown-mode))
+(add-to-list 'auto-mode-alist '("\\.md\\'" . markdown-mode))
+
 ;; SPECIAL PROGRAMMING TOOLS
 ;;===========================================================================
 ;; multiple-cursors.el https://github.com/magnars/multiple-cursors.el
-;(require 'multiple-cursors)
+(use-package multiple-cursors
+  :ensure t
+  )
+(require 'multiple-cursors)
 
 ;; indent GUIDE https://raw.githubusercontent.com/zk-phi/indent-guide/master/indent-guide.el
 ;;(require 'indent-guide)
@@ -322,14 +321,27 @@
 
 ;; smart Parenthesis https://github.com/Fuco1/smartparens
 ;(require 'smartparens)
-(require 'smartparens-config)
-(smartparens-global-mode 1)
+;;(require 'smartparens-config)
+;;(smartparens-global-mode 1)
+
+(use-package smartparens
+  :ensure t ;; install the package
+  :hook (prog-mode text-mode markdown-mode python-mode ess-mode org-mode latex-mode) ;; add `smartparens-mode` to these hooks
+  :config
+  ;; load default config
+  (require 'smartparens-config)
+  (smartparens-global-mode 1)
+  )
 
 ;; folding by indentation ;; git clone https://github.com/zenozeng/yafolding.el.git
-(require 'yafolding)
-(define-key yafolding-mode-map (kbd "C-c {") 'yafolding-toggle-all)
-(define-key yafolding-mode-map (kbd "C-c }") 'yafolding-hide-parent-element)
-(define-key yafolding-mode-map (kbd "C-c ]") 'yafolding-toggle-element)
+
+(use-package yafolding 
+  :ensure t ;; install the package)
+  :config
+  (define-key yafolding-mode-map (kbd "C-c {") 'yafolding-toggle-all)
+  (define-key yafolding-mode-map (kbd "C-c }") 'yafolding-hide-parent-element)
+  (define-key yafolding-mode-map (kbd "C-c ]") 'yafolding-toggle-element)
+  )
 
 ;; add highlight for certain keywords
 (make-face 'special-words) 
@@ -364,10 +376,15 @@
 ;  :init (global-flycheck-mode t))
 
 
-;;AUTO COMLETE AND YASNIPPET
+;;AUTO COMPLETE AND YASNIPPET
 ;;=========================================================================== 
-(require 'yasnippet)
-(yas-global-mode 1)
+;; (require 'yasnippet)
+;; (yas-global-mode 1)
+(use-package yasnippet 
+  :ensure t
+  :config
+  (yas-global-mode 1)
+  )
 
 (defun yasnippet-snippets--fixed-indent ()
   "Set `yas-indent-line' to `fixed'."
@@ -387,6 +404,9 @@
 ;; R ESS
 ;;===========================================================================
 ;; setting to work with ess and r
+(use-package ess 
+  :ensure t
+  )
 (require 'ess-site)
 ;(require 'ess-eldoc)
 ;(setq-default ess-dialect "R")
@@ -404,7 +424,6 @@
 ;(require 'ess)
 ;; No indent levels, i.e., no more identation with one '#'
 (setq ess-indent-with-fancy-comments nil)
-
 (setq ess-offset-arguments 'prev-line)
 
 ;; cancel centering comments in R ESS
@@ -412,34 +431,6 @@
 
 ;; if you want all help buffers to go into one frame do:
 ;(setq ess-help-own-frame 'one)
-
-;; MARKDOWN MODE 
-;;===========================================================================
-;; org momde minor mode markdown http://stackoverflow.com/questions/14275122/editing-markdown-pipe-tables-in-emacs
-(require 'org-table)
-(defun cleanup-org-tables ()
-  (save-excursion
-    (goto-char (point-min))
-    (while (search-forward "-+-" nil t) (replace-match "-|-"))
-    ))
-
-(add-hook 'markdown-mode-hook 'orgtbl-mode)
-(add-hook 'markdown-mode-hook
-          (lambda()
-            (add-hook 'after-save-hook 'cleanup-org-tables  nil 'make-it-local)))
-
-;; markdown enable MATH ;http://jblevins.org/projects/markdown-mode/
-(setq markdown-enable-math t)
-
-;; markdown extensions. (IT MUST BE BEFORE LATEX EXTENSIONS.)
-(autoload 'markdown-mode "markdown-mode"
-  "Major mode for editing Markdown files" t)
-(add-to-list 'auto-mode-alist '("\\.markdown\\'" . markdown-mode))
-(add-to-list 'auto-mode-alist '("\\.md\\'" . markdown-mode))
-
-;; Org-struct minor mode active in markdown mode.
-;(add-hook 'markdown-mode-hook 'turn-on-orgstruct)
-;(add-hook 'markdown-mode-hook 'turn-on-orgstruct++)
 
 ;; REFTEX CITATION
 ;;===========================================================================
@@ -452,6 +443,10 @@
 (setq reftex-default-bibliography '("/home/rafatieppo/Dropbox/bibtex/references.bib"))
 
 ;; How to solve @
+(use-package citeproc
+  :ensure t
+  )
+
 (eval-after-load 'reftex-vars
   '(progn 
      (setq reftex-cite-format '((?\C-m . "@%l")
@@ -460,7 +455,6 @@
                                 (?\C-t . "\\citet{%l\}")
                                 (?\C-p . "\\citep{%l\}")
                                 ))))
-
 (require 'citeproc)
 
 ;; LATEX
@@ -482,6 +476,7 @@
 ;; web-mode
 (setq css-indent-offset tab-width)
 (use-package web-mode
+  :ensure t
   :init
   (setq web-mode-attr-indent-offset tab-width)
   (setq web-mode-code-indent-offset tab-width)
@@ -518,6 +513,7 @@
 ;; PHP CONFIGURATION
 ;;===========================================================================
 (use-package lsp-mode
+ :ensure t
  :config
  (setq lsp-prefer-flymake nil)
  :hook (php-mode . lsp)
@@ -550,7 +546,7 @@
 ;(setq lsp-headerline-breadcrumb-enable nil)
 
 ;; if you are helm user
-(use-package helm-lsp :commands helm-lsp-workspace-symbol)
+; (use-package helm-lsp :commands helm-lsp-workspace-symbol)
 
 ;(use-package lsp-ui
 ;  :commands lsp-ui-mode)
@@ -584,7 +580,7 @@
 (use-package projectile
   :diminish projectile-mode
   :config (projectile-mode)
-  :custom ((projectile-completion-system 'helm)) ; or ivy
+  :custom ((projectile-completion-system 'ivy)) ; helm or ivy
   :bind-keymap
   ("C-c p" . projectile-command-map)
   :init
