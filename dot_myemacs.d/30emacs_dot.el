@@ -145,8 +145,8 @@
   :init
   (evil-collection-init))
 
-;;----------------------------------------------------------------------
 ;; ivy
+;;----------------------------------------------------------------------
 (use-package ivy 
   :ensure t
   :config
@@ -154,6 +154,27 @@
   )
 (setopt ivy-use-virtual-buffers t)
 (setopt ivy-count-format "(%d/%d) ")
+
+;; avy
+;;----------------------------------------------------------------------
+(use-package avy
+  :ensure t ; Garante que o pacote seja instalado se ainda não estiver
+
+  ;; Configurações básicas
+  :config
+  (setq avy-background t) ; Torna o fundo do buffer mais escuro para destacar as letras de salto
+  (setq avy-all-windows nil) ; Não mostra labels em outras janelas por padrão
+  ;; (setq avy-timeout-seconds 0.5) ; Tempo limite para a seleção de caracteres (opcional)
+
+  ;; Ativações de comandos e atalhos de teclado
+  :bind
+  ;; Para saltar para um caractere
+  ("C-c =" . avy-goto-char)
+  ;; Para saltar para uma palavra ou linha (com base na primeira letra)
+  ("M-g w" . avy-goto-word-0)
+  ;; Para saltar para uma linha
+  ("M-g g" . avy-goto-line)
+  )
 
 ;;----------------------------------------------------------------------
 ;; Neotree A emacs tree plugin like NERD tree for Vim.
@@ -355,6 +376,15 @@
   )
 
 ;;----------------------------------------------------------------------
+;(use-package flycheck
+;  :defer t
+;  :hook (lsp-mode . flycheck-mode))
+ 
+(use-package flycheck
+  :ensure t
+  :init (global-flycheck-mode t))
+
+;;----------------------------------------------------------------------
 ;; folding by indentation ;; git clone https://github.com/zenozeng/yafolding.el.git
 (use-package yafolding 
   :ensure t ;; install the package
@@ -386,14 +416,6 @@
      ("\\<\\(BUG\\|WARNING\\|DANGER\\|FIXME\\)" 
       0 'special-words t)))
   ) 
-
-;(use-package flycheck
-;  :defer t
-;  :hook (lsp-mode . flycheck-mode))
- 
-;(use-package flycheck
-;  :ensure t
-;  :init (global-flycheck-mode t))
 
 ;;----------------------------------------------------------------------
 ;;AUTO COMPLETE AND YASNIPPET
