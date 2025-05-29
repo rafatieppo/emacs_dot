@@ -581,12 +581,73 @@
 ;; PYTHON CONFIGURATION
 ;;----------------------------------------------------------------------
 
-;;https://gitlab.com/skybert/my-little-friends/-/blob/master/emacs/.emacs
-(use-package eglot
-  :ensure t
-  :hook
-  ((python-mode . eglot-ensure))
+;; --- Elpy Configuration ---
+(use-package elpy
+  :ensure t ; Ensure Elpy is installed
+  :init
+  (elpy-enable) ; Enable Elpy
+  ;; Optional: Set Python executable (if not using the default virtual env's python)
+  ;; (setq elpy-rpc-python-command "python3")
+
+  ;; Optional: Disable Elpy's RPC backend for completion
+  ;; If you want Eglot to be solely responsible for completion,
+  ;; this can help prevent conflicts, though Eglot usually
+  ;; takes precedence anyway.
+  ;; (setq elpy-rpc-backend nil)
+
+  :config
+  ;; Elpy configurations (optional, but common)
+  (setq elpy-modules '( ;elpy-module-basics
+                       elpy-module-company ; For company-mode integration
+                       elpy-module-highlight-indentation
+                       elpy-module-flymake ; For diagnostics (but Eglot might override)
+                       elpy-module-pyvenv ; For virtual environments
+                       ;; elpy-module-autopep8 ; Example formatter
+                       ;; elpy-module-black ; Or Black
+                       ;; elpy-module-yapf ; Or Yapf
+                       ))
+
+  ;; Integrate with `company-mode` (if you use it)
+  (add-hook 'elpy-mode-hook 'company-mode)
+  ;; Optional: Define which formatter to use
+  ;; (setq elpy-format-on-save t) ; Format on save
+  ;; (setq elpy-formatter 'black) ; Use Black
   )
+
+;; --- Eglot Configuration and Integration ---
+(use-package eglot
+  ;; No :ensure t needed if Emacs >= 27.1 (Eglot is built-in)
+  :init
+  ;; Configure the Python language server for Eglot
+  ;; 'pylsp' (Python Language Server) is a common and recommended choice.
+  ;; Make sure it's installed in your Python environment: pip install "python-lsp-server[all]"
+  ;(add-to-list 'eglot-server-programs '(python-mode "pylsp"))
+
+  ;; If you prefer pyright (another popular Python LSP server from Microsoft)
+  ;; Make sure to install it: npm install -g pyright
+  ;; (add-to-list 'eglot-server-programs '(python-mode "pyright-langserver" "--node-ipc"))
+
+
+  ;; Optional: Automatically activate Eglot in Python buffers
+  :hook
+  ;(python-mode . eglot-mode)
+  (python-mode . eglot-ensure)
+
+  :config
+  ;; Optional Eglot settings
+  (setq eglot-autoshutdown t) ; Shut down the server when no associated buffers
+  (setq eglot-connect-timeout 60) ; Increase timeout for LSP connection
+  ;; (setq eglot-sync-stdout t) ; Useful for LSP server debugging
+  )
+
+
+
+;;https://gitlab.com/skybert/my-little-friends/-/blob/master/emacs/.emacs
+;(use-package eglot
+;  :ensure t
+;  :hook
+;  ((python-mode . eglot-ensure))
+;  )
 
 ;; https://emacs-lsp.github.io/lsp-pyright/ ;; https://emacs-lsp.github.io/lsp-mode/page/lsp-pylsp/ ;; https://www.mattduck.com/lsp-python-getting-started.html
 ;; FOR lsp-pyright
