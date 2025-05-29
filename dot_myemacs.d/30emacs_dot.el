@@ -177,28 +177,20 @@
   )
 
 ;;----------------------------------------------------------------------
+;; Icons and Neotree
+(use-package all-the-icons
+  :ensure t
+  :if (display-graphic-p)
+  )
+
 ;; Neotree A emacs tree plugin like NERD tree for Vim.
 (use-package neotree
              :ensure t
              :bind (([f8] . neotree-toggle))
-             :config (setq neo-autorefresh nil))
-
-;;----------------------------------------------------------------------
-;; Treemacs and icons.
-(use-package treemacs
-  :ensure t
-  :config
-  (setq treemacs-is-never-other-window nil))
-
-(use-package treemacs-nerd-icons
-  :ensure t
-  :config
-  (treemacs-load-theme "nerd-icons"))
-
-(use-package nerd-icons-dired
-  :ensure t
-  :hook
-  (dired-mode . nerd-icons-dired-mode))
+             :config 
+             (setq neo-autorefresh nil)
+             (setq neo-theme 'icons)
+             )
 
 ;;----------------------------------------------------------------------
 ;; ORG-MODE
@@ -825,9 +817,11 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '(custom-enabled-themes '(doom-moonlight))
+ '(custom-enabled-themes '(zerodark))
  '(custom-safe-themes
-   '("846ef3695c42d50347884515f98cc359a7a61b82a8d0c168df0f688cf54bf089"
+   '("aff0396925324838889f011fd3f5a0b91652b88f5fd0611f7b10021cc76f9e09"
+     "356b7dc07192e3fdc0b131d80b48b3a5d7a8be291561abbbc601072d601b2f23"
+     "846ef3695c42d50347884515f98cc359a7a61b82a8d0c168df0f688cf54bf089"
      "8d3ef5ff6273f2a552152c7febc40eabca26bae05bd12bc85062e2dc224cde9a"
      default))
  '(helm-minibuffer-history-key "M-p")
