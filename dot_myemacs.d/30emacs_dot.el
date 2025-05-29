@@ -169,11 +169,11 @@
   ;; Ativações de comandos e atalhos de teclado
   :bind
   ;; Para saltar para um caractere
-  ("C-c =" . avy-goto-char)
-  ;; Para saltar para uma palavra ou linha (com base na primeira letra)
-  ("M-g w" . avy-goto-word-0)
+  ("C-:" . avy-goto-char)
+  ;; Para saltar para uma palavra ou linha (com base nas duas letras)
+  ("C-'" . avy-goto-char-2)
   ;; Para saltar para uma linha
-  ("M-g g" . avy-goto-line)
+  ("M-g f" . avy-goto-line)
   )
 
 ;;----------------------------------------------------------------------
