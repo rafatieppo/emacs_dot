@@ -580,50 +580,97 @@
   (elpy-enable) ; Enable Elpy
   ;; Optional: Set Python executable (if not using the default virtual env's python)
   ;; (setq elpy-rpc-python-command "python3")
-
+;; Elpy will install RPC dependencies automatically.
+  ;(setq elpy-rpc-python-command "/home/rafatieppo/miniconda3/bin/python3")  
   ;; Optional: Disable Elpy's RPC backend for completion
   ;; If you want Eglot to be solely responsible for completion,
   ;; this can help prevent conflicts, though Eglot usually
   ;; takes precedence anyway.
-  ;; (setq elpy-rpc-backend nil)
+  ;;(setq elpy-rpc-backend nil)
 
   :config
-  ;; Elpy configurations (optional, but common)
-  (setq elpy-modules '( ;elpy-module-basics
-                       elpy-module-company ; For company-mode integration
+  ;; Elpy configurations (optional, but common)  
+  (setq elpy-modules '( 
+                       ;elpy-module-basics
+                       ;elpy-module-company ; For company-mode integration
                        elpy-module-highlight-indentation
-                       elpy-module-flymake ; For diagnostics (but Eglot might override)
-                       elpy-module-pyvenv ; For virtual environments
+                       ;; elpy-module-flymake ; For diagnostics (but Eglot might override)
+                       ;; elpy-module-pyvenv ; For virtual environments
                        ;; elpy-module-autopep8 ; Example formatter
                        ;; elpy-module-black ; Or Black
                        ;; elpy-module-yapf ; Or Yapf
                        ))
 
   ;; Integrate with `company-mode` (if you use it)
-  (add-hook 'elpy-mode-hook 'company-mode)
+  ;(add-hook 'elpy-mode-hook 'company-mode)
   ;; Optional: Define which formatter to use
   ;; (setq elpy-format-on-save t) ; Format on save
   ;; (setq elpy-formatter 'black) ; Use Black
   )
 
+;; --- Conda ---
+;; https://www.reddit.com/r/emacs/comments/hkshob/save_correct_condaenv_for_project/fwxty9v
+;;
+;; 1. Set `conda-project-env-name' as a directory local variable. (With
+;;    projectile you could use the `projectile-edit-dir-locals'
+;;    command.)
+;; 2. Use `conda-env-activate-for-buffer' to activate the environment
+;;    set. (Or enable `conda-env-autoactivate-mode' to automatically
+;;    activate it.)
+;; A conda environment manager, assuming the use of Anaconda and the
+;; `conda` tool. See https://github.com/necaris/conda.el for more
+;; details. https://melpa.org/#/conda.
+(use-package conda
+  :ensure t
+  :init
+  ;; (message "HERE conda init")
+  (setq conda-anaconda-home (expand-file-name "~/miniconda3"))
+  (setq conda-env-home-directory (expand-file-name "~/miniconda3/envs"))
+  :config
+  ;; (message "HERE conda config")
+  (conda-env-initialize-interactive-shells)
+  (conda-env-initialize-eshell)
+  ;; (conda-env-activate 'getenv "CONDA_DEFAULT_ENV")
+  (conda-env-autoactivate-mode t)
+  )
+
+(use-package company-anaconda
+  :ensure t
+  )
+
+;; Code navigation, documentation lookup and completion for Python.
+;; https://github.com/pythonic-emacs/anaconda-mode
+;; https://melpa.org/#/anaconda-mode
+(use-package anaconda-mode
+  :ensure t
+  :bind (:map python-mode-map ("C-;" . company-anaconda))
+  :hook
+  (python-mode . anaconda-mode)
+  (python-mode . anaconda-eldoc-mode)
+  ;; :init
+  ;; (add-hook 'python-mode-hook 'anaconda-mode)
+  ;; (add-hook 'python-mode-hook 'anaconda-eldoc-mode)
+)
+
 ;; --- Eglot Configuration and Integration ---
 (use-package eglot
-  ;; No :ensure t needed if Emacs >= 27.1 (Eglot is built-in)
   :init
   ;; Configure the Python language server for Eglot
   ;; 'pylsp' (Python Language Server) is a common and recommended choice.
   ;; Make sure it's installed in your Python environment: pip install "python-lsp-server[all]"
   ;(add-to-list 'eglot-server-programs '(python-mode "pylsp"))
+    
 
   ;; If you prefer pyright (another popular Python LSP server from Microsoft)
   ;; Make sure to install it: npm install -g pyright
-  ;; (add-to-list 'eglot-server-programs '(python-mode "pyright-langserver" "--node-ipc"))
-
+  ;(add-to-list 'eglot-server-programs '(python-mode "pyright-langserver" "--node-ipc"))
+   
 
   ;; Optional: Automatically activate Eglot in Python buffers
   :hook
   ;(python-mode . eglot-mode)
-  (python-mode . eglot-ensure)
+   (python-mode . eglot-ensure)
+  ;(elpy-mode . eglot-ensure)
 
   :config
   ;; Optional Eglot settings
@@ -648,6 +695,18 @@
 ;  :hook (python-mode . (lambda ()
 ;                          (require 'lsp-pyright)
 ;                          (lsp))))  ;lsp or lsp-deferred 
+
+;; YAML
+;;----------------------------------------------------------------------
+(use-package yaml-mode
+  :ensure t ; Ensure the yaml-mode package is installed
+  :mode ("\\.yaml\\'" "\\.yml\\'") ; Associate this mode with these file extensions
+  :hook (yaml-mode . (lambda ()
+                       (setq indent-tabs-mode nil) ; Optional: Ensure YAML uses spaces for indentation
+                       (setq tab-width 4) ; Optional: Set tab width to 2 spaces
+                       (setq completion-styles '(initials substring)) ; Optional: Improve completion for YAML
+                       ))
+  )
 
 ;; PHP CONFIGURATION
 ;;----------------------------------------------------------------------
@@ -825,7 +884,12 @@
      "8d3ef5ff6273f2a552152c7febc40eabca26bae05bd12bc85062e2dc224cde9a"
      default))
  '(helm-minibuffer-history-key "M-p")
- '(package-selected-packages nil))
+ '(package-selected-packages
+   '(all-the-icons anaconda-mode citeproc company-anaconda conda elpy ess
+                   evil-collection flycheck ivy lsp-mode magit
+                   multiple-cursors neotree nerd-icons-dired org-bullets
+                   org-tree-slide smartparens treemacs-nerd-icons
+                   web-mode yafolding yaml yaml-mode)))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
