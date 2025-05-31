@@ -61,3 +61,20 @@ Rafael Tieppo
 [![](http://www.linkedin.com/img/webpromo/btn_liprofile_blue_80x15.png)](https://www.linkedin.com/in/rafael-tieppo-5a039431/)
 [@rafatieppo](https://twitter.com/rafatieppo)
 
+## Notes
+
+### Python
+
+- From May 2025, I am testing [Miniconda3](https://www.anaconda.com/docs/getting-started/miniconda/main) as `Python` environmet. For documentation lookup and completion for Python I set:
+
+- `elpy`
+- `anaconda-mode`
+- `eglot` is the Emacs client for the Language Server Protocol (LSP)
+
+For a better experience. After opening the `.py` file, do not foget:
+
+1. `elpy-config` (just once)
+2. `conda-env-activate` to activate the environment set for the **buffer**.
+3. `pyvenv` to choose the *RPC* (if necessary).
+4. start the `eglot`
+

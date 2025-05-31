@@ -569,7 +569,6 @@
 ;; on the fly syntax checking
 (add-hook 'sh-mode-hook 'flycheck-mode)
 
-
 ;; PYTHON CONFIGURATION
 ;;----------------------------------------------------------------------
 
@@ -580,14 +579,13 @@
   (elpy-enable) ; Enable Elpy
   ;; Optional: Set Python executable (if not using the default virtual env's python)
   ;; (setq elpy-rpc-python-command "python3")
-;; Elpy will install RPC dependencies automatically.
-  ;(setq elpy-rpc-python-command "/home/rafatieppo/miniconda3/bin/python3")  
-  ;; Optional: Disable Elpy's RPC backend for completion
-  ;; If you want Eglot to be solely responsible for completion,
-  ;; this can help prevent conflicts, though Eglot usually
-  ;; takes precedence anyway.
+  ;; Elpy will install RPC dependencies automatically.
+  (setq elpy-rpc-python-command "/home/rafatieppo/miniconda3/envs/vconda_basic/bin/python3")  
+  ;; Optional: Disable Elpy's RPC backend for completion; If you want Eglot to be
+  ;; solely responsible for completion,this can help prevent conflicts, though Eglot takes precedence anyway.
   ;;(setq elpy-rpc-backend nil)
-
+  ;;(setq elpy-rpc-virtualenv-path 'current)
+  
   :config
   ;; Elpy configurations (optional, but common)  
   (setq elpy-modules '( 
@@ -596,16 +594,15 @@
                        elpy-module-highlight-indentation
                        ;; elpy-module-flymake ; For diagnostics (but Eglot might override)
                        ;; elpy-module-pyvenv ; For virtual environments
-                       ;; elpy-module-autopep8 ; Example formatter
-                       ;; elpy-module-black ; Or Black
-                       ;; elpy-module-yapf ; Or Yapf
                        ))
-
   ;; Integrate with `company-mode` (if you use it)
   ;(add-hook 'elpy-mode-hook 'company-mode)
-  ;; Optional: Define which formatter to use
-  ;; (setq elpy-format-on-save t) ; Format on save
-  ;; (setq elpy-formatter 'black) ; Use Black
+  ;; Choose your preferred formatter:
+  ;; (setq elpy-formatter 'black) ; autopep8 yapf
+  ;; Ensure the formatter module is loaded if you didn't list it in :modules
+  ;; (add-to-list 'elpy-modules 'elpy-module-black) ; autopep8 yapf
+  ;; If you want to see verbose output from the formatter (e.g., for debugging)
+  ;; (setq elpy-format-verbose t)
   )
 
 ;; --- Conda ---
@@ -655,16 +652,12 @@
 ;; --- Eglot Configuration and Integration ---
 (use-package eglot
   :init
-  ;; Configure the Python language server for Eglot
   ;; 'pylsp' (Python Language Server) is a common and recommended choice.
-  ;; Make sure it's installed in your Python environment: pip install "python-lsp-server[all]"
+  ;; Make sure it's installed in your py environment: pip install "python-lsp-server[all]"
   ;(add-to-list 'eglot-server-programs '(python-mode "pylsp"))
-    
 
-  ;; If you prefer pyright (another popular Python LSP server from Microsoft)
-  ;; Make sure to install it: npm install -g pyright
+  ;; If you prefer pyright,Make sure to install it
   ;(add-to-list 'eglot-server-programs '(python-mode "pyright-langserver" "--node-ipc"))
-   
 
   ;; Optional: Automatically activate Eglot in Python buffers
   :hook
@@ -678,8 +671,6 @@
   (setq eglot-connect-timeout 60) ; Increase timeout for LSP connection
   ;; (setq eglot-sync-stdout t) ; Useful for LSP server debugging
   )
-
-
 
 ;;https://gitlab.com/skybert/my-little-friends/-/blob/master/emacs/.emacs
 ;(use-package eglot
@@ -819,7 +810,7 @@
 ;;(require 'deep-thought-theme)
 ;;(require 'challenger-deep-theme.el)
 ;(require 'clues-theme)
-(require 'doom-themes)
+;(require 'doom-themes)
 ;(require 'dracula-theme)
 ;;(require 'erosiond-theme)
 ;(require 'forest-blue-theme)
@@ -849,7 +840,7 @@
 ;;(require 'wilmersdorf-theme)
 ;;(require 'wilson-theme)
 ;;(require 'zenburn-theme)
-;(require 'zerodark-theme)
+(require 'zerodark-theme)
 ;(require 'timu-rouge-theme)
 ;(require 'zonokai-blue-theme)
 ;(require 'color-theme-tomorrow)
