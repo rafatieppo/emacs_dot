@@ -619,6 +619,9 @@
 ;; details. https://melpa.org/#/conda.
 (use-package conda
   :ensure t
+  :hook
+  (python-mode . anaconda-mode)
+  (python-mode . anaconda-eldoc-mode)
   :init
   ;; (message "HERE conda init")
   (setq conda-anaconda-home (expand-file-name "~/miniconda3"))
