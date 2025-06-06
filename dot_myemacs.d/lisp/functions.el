@@ -25,18 +25,18 @@
 (defun header_md ()
   "Insere cabecalho markdown-mode"
   (interactive)
-  (insert (make-string 0 ? ) "---\n")
-  (insert (make-string 0 ? ) "title: TITLE\n")
-  (insert (make-string 0 ? ) "author: Rafael Tieppo\n")
-  (insert (make-string 0 ? ) "date: Maio, 201\n")
-  (insert (make-string 0 ? ) "---\n")
+  (insert (make-string 0 ? ) "--- \n")
+  (insert (make-string 0 ? ) "title: TITLE \n")
+  (insert (make-string 0 ? ) "author: Rafael Tieppo \n")
+  (insert (make-string 0 ? ) "date: Maio, 201 \n")
+  (insert (make-string 0 ? ) "--- \n")
   )
 
 ;;------------------------------------------------------------
 (defun figure_md ()
   "Insere cabecalho markdown-mode"
   (interactive)
-  (insert (make-string 0 ? ) "![cap](PICS/file.png){width=16cm height=9cm #fig:figbal}\n")
+  (insert (make-string 0 ? ) "![cap](PICS/file.png){width=16cm height=9cm #fig:figbal} \n")
   )
 
 ;;------------------------------------------------------------
@@ -353,7 +353,7 @@ nEnter how many times: ")
 ;;------------------------------------------------------------
 
 ;; Define C-TAB para mudar o cursor de janelas (buffers ativos).
-(global-set-key [(control tab)] 'other-window)
+;; (global-set-key [(control tab)] 'other-window) ;; use C-x o instead
 
 ;; enable iswitchb mode: C-x b now shows a list of buffers
 (global-set-key (kbd "C-<next>") 'next-buffer)
@@ -386,6 +386,13 @@ nEnter how many times: ")
 (global-set-key (kbd "C-<") 'mc/mark-previous-like-this)
 (global-set-key (kbd "C-; C-<") 'mc/mark-all-like-this)
 
+;;-----------------------------------------------------------------------------
+;; FUNCTION HIGHLIGHTS LISP
+(global-set-key [(control f3)] 'highlight-symbol-at-point)
+(global-set-key [f3] 'highlight-symbol-next)
+(global-set-key [(shift f3)] 'highlight-symbol-prev)
+(global-set-key [(meta f3)] 'highlight-symbol-query-replace)
+;;-----------------------------------------------------------------------------
 
 ;;;(provide 'functions)
 ;;; functions.el ends here
