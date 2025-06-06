@@ -573,37 +573,7 @@
 ;;----------------------------------------------------------------------
 
 ;; --- Elpy Configuration ---
-(use-package elpy
-  :ensure t ; Ensure Elpy is installed
-  :init
-  (elpy-enable) ; Enable Elpy
-  ;; Optional: Set Python executable (if not using the default virtual env's python)
-  ;; (setq elpy-rpc-python-command "python3")
-  ;; Elpy will install RPC dependencies automatically.
-  (setq elpy-rpc-python-command "/home/rafatieppo/miniconda3/envs/vconda_basic/bin/python3")  
-  ;; Optional: Disable Elpy's RPC backend for completion; If you want Eglot to be
-  ;; solely responsible for completion,this can help prevent conflicts, though Eglot takes precedence anyway.
-  ;;(setq elpy-rpc-backend nil)
-  ;;(setq elpy-rpc-virtualenv-path 'current)
-  
-  :config
-  ;; Elpy configurations (optional, but common)  
-  (setq elpy-modules '( 
-                       ;elpy-module-basics
-                       ;elpy-module-company ; For company-mode integration
-                       elpy-module-highlight-indentation
-                       ;; elpy-module-flymake ; For diagnostics (but Eglot might override)
-                       ;; elpy-module-pyvenv ; For virtual environments
-                       ))
-  ;; Integrate with `company-mode` (if you use it)
-  ;(add-hook 'elpy-mode-hook 'company-mode)
-  ;; Choose your preferred formatter:
-  ;; (setq elpy-formatter 'black) ; autopep8 yapf
-  ;; Ensure the formatter module is loaded if you didn't list it in :modules
-  ;; (add-to-list 'elpy-modules 'elpy-module-black) ; autopep8 yapf
-  ;; If you want to see verbose output from the formatter (e.g., for debugging)
-  ;; (setq elpy-format-verbose t)
-  )
+;; using python-mode
 
 ;; --- Conda ---
 ;; https://www.reddit.com/r/emacs/comments/hkshob/save_correct_condaenv_for_project/fwxty9v
