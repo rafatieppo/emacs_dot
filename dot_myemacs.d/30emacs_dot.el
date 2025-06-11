@@ -532,11 +532,16 @@
 ;; LATEX
 ;;----------------------------------------------------------------------
 
+(use-package auctex
+  :ensure t ; Garante que o pacote seja instalado se ainda não estiver
+  :init
+  (setq reftex-plug-into-AUCTeX t)  
+  )
+
 (add-hook 'LaTeX-mode-hook 'LaTeX-math-mode)
 ;(require 'company-auctex)
 ;; Naveg http://piotrkazmierczak.com/2010/05/13/emacs-as-the-ultimate-latex-editor/ C-c = 
 (add-hook 'LaTeX-mode-hook 'turn-on-reftex)
-(setq reftex-plug-into-AUCTeX t)
 
 
 ;; HTML
@@ -848,12 +853,7 @@
      "8d3ef5ff6273f2a552152c7febc40eabca26bae05bd12bc85062e2dc224cde9a"
      default))
  '(helm-minibuffer-history-key "M-p")
- '(package-selected-packages
-   '(all-the-icons anaconda-mode citeproc company-anaconda conda elpy ess
-                   evil-collection flycheck ivy lsp-mode magit
-                   multiple-cursors neotree nerd-icons-dired org-bullets
-                   org-tree-slide smartparens treemacs-nerd-icons
-                   web-mode yafolding yaml yaml-mode)))
+ '(package-selected-packages nil))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
