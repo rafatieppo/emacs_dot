@@ -201,12 +201,12 @@
 (setq org-log-done t)
 
 ;; files for org agendasorg-agenda
-(setq org-agenda-files (list "/home/rafatieppo/Dropbox/emacs_org_mode/rafa_tieppo.org"
-			     "/home/rafatieppo/Dropbox/emacs_org_mode/proj_extens.org"
-			     "/home/rafatieppo/Dropbox/emacs_org_mode/proj_manage.org"			     
-			     "/home/rafatieppo/Dropbox/emacs_org_mode/proj_person.org"
-			     "/home/rafatieppo/Dropbox/emacs_org_mode/proj_resear.org"
-			     "/home/rafatieppo/Dropbox/emacs_org_mode/proj_teachi.org"
+(setq org-agenda-files (list "/home/rafatieppo/Gdrive/emacs_org_mode/rafa_tieppo.org"
+			     "/home/rafatieppo/Gdrive/emacs_org_mode/proj_extens.org"
+			     "/home/rafatieppo/Gdrive/emacs_org_mode/proj_manage.org"			     
+			     "/home/rafatieppo/Gdrive/emacs_org_mode/proj_person.org"
+			     "/home/rafatieppo/Gdrive/emacs_org_mode/proj_resear.org"
+			     "/home/rafatieppo/Gdrive/emacs_org_mode/proj_teachi.org"
                         ))
                                                                 
 (setq org-agenda-custom-commands
@@ -282,26 +282,26 @@
 (setq org-capture-templates
   '(    ;; ... other templates
     ("l" "Link" entry (file+headline 
-         "~/Dropbox/emacs_org_mode/capture.org" "Link") 
+         "~/Gdrive/emacs_org_mode/capture.org" "Link") 
          "* LINK %^{Description} %^g
          %?
          Added: %U")
     ("j" "Journal Entry"
-         entry (file+datetree "~/Dropbox/emacs_org_mode/capture.org")
+         entry (file+datetree "~/Gdrive/emacs_org_mode/capture.org")
          "* %?"
          :empty-lines 1)
     ("p" "Phone" entry (file+headline 
-         "~/Dropbox/emacs_org_mode/capture.org" "Phone") 
+         "~/Gdrive/emacs_org_mode/capture.org" "Phone") 
          "* NUMBER %^{Description} %^g
          %?
          Added: %U")
     ("q" "Quote" entry (file+headline 
-         "~/Dropbox/emacs_org_mode/capture.org" "Quote") 
+         "~/Gdrive/emacs_org_mode/capture.org" "Quote") 
          "* QUOTE %^{Description} %^g
          %?
          Added: %U")
     ("t" "Ted Talks" entry (file+headline 
-         "~/Dropbox/emacs_org_mode/capture.org" "Ted") 
+         "~/Gdrive/emacs_org_mode/capture.org" "Ted") 
          "* TED %^{Description} %^g
          %?
          Added: %U")
@@ -507,7 +507,7 @@
 (setq TeX-parse-self t)
 
 ;; So that RefTeX finds my bibliography
-(setq reftex-default-bibliography '("/home/rafatieppo/Dropbox/bibtex/references.bib"))
+(setq reftex-default-bibliography '("/home/rafatieppo/Gdrive/bibtex/references.bib"))
 
 ;; How to solve @
 (use-package citeproc
@@ -860,3 +860,4 @@
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  )
+
