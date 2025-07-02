@@ -458,15 +458,6 @@
   (set (make-local-variable 'yas-indent-line) nil))
 
 ;;----------------------------------------------------------------------
-;; add ac-sources to default ac-sources
-(defun ac-LaTeX-mode-setup ()
-  (setq ac-sources
-        (append '(ac-source-math-unicode ac-source-math-latex ac-source-latex-commands)
-                ac-sources)))
-(add-hook 'LaTeX-mode-hook 'ac-LaTeX-mode-setup)
-
-
-;;----------------------------------------------------------------------
 ;; R ESS
 ;;----------------------------------------------------------------------
 
@@ -533,16 +524,38 @@
 ;; LATEX
 ;;----------------------------------------------------------------------
 
+(require 'cc-mode)
+
 (use-package auctex
   :ensure t ; Garante que o pacote seja instalado se ainda não estiver
   :init
-  (setq reftex-plug-into-AUCTeX t)  
+  (setq reftex-plug-into-AUCTeX t)
   )
+
+;; Enable AUCTeX for .tex files
+(add-to-list 'auto-mode-alist '("\\.tex\\'" . LaTeX-mode))
+(add-to-list 'auto-mode-alist '("\\.dtx\\'" . LaTeX-mode))
+(add-to-list 'auto-mode-alist '("\\.ltx\\'" . LaTeX-mode))
 
 (add-hook 'LaTeX-mode-hook 'LaTeX-math-mode)
 ;(require 'company-auctex)
 ;; Naveg http://piotrkazmierczak.com/2010/05/13/emacs-as-the-ultimate-latex-editor/ C-c = 
 (add-hook 'LaTeX-mode-hook 'turn-on-reftex)
+
+;; Enable font-locking (syntax highlighting) for LaTeX
+;(setq TeX-font-lock-mode t)
+
+;; Enable font-locking (syntax highlighting) for LaTeX
+(setq TeX-font-lock-mode t)
+;; Ensure font-lock-mode is enabled for LaTeX buffers
+(add-hook 'LaTeX-mode-hook 'font-lock-mode)
+
+;;----------------------------------------------------------------------
+;; add ac-sources to default ac-sources
+(defun ac-LaTeX-mode-setup ()
+  (setq ac-sources
+        (append '(ac-source-math-unicode ac-source-math-latex ac-source-latex-commands)
+                ac-sources)))
 
 
 ;; HTML
@@ -854,7 +867,11 @@
      "8d3ef5ff6273f2a552152c7febc40eabca26bae05bd12bc85062e2dc224cde9a"
      default))
  '(helm-minibuffer-history-key "M-p")
- '(package-selected-packages nil))
+ '(package-selected-packages
+   '(all-the-icons auctex avy citeproc company-anaconda conda ess
+                   evil-collection flycheck ivy lsp-mode magit
+                   multiple-cursors neotree org-bullets org-tree-slide
+                   smartparens web-mode yafolding yaml-mode yasnippet)))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
