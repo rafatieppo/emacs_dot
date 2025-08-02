@@ -25,11 +25,11 @@
 (defun header_md ()
   "Insere cabecalho markdown-mode"
   (interactive)
-  (insert (make-string 0 ? ) "--- \n")
-  (insert (make-string 0 ? ) "title: TITLE \n")
-  (insert (make-string 0 ? ) "author: Rafael Tieppo \n")
-  (insert (make-string 0 ? ) "date: Maio, 201 \n")
-  (insert (make-string 0 ? ) "--- \n")
+  (insert (make-string 0 ? ) "---\n")
+  (insert (make-string 0 ? ) "title: TITLE\n")
+  (insert (make-string 0 ? ) "author: Rafael Tieppo\n")
+  (insert (make-string 0 ? ) "date: Maio, 201\n")
+  (insert (make-string 0 ? ) "---\n")
   )
 
 ;;------------------------------------------------------------
