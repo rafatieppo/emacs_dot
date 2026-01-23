@@ -213,6 +213,7 @@
       '(("Z" "tags-todo -DONE"
          (
           (tags-todo "personal/-DONE")
+          (tags-todo "advising/-DONE")
           (tags-todo "u_cetegeo/-DONE")                    
           (tags-todo "u_extension/-DONE")
           (tags-todo "u_overall/-DONE")          
@@ -375,7 +376,16 @@
  
 (use-package flycheck
   :ensure t
-  :init (global-flycheck-mode t))
+  :init (global-flycheck-mode t)
+  (setq
+  flycheck-check-syntax-automatically '(save new-line)
+  flycheck-idle-change-delay 5.0
+  flycheck-display-errors-delay 0.9
+  flycheck-highlighting-mode 'symbols
+  flycheck-indication-mode 'left-fringe
+  flycheck-standard-error-navigation t
+  flycheck-deferred-syntax-check nil)  
+   )
 
 ;;----------------------------------------------------------------------
 ;; folding by indentation ;; git clone https://github.com/zenozeng/yafolding.el.git
@@ -642,6 +652,7 @@
 )
 
 ;; --- Eglot Configuration and Integration ---
+
 (use-package eglot
   :init
   ;; 'pylsp' (Python Language Server) is a common and recommended choice.
@@ -678,6 +689,7 @@
 ;  :hook (python-mode . (lambda ()
 ;                          (require 'lsp-pyright)
 ;                          (lsp))))  ;lsp or lsp-deferred 
+
 
 ;; YAML
 ;;----------------------------------------------------------------------
