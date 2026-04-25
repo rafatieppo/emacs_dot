@@ -392,7 +392,7 @@
            (ess-fl-keyword:numbers . t)  ;;se ativar fica muita colorido
            (ess-fl-keyword:operators . nil)
            (ess-fl-keyword:delimiters . t) ;;se ativar fica muita colorido
-           (ess-fl-keyword:= . nil) ;;se ativar fica muita colorido
+           (ess-fl-keyword:= . t) ;;se ativar fica muita colorido
            (ess-R-fl-keyword:F&T . t)))
 
    (setq inferior-R-font-lock-keywords

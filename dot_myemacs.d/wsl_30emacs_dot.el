@@ -58,7 +58,7 @@
 ;(set-frame-font "Fira Code-15" nil t)
 ;(set-frame-font "JetBrains Mono 16" nil t) ;; new code to set font
 ;(set-frame-font "Hack-16")
-(set-frame-font "IBMPlexMono-14" nil t)
+(set-frame-font "IBMPlexMono-15" nil t)
 ;(set-frame-font "JetBrains Mono-15" nil t)
 ;(set-frame-font "Monaco-16.5")
 ;(set-frame-font "monofur-19")
@@ -201,12 +201,12 @@
 (setq org-log-done t)
 
 ;; files for org agendasorg-agenda
-(setq org-agenda-files (list "/home/rafatieppo/Gdrive/emacs_org_mode/rafa_tieppo.org"
-			     "/home/rafatieppo/Gdrive/emacs_org_mode/proj_extens.org"
-			     "/home/rafatieppo/Gdrive/emacs_org_mode/proj_manage.org"			     
-			     "/home/rafatieppo/Gdrive/emacs_org_mode/proj_person.org"
-			     "/home/rafatieppo/Gdrive/emacs_org_mode/proj_resear.org"
-			     "/home/rafatieppo/Gdrive/emacs_org_mode/proj_teachi.org"
+(setq org-agenda-files (list "/mnt/c/Users/rafat/Gdrive/emacs_org_mode/rafa_tieppo.org"
+			     "/mnt/c/Users/rafat/Gdrive/emacs_org_mode/proj_extens.org"
+			     "/mnt/c/Users/rafat/Gdrive/emacs_org_mode/proj_manage.org"			     
+			     "/mnt/c/Users/rafat/Gdrive/emacs_org_mode/proj_person.org"
+			     "/mnt/c/Users/rafat/Gdrive/emacs_org_mode/proj_resear.org"
+			     "/mnt/c/Users/rafat/Gdrive/emacs_org_mode/proj_teachi.org"
                         ))
                                                                 
 (setq org-agenda-custom-commands
@@ -284,26 +284,26 @@
 (setq org-capture-templates
   '(    ;; ... other templates
     ("l" "Link" entry (file+headline 
-         "~/Gdrive/emacs_org_mode/capture.org" "Link") 
+         "/mnt/c/Users/rafat/Gdrive/emacs_org_mode/capture.org" "Link") 
          "* LINK %^{Description} %^g
          %?
          Added: %U")
     ("j" "Journal Entry"
-         entry (file+datetree "~/Gdrive/emacs_org_mode/capture.org")
+         entry (file+datetree "/mnt/c/Users/rafat/Gdrive/emacs_org_mode/capture.org")
          "* %?"
          :empty-lines 1)
     ("p" "Phone" entry (file+headline 
-         "~/Gdrive/emacs_org_mode/capture.org" "Phone") 
+         "/mnt/c/Users/rafat/Gdrive/emacs_org_mode/capture.org" "Phone") 
          "* NUMBER %^{Description} %^g
          %?
          Added: %U")
     ("q" "Quote" entry (file+headline 
-         "~/Gdrive/emacs_org_mode/capture.org" "Quote") 
+         "/mnt/c/Users/rafat/Gdrive/emacs_org_mode/capture.org" "Quote") 
          "* QUOTE %^{Description} %^g
          %?
          Added: %U")
     ("t" "Ted Talks" entry (file+headline 
-         "~/Gdrive/emacs_org_mode/capture.org" "Ted") 
+         "/mnt/c/Users/rafat/Gdrive/emacs_org_mode/capture.org" "Ted") 
          "* TED %^{Description} %^g
          %?
          Added: %U")
@@ -476,9 +476,9 @@
   :ensure t
   )
 (require 'ess-site)
-(require 'ess-eldoc)
-(setq-default ess-dialect "R")
-(setq-default inferior-R-args "--no-restore-history --no-save ")
+;(require 'ess-eldoc)
+;(setq-default ess-dialect "R")
+;(setq-default inferior-R-args "--no-restore-history --no-save ")
 
 ;; key SHIFT + ENTER
 (eval-after-load "ess-mode"
@@ -500,37 +500,6 @@
 ;; if you want all help buffers to go into one frame do:
 ;(setq ess-help-own-frame 'one)
 
-
-;; ess - highlights on programing codes
- (setq ess-R-font-lock-keywords
-         '((ess-R-fl-keyword:modifiers . t) ; default
-           (ess-R-fl-keyword:fun-defs . t) ; default
-           (ess-R-fl-keyword:keywords . t) ; default
-           (ess-R-fl-keyword:assign-ops . t) ; default
-           (ess-R-fl-keyword:constants . t) ; default
-           (ess-fl-keyword:fun-calls . t)
-           (ess-fl-keyword:numbers . t)  ;;se ativar fica muita colorido
-           (ess-fl-keyword:operators . nil)
-           (ess-fl-keyword:delimiters . t) ;;se ativar fica muita colorido
-           (ess-fl-keyword:= . t) ;;se ativar fica muita colorido
-           (ess-R-fl-keyword:F&T . t)))
-
-   (setq inferior-R-font-lock-keywords
-         '((ess-S-fl-keyword:prompt . t) ; default
-           (ess-R-fl-keyword:messages . t) ; default
-           (ess-R-fl-keyword:modifiers . nil) ; default
-           (ess-R-fl-keyword:fun-defs . nil) ; default
-           (ess-R-fl-keyword:keywords . t) ; default
-           (ess-R-fl-keyword:assign-ops . nil) ; default
-           (ess-R-fl-keyword:constants . t) ; default
-           (ess-fl-keyword:matrix-labels . t) ; default
-           (ess-fl-keyword:fun-calls . t)
-;;           (ess-fl-keyword:numbers . nil)
-;;           (ess-fl-keyword:operators . nil)
-;;           (ess-fl-keyword:delimiters . nil)
-;;           (ess-fl-keyword:= . t)
-           (ess-R-fl-keyword:F&T . t)))
-
 ;;----------------------------------------------------------------------
 ;; REFTEX CITATION
 ;;----------------------------------------------------------------------
@@ -540,7 +509,7 @@
 (setq TeX-parse-self t)
 
 ;; So that RefTeX finds my bibliography
-(setq reftex-default-bibliography '("/home/rafatieppo/Gdrive/bibtex/references.bib"))
+(setq reftex-default-bibliography '("/mnt/c/Users/rafat/Gdrive/bibtex/references.bib"))
 
 ;; How to solve @
 (use-package citeproc
@@ -904,17 +873,10 @@
  ;; If there is more than one, they won't work right.
  '(custom-enabled-themes '(zerodark))
  '(custom-safe-themes
-   '("aff0396925324838889f011fd3f5a0b91652b88f5fd0611f7b10021cc76f9e09"
-     "356b7dc07192e3fdc0b131d80b48b3a5d7a8be291561abbbc601072d601b2f23"
-     "846ef3695c42d50347884515f98cc359a7a61b82a8d0c168df0f688cf54bf089"
-     "8d3ef5ff6273f2a552152c7febc40eabca26bae05bd12bc85062e2dc224cde9a"
-     default))
+   '("aff0396925324838889f011fd3f5a0b91652b88f5fd0611f7b10021cc76f9e09" "356b7dc07192e3fdc0b131d80b48b3a5d7a8be291561abbbc601072d601b2f23" "846ef3695c42d50347884515f98cc359a7a61b82a8d0c168df0f688cf54bf089" "8d3ef5ff6273f2a552152c7febc40eabca26bae05bd12bc85062e2dc224cde9a" default))
  '(helm-minibuffer-history-key "M-p")
  '(package-selected-packages
-   '(all-the-icons auctex avy citeproc company-anaconda conda ess
-                   evil-collection flycheck ivy lsp-mode magit
-                   multiple-cursors neotree org-bullets org-tree-slide
-                   smartparens web-mode yafolding yaml-mode yasnippet)))
+   '(all-the-icons auctex avy citeproc company-anaconda conda ess evil-collection flycheck ivy lsp-mode magit multiple-cursors neotree org-bullets org-tree-slide smartparens web-mode yafolding yaml-mode yasnippet)))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
