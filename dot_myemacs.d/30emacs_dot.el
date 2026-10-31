@@ -58,8 +58,8 @@
 ;(set-frame-font "Fira Code-15" nil t)
 ;(set-frame-font "JetBrains Mono 16" nil t) ;; new code to set font
 ;(set-frame-font "Hack-16")
-(set-frame-font "IBMPlexMono-14" nil t)
-;(set-frame-font "JetBrains Mono-15" nil t)
+;(set-frame-font "IBMPlexMono-14" nil t)
+(set-frame-font "JetBrains Mono-13" nil t)
 ;(set-frame-font "Monaco-16.5")
 ;(set-frame-font "monofur-19")
 ;(set-frame-font "Menlo-16")
@@ -202,6 +202,7 @@
 
 ;; files for org agendasorg-agenda
 (setq org-agenda-files (list "/home/rafatieppo/Gdrive/emacs_org_mode/rafa_tieppo.org"
+                 "/home/rafatieppo/Gdrive/emacs_org_mode/proj_advisi.org"
 			     "/home/rafatieppo/Gdrive/emacs_org_mode/proj_extens.org"
 			     "/home/rafatieppo/Gdrive/emacs_org_mode/proj_manage.org"			     
 			     "/home/rafatieppo/Gdrive/emacs_org_mode/proj_person.org"
@@ -213,7 +214,7 @@
       '(("Z" "tags-todo -DONE"
          (
           (tags-todo "personal/-DONE")
-          (tags-todo "advising/-DONE")
+          (tags-todo "u_advising/-DONE")
           (tags-todo "u_cetegeo/-DONE")                    
           (tags-todo "u_extension/-DONE")
           (tags-todo "u_overall/-DONE")          
@@ -631,97 +632,67 @@
 
 ;; PYTHON CONFIGURATION
 ;;----------------------------------------------------------------------
-
-;; --- Elpy Configuration ---
-;; using python-mode
-
-;; --- Conda ---
-;; https://www.reddit.com/r/emacs/comments/hkshob/save_correct_condaenv_for_project/fwxty9v
-;;
-;; 1. Set `conda-project-env-name' as a directory local variable. (With
-;;    projectile you could use the `projectile-edit-dir-locals'
-;;    command.)
-;; 2. Use `conda-env-activate-for-buffer' to activate the environment
-;;    set. (Or enable `conda-env-autoactivate-mode' to automatically
-;;    activate it.)
-;; A conda environment manager, assuming the use of Anaconda and the
-;; `conda` tool. See https://github.com/necaris/conda.el for more
-;; details. https://melpa.org/#/conda.
+;; 1. Environment Management (Conda)
 (use-package conda
   :ensure t
-  :hook
-  (python-mode . anaconda-mode)
-  (python-mode . anaconda-eldoc-mode)
   :init
-  ;; (message "HERE conda init")
+  ;; Adjust these paths if your miniconda is installed elsewhere
   (setq conda-anaconda-home (expand-file-name "~/miniconda3"))
   (setq conda-env-home-directory (expand-file-name "~/miniconda3/envs"))
   :config
-  ;; (message "HERE conda config")
   (conda-env-initialize-interactive-shells)
   (conda-env-initialize-eshell)
-  ;; (conda-env-activate 'getenv "CONDA_DEFAULT_ENV")
-  (conda-env-autoactivate-mode t)
-  )
+  (conda-env-autoactivate-mode t))
 
-(use-package company-anaconda
+;; 3. Autocomplete UI (Corfu)
+(use-package corfu
   :ensure t
-  )
-
-;; Code navigation, documentation lookup and completion for Python.
-;; https://github.com/pythonic-emacs/anaconda-mode
-;; https://melpa.org/#/anaconda-mode
-(use-package anaconda-mode
-  :ensure t
-  :bind (:map python-mode-map ("C-;" . company-anaconda))
-  :hook
-  (python-mode . anaconda-mode)
-  (python-mode . anaconda-eldoc-mode)
-  ;; :init
-  ;; (add-hook 'python-mode-hook 'anaconda-mode)
-  ;; (add-hook 'python-mode-hook 'anaconda-eldoc-mode)
-)
-
-;; --- Eglot Configuration and Integration ---
-
-(use-package eglot
+  :custom
+  (corfu-auto t)                 ; Enable auto-completion popup automatically
+  (corfu-auto-prefix 2)          ; Trigger after 2 characters
+  (corfu-auto-delay 0.1)         ; Show popup almost immediately
+  (corfu-quit-no-match t)        ; Close popup if no match is found
   :init
-  ;; 'pylsp' (Python Language Server) is a common and recommended choice.
-  ;; Make sure it's installed in your py environment: pip install "python-lsp-server[all]"
-  ;(add-to-list 'eglot-server-programs '(python-mode "pylsp"))
-
-  ;; If you prefer pyright,Make sure to install it
-  ;(add-to-list 'eglot-server-programs '(python-mode "pyright-langserver" "--node-ipc"))
-
-  ;; Optional: Automatically activate Eglot in Python buffers
-  :hook
-  ;(python-mode . eglot-mode)
-   (python-mode . eglot-ensure)
-  ;(elpy-mode . eglot-ensure)
-
+  (global-corfu-mode)
+  (corfu-popupinfo-mode 1)       ; Show documentation panels next to suggestions
   :config
-  ;; Optional Eglot settings
-  (setq eglot-autoshutdown t) ; Shut down the server when no associated buffers
-  (setq eglot-connect-timeout 60) ; Increase timeout for LSP connection
-  ;; (setq eglot-sync-stdout t) ; Useful for LSP server debugging
-  )
+  (setq corfu-popupinfo-delay 0.3))
 
-;;https://gitlab.com/skybert/my-little-friends/-/blob/master/emacs/.emacs
-;(use-package eglot
-;  :ensure t
-;  :hook
-;  ((python-mode . eglot-ensure))
-;  )
+;; 4. Python LSP Client (Eglot + pylsp)
+(use-package eglot
+  :ensure t
+  :bind (:map eglot-mode-map 
+              ;; Binds C-c f to use pylsp's native formatting
+              ("C-c f" . eglot-format-buffer))
+  :config
+  (setq eglot-autoshutdown t) 
+  (setq eglot-connect-timeout 60)
+  
+  ;; Disable the file watch limit warning
+  (setq eglot-max-file-watches nil)
+  
+  ;; Force Eglot to use pylsp
+;  (add-to-list 'eglot-server-programs '(python-mode . ("pylsp")))
+  
+  ;; Wait for Conda to activate before starting Eglot
+  (add-hook 'conda-postactivate-hook 
+            (lambda () 
+              (when (derived-mode-p 'python-mode)
+                (if (eglot-current-server)
+                    (eglot-reconnect (eglot-current-server))
+                  (eglot-ensure))))))
 
-;; https://emacs-lsp.github.io/lsp-pyright/ ;; https://emacs-lsp.github.io/lsp-mode/page/lsp-pylsp/ ;; https://www.mattduck.com/lsp-python-getting-started.html
-;; FOR lsp-pyright
-;(use-package lsp-pyright
-;  :ensure t
-;  :hook (python-mode . (lambda ()
-;                          (require 'lsp-pyright)
-;                          (lsp))))  ;lsp or lsp-deferred 
 
 
+
+
+
+
+
+
+
+
+                
 ;; YAML
 ;;----------------------------------------------------------------------
 (use-package yaml-mode
